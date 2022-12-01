@@ -80,7 +80,6 @@ def display_title():
 {'=' * (len(app_title) + 8)}
     {app_title}
 {'=' * (len(app_title) + 8)}
-made by {getenv("APP_CREATOR")}
 """
     print(app_display)
 
