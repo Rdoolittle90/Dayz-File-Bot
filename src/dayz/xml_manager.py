@@ -20,6 +20,12 @@ class XMLManager(DBConnect):
         return (tree, root)
 
 
+    def refresh_xml_format(self, map_name, xml_file, tree:_ElementTree):
+        self.get_tree(self, xml_file)
+        tree.write(f'_files/outputs/{map_name}/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
+
+
+
     def load_types_xml_to_db(self, map_name: str, mod_value:int=35) -> None:
 
         for xml_file in os.listdir(f"_files/inputs/{map_name}"):
@@ -28,6 +34,9 @@ class XMLManager(DBConnect):
                 user_input = input(f"load {xml_file}?")
                 if user_input == "n":
                     continue
+
+                # clean the xml to matching format
+                self.refresh_xml_format(map_name, xml_file)
 
                 tree, root = self.get_tree(f"_files/inputs/{map_name}/{xml_file}")
                 root: _Element
