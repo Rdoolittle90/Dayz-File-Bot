@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<types> 
+
+<!-- .......................................... -->  
+<!-- New Things, that shouldn't despawn -->
+<!-- .......................................... --> 
+
+  
+
+<!-- .......................................... -->  
+<!-- Prefab Kits and Things without Kits -->
+<!-- .......................................... --> 
+
+  <type name="bl_repair_anvil">
+    <nominal>10</nominal>
+    <min>8</min>
+    <lifetime>14400</lifetime>
+    <restock>0</restock>
+    <quantmin>-1</quantmin>
+    <quantmax>-1</quantmax>
+    <cost>75</cost>
+    <flags count_in_map="1" count_in_hoarder="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0" />
+    <category name="tools"/>
+    <tag name="shelves"/>
+    <usage name="Industrial" />
+    <usage name="Farm" />
+  </type>
+
+</types>
