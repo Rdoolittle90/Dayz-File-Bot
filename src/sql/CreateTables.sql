@@ -2,40 +2,62 @@ USE s76891_PlatinumDayz;
 
 DROP TABLE traderconfig;
 CREATE TABLE traderconfig (
-MapName VARCHAR(35) NOT NULL,
-Trader VARCHAR(35) NOT NULL,
-Category VARCHAR(60) NOT NULL,
-ClassName VARCHAR(60) NOT NULL,
-VendorFlag VARCHAR(10) NOT NULL,
-BuyValue INT NOT NULL,
-SellValue INT NOT NULL,
-PRIMARY KEY (MapName, Trader, ClassName)
+	MapName VARCHAR(35) NOT NULL,
+	Trader VARCHAR(35) NOT NULL,
+	Category VARCHAR(60) NOT NULL,
+	ClassName VARCHAR(60) NOT NULL,
+	VendorFlag VARCHAR(10) NOT NULL,
+	BuyValue INT NOT NULL,
+	SellValue INT NOT NULL,
+	PRIMARY KEY (MapName, Trader, ClassName)
 );
 
 DROP TABLE typestable;
 CREATE TABLE typestable(
-MapName VARCHAR(35) NOT NULL,
-ClassName VARCHAR(60) NOT NULL,
-Category VARCHAR(60) NOT NULL,
-Nominal TINYINT,
-Lifetime MEDIUMINT NOT NULL,
-Restock MEDIUMINT,
-_Min TINYINT,
-Quantmin SMALLINT,
-Quantmax SMALLINT,
-Cost TINYINT,
-_Tier VARCHAR(20),
-_Usage VARCHAR(60),
-_Tags VARCHAR(60),
-CntInMap BOOLEAN NOT NULL,
-CntInHoarder BOOLEAN NOT NULL,
-CntInCargo BOOLEAN NOT NULL,
-CntInPlayer BOOLEAN NOT NULL,
-Crafted BOOLEAN NOT NULL,
-Deloot BOOLEAN NOT NULL,
-PRIMARY KEY (MapName, ClassName)
+	MapName VARCHAR(35) NOT NULL,
+	ClassName VARCHAR(60) NOT NULL,
+	Category VARCHAR(60) NOT NULL,
+	Nominal TINYINT,
+	Lifetime MEDIUMINT NOT NULL,
+	Restock MEDIUMINT,
+	_Min TINYINT,
+	Quantmin SMALLINT,
+	Quantmax SMALLINT,
+	Cost TINYINT,
+	_Tier VARCHAR(20),
+	_Usage VARCHAR(60),
+	_Tags VARCHAR(60),
+	CntInMap BOOLEAN NOT NULL,
+	CntInHoarder BOOLEAN NOT NULL,
+	CntInCargo BOOLEAN NOT NULL,
+	CntInPlayer BOOLEAN NOT NULL,
+	Crafted BOOLEAN NOT NULL,
+	Deloot BOOLEAN NOT NULL,
+	PRIMARY KEY (MapName, ClassName)
 );
-CREATE INDEX typestable_category_idx ON typestable(category);
+CREATE INDEX typestable_category_idx ON typestable(Category);
+CREATE INDEX typestable_mapname_idx ON typestable(MapName);
+
+
+CREATE TABLE player_atms(
+	MapName VARCHAR(35) NOT NULL,
+    PlainID BIGINT UNSIGNED NOT NULL,
+    UserName VARCHAR(60) NOT NULL,
+    OwnedCurrency MEDIUMINT UNSIGNED NOT NULL,
+    MaxOwnedCurrencyBonus SMALLINT UNSIGNED NOT NULL,
+    DID BIGINT UNSIGNED,
+    PRIMARY KEY (MapName, PlainID)
+);
+
+CREATE TABLE server_mods(
+	MapName VARCHAR(35),
+    _Directory VARCHAR(35),
+    Disabled BOOLEAN,
+    FileID BIGINT UNSIGNED,
+    ServerSide BOOLEAN,
+    PRIMARY KEY (MapName, FileID)
+);
+
 
 
 delimiter //

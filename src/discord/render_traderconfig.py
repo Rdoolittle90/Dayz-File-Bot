@@ -11,7 +11,8 @@ class render_traderconfig(Select):
     def __init__(self):
         options=[
             SelectOption(label="Namalsk", emoji="❄️"),
-            SelectOption(label="Chernarus", emoji="🌲")
+            SelectOption(label="Chernarus", emoji="🌲"),
+            SelectOption(label="New Map", emoji="🌴")
             ]
         super().__init__(placeholder="Select a map",max_values=1,min_values=1,options=options)
     
@@ -27,9 +28,12 @@ class render_traderconfig(Select):
         if self.values[0] in ["Namalsk", "Chernarus"]:
             
             tcm = TraderConfigManager()
-            await tcm.create_new_traderconfig(message, "Namalsk")
+            await tcm.create_new_traderconfig(message, self.values[0])
             await interaction.author.send(file=disnake_File(f'_files/outputs/{self.values[0]}/TraderConfig.txt'))
+            await bot.change_presence(status=Status.online, activity=None)
             await interaction.followup.send("TraderConfig.txt Complete!")
+        else:
+            await interaction.followup.send("Coming Soon!")
 
 
 

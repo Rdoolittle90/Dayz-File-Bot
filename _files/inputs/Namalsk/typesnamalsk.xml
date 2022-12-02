@@ -1,148 +1,146 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <types>
 	<!-- 1.19 Things -->
-    <type name="Offroad_02">
-        <nominal>0</nominal>
-        <lifetime>3888000</lifetime>
-        <restock>1800</restock>
-        <min>0</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-    </type>
-    <type name="SSG82">
-        <nominal>10</nominal>
-        <lifetime>28800</lifetime>
-        <restock>0</restock>
-        <min>7</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Hunting"/>
-        <value name="Tier2"/>
-        <value name="Tier3"/>
-        <value name="Tier4"/>
-    </type>
-    <type name="Mag_SSG82_5rnd">
-        <nominal>20</nominal>
-        <lifetime>28800</lifetime>
-        <restock>0</restock>
-        <min>10</min>
-        <quantmin>0</quantmin>
-        <quantmax>80</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Hunting"/>
-        <value name="Tier2"/>
-        <value name="Tier3"/>
-        <value name="Tier4"/>
-    </type>
-    <type name="Blowtorch">
-        <nominal>40</nominal>
-        <lifetime>28800</lifetime>
-        <restock>14400</restock>
-        <min>10</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-        <category name="tools"/>
-        <usage name="Village"/>
-        <usage name="Hunting"/>
-    </type>
-    <type name="GlowPlug">
-        <nominal>20</nominal>
-        <lifetime>14400</lifetime>
-        <restock>0</restock>
-        <min>5</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-        <category name="tools"/>
-        <tag name="shelves"/>
-        <usage name="Industrial"/>
-    </type>
-    <type name="GPSReceiver">
-        <nominal>20</nominal>
-        <lifetime>28800</lifetime>
-        <restock>14400</restock>
-        <min>5</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-        <category name="tools"/>
-        <usage name="Village"/>
-        <usage name="Hunting"/>
-        <value name="Tier2"/>
-        <value name="Tier3"/>
-    </type>
-    <type name="CP_Workbench">
-        <lifetime>3888000</lifetime>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0"/>
-    </type>
-    <type name="CP_DryPost">
-        <lifetime>3888000</lifetime>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0"/>
-    </type>
-
+	<type name="Offroad_02">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>1800</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="SSG82">
+		<nominal>10</nominal>
+		<lifetime>28800</lifetime>
+		<restock>0</restock>
+		<min>7</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="weapons"/>
+		<usage name="Hunting"/>
+		<value name="Tier2"/>
+		<value name="Tier3"/>
+		<value name="Tier4"/>
+	</type>
+	<type name="Mag_SSG82_5rnd">
+		<nominal>20</nominal>
+		<lifetime>28800</lifetime>
+		<restock>0</restock>
+		<min>10</min>
+		<quantmin>0</quantmin>
+		<quantmax>80</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="weapons"/>
+		<usage name="Hunting"/>
+		<value name="Tier2"/>
+		<value name="Tier3"/>
+		<value name="Tier4"/>
+	</type>
+	<type name="Blowtorch">
+		<nominal>40</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>10</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="tools"/>
+		<usage name="Village"/>
+		<usage name="Hunting"/>
+	</type>
+	<type name="GlowPlug">
+		<nominal>20</nominal>
+		<lifetime>14400</lifetime>
+		<restock>0</restock>
+		<min>5</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="tools"/>
+		<tag name="shelves"/>
+		<usage name="Industrial"/>
+	</type>
+	<type name="GPSReceiver">
+		<nominal>20</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>5</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="tools"/>
+		<usage name="Village"/>
+		<usage name="Hunting"/>
+		<value name="Tier2"/>
+		<value name="Tier3"/>
+	</type>
+	<type name="CP_Workbench">
+		<lifetime>3888000</lifetime>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0"/>
+	</type>
+	<type name="CP_DryPost">
+		<lifetime>3888000</lifetime>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0"/>
+	</type>
 	<!-- HUMMERS -->
-    <type name="CrSk_Hummer_H2_6x6_Xin_Camo">
-        <nominal>0</nominal>
-        <lifetime>3888000</lifetime>
-        <restock>0</restock>
-        <min>0</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-    </type>
-    <type name="CrSk_Hummer_H2_6x6_Xin_Black">
-        <nominal>0</nominal>
-        <lifetime>3888000</lifetime>
-        <restock>0</restock>
-        <min>0</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-    </type>
-    <type name="CrSk_Hummer_H2_6x6_Xin">
-        <nominal>0</nominal>
-        <lifetime>3888000</lifetime>
-        <restock>0</restock>
-        <min>0</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-    </type>
-    <type name="CrSk_Hummer_H2_6x6_Xin_Pink">
-        <nominal>0</nominal>
-        <lifetime>3888000</lifetime>
-        <restock>0</restock>
-        <min>0</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-    </type>
-    <type name="CrSk_Hummer_H2_6x6_Xin_Space">
-        <nominal>0</nominal>
-        <lifetime>3888000</lifetime>
-        <restock>0</restock>
-        <min>0</min>
-        <quantmin>-1</quantmin>
-        <quantmax>-1</quantmax>
-        <cost>100</cost>
-        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
-    </type>
-	
+	<type name="CrSk_Hummer_H2_6x6_Xin_Camo">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin_Black">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin_Pink">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin_Space">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
 	<type name="Collectable_Bitcoin">
 		<category name="tools"/>
 		<nominal>2</nominal>

@@ -59,6 +59,37 @@ class DBConnect():
         self.c.execute(sql, (map_name, trader, category, classname, vendorflag, buyvalue, sellvalue, 
             vendorflag, buyvalue, sellvalue))
 
+
+    def insert_into_player_atms(self, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus):
+        sql = """
+            INSERT INTO
+                player_atms
+                    (MapName, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus)
+                VALUES
+                    (%s, %s, %s, %s, %s)
+            ON DUPLICATE KEY
+                UPDATE
+                    OwnedCurrency = %s,
+                    MaxOwnedCurrencyBonus = %s
+"""
+        self.c.execute(sql, (map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus, OwnedCurrency, MaxOwnedCurrencyBonus))
+
+    
+    def insert_into_server_mods(self, map_name, mod_dict):
+        sql = """
+            INSERT INTO
+                server_mods
+                    (MapName, _Directory, Disabled, FileID, ServerSide)
+                VALUES
+                    (%s, %s, %s, %s, %s)     
+            ON DUPLICATE KEY
+                UPDATE
+                    Disabled = %s
+"""
+        self.c.execute(sql, (map_name, mod_dict["directory"], mod_dict["disabled"], 
+            mod_dict["file_id"], mod_dict["server_side"], mod_dict["disabled"]))
+
+
     def select_all_from_typestable(self, map_name):
         sql = """
         SELECT

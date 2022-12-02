@@ -20,20 +20,23 @@ class XMLManager(DBConnect):
         return (tree, root)
 
 
-    def refresh_xml_format(self, map_name, xml_file, tree:_ElementTree):
-        self.get_tree(self, xml_file)
-        tree.write(f'_files/outputs/{map_name}/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
+    def refresh_xml_format(self, map_name, xml_file):
+        tree, root = self.get_tree(f"_files/inputs/{map_name}/{xml_file}")
+        indent(tree, space="\t", level=0)
+        tree.write(f'_files/inputs/{map_name}/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
 
 
-
-    def load_types_xml_to_db(self, map_name: str, mod_value:int=35) -> None:
+    def load_types_xml_to_db(self, map_name: str, mod_value:int=35, force_load_all=False) -> None:
 
         for xml_file in os.listdir(f"_files/inputs/{map_name}"):
             if xml_file.endswith(".xml"):
                 print(xml_file)
-                user_input = input(f"load {xml_file}?")
-                if user_input == "n":
-                    continue
+
+                # force_load_all will bypass this allowing all files to be loaded without interuption
+                if not force_load_all:
+                    user_input = input(f"load {xml_file}?")
+                    if user_input != "y":
+                        continue
 
                 # clean the xml to matching format
                 self.refresh_xml_format(map_name, xml_file)
@@ -122,13 +125,15 @@ class XMLManager(DBConnect):
 
                         class_usage = None
                         usage = []
+
                         for value in item.findall("usage"):
                             value: _Element
                             if value == None:
                                 continue
                             if len(value.attrib.values()) != 0:
                                 usage.append(value.attrib.values()[0])
-                        if len(tiers) > 0:
+                                usage.sort()
+                        if len(usage) > 0:
                             class_usage = "".join(usage)
 
 
@@ -140,8 +145,10 @@ class XMLManager(DBConnect):
                                 continue
                             if len(value.attrib.values()) != 0:
                                 tags.append(value.attrib.values()[0])
-                        if len(tiers) > 0:
+                                tags.sort()
+                        if len(tags) > 0:
                             class_tag = ",".join(tags)
+
                         # item_list already contains the mapname append the remaining values
                         item_list.append(class_name)
                         item_list.append(class_category)
@@ -179,8 +186,6 @@ class XMLManager(DBConnect):
                     self.commit()
                 self.commit()
         self.close()
-
-
 
 
     async def create_new_types(self, message, map_name) -> None:

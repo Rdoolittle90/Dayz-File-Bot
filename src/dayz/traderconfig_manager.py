@@ -93,8 +93,8 @@ class TraderConfigManager(DBConnect):
                             product[3]))
                     
                     fout.write("\n")
-                await message.edit(embed=embed)
             fout.write("<FileEnd>")
+            await message.edit(embed=embed)
             
             end_time = datetime.datetime.now()
 
