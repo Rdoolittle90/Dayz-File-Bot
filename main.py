@@ -1,4 +1,6 @@
 from os import getenv
+import os
+from setup import create_new_map_dir, initial_dir_setup
 
 from src.discord.discord_static import MyClient
 
@@ -53,6 +55,13 @@ def main():
         await interaction.send(view=render_traderconfig_view(), ephemeral=True)
 
 
+    @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
+    async def add_map(interaction: ApplicationCommandInteraction, MapName: str) -> None:
+        """"""
+        create_new_map_dir(MapName)
+        await interaction.send(f"New Directory created for {MapName}")
+
+
 # @everyone COMMANDS ======================================================================================
 
 
@@ -77,4 +86,6 @@ def display_title():
 
 if __name__ == "__main__":
     display_title()
+    if "_files" not in os.listdir():
+        initial_dir_setup()
     main()
