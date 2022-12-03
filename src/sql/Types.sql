@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------
-SELECT * FROM typestable WHERE ClassName LIKE "%pokemonc%";
+SELECT * FROM typestable WHERE Restock < 1800 AND Nominal > 0;
 
 
 SELECT ClassName FROM typestable WHERE _Tags = "hunting,military";

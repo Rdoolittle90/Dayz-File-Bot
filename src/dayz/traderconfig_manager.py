@@ -20,6 +20,7 @@ class TraderConfigManager(DBConnect):
         self.commit()
         self.close()
 
+
     async def create_new_traderconfig(self, message, map_name):
         label = """
                   //---------------------------------------------------------------------------------------------//
@@ -42,12 +43,12 @@ class TraderConfigManager(DBConnect):
 
 """
 
-        with open(f"_files/outputs/{map_name}/TraderConfig.txt", "w") as fout:
+        with open(f"_files/maps/{map_name}/outputs/TraderConfig.txt", "w") as fout:
             stats = self.c.callproc("select_stats", args=(map_name, "", ""))
             today = datetime.date.today().strftime("%m/%d/%Y")
             start_time = datetime.datetime.now()
 
-            fout.writelines(label.format(today, stats[1], stats[0]))
+            fout.writelines(label.format(today, stats[1], stats[2]))
 
 
             self.c.callproc("select_map_traders", args=(map_name, ))

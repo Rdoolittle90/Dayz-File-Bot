@@ -4,7 +4,7 @@ from src.sql.sql_manager import DBConnect
 
 
 def update_mod_list(map_name):
-    ftp = FTPConnect("Namalsk", ) #FIXME
+    ftp = FTPConnect("Namalsk", "135.148.136.106", 1338, "ryan", "Platinum1234") #FIXME
     ftp.getOmegaConfig()
     
     with open(f"_files/support/{map_name}/omega.cfg", "r") as fin:

@@ -1,5 +1,5 @@
-def open_config(mapname):
-    with open(f"_files/inputs/{mapname}/TraderConfig.txt", "r") as fin:
+def open_config(map_name):
+    with open(f"_files/maps/{map_name}/inputs/TraderConfig.txt", "r") as fin:
         lines = fin.readlines()
     return lines
 

@@ -1,4 +1,5 @@
 from ftplib import FTP
+from os import getenv
 
 
 
@@ -35,6 +36,9 @@ class FTPConnect():
 
 
 if __name__ == "__main__":
-    ftp = FTPConnect() #FIXME
+    ftp = FTPConnect("Namalsk", 
+        getenv("FTP_IP"), int(getenv("FTP_PORT_1")), 
+        getenv("FTP_USER"), getenv("FTP_PASSWORD")
+    ) #FIXME
 
     ftp.getOmegaConfig()

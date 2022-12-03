@@ -21,14 +21,14 @@ class XMLManager(DBConnect):
 
 
     def refresh_xml_format(self, map_name, xml_file):
-        tree, root = self.get_tree(f"_files/inputs/{map_name}/{xml_file}")
+        tree, root = self.get_tree(f"_files/maps/{map_name}/inputs/{xml_file}")
         indent(tree, space="\t", level=0)
-        tree.write(f'_files/inputs/{map_name}/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
+        tree.write(f'_files/maps/{map_name}/inputs/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
 
 
     def load_types_xml_to_db(self, map_name: str, mod_value:int=35, force_load_all=False) -> None:
 
-        for xml_file in os.listdir(f"_files/inputs/{map_name}"):
+        for xml_file in os.listdir(f"_files/maps/{map_name}/inputs"):
             if xml_file.endswith(".xml"):
                 print(xml_file)
 
@@ -41,7 +41,7 @@ class XMLManager(DBConnect):
                 # clean the xml to matching format
                 self.refresh_xml_format(map_name, xml_file)
 
-                tree, root = self.get_tree(f"_files/inputs/{map_name}/{xml_file}")
+                tree, root = self.get_tree(f"_files/maps/{map_name}/inputs/{xml_file}")
                 root: _Element
                 item_count = float(len(root))
                 items_added = 0.0
@@ -293,5 +293,5 @@ class XMLManager(DBConnect):
 
         await message.edit(embed=embed)
 
-        tree.write(f'_files/outputs/{map_name}/types.xml', xml_declaration=True, encoding="utf-8", standalone=True)
+        tree.write(f'_files/maps/{map_name}/outputs/types.xml', xml_declaration=True, encoding="utf-8", standalone=True)
 

@@ -54,17 +54,7 @@ def main():
 
 
 # @everyone COMMANDS ======================================================================================
-    # @bot.slash_command(guild_ids=[GUILD])
-    # async def prices(interaction: ApplicationCommandInteraction, product_name):
-    #     await interaction.send(view=select_vendors_view(product_name))
 
-
-    # random.seed(0)
-    # load_types_xml_to_db("inputs/Morty_types.xml")
-    # create_new_traderconfig()
-    # create_new_types()
-    # price_assist_by_rarity(2)
-    # print("Job Done!")
 
 
 # START THE BOT ===========================================================================================
