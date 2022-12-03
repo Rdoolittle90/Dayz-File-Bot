@@ -57,10 +57,10 @@ def main():
 
 
     @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
-    async def add_map(interaction: ApplicationCommandInteraction, MapName: str) -> None:
+    async def add_map(interaction: ApplicationCommandInteraction, mapname: str) -> None:
         """"""
-        create_new_map_dir(MapName)
-        await interaction.send(f"New Directory created for {MapName}")
+        create_new_map_dir(mapname)
+        await interaction.send(f"New Directory created for {mapname}")
 
 
 # @everyone COMMANDS ======================================================================================
