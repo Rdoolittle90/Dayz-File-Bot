@@ -1,6 +1,7 @@
 from os import getenv
 import os
-from setup import create_new_map_dir, initial_dir_setup
+
+from src.setup import create_new_map_dir, initial_dir_setup
 
 from src.discord.discord_static import MyClient
 
