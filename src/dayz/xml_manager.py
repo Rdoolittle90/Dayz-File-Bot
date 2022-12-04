@@ -201,7 +201,7 @@ class XMLManager(DBConnect):
         start_time = datetime.datetime.now()
 
         ## before starting add file info comment
-        comment_map = Comment(f"  Map Name: {map_name}")
+        comment_map = Comment(f"Map Name: {map_name}")
         comment_time = Comment(f"Created on: {start_time}")
         comment_items = Comment(f"Item Count: {len(rows)}")
 

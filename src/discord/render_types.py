@@ -29,7 +29,7 @@ class render_types(Select):
 
             await author.send(file=disnake_File(f'_files/{interaction.guild.id}/maps/{self.values[0]}/outputs/types.xml'))
             await bot.change_presence(status=Status.online, activity=None)
-            await interaction.followup.send("Done.")
+            await interaction.followup.send("types.xml Complete!", ephemeral=True)
 
 
 

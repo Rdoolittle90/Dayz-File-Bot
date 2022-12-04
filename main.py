@@ -34,15 +34,8 @@ def main():
     # default_member_permissions=8 is the same as saying only available to admins
 # ADMIN COMMANDS =========================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def add_server(interaction:ApplicationCommandInteraction) -> None:
-        """"""
-        create_new_server_dir(interaction.guild.id)
-        await interaction.send(f"New Directory created for {interaction.guild.name}")
-
-
-    @bot.slash_command(default_member_permissions=1067403561537)
     async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
-        """"""
+        """creates a new map directory"""
         create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
 
@@ -76,14 +69,14 @@ def main():
 
     @bot.slash_command(default_member_permissions=1067403561537)
     async def get_key(interaction:ApplicationCommandInteraction, mapname: str) -> None:
-        """"""
+        """Looks up the given maps passkey"""
         passkey = get_map_key(interaction.guild.id, mapname)["passkey"]
         await interaction.send(embed=key_embed(mapname, passkey))
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
     async def remove_map(interaction:ApplicationCommandInteraction) -> None:
-        """"""
+        """Opens the map deletion Modal"""
         await interaction.response.send_modal(modal=RemoveMapModal())
 
 

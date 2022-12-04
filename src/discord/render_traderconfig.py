@@ -17,7 +17,7 @@ class render_traderconfig(Select):
         await interaction.response.defer(ephemeral=True)
         bot = interaction.bot
 
-        activity = Activity(type=ActivityType.custom, name=F"{self.values[0]} TraderFile.txt")
+        activity = Activity(type=ActivityType.custom, name=f"{self.values[0]} TraderFile.txt")
         await bot.change_presence(status=Status.dnd, activity=activity)
         message = await interaction.author.send("This will take some time please dont run any commands until this has either completed or failed\nAVG: completion time is 5min")
         
