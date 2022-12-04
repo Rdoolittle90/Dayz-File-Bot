@@ -1,10 +1,9 @@
 # ----------------------------------------------------------------------------------------
-SELECT * FROM typestable WHERE Restock < 1800 AND Nominal > 0;
+SELECT * FROM typestable;
 
-
-SELECT ClassName FROM typestable WHERE _Tags = "hunting,military";
-SELECT _Tags, COUNT(_Tags) FROM typestable WHERE MapName = "Nemalsk" AND _Tags IS NOT NULL GROUP BY _Tags;
-SELECT _Tier, COUNT(_Tier) FROM typestable WHERE MapName = "Nemalsk" AND _Tier IS NOT NULL GROUP BY _Tier;
+SELECT ClassName FROM typestable WHERE _Tags = "industrial";
+SELECT _Tags, COUNT(_Tags) FROM typestable WHERE MapName = "Takistan" AND _Tags IS NOT NULL GROUP BY _Tags;
+SELECT _Tags, COUNT(_Tags) FROM typestable WHERE MapName = "Namalsk" AND _Tags IS NOT NULL GROUP BY _Tags;
 
 UPDATE typestable
 SET _Tags = NULL
