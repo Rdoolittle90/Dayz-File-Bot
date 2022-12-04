@@ -19,7 +19,6 @@ def generate_map_passkey() -> str:
 
 def initial_dir_setup():
     os.makedirs(f"_files")
-    os.makedirs(f"_files/maps")
     os.makedirs(f"extra_resources")
 
 
