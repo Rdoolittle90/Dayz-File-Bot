@@ -47,13 +47,13 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537)
     async def render_types(interaction: ApplicationCommandInteraction) -> None:
         """Render the types.xml for the selected map"""
-        await interaction.send(view=render_types_view(interaction.guild.id), ephemeral=True)
+        await interaction.send(view=render_types_view(guild_id=interaction.guild.id), ephemeral=True)
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
     async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
-        await interaction.send(view=render_traderconfig_view(interaction.guild.id), ephemeral=True)
+        await interaction.send(view=render_traderconfig_view(guild_id=interaction.guild.id), ephemeral=True)
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
