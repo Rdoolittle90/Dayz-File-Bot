@@ -6,16 +6,12 @@ from disnake import File as disnake_File
 from disnake.ui import View, Select
 
 from src.dayz.traderconfig_manager import TraderConfigManager
-from src.discord.guild_manager import get_map_selections
 
 
 
 class render_traderconfig(Select):
-    def __init__(self, guild_id):
-        self.guid = guild_id
-        options = get_map_selections(self.guid)
-        if options:
-            super().__init__(placeholder="Select a map", max_values=1, min_values=1, options=options)
+    def __init__(self, options):
+        super().__init__(placeholder="Select a map", max_values=1, min_values=1, options=options)
     
     async def callback(self, interaction: ApplicationCommandInteraction):
         await interaction.response.defer(ephemeral=True)
@@ -39,7 +35,7 @@ class render_traderconfig(Select):
 
 
 class render_traderconfig_view(View):
-    def __init__(self, guild_id, *, timeout = 180):
+    def __init__(self, options, *, timeout = 180):
         super().__init__(timeout=timeout)
-        self.add_item(render_traderconfig(guild_id))
+        self.add_item(render_traderconfig(options))
 

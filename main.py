@@ -13,6 +13,7 @@ from src.discord.render_traderconfig import render_traderconfig_view
 from src.discord.render_types import render_types_view
 
 from src.discord.vendor_views import select_vendors_view
+from src.discord.guild_manager import get_map_selections
 
 
 
@@ -38,25 +39,6 @@ def main():
     # default_member_permissions=8 is the same as saying only available to admins
 # ADMIN COMMANDS =========================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def kill(interaction: ApplicationCommandInteraction) -> None:
-        """Kill the bot 🗡️🤖 requires manual reboot"""
-        await interaction.send(f"Shutdown Command sent from {interaction.author}")
-        await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
-
-
-    @bot.slash_command(default_member_permissions=1067403561537)
-    async def render_types(interaction: ApplicationCommandInteraction) -> None:
-        """Render the types.xml for the selected map"""
-        await interaction.send(view=render_types_view(guild_id=interaction.guild.id), ephemeral=True)
-
-
-    @bot.slash_command(default_member_permissions=1067403561537)
-    async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
-        """Render the TraderConfig.txt for the selected map"""
-        await interaction.send(view=render_traderconfig_view(guild_id=interaction.guild.id), ephemeral=True)
-
-
-    @bot.slash_command(default_member_permissions=1067403561537)
     async def add_server(interaction: ApplicationCommandInteraction) -> None:
         """"""
         create_new_server_dir(interaction.guild.id)
@@ -68,6 +50,34 @@ def main():
         """"""
         create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
+
+
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def render_types(interaction: ApplicationCommandInteraction) -> None:
+        """Render the types.xml for the selected map"""
+        options = get_map_selections(interaction.guild.id)
+        if options:
+            await interaction.send(view=render_types_view(options=options), ephemeral=True)
+        else:
+            await interaction.send("Server has no registered maps", ephemeral=True)
+
+
+
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
+        """Render the TraderConfig.txt for the selected map"""
+        options = get_map_selections(interaction.guild.id)
+        if options:
+            await interaction.send(view=render_traderconfig_view(options=options), ephemeral=True)
+        else:
+            await interaction.send("Server has no registered maps", ephemeral=True)
+
+
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def kill(interaction: ApplicationCommandInteraction) -> None:
+        """Kill the bot 🗡️🤖 requires manual reboot"""
+        await interaction.send(f"Shutdown Command sent from {interaction.author}")
+        await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
