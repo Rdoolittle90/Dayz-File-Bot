@@ -5,8 +5,7 @@ from lxml.etree import parse
 
 from src.sql.sql_manager import DBConnect
 
-from lxml.etree import _Element, _ElementTree
-from lxml.etree import Element, ElementTree, indent
+from lxml.etree import Element, ElementTree, indent, Comment
 
 from disnake import Embed, Color
 
@@ -200,6 +199,17 @@ class XMLManager(DBConnect):
         items_added = 0
 
         start_time = datetime.datetime.now()
+
+        ## before starting add file info comment
+        comment_map = Comment(f"{map_name}")
+        comment_time = Comment(f"Created on: {start_time}")
+        comment_items = Comment(f"Item Count: {len(rows)}")
+
+        root_types.append(comment_map)
+        root_types.append(comment_time)
+        root_types.append(comment_items)
+
+        ## start the loop over rows
         for idx, row in enumerate(rows):
             items_added += 1             
             if idx % 35 == 0:
