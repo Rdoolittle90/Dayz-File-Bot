@@ -23,6 +23,12 @@ def initial_dir_setup():
     os.makedirs(f"extra_resources")
 
 
+def create_new_server_dir(server_id):
+    if server_id not in os.listdir("_files"):
+        os.makedirs(f"_files/{server_id}")
+        os.makedirs(f"_files/{server_id}/maps")
+
+
 def create_new_map_dir(server_id, map_name) -> bool:
     """Returns True if map directory does not exist"""
     
@@ -31,19 +37,18 @@ def create_new_map_dir(server_id, map_name) -> bool:
         "passkey": generate_map_passkey()
         }
     if server_id not in os.listdir("_files"):
-        os.makedirs(f"_files/{server_id}")
-        os.makedirs(f"_files/{server_id}/maps")
+        create_new_server_dir(server_id)
 
-        if map_name not in os.listdir("_files/{server_id}/maps"):
-            os.makedirs(f"_files/{server_id}/maps/{map_name}")
-            os.makedirs(f"_files/{server_id}/maps/{map_name}/inputs")
-            os.makedirs(f"_files/{server_id}/maps/{map_name}/outputs")
-            os.makedirs(f"_files/{server_id}/maps/{map_name}/atms")
-            os.makedirs(f"_files/{server_id}/maps/{map_name}/backups")
-            os.makedirs(f"_files/{server_id}/maps/{map_name}/support")
+    if map_name not in os.listdir(f"_files/{server_id}/maps"):
+        os.makedirs(f"_files/{server_id}/maps/{map_name}")
+        os.makedirs(f"_files/{server_id}/maps/{map_name}/inputs")
+        os.makedirs(f"_files/{server_id}/maps/{map_name}/outputs")
+        os.makedirs(f"_files/{server_id}/maps/{map_name}/atms")
+        os.makedirs(f"_files/{server_id}/maps/{map_name}/backups")
+        os.makedirs(f"_files/{server_id}/maps/{map_name}/support")
 
-            with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "w") as json_out:
-                json.dump(passkey, json_out, indent=4)
+        with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "w") as json_out:
+            json.dump(passkey, json_out, indent=4)
 
         return True
     else:
