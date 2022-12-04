@@ -56,7 +56,7 @@ class XMLManager(DBConnect):
                         pass
                     else:
                         item: _Element
-                        item_list: list = [map_name]
+                        item_list: list = [duid, map_name]
 
                         class_name = item.attrib["name"]
 
@@ -193,7 +193,7 @@ class XMLManager(DBConnect):
         root_types: _Element = Element("types")
         tree: _ElementTree = ElementTree(root_types)
 
-        self.select_all_from_typestable(map_name)
+        self.select_all_from_typestable(duid, map_name)
         rows = self.c.fetchall()
 
         item_count = len(rows)
