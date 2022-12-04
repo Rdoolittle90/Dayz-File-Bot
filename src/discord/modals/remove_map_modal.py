@@ -1,7 +1,7 @@
 from disnake import ModalInteraction
 from disnake.ui import Modal, Select, TextInput
 
-from discord.guild_manager import get_map_selections
+from src.discord.guild_manager import get_map_selections
 
 
 class RemoveMapModal(Modal):

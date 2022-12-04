@@ -1,6 +1,5 @@
 from os import getenv
 import os
-from src.discord.modals.remove_map_modal import RemoveMapModal
 
 from src.file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup, key_embed, remove_map_dir
 
@@ -12,16 +11,14 @@ from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
 from src.discord.render_traderconfig import render_traderconfig_view
 from src.discord.render_types import render_types_view
-
 from src.discord.guild_manager import get_map_selections
+from src.discord.modals.remove_map_modal import RemoveMapModal
 
 
 
 def main():
     load_dotenv()
-
-    GUILD = int(getenv("DISCORD_GUILD"))
-    
+        
     # setup intents for bot permissions
     intents = Intents.default()
     intents.members = True
