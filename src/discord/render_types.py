@@ -2,7 +2,7 @@ import os
 from disnake import ApplicationCommandInteraction
 from disnake.ui import View, Select
 from disnake import File as disnake_File
-from disnake import Status, Game, Activity, ActivityType
+from disnake import Status, Activity, ActivityType
 
 from src.dayz.xml_manager import XMLManager
 
