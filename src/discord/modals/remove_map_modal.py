@@ -30,13 +30,9 @@ class RemoveMapModal(Modal):
 
     async def callback(self, interaction:ModalInteraction) -> None:
         await interaction.response.defer(ephemeral=False)
-        print(interaction.data["components"])
         map_str: str = interaction.data["components"][0]["components"][0]["value"]
         passkey: str = interaction.data["components"][1]["components"][0]["value"]
         map_key: str = get_map_key(interaction.guild.id, map_str)["passkey"]
-        print(map_str)
-        print(passkey)
-        print(map_key)
         
         if passkey == map_key:
             remove_map_dir(interaction.guild.id, map_str)
