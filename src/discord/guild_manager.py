@@ -15,3 +15,9 @@ def get_map_selections(guild_id):
 
         return selections
     return None
+
+
+## get player atms
+
+
+## get server mods

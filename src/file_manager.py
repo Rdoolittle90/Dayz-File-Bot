@@ -18,7 +18,7 @@ def generate_map_passkey() -> str:
         passkey += str(random_choice)
 
     return passkey
-    
+
 
 def initial_dir_setup() -> None:
     os.makedirs(f"_files")
@@ -72,6 +72,10 @@ def remove_map_dir(server_id, map_name) -> None:
         shutil.rmtree(path)
     except OSError as e:
         print("Error: %s : %s" % (path, e.strerror))
+
+
+def remove_embed(map_name):
+    embed = Embed(title="gdf")
 
 
 def key_embed(map_name, passkey) -> Embed:

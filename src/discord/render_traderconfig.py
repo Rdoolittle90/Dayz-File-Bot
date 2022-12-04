@@ -16,7 +16,6 @@ class render_traderconfig(Select):
     async def callback(self, interaction: ApplicationCommandInteraction):
         await interaction.response.defer(ephemeral=True)
         bot = interaction.bot
-        author = interaction.author
 
         activity = Activity(type=ActivityType.custom, name=F"{self.values[0]} TraderFile.txt")
         await bot.change_presence(status=Status.dnd, activity=activity)
