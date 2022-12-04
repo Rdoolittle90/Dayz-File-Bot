@@ -80,7 +80,7 @@ def main():
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def remove_map(interaction: ApplicationCommandInteraction, mapname: str, passkey: int) -> None:
+    async def remove_map(interaction: ApplicationCommandInteraction, mapname: str, passkey: str) -> None:
         """"""
         if passkey == get_map_key(interaction.guild.id, passkey):
             remove_map(interaction.guild.id, mapname)
