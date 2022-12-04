@@ -211,50 +211,50 @@ class XMLManager(DBConnect):
                 await message.edit(embed=embed)
 
 
-            type_name:_Element = Element("type", attrib={"name": row[1]})
+            type_name:_Element = Element("type", attrib={"name": row[2]})
 
-            category:_Element = Element("category", attrib={"name": row[2]})
+            category:_Element = Element("category", attrib={"name": row[3]})
             type_name.append(category)
 
             nominal:_Element = Element("nominal")
-            nominal.text = str(row[3])
+            nominal.text = str(row[4])
             type_name.append(nominal)
 
             lifetime:_Element = Element("lifetime")
-            lifetime.text = str(row[4])
+            lifetime.text = str(row[5])
             type_name.append(lifetime)
 
             restock:_Element = Element("restock")
-            restock.text = str(row[5])
+            restock.text = str(row[6])
             type_name.append(restock)
 
             min:_Element = Element("min")
-            min.text = str(row[6])
+            min.text = str(row[7])
             type_name.append(min)
 
             quantmin:_Element = Element("quantmin")
-            quantmin.text = str(row[7])
+            quantmin.text = str(row[8])
             type_name.append(quantmin)
 
             quantmax:_Element = Element("quantmax")
-            quantmax.text = str(row[8])
+            quantmax.text = str(row[9])
             type_name.append(quantmax)
 
             cost:_Element = Element("cost")
-            cost.text = str(row[9])
+            cost.text = str(row[10])
             type_name.append(cost)
 
 
-            if row[10] is not None:
-                type_name.append(Element("value", attrib={"user":  row[10]}))
+            if row[11] is not None:
+                type_name.append(Element("value", attrib={"user":  row[11]}))
 
-            if row[11] is not None and map_name == "Chernarus":
-                values = row[11].split(",")
+            if row[12] is not None and map_name == "Chernarus":
+                values = row[12].split(",")
                 for value in values:
                     type_name.append(Element("usage", attrib={"user": value}))
             
-            if row[12] is not None:
-                tags = row[12].split(",")
+            if row[13] is not None:
+                tags = row[13].split(",")
                 for tag in tags:
                     type_name.append(Element("tag", attrib={"name": tag}))
 
@@ -262,19 +262,15 @@ class XMLManager(DBConnect):
             # flags is the only tag with multiple attributes and was normalized in the db this recreates the dict 
             type_name.append(
                 Element("flags", attrib={
-                    "count_in_hoarder": str(row[13]), 
-                    "count_in_map": str(row[14]), 
-                    "count_in_cargo": str(row[15]),
-                    "count_in_player": str(row[16]), 
-                    "crafted": str(row[17]),
-                    "deloot": str(row[18])
+                    "count_in_hoarder": str(row[14]), 
+                    "count_in_map": str(row[15]), 
+                    "count_in_cargo": str(row[16]),
+                    "count_in_player": str(row[17]), 
+                    "crafted": str(row[18]),
+                    "deloot": str(row[19])
                     }
                 )
             )
-
-
-
-
             root_types.append(type_name)
 
 
