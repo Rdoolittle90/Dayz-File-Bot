@@ -44,14 +44,14 @@ class TraderConfigManager(DBConnect):
 """
 
         with open(f"_files/{duid}/maps/{map_name}/outputs/TraderConfig.txt", "w") as fout:
-            stats = self.c.callproc("select_stats", args=(map_name, "", ""))
+            stats = self.c.callproc("select_stats", args=(duid, map_name, "", ""))
             today = datetime.date.today().strftime("%m/%d/%Y")
             start_time = datetime.datetime.now()
 
             fout.writelines(label.format(today, stats[1], stats[2]))
 
 
-            self.c.callproc("select_map_traders", args=(map_name, ))
+            self.c.callproc("select_map_traders", args=(duid, map_name))
             traders_generator = self.c.stored_results()
             idx = 0
             
@@ -65,7 +65,7 @@ class TraderConfigManager(DBConnect):
                 embed.add_field(name=map_name, value=est_perc, inline=False)  # embed
 
                 fout.write(f"<Trader> {trader}\n")
-                self.c.callproc("select_map_trader_categories", args=(map_name, trader))
+                self.c.callproc("select_map_trader_categories", args=(duid, map_name, trader))
                 category_generator = self.c.stored_results()
 
                 for category_c in category_generator:
@@ -75,7 +75,7 @@ class TraderConfigManager(DBConnect):
                 for category in category_list:
 
                     fout.write(f"\t<Category> {category}\n")
-                    self.c.callproc("select_map_trader_category_products", args=(map_name, trader, category))
+                    self.c.callproc("select_map_trader_category_products", args=(duid, map_name, trader, category))
                     product_generator = self.c.stored_results()
                     
                     for product_c in product_generator:

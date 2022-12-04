@@ -28,11 +28,11 @@ class DBConnect():
         sql = """
             INSERT IGNORE INTO
                 typestable
-                    (MapName, ClassName, Category, Nominal, Lifetime,
+                    (DUID, MapName, ClassName, Category, Nominal, Lifetime,
                     Restock, _Min, Quantmin, Quantmax, Cost, _Tier, _Usage, _Tags,
                     CntInMap, CntInHoarder, CntInCargo, CntInPlayer, Crafted, Deloot)
                 VALUES
-                    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY
                 UPDATE
                     Category = %s,
@@ -43,62 +43,64 @@ class DBConnect():
         self.c.execute(sql, list_object)
         
     
-    def insert_into_traderconfig(self, map_name, trader, category, classname, vendorflag, buyvalue, sellvalue):
+    def insert_into_traderconfig(self, duid, map_name, trader, category, classname, vendorflag, buyvalue, sellvalue):
         sql = """
             INSERT INTO
                 traderconfig
-                    (MapName, Trader, Category, ClassName, VendorFlag, BuyValue, SellValue)
+                    (DUID, MapName, Trader, Category, ClassName, VendorFlag, BuyValue, SellValue)
                 VALUES
-                    (%s, %s, %s, %s, %s, %s, %s)
+                    (%s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY
                 UPDATE
                     VendorFlag = %s,
                     BuyValue = %s,
                     SellValue = %s
 """
-        self.c.execute(sql, (map_name, trader, category, classname, vendorflag, buyvalue, sellvalue, 
+        self.c.execute(sql, (duid, map_name, trader, category, classname, vendorflag, buyvalue, sellvalue, 
             vendorflag, buyvalue, sellvalue))
 
 
-    def insert_into_player_atms(self, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus):
+    def insert_into_player_atms(self, duid, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus):
         sql = """
             INSERT INTO
                 player_atms
-                    (MapName, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus)
+                    (DUID, MapName, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus)
                 VALUES
-                    (%s, %s, %s, %s, %s)
+                    (%s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY
                 UPDATE
                     OwnedCurrency = %s,
                     MaxOwnedCurrencyBonus = %s
 """
-        self.c.execute(sql, (map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus, OwnedCurrency, MaxOwnedCurrencyBonus))
+        self.c.execute(sql, (duid, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus, OwnedCurrency, MaxOwnedCurrencyBonus))
 
     
-    def insert_into_server_mods(self, map_name, mod_dict):
+    def insert_into_server_mods(self, duid, map_name, mod_dict):
         sql = """
             INSERT INTO
                 server_mods
-                    (MapName, _Directory, Disabled, FileID, ServerSide)
+                    (DUID, MapName, _Directory, Disabled, FileID, ServerSide)
                 VALUES
-                    (%s, %s, %s, %s, %s)     
+                    (%s, %s, %s, %s, %s, %s)     
             ON DUPLICATE KEY
                 UPDATE
                     Disabled = %s
 """
-        self.c.execute(sql, (map_name, mod_dict["directory"], mod_dict["disabled"], 
+        self.c.execute(sql, (duid, map_name, mod_dict["directory"], mod_dict["disabled"], 
             mod_dict["file_id"], mod_dict["server_side"], mod_dict["disabled"]))
 
 
-    def select_all_from_typestable(self, map_name):
+    def select_all_from_typestable(self, duid, map_name):
         sql = """
         SELECT
             *
         FROM
             typestable
         WHERE
+            DUID = %s
+                AND
             MapName = %s
         ORDER BY
             ClassName
 """
-        self.c.execute(sql, (map_name, ))
+        self.c.execute(sql, (duid, map_name))
