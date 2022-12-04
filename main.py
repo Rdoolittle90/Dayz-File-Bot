@@ -79,7 +79,7 @@ def main():
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def get_map_key(interaction: ApplicationCommandInteraction, mapname: str) -> None:
+    async def get_key(interaction: ApplicationCommandInteraction, mapname: str) -> None:
         """"""
         passkey = get_map_key(interaction.guild.id, mapname)
         print(passkey)
