@@ -39,7 +39,7 @@ class render_traderconfig(Select):
 
 
 class render_traderconfig_view(View):
-    def __init__(self, *, timeout = 180):
+    def __init__(self, *, timeout = 180, guild_id):
         super().__init__(timeout=timeout)
-        self.add_item(render_traderconfig())
+        self.add_item(render_traderconfig(guild_id))
 

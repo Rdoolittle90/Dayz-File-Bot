@@ -38,7 +38,7 @@ class render_types(Select):
 
 
 class render_types_view(View):
-    def __init__(self, *, timeout = 180):
+    def __init__(self, *, timeout = 180, guild_id):
         super().__init__(timeout=timeout)
-        self.add_item(render_types())
+        self.add_item(render_types(guild_id))
 
