@@ -1,16 +1,18 @@
-from disnake import ApplicationCommandInteraction, ModalInteraction
-from disnake.ui import Modal, Select, TextInput
+from disnake import ModalInteraction
+from disnake.ui import Modal, TextInput
 
-from src.discord.guild_manager import get_map_selections
 
 
 class RemoveMapModal(Modal):
-    def __init__(self, interaction:ApplicationCommandInteraction) -> None:
+    def __init__(self) -> None:
         components: list = [
-            Select(
-                custom_id="map",
-                placeholder="Select a Map",
-                options=get_map_selections(interaction.guild.id)
+            TextInput(
+                label="Map Name",
+                placeholder="Namalsk",
+                custom_id=f"map",
+                min_length=1,
+                max_length=25,
+                required=True
             ),
             TextInput(
                 label="Enter passkey",
