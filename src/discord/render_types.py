@@ -23,11 +23,11 @@ class render_types(Select):
 
         message = await interaction.author.send("This will take some time please dont run any commands until this has either completed or failed\nAVG: completion time is 37min")
 
-        if self.values[0] in os.listdir(f"_files/{self.guid}/maps"):
+        if self.values[0] in os.listdir(f"_files/{interaction.guild.id}/maps"):
             xmlm = XMLManager()
             await xmlm.create_new_types(message, self.values[0])
 
-            await author.send(file=disnake_File(f'_files/{self.guid}/maps/{self.values[0]}/outputs/types.xml'))
+            await author.send(file=disnake_File(f'_files/{interaction.guild.id}/maps/{self.values[0]}/outputs/types.xml'))
             await bot.change_presence(status=Status.online, activity=None)
             await interaction.followup.send("Done.")
 
