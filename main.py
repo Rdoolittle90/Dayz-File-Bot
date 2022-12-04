@@ -82,6 +82,7 @@ def main():
     async def get_map_key(interaction: ApplicationCommandInteraction, mapname: str) -> None:
         """"""
         passkey = get_map_key(interaction.guild.id, mapname)
+        print(passkey)
         await interaction.send(embed=key_embed(mapname, passkey))
 
 
