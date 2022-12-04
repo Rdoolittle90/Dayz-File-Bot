@@ -7,6 +7,6 @@ class MyClient(Bot):
     async def on_ready(self):
         print("Connected to:")
         for guild in self.guilds:
-            create_new_server_dir(guild.id)
             print('\t', guild.name)
+            create_new_server_dir(guild.id)
         print(f'Logged on as: {self.user}')

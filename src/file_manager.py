@@ -29,8 +29,9 @@ def create_new_server_dir(server_id) -> None:
     try:
         os.makedirs(f"_files/{server_id}")
         os.makedirs(f"_files/{server_id}/maps")
+        print(f"\t\tDirectories Created.")
     except FileExistsError:
-        print(f"{server_id}: ready.")
+        print(f"\t\t{server_id}: Ready.")
 
 
 def create_new_map_dir(server_id, map_name) -> bool:
