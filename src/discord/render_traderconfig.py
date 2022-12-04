@@ -25,7 +25,7 @@ class render_traderconfig(Select):
 
         if self.values[0] in os.listdir(f"_files/{interaction.guild.id}/maps"):
             tcm = TraderConfigManager()
-            await tcm.create_new_traderconfig(message, self.values[0])
+            await tcm.create_new_traderconfig(message, interaction.guild.id, self.values[0])
             await interaction.author.send(file=disnake_File(f'_files/{interaction.guild.id}/maps/{self.values[0]}/outputs/TraderConfig.txt'))
             await bot.change_presence(status=Status.online, activity=None)
             await interaction.followup.send("TraderConfig.txt Complete!")

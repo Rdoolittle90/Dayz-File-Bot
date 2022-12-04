@@ -25,7 +25,7 @@ class render_types(Select):
 
         if self.values[0] in os.listdir(f"_files/{interaction.guild.id}/maps"):
             xmlm = XMLManager()
-            await xmlm.create_new_types(message, self.values[0])
+            await xmlm.create_new_types(message, interaction.guild.id, self.values[0])
 
             await author.send(file=disnake_File(f'_files/{interaction.guild.id}/maps/{self.values[0]}/outputs/types.xml'))
             await bot.change_presence(status=Status.online, activity=None)
