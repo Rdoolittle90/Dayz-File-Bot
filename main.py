@@ -1,6 +1,6 @@
 from os import getenv
 import os
-from discord.modals.remove_map_modal import RemoveMapModal
+from src.discord.modals.remove_map_modal import RemoveMapModal
 
 from src.file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup, key_embed, remove_map_dir
 
