@@ -36,8 +36,6 @@ def create_new_map_dir(server_id, map_name) -> bool:
         "map_name": map_name, 
         "passkey": generate_map_passkey()
         }
-    if server_id not in os.listdir("_files"):
-        create_new_server_dir(server_id)
 
     if map_name not in os.listdir(f"_files/{server_id}/maps"):
         os.makedirs(f"_files/{server_id}/maps/{map_name}")
