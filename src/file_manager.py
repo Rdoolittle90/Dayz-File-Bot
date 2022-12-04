@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import shutil
 from string import ascii_lowercase, ascii_uppercase
 from xmlrpc.client import boolean
 
@@ -50,6 +51,25 @@ def create_new_map_dir(server_id, map_name) -> bool:
         return True
     else:
         return False
+
+
+def get_map_key(server_id, map_name):
+    path = f"_files/{server_id}/maps/{map_name}"
+    try:
+        with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "r") as json_in:
+            passkey = json.load(json_in)["passkey"]
+    except FileNotFoundError:
+        print("No map or passkey found.")
+        return None
+    return passkey
+
+
+def remove_map_dir(server_id, map_name):
+    path = f"_files/{server_id}/maps/{map_name}"
+    try:
+        shutil.rmtree(path)
+    except OSError as e:
+        print("Error: %s : %s" % (path, e.strerror))
 
 
 

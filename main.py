@@ -1,7 +1,7 @@
 from os import getenv
 import os
 
-from src.setup import create_new_server_dir, create_new_map_dir, initial_dir_setup
+from file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup
 
 from src.discord.discord_static import MyClient
 
@@ -82,8 +82,10 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537)
     async def remove_map(interaction: ApplicationCommandInteraction, mapname: str, passkey: int) -> None:
         """"""
-
-        await interaction.send(f"New Directory created for {mapname}")
+        if passkey == get_map_key(interaction.guild.id, passkey):
+            remove_map(interaction.guild.id, mapname)
+            await interaction.send(f"{mapname} Directory has been removed this can NOT be undone")
+        await interaction.send(f"Failed! Incorrect map name or passkey.")
 
 
 # @everyone COMMANDS ======================================================================================

@@ -48,7 +48,7 @@ class TraderConfigManager(DBConnect):
             today = datetime.date.today().strftime("%m/%d/%Y")
             start_time = datetime.datetime.now()
 
-            fout.writelines(label.format(today, stats[1], stats[2]))
+            fout.writelines(label.format(today, stats[2], stats[3]))
 
 
             self.c.callproc("select_map_traders", args=(duid, map_name))
