@@ -201,13 +201,13 @@ class XMLManager(DBConnect):
         start_time = datetime.datetime.now()
 
         ## before starting add file info comment
-        comment_map = Comment(f"{map_name}")
+        comment_map = Comment(f"  Map Name: {map_name}")
         comment_time = Comment(f"Created on: {start_time}")
         comment_items = Comment(f"Item Count: {len(rows)}")
 
-        tree.append(comment_map)
-        tree.append(comment_time)
-        tree.append(comment_items)
+        root_types.append(comment_map)
+        root_types.append(comment_time)
+        root_types.append(comment_items)
 
         ## start the loop over rows
         for idx, row in enumerate(rows):
