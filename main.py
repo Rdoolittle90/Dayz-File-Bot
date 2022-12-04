@@ -37,36 +37,36 @@ def main():
     # below are all of the commands for the bot
     # default_member_permissions=8 is the same as saying only available to admins
 # ADMIN COMMANDS =========================================================================================
-    @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
+    @bot.slash_command(default_member_permissions=1067403561537)
     async def kill(interaction: ApplicationCommandInteraction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.author}")
         await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
 
-    @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
+    @bot.slash_command(default_member_permissions=1067403561537)
     async def render_types(interaction: ApplicationCommandInteraction) -> None:
         """Render the types.xml for the selected map"""
         await interaction.send(view=render_types_view(), ephemeral=True)
 
 
-    @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
+    @bot.slash_command(default_member_permissions=1067403561537)
     async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         await interaction.send(view=render_traderconfig_view(), ephemeral=True)
 
 
-    @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
+    @bot.slash_command(default_member_permissions=1067403561537)
     async def add_map(interaction: ApplicationCommandInteraction, mapname: str) -> None:
         """"""
-        create_new_map_dir(mapname)
+        create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
 
 
-    @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
+    @bot.slash_command(default_member_permissions=1067403561537)
     async def remove_map(interaction: ApplicationCommandInteraction, mapname: str, passkey: int) -> None:
         """"""
-        create_new_map_dir(mapname)
+
         await interaction.send(f"New Directory created for {mapname}")
 
 
