@@ -20,15 +20,15 @@ class XMLManager(DBConnect):
         return (tree, root)
 
 
-    def refresh_xml_format(self, map_name, xml_file):
+    def refresh_xml_format(self, duid, map_name, xml_file):
         tree, root = self.get_tree(f"_files/maps/{map_name}/inputs/{xml_file}")
         indent(tree, space="\t", level=0)
-        tree.write(f'_files/maps/{map_name}/inputs/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
+        tree.write(f'_files/{duid}/maps/{map_name}/inputs/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
 
 
-    def load_types_xml_to_db(self, map_name: str, mod_value:int=35, force_load_all=False) -> None:
+    def load_types_xml_to_db(self, duid, map_name: str, mod_value:int=35, force_load_all=False) -> None:
 
-        for xml_file in os.listdir(f"_files/maps/{map_name}/inputs"):
+        for xml_file in os.listdir(f"_files/{duid}/maps/{map_name}/inputs"):
             if xml_file.endswith(".xml"):
                 print(xml_file)
 
@@ -41,7 +41,7 @@ class XMLManager(DBConnect):
                 # clean the xml to matching format
                 self.refresh_xml_format(map_name, xml_file)
 
-                tree, root = self.get_tree(f"_files/maps/{map_name}/inputs/{xml_file}")
+                tree, root = self.get_tree(f"_files/{duid}/maps/{map_name}/inputs/{xml_file}")
                 root: _Element
                 item_count = float(len(root))
                 items_added = 0.0
@@ -188,7 +188,7 @@ class XMLManager(DBConnect):
         self.close()
 
 
-    async def create_new_types(self, message, map_name) -> None:
+    async def create_new_types(self, message, duid, map_name) -> None:
         """get all items from db and convert them to xml objects"""
         root_types: _Element = Element("types")
         tree: _ElementTree = ElementTree(root_types)
@@ -293,5 +293,5 @@ class XMLManager(DBConnect):
 
         await message.edit(embed=embed)
 
-        tree.write(f'_files/maps/{map_name}/outputs/types.xml', xml_declaration=True, encoding="utf-8", standalone=True)
+        tree.write(f'_files/{duid}/maps/{map_name}/outputs/types.xml', xml_declaration=True, encoding="utf-8", standalone=True)
 

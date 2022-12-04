@@ -62,7 +62,6 @@ def main():
             await interaction.send("Server has no registered maps", ephemeral=True)
 
 
-
     @bot.slash_command(default_member_permissions=1067403561537)
     async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""

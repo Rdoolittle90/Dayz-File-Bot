@@ -23,7 +23,7 @@ class render_traderconfig(Select):
         message = await interaction.author.send("This will take some time please dont run any commands until this has either completed or failed\nAVG: completion time is 5min")
         
 
-        if self.values[0] in os.listdir("_files/{self.guid}/maps"):
+        if self.values[0] in os.listdir(f"_files/{self.guid}/maps"):
             tcm = TraderConfigManager()
             await tcm.create_new_traderconfig(message, self.values[0])
             await interaction.author.send(file=disnake_File(f'_files/{self.guid}/maps/{self.values[0]}/outputs/TraderConfig.txt'))

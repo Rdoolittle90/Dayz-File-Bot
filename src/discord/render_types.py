@@ -5,7 +5,6 @@ from disnake import File as disnake_File
 from disnake import Status, Game, Activity, ActivityType
 
 from src.dayz.xml_manager import XMLManager
-from src.discord.guild_manager import get_map_selections
 
 
 
@@ -24,7 +23,7 @@ class render_types(Select):
 
         message = await interaction.author.send("This will take some time please dont run any commands until this has either completed or failed\nAVG: completion time is 37min")
 
-        if self.values[0] in os.listdir("_files/{self.guid}/maps"):
+        if self.values[0] in os.listdir(f"_files/{self.guid}/maps"):
             xmlm = XMLManager()
             await xmlm.create_new_types(message, self.values[0])
 

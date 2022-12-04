@@ -8,8 +8,8 @@ from src.dayz.clean_trader_file import open_config, parse_config
 
 
 class TraderConfigManager(DBConnect):
-    def load_traderconfig_to_db(self, map_name):
-        items = parse_config(open_config(map_name))
+    def load_traderconfig_to_db(self, duid, map_name):
+        items = parse_config(open_config(duid, map_name))
         print(map_name)
         for idx, line in enumerate(items):
             self.insert_into_traderconfig(map_name, line[0], line[1], line[2], line[3], line[4], line[5])
@@ -21,7 +21,7 @@ class TraderConfigManager(DBConnect):
         self.close()
 
 
-    async def create_new_traderconfig(self, message, map_name):
+    async def create_new_traderconfig(self, message, duid, map_name):
         label = """
                   //---------------------------------------------------------------------------------------------//
                  //                                                                                             //
@@ -43,7 +43,7 @@ class TraderConfigManager(DBConnect):
 
 """
 
-        with open(f"_files/maps/{map_name}/outputs/TraderConfig.txt", "w") as fout:
+        with open(f"_files/{duid}/maps/{map_name}/outputs/TraderConfig.txt", "w") as fout:
             stats = self.c.callproc("select_stats", args=(map_name, "", ""))
             today = datetime.date.today().strftime("%m/%d/%Y")
             start_time = datetime.datetime.now()
