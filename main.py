@@ -1,7 +1,7 @@
 from os import getenv
 import os
 
-from src.file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup
+from src.file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup, remove_map_dir
 
 from src.discord.discord_static import MyClient
 
@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 from src.discord.render_traderconfig import render_traderconfig_view
 from src.discord.render_types import render_types_view
 
-from src.discord.vendor_views import select_vendors_view
 from src.discord.guild_manager import get_map_selections
 
 
@@ -84,7 +83,7 @@ def main():
         """"""
         passkey = get_map_key(interaction.guild.id, mapname)
         if passkey:
-            remove_map(interaction.guild.id, mapname)
+            remove_map_dir(interaction.guild.id, mapname)
             await interaction.send(f"{mapname} Directory has been removed this can NOT be undone")
         else:
             await interaction.send(f"Failed! Incorrect map name or passkey.")
