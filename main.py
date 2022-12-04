@@ -86,7 +86,8 @@ def main():
         if passkey:
             remove_map(interaction.guild.id, mapname)
             await interaction.send(f"{mapname} Directory has been removed this can NOT be undone")
-        await interaction.send(f"Failed! Incorrect map name or passkey.")
+        else:
+            await interaction.send(f"Failed! Incorrect map name or passkey.")
 
 
 # @everyone COMMANDS ======================================================================================
