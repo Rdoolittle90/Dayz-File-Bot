@@ -5,6 +5,8 @@ import shutil
 from string import ascii_lowercase, ascii_uppercase
 from xmlrpc.client import boolean
 
+from disnake import Color, Embed
+
 
 def generate_map_passkey() -> str:
     """generates a random key to associate with a map to be used for deletion confirmation"""
@@ -16,14 +18,14 @@ def generate_map_passkey() -> str:
         passkey += str(random_choice)
 
     return passkey
+    
 
-
-def initial_dir_setup():
+def initial_dir_setup() -> None:
     os.makedirs(f"_files")
     os.makedirs(f"extra_resources")
 
 
-def create_new_server_dir(server_id):
+def create_new_server_dir(server_id) -> None:
     if server_id not in os.listdir("_files"):
         os.makedirs(f"_files/{server_id}")
         os.makedirs(f"_files/{server_id}/maps")
@@ -53,7 +55,7 @@ def create_new_map_dir(server_id, map_name) -> bool:
         return False
 
 
-def get_map_key(server_id, map_name):
+def get_map_key(server_id, map_name) -> str:
     path = f"_files/{server_id}/maps/{map_name}"
     try:
         with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "r") as json_in:
@@ -64,13 +66,17 @@ def get_map_key(server_id, map_name):
     return passkey
 
 
-def remove_map_dir(server_id, map_name):
+def remove_map_dir(server_id, map_name) -> None:
     path = f"_files/{server_id}/maps/{map_name}"
     try:
         shutil.rmtree(path)
     except OSError as e:
         print("Error: %s : %s" % (path, e.strerror))
 
+
+def key_embed(map_name, passkey) -> Embed:
+    embed = Embed(title=map_name, description=passkey, color=Color.blurple())
+    return embed
 
 
 if __name__ == "__main__":

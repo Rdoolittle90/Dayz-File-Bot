@@ -1,7 +1,7 @@
 from os import getenv
 import os
 
-from src.file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup, remove_map_dir
+from src.file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup, key_embed, remove_map_dir
 
 from src.discord.discord_static import MyClient
 
@@ -76,6 +76,13 @@ def main():
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.author}")
         await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
+
+
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def get_map_key(interaction: ApplicationCommandInteraction, mapname: str) -> None:
+        """"""
+        passkey = get_map_key(interaction.guild.id, mapname)
+        await interaction.send(embed=key_embed(mapname, passkey))
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
