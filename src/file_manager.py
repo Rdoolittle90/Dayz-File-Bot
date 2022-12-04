@@ -75,7 +75,8 @@ def remove_map_dir(server_id:int, map_name:str) -> None:
 
 
 def remove_embed(map_name):
-    embed = Embed(title="gdf")
+    embed = Embed(title=map_name, description="Map Removed!\nThis can NOT be undone.", color=Color.green())
+    return embed
 
 
 def key_embed(map_name:str, passkey:str) -> Embed:
