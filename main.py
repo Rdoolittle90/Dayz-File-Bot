@@ -82,7 +82,8 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537)
     async def remove_map(interaction: ApplicationCommandInteraction, mapname: str, passkey: str) -> None:
         """"""
-        if passkey == get_map_key(interaction.guild.id, passkey):
+        passkey = get_map_key(interaction.guild.id, mapname)
+        if passkey:
             remove_map(interaction.guild.id, mapname)
             await interaction.send(f"{mapname} Directory has been removed this can NOT be undone")
         await interaction.send(f"Failed! Incorrect map name or passkey.")

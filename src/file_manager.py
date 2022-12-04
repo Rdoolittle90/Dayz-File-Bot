@@ -57,7 +57,7 @@ def get_map_key(server_id, map_name):
     path = f"_files/{server_id}/maps/{map_name}"
     try:
         with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "r") as json_in:
-            passkey = json.load(json_in)["passkey"]
+            passkey = json.load(json_in)
     except FileNotFoundError:
         print("No map or passkey found.")
         return None
