@@ -63,6 +63,13 @@ def main():
         await interaction.send(f"New Directory created for {mapname}")
 
 
+    @bot.slash_command(guild_ids=[GUILD], default_member_permissions=1067403561537)
+    async def remove_map(interaction: ApplicationCommandInteraction, mapname: str, passkey: int) -> None:
+        """"""
+        create_new_map_dir(mapname)
+        await interaction.send(f"New Directory created for {mapname}")
+
+
 # @everyone COMMANDS ======================================================================================
 
 
