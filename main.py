@@ -1,19 +1,17 @@
-from os import getenv
 import os
-
-from src.file_manager import create_new_server_dir, create_new_map_dir, get_map_key, initial_dir_setup, key_embed, remove_map_dir
-
-from src.discord.discord_static import MyClient
+from os import getenv
 
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
-
 from dotenv import load_dotenv
-from src.discord.render_traderconfig import render_traderconfig_view
-from src.discord.render_types import render_types_view
+
+from src.discord.discord_static import MyClient
 from src.discord.guild_manager import get_map_selections
 from src.discord.modals.remove_map_modal import RemoveMapModal
-
+from src.discord.render_traderconfig import render_traderconfig_view
+from src.discord.render_types import render_types_view
+from src.file_manager import (create_new_map_dir, create_new_server_dir,
+                              get_map_key, initial_dir_setup, key_embed)
 
 
 def main():
@@ -36,21 +34,21 @@ def main():
     # default_member_permissions=8 is the same as saying only available to admins
 # ADMIN COMMANDS =========================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def add_server(interaction: ApplicationCommandInteraction) -> None:
+    async def add_server(interaction:ApplicationCommandInteraction) -> None:
         """"""
         create_new_server_dir(interaction.guild.id)
         await interaction.send(f"New Directory created for {interaction.guild.name}")
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def add_map(interaction: ApplicationCommandInteraction, mapname: str) -> None:
+    async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """"""
         create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def render_types(interaction: ApplicationCommandInteraction) -> None:
+    async def render_types(interaction:ApplicationCommandInteraction) -> None:
         """Render the types.xml for the selected map"""
         options = get_map_selections(interaction.guild.id)
         if options:
@@ -70,21 +68,21 @@ def main():
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def kill(interaction: ApplicationCommandInteraction) -> None:
+    async def kill(interaction:ApplicationCommandInteraction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.author}")
         await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def get_key(interaction: ApplicationCommandInteraction, mapname: str) -> None:
+    async def get_key(interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """"""
         passkey = get_map_key(interaction.guild.id, mapname)["passkey"]
         await interaction.send(embed=key_embed(mapname, passkey))
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def remove_map(interaction: ApplicationCommandInteraction) -> None:
+    async def remove_map(interaction:ApplicationCommandInteraction) -> None:
         """"""
         await interaction.response.send_modal(modal=RemoveMapModal(interaction))
 

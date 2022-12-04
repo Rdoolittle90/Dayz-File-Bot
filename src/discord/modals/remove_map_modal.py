@@ -1,11 +1,11 @@
-from disnake import ModalInteraction
+from disnake import ApplicationCommandInteraction, ModalInteraction
 from disnake.ui import Modal, Select, TextInput
 
 from src.discord.guild_manager import get_map_selections
 
 
 class RemoveMapModal(Modal):
-    def __init__(self, interaction) -> None:
+    def __init__(self, interaction:ApplicationCommandInteraction) -> None:
         components: list = [
             Select(
                 custom_id="map",
@@ -14,7 +14,7 @@ class RemoveMapModal(Modal):
             ),
             TextInput(
                 label="Enter passkey",
-                placeholder="",
+                placeholder="use /get_key",
                 custom_id=f"passkey",
                 min_length=16,
                 max_length=16,
@@ -24,7 +24,7 @@ class RemoveMapModal(Modal):
         super().__init__(title="Select an Option Catagory", components=components)
     
 
-    async def callback(self, interaction: ModalInteraction) -> None:
+    async def callback(self, interaction:ModalInteraction) -> None:
         map: str = interaction.data["components"][0]["components"][0]["values"][0]
         passkey: str = interaction.data["components"][0]["components"][0]["value"]
 

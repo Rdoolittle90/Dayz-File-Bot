@@ -55,7 +55,7 @@ def create_new_map_dir(server_id, map_name) -> bool:
         return False
 
 
-def get_map_key(server_id, map_name) -> str:
+def get_map_key(server_id:int, map_name:str) -> str:
     path = f"_files/{server_id}/maps/{map_name}"
     try:
         with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "r") as json_in:
@@ -66,7 +66,7 @@ def get_map_key(server_id, map_name) -> str:
     return passkey
 
 
-def remove_map_dir(server_id, map_name) -> None:
+def remove_map_dir(server_id:int, map_name:str) -> None:
     path = f"_files/{server_id}/maps/{map_name}"
     try:
         shutil.rmtree(path)
@@ -78,7 +78,7 @@ def remove_embed(map_name):
     embed = Embed(title="gdf")
 
 
-def key_embed(map_name, passkey) -> Embed:
+def key_embed(map_name:str, passkey:str) -> Embed:
     embed = Embed(title=map_name, description=passkey, color=Color.blurple())
     return embed
 
