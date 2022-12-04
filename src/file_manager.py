@@ -21,8 +21,13 @@ def generate_map_passkey() -> str:
 
 
 def initial_dir_setup() -> None:
-    os.makedirs(f"_files")
-    os.makedirs(f"extra_resources")
+    try:
+        os.makedirs(f"_files")
+        os.makedirs(f"extra_resources")
+        print(f"First Time Startup.")
+        print(f"Root Directory Created\n")
+    except:
+        pass
 
 
 def create_new_server_dir(server_id) -> None:

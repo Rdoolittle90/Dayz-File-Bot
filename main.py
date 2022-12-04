@@ -103,7 +103,5 @@ def display_title():
 
 
 if __name__ == "__main__":
-    display_title()
-    if "_files" not in os.listdir():
-        initial_dir_setup()
+    display_title()        
     main()
