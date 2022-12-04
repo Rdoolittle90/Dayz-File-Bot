@@ -84,7 +84,7 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537)
     async def remove_map(interaction:ApplicationCommandInteraction) -> None:
         """"""
-        await interaction.response.send_modal(modal=RemoveMapModal(interaction))
+        await interaction.response.send_modal(modal=RemoveMapModal())
 
 
 # @everyone COMMANDS ======================================================================================

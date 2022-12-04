@@ -27,8 +27,8 @@ class RemoveMapModal(Modal):
     
 
     async def callback(self, interaction:ModalInteraction) -> None:
-        map: str = interaction.data["components"][0]["components"][0]["values"][0]
+        map_str: str = interaction.data["components"][0]["components"][0]["values"][0]
         passkey: str = interaction.data["components"][0]["components"][0]["value"]
 
-        print(map)
+        print(map_str)
         print(passkey)
