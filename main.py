@@ -81,7 +81,7 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537)
     async def get_key(interaction: ApplicationCommandInteraction, mapname: str) -> None:
         """"""
-        passkey = get_map_key(interaction.guild.id, mapname)
+        passkey = get_map_key(interaction.guild.id, mapname)["passkey"]
         print(passkey)
         await interaction.send(embed=key_embed(mapname, passkey))
 
@@ -89,8 +89,8 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537)
     async def remove_map(interaction: ApplicationCommandInteraction, mapname: str, passkey: str) -> None:
         """"""
-        passkey = get_map_key(interaction.guild.id, mapname)
-        if passkey:
+        map_key = get_map_key(interaction.guild.id, mapname)["passkey"]
+        if passkey == map_key:
             remove_map_dir(interaction.guild.id, mapname)
             await interaction.send(f"{mapname} Directory has been removed this can NOT be undone")
         else:
