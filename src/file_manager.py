@@ -26,9 +26,11 @@ def initial_dir_setup() -> None:
 
 
 def create_new_server_dir(server_id) -> None:
-    if server_id not in os.listdir("_files"):
+    try:
         os.makedirs(f"_files/{server_id}")
         os.makedirs(f"_files/{server_id}/maps")
+    except FileExistsError:
+        print(f"{server_id}: ready.")
 
 
 def create_new_map_dir(server_id, map_name) -> bool:
