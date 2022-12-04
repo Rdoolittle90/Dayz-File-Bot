@@ -205,9 +205,9 @@ class XMLManager(DBConnect):
         comment_time = Comment(f"Created on: {start_time}")
         comment_items = Comment(f"Item Count: {len(rows)}")
 
-        root_types.append(comment_map)
-        root_types.append(comment_time)
-        root_types.append(comment_items)
+        tree.append(comment_map)
+        tree.append(comment_time)
+        tree.append(comment_items)
 
         ## start the loop over rows
         for idx, row in enumerate(rows):
