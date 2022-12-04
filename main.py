@@ -1,7 +1,7 @@
 from os import getenv
 import os
 
-from src.setup import create_new_map_dir, initial_dir_setup
+from src.setup import create_new_server_dir, create_new_map_dir, initial_dir_setup
 
 from src.discord.discord_static import MyClient
 
@@ -54,6 +54,13 @@ def main():
     async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         await interaction.send(view=render_traderconfig_view(), ephemeral=True)
+
+
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def add_server(interaction: ApplicationCommandInteraction) -> None:
+        """"""
+        create_new_server_dir(interaction.guild.id)
+        await interaction.send(f"New Directory created for {interaction.guild.name}")
 
 
     @bot.slash_command(default_member_permissions=1067403561537)
