@@ -1,18 +1,16 @@
-import os
 from os import getenv
 
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
-from discord.load_traderconfig import load_traderconfig_view
 
 from src.discord.discord_static import MyClient
 from src.discord.guild_manager import get_map_selections
+from src.discord.load_traderconfig import load_traderconfig_view
 from src.discord.modals.remove_map_modal import RemoveMapModal
 from src.discord.render_traderconfig import render_traderconfig_view
 from src.discord.render_types import render_types_view
-from src.file_manager import (create_new_map_dir, create_new_server_dir,
-                              get_map_key, initial_dir_setup, key_embed)
+from src.file_manager import create_new_map_dir, get_map_key, key_embed
 
 
 def main():
