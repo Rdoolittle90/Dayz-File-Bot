@@ -4,6 +4,13 @@ from disnake.errors import Forbidden
 from disnake.utils import get
 
 
+async def initial_server_setup(guild: Guild):
+    try:
+        guild.create_role(name="Bot Manager", color=Color.darker_grey())
+    except:
+        pass
+
+
 async def initial_cha_setup(guild: Guild):
     try:
         channel = get(guild.categories, name='BOT CONTROLS')

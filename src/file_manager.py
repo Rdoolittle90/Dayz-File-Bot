@@ -7,7 +7,7 @@ from xmlrpc.client import boolean
 
 from disnake import Color, Embed
 
-
+# =========================================================================================================
 def generate_map_passkey() -> str:
     """generates a random key to associate with a map to be used for deletion confirmation"""
     passkey = ""
@@ -19,7 +19,7 @@ def generate_map_passkey() -> str:
 
     return passkey
 
-
+# =========================================================================================================
 def initial_dir_setup() -> None:
     """called automatically on bot ready, create files required for bot"""
     try:
@@ -30,7 +30,7 @@ def initial_dir_setup() -> None:
     except:
         pass
 
-
+# =========================================================================================================
 def create_new_server_dir(server_id) -> None:
     """called automatically on bot ready, creates required files for server"""
 
@@ -42,7 +42,7 @@ def create_new_server_dir(server_id) -> None:
     except FileExistsError:
         print(f"\t\tReady.")
 
-
+# =========================================================================================================
 def create_new_map_dir(server_id, map_name) -> bool:
     """Returns True if map directory does not exist"""
     
@@ -65,7 +65,7 @@ def create_new_map_dir(server_id, map_name) -> bool:
     else:
         return False
 
-
+# =========================================================================================================
 def get_map_key(server_id:int, map_name:str) -> str:
     """if map passkey exists return it"""
     path = f"_files/{server_id}/maps/{map_name}/passkey.json"
@@ -77,7 +77,7 @@ def get_map_key(server_id:int, map_name:str) -> str:
         return None
     return passkey
 
-
+# =========================================================================================================
 def remove_map_dir(server_id:int, map_name:str) -> None:
     """Destory the directory given the server_id and map_name"""
     path = f"_files/{server_id}/maps/{map_name}"
@@ -86,13 +86,13 @@ def remove_map_dir(server_id:int, map_name:str) -> None:
     except OSError as e:
         print("Error: %s : %s" % (path, e.strerror))
 
-
+# =========================================================================================================
 def remove_embed(map_name):
     """return a removal confirmation Embed"""
     embed = Embed(title=map_name, description="Map Removed!\nThis can NOT be undone.", color=Color.green())
     return embed
 
-
+# =========================================================================================================
 def key_embed(map_name:str, passkey:str) -> Embed:
     """returns an Embed containing a map passkey"""
     embed = Embed(title=map_name, description=passkey, color=Color.blurple())
@@ -100,6 +100,9 @@ def key_embed(map_name:str, passkey:str) -> Embed:
 
 
 
+# =========================================================================================================
+# =========================================================================================================
+# =========================================================================================================
 if __name__ == "__main__":
     for i in range(25):
         print(generate_map_passkey())

@@ -30,7 +30,9 @@ def main():
 
     # below are all of the commands for the bot
     # default_member_permissions=8 is the same as saying only available to admins
-# ADMIN COMMANDS =========================================================================================
+    
+# ADMIN COMMANDS ==========================================================================================
+# =========================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """creates a new map directory"""
@@ -38,6 +40,7 @@ def main():
         await interaction.send(f"New Directory created for {mapname}")
 
 
+    # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def render_types(interaction:ApplicationCommandInteraction) -> None:
         """Render the types.xml for the selected map"""
@@ -48,6 +51,7 @@ def main():
             await interaction.send("Server has no registered maps", ephemeral=True)
 
 
+    # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
@@ -58,6 +62,7 @@ def main():
             await interaction.send("Server has no registered maps", ephemeral=True)
 
 
+    # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def kill(interaction:ApplicationCommandInteraction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
@@ -65,6 +70,7 @@ def main():
         await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
 
+    # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def get_key(interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """Looks up the given maps passkey"""
@@ -72,6 +78,7 @@ def main():
         await interaction.send(embed=key_embed(mapname, passkey))
 
 
+    # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def remove_map(interaction:ApplicationCommandInteraction) -> None:
         """Opens the map deletion Modal"""
@@ -79,10 +86,12 @@ def main():
 
 
 # @everyone COMMANDS ======================================================================================
+# =========================================================================================================
 
 
 
 # START THE BOT ===========================================================================================
+# =========================================================================================================
     # start the bot loop
     bot.run(getenv("DISCORD_TOKEN"))
 
@@ -100,6 +109,9 @@ def display_title():
 
 
 
+# =========================================================================================================
+# =========================================================================================================
+# =========================================================================================================
 if __name__ == "__main__":
     display_title()        
     main()
