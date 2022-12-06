@@ -7,7 +7,7 @@ import requests
 
 async def initial_server_setup(guild: Guild):
     try:
-        guild.create_role(name="Bot Manager", color=Color.darker_grey())
+        await guild.create_role(name="Bot Manager", color=Color.darker_grey())
     except:
         pass
 
