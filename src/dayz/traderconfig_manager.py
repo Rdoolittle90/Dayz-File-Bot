@@ -18,7 +18,7 @@ class TraderConfigManager(DBConnect):
                 self.commit()   
    
                 est_perc = f"{round((idx / len(items)) * 100, 2)}%"
-                embed = Embed(title="Rendering types.xml", description="This will take some time.", color=Color.yellow())
+                embed = Embed(title="loading TraderConfig.txt to db", description="This will take some time.", color=Color.yellow())
                 embed.add_field(name=map_name, value=est_perc)
                 await message.edit(embed=embed)
 

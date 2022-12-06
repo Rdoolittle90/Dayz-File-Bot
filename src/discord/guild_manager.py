@@ -68,7 +68,7 @@ def get_map_selections(guild_id, type_return="SelectOption"):
                 selections.append(SelectOption(label=guild_map))
                 selections_list.append(guild_map)
         else:
-            selections.append(SelectOption(label="No Maps Found", emoji="❌", discription="This probably means no map has been setup for this server."))
+            selections.append(SelectOption(label="No Maps Found", emoji="❌", description="This probably means no map has been setup for this server."))
 
         if type_return == "SelectOption":
             return selections
