@@ -2,7 +2,7 @@ from disnake import DMChannel
 import requests
 from disnake.message import Message
 from disnake.ext.commands import Bot
-from src.discord.guild_manager import initial_cha_setup
+from src.discord.guild_manager import initial_cha_setup, initial_server_setup
 
 from src.file_manager import create_new_server_dir, initial_dir_setup
 
@@ -14,8 +14,12 @@ class MyClient(Bot):
         for guild in self.guilds:
             print('\t', guild.name)
             await initial_cha_setup(guild)
+            await initial_server_setup(guild)
             create_new_server_dir(guild.id)
         print(f'Logged on as: {self.user}')
+
+
+
 
     async def on_message(self, message: Message):
         if isinstance(message.channel, DMChannel):
