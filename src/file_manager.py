@@ -37,6 +37,7 @@ def create_new_server_dir(server_id) -> None:
     try:
         os.makedirs(f"_files/{server_id}")
         os.makedirs(f"_files/{server_id}/maps")
+        os.makedirs(f"_files/{server_id}/support")
         print(f"\t\tDirectories Created.")
     except FileExistsError:
         print(f"\t\tReady.")
@@ -59,7 +60,6 @@ def create_new_map_dir(server_id, map_name) -> bool:
         with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "w") as json_out:
             json.dump(passkey, json_out, indent=4)
 
-        os.makedirs(f"_files/{server_id}/support")
 
         return True
     else:
