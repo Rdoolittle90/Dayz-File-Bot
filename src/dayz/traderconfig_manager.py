@@ -92,10 +92,9 @@ class TraderConfigManager(DBConnect):
                             str(product[1]) + ",", 
                             str(product[2]) + ",", 
                             product[3]))
-                    
+                    await message.edit(embed=embed)
                     fout.write("\n")
             fout.write("<FileEnd>")
-            await message.edit(embed=embed)
             
             end_time = datetime.datetime.now()
 

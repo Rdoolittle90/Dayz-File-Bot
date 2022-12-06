@@ -1,0 +1,1673 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<types>
+	<!-- 1.19 Things -->
+	<type name="Offroad_02">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>1800</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="SSG82">
+		<nominal>10</nominal>
+		<lifetime>28800</lifetime>
+		<restock>0</restock>
+		<min>7</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="weapons"/>
+		<usage name="Hunting"/>
+		<value name="Tier2"/>
+		<value name="Tier3"/>
+		<value name="Tier4"/>
+	</type>
+	<type name="Mag_SSG82_5rnd">
+		<nominal>20</nominal>
+		<lifetime>28800</lifetime>
+		<restock>0</restock>
+		<min>10</min>
+		<quantmin>0</quantmin>
+		<quantmax>80</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="weapons"/>
+		<usage name="Hunting"/>
+		<value name="Tier2"/>
+		<value name="Tier3"/>
+		<value name="Tier4"/>
+	</type>
+	<type name="Blowtorch">
+		<nominal>40</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>10</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="tools"/>
+		<usage name="Village"/>
+		<usage name="Hunting"/>
+	</type>
+	<type name="GlowPlug">
+		<nominal>20</nominal>
+		<lifetime>14400</lifetime>
+		<restock>0</restock>
+		<min>5</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="tools"/>
+		<tag name="shelves"/>
+		<usage name="Industrial"/>
+	</type>
+	<type name="GPSReceiver">
+		<nominal>20</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>5</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+		<category name="tools"/>
+		<usage name="Village"/>
+		<usage name="Hunting"/>
+		<value name="Tier2"/>
+		<value name="Tier3"/>
+	</type>
+	<type name="CP_Workbench">
+		<lifetime>3888000</lifetime>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0"/>
+	</type>
+	<type name="CP_DryPost">
+		<lifetime>3888000</lifetime>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="1" deloot="0"/>
+	</type>
+	<!-- HUMMERS -->
+	<type name="CrSk_Hummer_H2_6x6_Xin_Camo">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin_Black">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin_Pink">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="CrSk_Hummer_H2_6x6_Xin_Space">
+		<nominal>0</nominal>
+		<lifetime>3888000</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_Bitcoin">
+		<category name="tools"/>
+		<nominal>2</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_CrossNecklace">
+		<category name="tools"/>
+		<nominal>6</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_FloppyDisks_1999">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_FloppyDisks_April">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_FloppyDisks_MTV">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_DonkeyKong">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_Mario">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_Medarot">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_PokemonOne">
+		<category name="collectable"/>
+		<nominal>1</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_PokemonTwo">
+		<category name="collectable"/>
+		<nominal>1</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_Snakes">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_Tetris">
+		<category name="collectable"/>
+		<nominal>8</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_Yoshi">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GameBoy_Zelda">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_GPU">
+		<category name="tools"/>
+		<nominal>1</nominal>
+		<lifetime>7200</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>50</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_Intel">
+		<category name="tools"/>
+		<nominal>2</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PocketWatch">
+		<category name="tools"/>
+		<nominal>6</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Abra">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Alakazam">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Arcanine">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Beedrill">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Bill">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Blastoise">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Breeder">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Bulbasaur">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Caterpie">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Center">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Chansey">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Charizard">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Charmander">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Charmeleon">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_ClefairlyDoll">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Clefairy">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_ComputerSearch">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Defender">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_DevolutionSpray">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Dewgong">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Diglett">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Doduo">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_DoubleColourlessEnergy">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Dragonair">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Dratini">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Drowzee">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Dugtrio">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Eevee">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Electabuzz">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Electrode">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_EnergyRemoval">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_EnergyRetrieval">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Farfetchd">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_FightingEnergy">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_FireEnergy">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Flute">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_FullHeal">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Gastly">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_GrassEnergy">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Growlithe">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_GustOfWind">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Gyarados">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Haunter">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Hitmonchan">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_ImposterProfessorOak">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_ItemFinder">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Ivysaur">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Jolteon">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Jynx">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Kadabra">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Kakuna">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Koffing">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Lass">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Machamp">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Machoke">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Machop">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Magikarp">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Magmar">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Magnemite">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Magneton">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Maintenance">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Metapod">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Mew">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Mewtwo">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Nidoking">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Nidoran">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Nidorino">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Ninetales">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Onix">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Pidgeotto">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Pidgey">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Pikachu">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_PikachuBS">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Pluspower">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Pokedex">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Poliwag">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Poliwhirl">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Poliwrath">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Ponyta">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Porygon">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Potion">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_ProfessorOakBase">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_PsychicEnergy">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Raichu">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Raticate">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Rattata">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Revive">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Sandshrew">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_ScoopUp">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Seel">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_ShinyMewtwo">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Squirtle">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Starmie">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Staryu">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_SuperEnergy">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_SuperPotion">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_SwitchBase">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Tangela">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Trader">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>80</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Venusaur">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Volcanion">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Voltorb">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Vulpix">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Wartortle">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_WaterEnergy">
+		<category name="collectable"/>
+		<nominal>3</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>2</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>85</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Weedle">
+		<category name="collectable"/>
+		<nominal>4</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>3</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>90</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_PokemonCard_Zapdos">
+		<category name="collectable"/>
+		<nominal>0</nominal>
+		<lifetime>3600</lifetime>
+		<restock>14400</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>75</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_Polaroid_Four">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_Polaroid_One">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_Polaroid_Three">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_Polaroid_Two">
+		<category name="collectable"/>
+		<nominal>2</nominal>
+		<lifetime>28800</lifetime>
+		<restock>14400</restock>
+		<min>1</min>
+		<quantmin>10</quantmin>
+		<quantmax>10</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_RAM">
+		<category name="tools"/>
+		<nominal>2</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_RetroToy">
+		<category name="tools"/>
+		<nominal>3</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_SmartPhone_Black">
+		<category name="tools"/>
+		<nominal>1</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_SmartPhone_Blue">
+		<category name="tools"/>
+		<nominal>1</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_SmartPhone_Green">
+		<category name="tools"/>
+		<nominal>1</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_SmartPhone_Red">
+		<category name="tools"/>
+		<nominal>1</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_SmartPhone_Yellow">
+		<category name="tools"/>
+		<nominal>1</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_SSD">
+		<category name="tools"/>
+		<nominal>2</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_SSDV2">
+		<category name="tools"/>
+		<nominal>2</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_TetrisToy">
+		<category name="tools"/>
+		<nominal>2</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	<type name="Collectable_USB">
+		<category name="tools"/>
+		<nominal>2</nominal>
+		<lifetime>14400</lifetime>
+		<restock>7200</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>66</cost>
+		<flags count_in_hoarder="1" count_in_map="0" count_in_cargo="0" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+</types>

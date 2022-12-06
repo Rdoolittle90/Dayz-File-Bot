@@ -21,6 +21,7 @@ def generate_map_passkey() -> str:
 
 
 def initial_dir_setup() -> None:
+    """called automatically on bot ready, create files required for bot"""
     try:
         os.makedirs(f"_files")
         os.makedirs(f"extra_resources")
@@ -31,6 +32,8 @@ def initial_dir_setup() -> None:
 
 
 def create_new_server_dir(server_id) -> None:
+    """called automatically on bot ready, creates required files for server"""
+
     try:
         os.makedirs(f"_files/{server_id}")
         os.makedirs(f"_files/{server_id}/maps")
@@ -53,10 +56,10 @@ def create_new_map_dir(server_id, map_name) -> bool:
         os.makedirs(f"_files/{server_id}/maps/{map_name}/outputs")
         os.makedirs(f"_files/{server_id}/maps/{map_name}/atms")
         os.makedirs(f"_files/{server_id}/maps/{map_name}/backups")
-        os.makedirs(f"_files/{server_id}/maps/{map_name}/support")
-
         with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "w") as json_out:
             json.dump(passkey, json_out, indent=4)
+
+        os.makedirs(f"_files/{server_id}/support")
 
         return True
     else:
@@ -64,9 +67,10 @@ def create_new_map_dir(server_id, map_name) -> bool:
 
 
 def get_map_key(server_id:int, map_name:str) -> str:
-    path = f"_files/{server_id}/maps/{map_name}"
+    """if map passkey exists return it"""
+    path = f"_files/{server_id}/maps/{map_name}/passkey.json"
     try:
-        with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "r") as json_in:
+        with open(path, "r") as json_in:
             passkey = json.load(json_in)
     except FileNotFoundError:
         print("No map or passkey found.")
@@ -75,6 +79,7 @@ def get_map_key(server_id:int, map_name:str) -> str:
 
 
 def remove_map_dir(server_id:int, map_name:str) -> None:
+    """Destory the directory given the server_id and map_name"""
     path = f"_files/{server_id}/maps/{map_name}"
     try:
         shutil.rmtree(path)
@@ -83,13 +88,16 @@ def remove_map_dir(server_id:int, map_name:str) -> None:
 
 
 def remove_embed(map_name):
+    """return a removal confirmation Embed"""
     embed = Embed(title=map_name, description="Map Removed!\nThis can NOT be undone.", color=Color.green())
     return embed
 
 
 def key_embed(map_name:str, passkey:str) -> Embed:
+    """returns an Embed containing a map passkey"""
     embed = Embed(title=map_name, description=passkey, color=Color.blurple())
     return embed
+
 
 
 if __name__ == "__main__":

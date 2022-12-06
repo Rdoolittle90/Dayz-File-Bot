@@ -32,9 +32,7 @@ class render_types(Select):
             await interaction.followup.send("types.xml Complete!", ephemeral=True)
 
 
-
 class render_types_view(View):
     def __init__(self, options, *, timeout = 180):
         super().__init__(timeout=timeout)
         self.add_item(render_types(options))
-

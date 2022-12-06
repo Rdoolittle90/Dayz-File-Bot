@@ -1,5 +1,23 @@
 ﻿import os
-from disnake import SelectOption
+from disnake import Color, Embed, Guild, SelectOption
+from disnake.errors import Forbidden
+from disnake.utils import get
+
+
+async def initial_cha_setup(guild: Guild):
+    try:
+        channel = get(guild.categories, name='BOT CONTROLS')
+        if channel is None:
+            category = await guild.create_category("BOT CONTROLS")
+            channel = await category.create_text_channel('drifter-imports')
+            embed = Embed(title="How to upload a file", description="Files must be uploaded by the following commands", color=Color.blurple())
+            embed.add_field(name="Step 1", value="Attach files to a message")
+            embed.add_field(name="Step 2", value="send `@Drifter map_name` as the message with the files")
+            embed.add_field(name="Step 3", value="wait for confirmation of upload.")
+
+            await channel.send(embed=embed)
+    except Forbidden:
+        print("Missing Permissions!")
 
 
 
