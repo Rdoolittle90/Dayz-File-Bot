@@ -1,7 +1,8 @@
 ﻿import os
-from disnake import Color, Embed, Guild, SelectOption
+from disnake import Color, DMChannel, Embed, Guild, Message, SelectOption
 from disnake.errors import Forbidden
 from disnake.utils import get
+import requests
 
 
 async def initial_server_setup(guild: Guild):
@@ -18,14 +19,43 @@ async def initial_cha_setup(guild: Guild):
             category = await guild.create_category("BOT CONTROLS")
             channel = await category.create_text_channel('drifter-imports')
             embed = Embed(title="How to upload a file", description="Files must be uploaded by the following commands", color=Color.blurple())
-            embed.add_field(name="Step 1", value="Attach files to a message")
-            embed.add_field(name="Step 2", value="send `@Drifter map_name` as the message with the files")
-            embed.add_field(name="Step 3", value="wait for confirmation of upload.")
+            embed.add_field(name="Step 1", value="Attach files to a message", inline=False)
+            embed.add_field(name="Step 2", value="send `@Drifter map_name` as the message with the files", inline=False)
+            embed.add_field(name="Step 3", value="wait for confirmation of upload.", inline=False)
 
             await channel.send(embed=embed)
     except Forbidden:
         print("Missing Permissions!")
 
+
+async def check_for_files(message: Message):
+    """"""     
+    if isinstance(message.channel, DMChannel):
+        return
+    if message.channel.name != "drifter-imports":
+        return
+    if len(message.content) == 0:
+        return
+
+    map_name = message.content.split(" ")[1]
+    attachments = message.attachments
+    await message.delete()
+    if len(attachments) > 0:
+        for file in attachments:
+            response = requests.get(file.url)
+            try:
+                if file.filename.endswith(".txt"):
+                    with open(f"_files/{message.guild.id}/maps/{map_name}/inputs/TraderConfig.txt", "w") as text_out:
+                        text_out.write(response.content.decode('utf-8'))
+
+                elif file.filename.endswith(".xml"):
+                    with open(f"_files/{message.guild.id}/maps/{map_name}/inputs/{file.filename}", "wb") as xml_out:
+                        xml_out.write(response.content)
+
+            except FileNotFoundError:
+                print("something went wrong")
+                print(f"_files/{message.guild.id}/maps/{map_name}/inputs/{file.filename}")
+                print("Not found")
 
 
 def get_map_selections(guild_id, type_return="SelectOption"):

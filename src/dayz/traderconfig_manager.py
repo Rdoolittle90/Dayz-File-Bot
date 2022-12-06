@@ -1,22 +1,27 @@
 import datetime
 import os
 
-from disnake import Color, Embed
+from disnake import Color, Embed, Message
 
 from src.sql.sql_manager import DBConnect
 from src.dayz.clean_trader_file import open_config, parse_config
 
 
 class TraderConfigManager(DBConnect):
-    def load_traderconfig_to_db(self, duid, map_name):
+    async def load_traderconfig_to_db(self, message: Message, duid: int, map_name: str):
         items = parse_config(open_config(duid, map_name))
         print(map_name)
         for idx, line in enumerate(items):
-            self.insert_into_traderconfig(map_name, line[0], line[1], line[2], line[3], line[4], line[5])
+            self.insert_into_traderconfig(duid, map_name, line[0], line[1], line[2], line[3], line[4], line[5])
 
-            if idx % 25 == 0:
-                print(f"{round((idx / len(items)) * 100, 2)}%")
-                self.commit()
+            if idx % 25 == 0:     
+                self.commit()   
+   
+                est_perc = f"{round((idx / len(items)) * 100, 2)}%"
+                embed = Embed(title="Rendering types.xml", description="This will take some time.", color=Color.yellow())
+                embed.add_field(name=map_name, value=est_perc)
+                await message.edit(embed=embed)
+
         self.commit()
         self.close()
 
