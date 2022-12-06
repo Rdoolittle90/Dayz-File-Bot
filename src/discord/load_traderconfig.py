@@ -15,7 +15,7 @@ class load_traderconfig(Select):
     
     async def callback(self, interaction: ApplicationCommandInteraction):
         bot = interaction.bot
-        interaction.response.defer(ephemeral=True)
+        await interaction.response.defer(ephemeral=True)
         if self.values[0] in os.listdir(f"_files/{interaction.guild.id}/maps"):
             await interaction.author.send(f"Loading TraderConfig from {interaction.guild.name} {self.values[0]}")
             message = await interaction.followup.send("One moment while this loads")
