@@ -1,7 +1,7 @@
 USE s76891_PlatinumDayz;
 
 # ----------------------------------------------------------------------------------------
-SELECT * FROM typestable WHERE MapName = "Namalsk" AND Restock = 1800;
+SELECT * FROM traderconfig WHERE DUID = 919677581824000070 AND MapName = "Chernarus" AND ClassName LIKE "%pokemon%" LIMIT 0, 2500;
 
 
 UPDATE typestable

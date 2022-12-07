@@ -3,6 +3,7 @@ from os import getenv
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
+from src.discord.load_types import load_types_view
 
 from src.discord.discord_static import MyClient
 from src.discord.guild_manager import get_map_selections
@@ -30,7 +31,8 @@ def main():
     # below are all of the commands for the bot
     # default_member_permissions=8 is the same as saying only available to admins
 
-# ADMIN COMMANDS ==========================================================================================
+# =========================================================================================================
+# ADMIN COMMANDS ------------------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
@@ -71,6 +73,15 @@ def main():
         else:
             await interaction.send("Server has no registered maps", ephemeral=True)
 
+    # =====================================================================================================
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def load_types(interaction: ApplicationCommandInteraction) -> None:
+        """Render the TraderConfig.txt for the selected map"""
+        options = get_map_selections(interaction.guild.id)
+        if options:
+            await interaction.send(view=load_types_view(options=options), ephemeral=True)
+        else:
+            await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
@@ -95,12 +106,14 @@ def main():
         await interaction.response.send_modal(modal=RemoveMapModal())
 
 
-# @everyone COMMANDS ======================================================================================
+# =========================================================================================================
+# @everyone COMMANDS --------------------------------------------------------------------------------------
 # =========================================================================================================
 
 
 
-# START THE BOT ===========================================================================================
+# =========================================================================================================
+# START THE BOT -------------------------------------------------------------------------------------------
 # =========================================================================================================
     # start the bot loop
     bot.run(getenv("DISCORD_TOKEN"))
