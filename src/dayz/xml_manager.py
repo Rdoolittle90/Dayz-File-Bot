@@ -25,18 +25,9 @@ class XMLManager(DBConnect):
         tree.write(f'_files/{duid}/maps/{map_name}/inputs/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
 
 
-    async def load_types_xml_to_db(self, message, duid, map_name: str, mod_value:int=35, force_load_all=False) -> None:
-
+    async def load_types_xml_to_db(self, message, duid, map_name: str, mod_value:int=35) -> None:
         for xml_file in os.listdir(f"_files/{duid}/maps/{map_name}/inputs"):
             if xml_file.endswith(".xml"):
-                print(xml_file)
-
-                # force_load_all will bypass this allowing all files to be loaded without interuption
-                if not force_load_all:
-                    user_input = input(f"load {xml_file}?")
-                    if user_input != "y":
-                        continue
-
                 # clean the xml to matching format
                 self.refresh_xml_format(map_name, xml_file)
 
@@ -197,7 +188,8 @@ class XMLManager(DBConnect):
 
         self.select_all_from_typestable(duid, map_name)
         rows = self.c.fetchall()
-
+        column_names = self.c.column_names
+        print(column_names)
         item_count = len(rows)
         items_added = 0
 
@@ -275,8 +267,8 @@ class XMLManager(DBConnect):
             # flags is the only tag with multiple attributes and was normalized in the db this recreates the dict 
             type_name.append(
                 Element("flags", attrib={
-                    "count_in_hoarder": str(row[14]), 
-                    "count_in_map": str(row[15]), 
+                    "count_in_map": str(row[14]), 
+                    "count_in_hoarder": str(row[15]), 
                     "count_in_cargo": str(row[16]),
                     "count_in_player": str(row[17]), 
                     "crafted": str(row[18]),

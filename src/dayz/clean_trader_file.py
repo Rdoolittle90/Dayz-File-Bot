@@ -10,10 +10,10 @@ def parse_config(lines) -> list[str]:
     items = []
     for line in lines[18:]:
         line: str
-        if line.startswith("<Trader>") or line.startswith("<CurrencyName>") or line.startswith("<FileEnd>"):
-            trader = line.strip("<Trader>").replace("\n", "").replace("\t", "").replace(" ", "").split("//")[0]
-        elif line.startswith("\t<Category>") or line.startswith("\t<Currency>"):
-            category = line.strip("\t<Category>").replace("\n", "").replace("\t", "").replace(" ", "").split("//")[0]
+        if line.startswith("<Trader> ") or line.startswith("<CurrencyName>") or line.startswith("<FileEnd>"):
+            trader = line.strip("<Trader> ").replace("\n", "").replace("\t", "").split("//")[0].strip()
+        elif line.startswith("\t<Category> ") or line.startswith("\t<Currency>"):
+            category = line.strip("\t<Category> ").replace("\n", "").replace("\t", "").split("//")[0].strip()
         elif line.replace("\t", "").replace(" ", "").startswith("/"):
             continue
         else:

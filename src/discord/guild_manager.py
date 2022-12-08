@@ -1,8 +1,9 @@
 ﻿import os
+
+import requests
 from disnake import Color, DMChannel, Embed, Guild, Message, SelectOption
 from disnake.errors import Forbidden
 from disnake.utils import get
-import requests
 
 
 async def initial_server_setup(guild: Guild):
@@ -36,7 +37,8 @@ async def check_for_files(message: Message):
         return
     if len(message.content) == 0:
         return
-
+    if message == None:
+        return
     map_name = message.content.split(" ")[1]
     attachments = message.attachments
     await message.delete()
@@ -45,8 +47,8 @@ async def check_for_files(message: Message):
             response = requests.get(file.url)
             try:
                 if file.filename.endswith(".txt"):
-                    with open(f"_files/{message.guild.id}/maps/{map_name}/inputs/TraderConfig.txt", "w") as text_out:
-                        text_out.write(response.content.decode('utf-8'))
+                    with open(f"_files/{message.guild.id}/maps/{map_name}/inputs/TraderConfig.txt", "wb") as text_out:
+                        text_out.write(response.content)
 
                 elif file.filename.endswith(".xml"):
                     with open(f"_files/{message.guild.id}/maps/{map_name}/inputs/{file.filename}", "wb") as xml_out:

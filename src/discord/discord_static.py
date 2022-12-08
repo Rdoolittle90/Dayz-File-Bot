@@ -1,7 +1,8 @@
-from disnake.message import Message
 from disnake.ext.commands import Bot
-from src.discord.guild_manager import check_for_files, initial_cha_setup, initial_server_setup
+from disnake.message import Message
 
+from src.discord.guild_manager import (check_for_files, initial_cha_setup,
+                                       initial_server_setup)
 from src.file_manager import create_new_server_dir, initial_dir_setup
 
 
@@ -18,4 +19,5 @@ class MyClient(Bot):
 
 
     async def on_message(self, message: Message):
-        await check_for_files(message)
+        if message.author != self.user:
+            await check_for_files(message)

@@ -13,7 +13,7 @@ class load_types(Select):
     async def callback(self, interaction: ApplicationCommandInteraction):
         await interaction.response.defer(ephemeral=True)
         if self.values[0] in os.listdir(f"_files/{interaction.guild.id}/maps"):
-            message = await interaction.author.send(f"Loading TraderConfig from {interaction.guild.name} {self.values[0]}")
+            message = await interaction.author.send(f"Loading type files from {interaction.guild.name} {self.values[0]}")
             tcm = XMLManager()
             await tcm.load_types_xml_to_db(message, interaction.guild.id, self.values[0])
             await interaction.followup.send("Done!")

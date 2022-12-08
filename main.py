@@ -3,11 +3,12 @@ from os import getenv
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
-from src.discord.load_types import load_types_view
+from src.discord.announcements import announce_status
 
 from src.discord.discord_static import MyClient
 from src.discord.guild_manager import get_map_selections
 from src.discord.load_traderconfig import load_traderconfig_view
+from src.discord.load_types import load_types_view
 from src.discord.modals.remove_map_modal import RemoveMapModal
 from src.discord.render_traderconfig import render_traderconfig_view
 from src.discord.render_types import render_types_view
@@ -32,7 +33,15 @@ def main():
     # default_member_permissions=8 is the same as saying only available to admins
 
 # =========================================================================================================
-# ADMIN COMMANDS ------------------------------------------------------------------------------------------
+# ADMIN DISCORD COMMANDS ----------------------------------------------------------------------------------
+# =========================================================================================================
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def set_status(interaction: ApplicationCommandInteraction, status_code:int, map_name="ALL", message=None):
+        """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
+        await announce_status(interaction, status_code, map_name, message)
+
+# =========================================================================================================
+# ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
@@ -113,9 +122,8 @@ def main():
 
 
 # =========================================================================================================
-# START THE BOT -------------------------------------------------------------------------------------------
+# START THE BOT |=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
 # =========================================================================================================
-    # start the bot loop
     bot.run(getenv("DISCORD_TOKEN"))
 
 
