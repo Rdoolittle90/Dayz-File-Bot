@@ -20,7 +20,7 @@ class XMLManager(DBConnect):
 
 
     def refresh_xml_format(self, duid, map_name, xml_file):
-        tree, root = self.get_tree(f"_files/maps/{map_name}/inputs/{xml_file}")
+        tree, root = self.get_tree(f"_files/{duid}/maps/{map_name}/inputs/{xml_file}")
         indent(tree, space="\t", level=0)
         tree.write(f'_files/{duid}/maps/{map_name}/inputs/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
 
@@ -29,7 +29,7 @@ class XMLManager(DBConnect):
         for xml_file in os.listdir(f"_files/{duid}/maps/{map_name}/inputs"):
             if xml_file.endswith(".xml"):
                 # clean the xml to matching format
-                self.refresh_xml_format(map_name, xml_file)
+                self.refresh_xml_format(duid, map_name, xml_file)
 
                 tree, root = self.get_tree(f"_files/{duid}/maps/{map_name}/inputs/{xml_file}")
                 root: _Element
@@ -41,7 +41,7 @@ class XMLManager(DBConnect):
                         self.commit()   
         
                         est_perc = f"{round((idx / item_count) * 100, 2)}%"
-                        embed = Embed(title="loading TraderConfig.txt to db", description="This will take some time.", color=Color.yellow())
+                        embed = Embed(title="loading Types.xml to db", description="This will take some time.", color=Color.yellow())
                         embed.add_field(name=map_name, value=est_perc)
                         await message.edit(embed=embed)
                         
