@@ -41,8 +41,8 @@ class XMLManager(DBConnect):
                         self.commit()   
         
                         est_perc = f"{round((idx / item_count) * 100, 2)}%"
-                        embed = Embed(title="loading Types.xml to db", description="This will take some time.", color=Color.yellow())
-                        embed.add_field(name=map_name, value=est_perc)
+                        embed = Embed(title=f"{map_name}", description=f"loading {xml_file} to db", color=Color.yellow())
+                        embed.add_field(name=f"{idx}/{item_count}", value=est_perc)
                         await message.edit(embed=embed)
                         
                     if type(item) == _Comment:
