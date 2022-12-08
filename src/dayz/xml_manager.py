@@ -164,11 +164,10 @@ class XMLManager(DBConnect):
                         item_list.append(class_min)
                         item_list.append(class_cost)
 
-                        print(class_name)
-                        print(class_tier)
-                        print(class_usage)
-                        print(class_tag)
-
+                        # print(class_name)
+                        # print(class_tier)
+                        # print(class_usage)
+                        # print(class_tag)
 
                         # insert item_list into typestable table 
                         self.insert_into_typestable(item_list)
