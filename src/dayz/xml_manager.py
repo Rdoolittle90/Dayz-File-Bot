@@ -172,10 +172,6 @@ class XMLManager(DBConnect):
                         # insert item_list into typestable table 
                         self.insert_into_typestable(item_list)
 
-
-
-                        self.commit()
-                    self.commit()
                 self.commit()
         self.close()
 
