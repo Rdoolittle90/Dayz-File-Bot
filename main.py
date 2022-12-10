@@ -47,7 +47,11 @@ def main():
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await interaction.response.defer(ephemeral=True)
         channel = set_announce_channel(interaction.guild, channel_id)
-        await interaction.send(f"Announcement channel has been set to `{channel.name}`", ephemeral=True)
+        if isinstance(channel, str):
+            await interaction.send(f"Announcement channel has been set to `{channel_id}`", ephemeral=True)
+        else:
+            await interaction.send(f"Announcement channel failed to set", ephemeral=True)
+
 
 
 # =========================================================================================================
