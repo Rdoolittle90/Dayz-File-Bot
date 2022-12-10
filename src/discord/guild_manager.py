@@ -1,4 +1,5 @@
 ﻿import os
+from typing import Literal
 
 import requests
 from disnake import Color, DMChannel, Embed, Guild, Message, SelectOption
@@ -68,18 +69,13 @@ def get_server_settings(guild_id):
     return settings
 
 
-def set_announce_channel(guild: Guild, channel_id: str):
-    try:
-        channel_int = int(channel_id)
-        channel = guild.get_channel(channel_int)
-        if channel == None:
-            return -1
-    except TypeError:
-        print("Channel id was not an integer")
+async def set_announce_channel(guild: Guild, channel_id: Literal):
+    channel = await guild.get_channel(channel_id)
+    if channel == None:
         return -1
 
     settings = get_server_settings(guild.id)
-    settings["announcement_channel"] = channel_int
+    settings["announcement_channel"] = channel_id
     with open(f"_files/{guild.id}/support/settings.json", "w") as json_out:
         dump(settings, json_out, indent=4)
     return channel.name

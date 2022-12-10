@@ -1,4 +1,5 @@
 from os import getenv
+from typing import Literal
 
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
@@ -42,7 +43,7 @@ def main():
         await announce_status(interaction, status_code, map_name, message)
 
     @bot.slash_command(default_member_permissions=1067403561537)
-    async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: str):
+    async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: Literal):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await interaction.response.defer(ephemeral=True)
         channel = await set_announce_channel(interaction.guild, channel_id)
