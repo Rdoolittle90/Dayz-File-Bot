@@ -68,9 +68,14 @@ def get_server_settings(guild_id):
     return settings
 
 
-def set_announce_channel(guild: Guild, channel_id: int):
-    channel = guild.get_channel(channel_id)
-    if channel == None:
+def set_announce_channel(guild: Guild, channel_id: str):
+    try:
+        channel_id = int(channel_id)
+        channel = guild.get_channel(channel_id)
+        if channel == None:
+            return -1
+    except TypeError:
+        print("Channel id was not an integer")
         return -1
 
     settings = get_server_settings(guild.id)
