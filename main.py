@@ -46,7 +46,7 @@ def main():
     async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: str):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await interaction.response.defer(ephemeral=True)
-        channel = await set_announce_channel(interaction.guild, channel_id)
+        channel = set_announce_channel(interaction.guild, channel_id)
         await interaction.send(f"Announcement channel has been set to `{channel.name}`", ephemeral=True)
 
 
