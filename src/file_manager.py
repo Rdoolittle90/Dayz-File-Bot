@@ -38,7 +38,7 @@ def create_new_server_dir(server_id) -> None:
         os.makedirs(f"_files/{server_id}")
         os.makedirs(f"_files/{server_id}/maps")
         os.makedirs(f"_files/{server_id}/support")
-        shutil.copyfile("src/discord/template_files/settings.json", f"_files/{server_id}/support")
+        shutil.copyfile("src/discord/template_files/settings.json", f"_files/{server_id}/support/settings.json")
         print(f"\t\tDirectories Created.")
     except FileExistsError:
         print(f"\t\tReady.")
