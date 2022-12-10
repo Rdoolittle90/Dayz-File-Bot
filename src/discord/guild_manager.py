@@ -5,6 +5,8 @@ from disnake import Color, DMChannel, Embed, Guild, Message, SelectOption
 from disnake.errors import Forbidden
 from disnake.utils import get
 
+from json import load
+
 
 async def initial_server_setup(guild: Guild):
     try:
@@ -58,6 +60,12 @@ async def check_for_files(message: Message):
                 print("something went wrong")
                 print(f"_files/{message.guild.id}/maps/{map_name}/inputs/{file.filename}")
                 print("Not found")
+
+
+def get_server_settings(guild_id):
+    with open(f"_files/{guild_id}/support/settings.json", "r") as json_in:
+        settings = load(json_in)
+    return settings
 
 
 def get_map_selections(guild_id, type_return="SelectOption"):
