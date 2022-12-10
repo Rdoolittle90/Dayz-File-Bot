@@ -62,17 +62,20 @@ async def check_for_files(message: Message):
                 print("Not found")
 
 
-def get_server_settings(guild_id):
+def get_server_settings(guild_id) -> dict:
     with open(f"_files/{guild_id}/support/settings.json", "r") as json_in:
         settings = load(json_in)
     return settings
 
-number = 1050962258353717258
 
 async def set_announce_channel(guild: Guild, channel_id: int):
+    print(guild, channel_id)
     channel = await guild.get_channel(channel_id)
+    print(channel)
     if channel == None:
+        print("None")
         return -1
+    print("Found")
 
     settings = get_server_settings(guild.id)
     settings["announcement_channel"] = channel_id
