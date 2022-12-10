@@ -3,6 +3,7 @@ from os import getenv
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
+from DayzFileManager.src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
 
 from src.discord.discord_static import MyClient
@@ -32,13 +33,20 @@ def main():
     # below are all of the commands for the bot
     # default_member_permissions=8 is the same as saying only available to admins
 
-# =========================================================================================================
+# =========================================================================================================set_announcement_channel(guild: Guild, channel_id: int)
 # ADMIN DISCORD COMMANDS ----------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def set_status(interaction: ApplicationCommandInteraction, status_code:int, map_name="ALL", message=None):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await announce_status(interaction, status_code, map_name, message)
+
+    @bot.slash_command(default_member_permissions=1067403561537)
+    async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: int):
+        """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
+        await interaction.response.defer(ephemeral=True)
+        channel = await set_announce_channel(interaction.guild, channel_id)
+        await interaction.send(f"Announcement channel has been set to `{channel.name}`", ephemeral=True)
 
 
 # =========================================================================================================
