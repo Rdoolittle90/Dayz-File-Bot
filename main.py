@@ -3,7 +3,7 @@ from os import getenv
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
-from DayzFileManager.src.discord.guild_manager import set_announce_channel
+from src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
 
 from src.discord.discord_static import MyClient
