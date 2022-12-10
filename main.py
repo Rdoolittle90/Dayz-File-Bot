@@ -47,7 +47,7 @@ def main():
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await interaction.response.defer(ephemeral=True)
         channel = set_announce_channel(interaction.guild, int(channel_id))
-        await interaction.followup(channel)
+        await interaction.followup.send(channel)
 
 
 
