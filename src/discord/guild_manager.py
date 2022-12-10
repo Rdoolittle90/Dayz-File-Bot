@@ -68,10 +68,10 @@ def get_server_settings(guild_id) -> dict:
     return settings
 
 
-def set_announce_channel(guild: Guild, channel_id: int) -> bool:
+async def set_announce_channel(guild: Guild, channel_id: int) -> bool:
     print(guild.name, channel_id)
     try:
-        channel = guild.fetch_channel(channel_id)
+        channel = await guild.fetch_channel(channel_id)
     except NotFound:
         return False
 
