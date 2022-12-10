@@ -1,5 +1,4 @@
 ﻿import os
-from typing import Literal
 
 import requests
 from disnake import Color, DMChannel, Embed, Guild, Message, SelectOption
@@ -68,8 +67,9 @@ def get_server_settings(guild_id):
         settings = load(json_in)
     return settings
 
+number = 1050962258353717258
 
-async def set_announce_channel(guild: Guild, channel_id: Literal):
+async def set_announce_channel(guild: Guild, channel_id: int):
     channel = await guild.get_channel(channel_id)
     if channel == None:
         return -1
