@@ -1,5 +1,7 @@
-from disnake import ApplicationCommandInteraction, CategoryChannel, Color, Embed
+from disnake import ApplicationCommandInteraction, Color, Embed
 import datetime
+
+from src.discord.guild_manager import get_server_settings
 
 
 async def announce_status(interaction:ApplicationCommandInteraction, status_code:int, map:str ="ALL", message:str=None) -> Embed:
@@ -21,9 +23,10 @@ async def announce_status(interaction:ApplicationCommandInteraction, status_code
         embed = Embed(title=f"**{map}** {server_str_format} now **RESTARTING**", description=message, timestamp=datetime.datetime.now(), color=Color.yellow())
         embed.set_author(name=interaction.author, icon_url=interaction.author.avatar.url)
 
-
-    channel = await interaction.guild.fetch_channel(1045953730824130590)
-    role = interaction.guild.get_role(919682839350493214)
-
-    await channel.send(f"<@&{role.id}>", embed=embed)
-    await interaction.send("Complete.", ephemeral=True)
+    settings = get_server_settings(interaction.guild.id)
+    if settings["announcement_channel"] != None:
+        channel = await interaction.guild.fetch_channel()
+        channel.send(embed=embed)
+        await interaction.send("Complete.", ephemeral=True)
+    else:
+        await interaction.send("No announcement channel set use /set_announcement_channel `channel ID`", ephemeral=True)

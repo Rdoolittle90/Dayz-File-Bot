@@ -17,7 +17,7 @@ from src.file_manager import create_new_map_dir, get_map_key, key_embed
 
 def main():
     load_dotenv()
-        
+
     # setup intents for bot permissions
     intents = Intents.default()
 
@@ -27,7 +27,7 @@ def main():
 
     # this is the discord bot object
     bot = MyClient(command_prefix=prefix, intents=intents)
-    
+
 
     # below are all of the commands for the bot
     # default_member_permissions=8 is the same as saying only available to admins
@@ -40,6 +40,7 @@ def main():
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await announce_status(interaction, status_code, map_name, message)
 
+
 # =========================================================================================================
 # ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
 # =========================================================================================================
@@ -48,7 +49,6 @@ def main():
         """creates a new map directory"""
         create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
-
 
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
@@ -60,7 +60,6 @@ def main():
         else:
             await interaction.send("Server has no registered maps", ephemeral=True)
 
-
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
     async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
@@ -70,7 +69,6 @@ def main():
             await interaction.send(view=render_traderconfig_view(options=options), ephemeral=True)
         else:
             await interaction.send("Server has no registered maps", ephemeral=True)
-
 
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537)
