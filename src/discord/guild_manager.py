@@ -69,19 +69,20 @@ def get_server_settings(guild_id) -> dict:
 
 
 def set_announce_channel(guild: Guild, channel_id: int):
-    print(guild, channel_id)
-    channel = guild.get_channel(channel_id)
-    print(channel)
-    if channel == None:
-        print("None")
-        return -1
-    print("Found")
+    print(guild.name, channel_id)
+    
+    # channel = guild.get_channel(channel_id)
+    # print(channel)
+    # if channel == None:
+    #     print("None")
+    #     return -1
+    # print("Found")
 
-    settings = get_server_settings(guild.id)
-    settings["announcement_channel"] = channel_id
-    with open(f"_files/{guild.id}/support/settings.json", "w") as json_out:
-        dump(settings, json_out, indent=4)
-    return channel.name
+    # settings = get_server_settings(guild.id)
+    # settings["announcement_channel"] = channel_id
+    # with open(f"_files/{guild.id}/support/settings.json", "w") as json_out:
+    #     dump(settings, json_out, indent=4)
+    # return channel.name
 
 
 def get_map_selections(guild_id, type_return="SelectOption"):

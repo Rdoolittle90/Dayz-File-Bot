@@ -46,13 +46,8 @@ def main():
     async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: str):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await interaction.response.defer(ephemeral=True)
-        try:
-            channel = set_announce_channel(interaction.guild, int(channel_id))
-        except TypeError:
-            await interaction.send(f"Announcement channel failed copy paste the channel id", ephemeral=True)
-            
-        if isinstance(channel, str):
-            await interaction.send(f"Announcement channel has been set to `{channel_id}`", ephemeral=True)
+        channel = set_announce_channel(interaction.guild, int(channel_id))
+        await interaction.followup(channel)
 
 
 
