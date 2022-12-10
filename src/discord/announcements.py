@@ -26,7 +26,7 @@ async def announce_status(interaction:ApplicationCommandInteraction, status_code
     settings = get_server_settings(interaction.guild.id)
     if settings["announcement_channel"] != None:
         channel = await interaction.guild.fetch_channel(settings["announcement_channel"])
-        channel.send(embed=embed)
+        await channel.send(embed=embed)
         await interaction.send("Complete.", ephemeral=True)
     else:
         await interaction.send("No announcement channel set use /set_announcement_channel `channel ID`", ephemeral=True)
