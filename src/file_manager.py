@@ -3,7 +3,6 @@ import json
 import random
 import shutil
 from string import ascii_lowercase, ascii_uppercase
-from xmlrpc.client import boolean
 
 from disnake import Color, Embed
 
