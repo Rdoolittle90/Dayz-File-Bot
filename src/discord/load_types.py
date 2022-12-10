@@ -15,10 +15,10 @@ class load_types(Select):
         if self.values[0] in os.listdir(f"_files/{interaction.guild.id}/maps"):
             message = await interaction.author.send(f"Loading type files from {interaction.guild.name} {self.values[0]}")
             tcm = XMLManager()
-            await tcm.load_types_xml_to_db(message, interaction.guild.id, self.values[0], 150)
+            await tcm.load_types_xml_to_db(message, interaction.guild.id, self.values[0], 75)
             await interaction.followup.send("Done!")
         else:
-            await interaction.followup.send("Coming Soon!")
+            await interaction.followup.send("map name not found!")
 
 
 class load_types_view(View):
