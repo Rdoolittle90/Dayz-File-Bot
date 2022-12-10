@@ -1,7 +1,7 @@
 ﻿import os
 
 import requests
-from disnake import Color, DMChannel, Embed, Guild, Message, SelectOption
+from disnake import Color, DMChannel, Embed, Guild, Message, NotFound, SelectOption
 from disnake.errors import Forbidden
 from disnake.utils import get
 
@@ -68,21 +68,20 @@ def get_server_settings(guild_id) -> dict:
     return settings
 
 
-def set_announce_channel(guild: Guild, channel_id: int):
+def set_announce_channel(guild: Guild, channel_id: int) -> bool:
     print(guild.name, channel_id)
-    channel = guild.get_channel(channel_id)
-    return channel.name
-    # print(channel)
-    # if channel == None:
-    #     print("None")
-    #     return -1
-    # print("Found")
+    try:
+        channel = guild.fetch_channel(channel_id)
+    except NotFound:
+        return False
 
-    # settings = get_server_settings(guild.id)
-    # settings["announcement_channel"] = channel_id
-    # with open(f"_files/{guild.id}/support/settings.json", "w") as json_out:
-    #     dump(settings, json_out, indent=4)
-    # return channel.name
+    print("Found")
+
+    settings = get_server_settings(guild.id)
+    settings["announcement_channel"] = channel_id
+    with open(f"_files/{guild.id}/support/settings.json", "w") as json_out:
+        dump(settings, json_out, indent=4)
+    return True
 
 
 def get_map_selections(guild_id, type_return="SelectOption"):
