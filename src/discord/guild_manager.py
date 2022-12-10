@@ -70,7 +70,7 @@ def get_server_settings(guild_id) -> dict:
 
 def set_announce_channel(guild: Guild, channel_id: int):
     print(guild.name, channel_id)
-    
+    return channel_id
     # channel = guild.get_channel(channel_id)
     # print(channel)
     # if channel == None:
