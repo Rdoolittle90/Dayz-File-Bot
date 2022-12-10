@@ -70,8 +70,8 @@ def get_server_settings(guild_id):
 
 def set_announce_channel(guild: Guild, channel_id: str):
     try:
-        channel_id = int(channel_id)
-        channel = guild.get_channel(channel_id)
+        channel_int = int(channel_id)
+        channel = guild.get_channel(channel_int)
         if channel == None:
             return -1
     except TypeError:
@@ -79,10 +79,11 @@ def set_announce_channel(guild: Guild, channel_id: str):
         return -1
 
     settings = get_server_settings(guild.id)
-    settings["announcement_channel"] = channel_id
+    settings["announcement_channel"] = channel_int
     with open(f"_files/{guild.id}/support/settings.json", "w") as json_out:
         dump(settings, json_out, indent=4)
     return channel.name
+
 
 def get_map_selections(guild_id, type_return="SelectOption"):
     if str(guild_id) in os.listdir("_files"):
