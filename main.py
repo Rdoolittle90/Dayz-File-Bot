@@ -22,6 +22,7 @@ def main():
 
     # setup intents for bot permissions
     intents = Intents.default()
+    intents.message_content = True
 
     # disable prefix in favor of just using slash commands
     # still allows for the bot to be mentioned to invoke a command if its valid
