@@ -49,6 +49,12 @@ def main():
         channel = await set_announce_channel(interaction.guild, int(channel_id))
         await interaction.followup.send(channel)
 
+    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    async def clean_bot_chatter(interaction: ApplicationCommandInteraction, channel_id: str):
+        """deletes messages at given channel from the bot"""
+        channel = bot.get_channel(int(channel_id))
+        await interaction.send(f"deleting the messages I have sent in #{channel.name}")
+        
 
 # =========================================================================================================
 # ADMIN FILE COMMANDS -------------------------------------------------------------------------------------

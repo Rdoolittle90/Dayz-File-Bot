@@ -1,7 +1,7 @@
 ﻿import os
 
 import requests
-from disnake import Color, DMChannel, Embed, Guild, Message, NotFound, SelectOption
+from disnake import Color, DMChannel, Embed, Guild, Message, NotFound, SelectOption, File
 from disnake.errors import Forbidden
 from disnake.utils import get
 
@@ -41,25 +41,35 @@ async def check_for_files(message: Message):
         return
     if message == None:
         return
-    map_name = message.content.split(" ")[1]
+
+
+    map_name = message.content
     attachments = message.attachments
     await message.delete()
-    if len(attachments) > 0:
-        for file in attachments:
-            response = requests.get(file.url)
-            try:
-                if file.filename.endswith(".txt"):
-                    with open(f"_files/{message.guild.id}/maps/{map_name}/inputs/TraderConfig.txt", "wb") as text_out:
-                        text_out.write(response.content)
+    if len(attachments) == 0:
+        return
 
-                elif file.filename.endswith(".xml"):
-                    with open(f"_files/{message.guild.id}/maps/{map_name}/inputs/{file.filename}", "wb") as xml_out:
-                        xml_out.write(response.content)
 
-            except FileNotFoundError:
-                print("something went wrong")
-                print(f"_files/{message.guild.id}/maps/{map_name}/inputs/{file.filename}")
-                print("Not found")
+    for file in attachments:
+        store_attachment(file)
+
+
+
+def store_attachment(file: File, guild_id, map_name):
+    if not os.path.exists(f"_files/{guild_id}/maps/{map_name}"):
+        print("something went wrong")
+        print(f"_files/{guild_id}/maps/{map_name}/inputs/{file.filename}")
+        print("Not found")
+        return
+
+    response = requests.get(file.url)
+    if file.filename.endswith(".txt"):
+        with open(f"_files/{guild_id}/maps/{map_name}/inputs/TraderConfig.txt", "wb") as text_out:
+            text_out.write(response.content)
+
+    elif file.filename.endswith(".xml"):
+        with open(f"_files/{guild_id}/maps/{map_name}/inputs/{file.filename}", "wb") as xml_out:
+            xml_out.write(response.content)
 
 
 def get_server_settings(guild_id) -> dict:
@@ -85,25 +95,21 @@ async def set_announce_channel(guild: Guild, channel_id: int) -> bool:
 
 
 def get_map_selections(guild_id, type_return="SelectOption"):
-    if str(guild_id) in os.listdir("_files"):
-        maps = os.listdir(f"_files/{guild_id}/maps")
-        selections = []
-        selections_list = []
-        if len(maps) > 0:
-            for guild_map in maps:
-                selections.append(SelectOption(label=guild_map))
-                selections_list.append(guild_map)
-        else:
-            selections.append(SelectOption(label="No Maps Found", emoji="❌", description="This probably means no map has been setup for this server."))
+    if not os.path.exists(f"_files/{guild_id}"):
+        return None
+        
+    maps = os.listdir(f"_files/{guild_id}/maps")
+    selections = []
+    selections_list = []
+    if len(maps) == 0:
+        selections.append(SelectOption(label="No Maps Found", emoji="❌", description="This probably means no map has been setup for this server."))
+        return None
 
-        if type_return == "SelectOption":
-            return selections
-        else:
-            return selections_list
-    return None
-
-
-## get player atms
-
-
-## get server mods
+    for guild_map in maps:
+        selections.append(SelectOption(label=guild_map))
+        selections_list.append(guild_map)
+        
+    if type_return == "SelectOption":
+        return selections
+    else:
+        return selections_list
