@@ -1,5 +1,4 @@
 from os import getenv
-from typing import Literal
 
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
@@ -7,7 +6,7 @@ from dotenv import load_dotenv
 from src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
 
-from src.discord.discord_static import MyClient
+from src.discord.bot import MyClient
 from src.discord.guild_manager import get_map_selections
 from src.discord.load_traderconfig import load_traderconfig_view
 from src.discord.load_types import load_types_view

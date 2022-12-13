@@ -1,3 +1,4 @@
+from disnake import Member
 from disnake.ext.commands import Bot
 from disnake.message import Message
 
@@ -21,3 +22,11 @@ class MyClient(Bot):
     async def on_message(self, message: Message):
         if message.author != self.user:
             await check_for_files(message)
+
+
+    async def on_member_join(self, member: Member):
+        print(f'{member.name} has joined the server')
+
+
+    async def on_member_remove(self, member: Member):
+        print(f'{member.name} has left the server')
