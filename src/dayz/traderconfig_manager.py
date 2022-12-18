@@ -15,13 +15,11 @@ class TraderConfigManager(DBConnect):
             self.insert_into_traderconfig(duid, map_name, line[0], line[1], line[2], line[3], line[4], line[5])
 
             if idx % 25 == 0:     
-                self.commit()   
-   
+                self.commit()
                 est_perc = f"{round((idx / len(items)) * 100, 2)}%"
                 embed = Embed(title="loading TraderConfig.txt to db", description="This will take some time.", color=Color.yellow())
                 embed.add_field(name=map_name, value=est_perc)
                 await message.edit(embed=embed)
-
         self.commit()
         self.close()
 
@@ -83,8 +81,9 @@ class TraderConfigManager(DBConnect):
                     self.c.callproc("select_map_trader_category_products", args=(duid, map_name, trader, category))
                     product_generator = self.c.stored_results()
                     
+                    product_list = []
                     for product_c in product_generator:
-                        product_list = product_c.fetchall()
+                        product_list += product_c.fetchall()
 
                     embed.add_field(name=category, value=len(product_list), inline=True)  # embed
                     for product in product_list:

@@ -25,7 +25,7 @@ class XMLManager(DBConnect):
         tree.write(f'_files/{duid}/maps/{map_name}/inputs/{xml_file}', xml_declaration=True, encoding="utf-8", standalone=True)
 
 
-    async def load_types_xml_to_db(self, message, duid, map_name: str, mod_value:int=35) -> None:
+    async def load_types_xml_to_db(self, message, duid, map_name: str, modal:int=35) -> None:
         for xml_file in os.listdir(f"_files/{duid}/maps/{map_name}/inputs"):
             if xml_file.endswith(".xml"):
                 # clean the xml to matching format
@@ -37,7 +37,7 @@ class XMLManager(DBConnect):
                 items_added = 0.0
                 for idx, item in enumerate(root):
                     items_added += 1             
-                    if idx % mod_value == 0:     
+                    if idx % modal == 0:     
                         self.commit()   
         
                         est_perc = f"{round((idx / item_count) * 100, 2)}%"
