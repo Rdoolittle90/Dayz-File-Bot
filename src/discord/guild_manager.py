@@ -50,8 +50,8 @@ async def check_for_files(message: Message):
         return
 
 
-    for file in attachments:
-        store_attachment(file, message.guild.id, map_name)
+    for _file in attachments:
+        store_attachment(_file, message.guild.id, map_name)
 
 
 
