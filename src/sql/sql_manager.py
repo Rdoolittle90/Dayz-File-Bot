@@ -1,5 +1,5 @@
 import mysql.connector
-
+import datetime
 
 from os import getenv
 from dotenv import load_dotenv
@@ -43,7 +43,7 @@ class DBConnect():
         self.c.execute(sql, list_object)
         
     
-    def insert_into_traderconfig(self, duid, map_name, trader, category, classname, vendorflag, buyvalue, sellvalue):
+    def insert_into_traderconfig(self, DUID, map_name, trader, category, classname, vendorflag, buyvalue, sellvalue):
         sql = """
             INSERT INTO
                 traderconfig
@@ -56,11 +56,11 @@ class DBConnect():
                     BuyValue = %s,
                     SellValue = %s
 """
-        self.c.execute(sql, (duid, map_name, trader, category, classname, vendorflag, buyvalue, sellvalue, 
+        self.c.execute(sql, (DUID, map_name, trader, category, classname, vendorflag, buyvalue, sellvalue, 
             vendorflag, buyvalue, sellvalue))
 
 
-    def insert_into_player_atms(self, duid, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus):
+    def insert_into_player_atms(self, DUID, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus):
         sql = """
             INSERT INTO
                 player_atms
@@ -72,11 +72,11 @@ class DBConnect():
                     OwnedCurrency = %s,
                     MaxOwnedCurrencyBonus = %s
 """
-        self.c.execute(sql, (duid, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus, OwnedCurrency, MaxOwnedCurrencyBonus))
+        self.c.execute(sql, (DUID, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus, OwnedCurrency, MaxOwnedCurrencyBonus))
 
 
     
-    def insert_into_server_mods(self, duid, map_name, mod_dict):
+    def insert_into_server_mods(self, DUID, map_name, mod_dict):
         sql = """
             INSERT INTO
                 server_mods
@@ -87,8 +87,21 @@ class DBConnect():
                 UPDATE
                     Disabled = %s
 """
-        self.c.execute(sql, (duid, map_name, mod_dict["directory"], mod_dict["disabled"], 
+        self.c.execute(sql, (DUID, map_name, mod_dict["directory"], mod_dict["disabled"], 
             mod_dict["file_id"], mod_dict["server_side"], mod_dict["disabled"]))
+
+    def check_if_DUID_in_registration(self, DUID):
+        sql = """ 
+            SELECT
+                CASE WHEN EXISTS
+                (
+                    SELECT * FROM registration WHERE DUID = %s
+                )
+                THEN True
+                ELSE False
+            END
+"""
+        self.c.execute(sql, (DUID, ))
 
 
     def check_if_SK64_in_registration(self, SK64):
@@ -105,7 +118,21 @@ class DBConnect():
         self.c.execute(sql, (SK64, ))
 
 
-    def select_SK64_from_registration(self, duid):
+    def update_registration(self, SK64, DUID):
+        sql = """
+            UPDATE 
+                registration 
+            SET 
+                DUID = %s,
+                regDate = %s
+            WHERE 
+                SK64 = %s
+"""
+        self.c.execute(sql, (DUID, datetime.datetime.now(), SK64))
+
+
+
+    def select_SK64_from_registration(self, DUID):
         sql = """
             SELECT 
                 SK64 
@@ -114,7 +141,7 @@ class DBConnect():
             WHERE 
                 DUID = %s
 """
-        self.c.execute(sql, (duid, ))
+        self.c.execute(sql, (DUID, ))
 
 
     def select_DUID_from_registration(self, SK64):
@@ -128,7 +155,7 @@ class DBConnect():
 """
         self.c.execute(sql, (SK64, ))
 
-    def select_all_from_typestable(self, duid, map_name):
+    def select_all_from_typestable(self, DUID, map_name):
         sql = """
         SELECT
             *
@@ -141,4 +168,4 @@ class DBConnect():
         ORDER BY
             ClassName
 """
-        self.c.execute(sql, (duid, map_name))
+        self.c.execute(sql, (DUID, map_name))

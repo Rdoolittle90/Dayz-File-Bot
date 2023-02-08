@@ -1,8 +1,9 @@
 from os import getenv
 
-from disnake import ApplicationCommandInteraction, Intents
+from disnake import ApplicationCommandInteraction, Embed, Intents, Message, Color
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
+from src.dayz.atm_manager import display_player_atm, update_player_atm
 from src.discord.modals.registration import Registration
 from src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
@@ -129,6 +130,27 @@ def main():
         await interaction.response.send_modal(modal=RemoveMapModal())
 
 
+    # =====================================================================================================
+    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    async def give_money(interaction:ApplicationCommandInteraction, steamid64, map_num:int, amount:int) -> None:
+        """map_nums = Chernarus:0, Takistan:1, Namalsk:2, testServer:3"""
+        maps = ["Chernarus", "Takistan", "Namalsk", "TestServer"]
+        await interaction.response.defer()
+        update_player_atm(maps[map_num], interaction.author.id, amount, SK64=steamid64)
+        embed: Embed
+        message: Message
+        embed, message = await display_player_atm(interaction, interaction.author.id)
+
+        if amount >= 0:
+            amount_str = "+" + f"{amount:,} ₽"
+            embed.color = Color.green()
+        else:
+            amount_str = f"{amount:,}₽"
+            embed.color = Color.red()
+
+        embed.add_field(name=f"Cash given by: {interaction.author.display_name}", value=amount_str)
+        await message.edit(embed=embed)
+
 # =========================================================================================================
 # @everyone COMMANDS --------------------------------------------------------------------------------------
 # =========================================================================================================
@@ -137,6 +159,27 @@ def main():
         """placeholder"""
         await interaction.response.send_modal(modal=Registration())
 
+
+    # =====================================================================================================
+    @bot.slash_command(dm_permission=False)
+    async def atm(interaction:ApplicationCommandInteraction) -> None:
+        """placeholder"""
+        await interaction.response.defer()
+        await display_player_atm(interaction, interaction.author.id)
+
+
+    # =====================================================================================================
+    @bot.slash_command(dm_permission=False)
+    async def inventory(interaction:ApplicationCommandInteraction) -> None:
+        """placeholder"""
+        pass
+
+
+    # =====================================================================================================
+    @bot.slash_command(dm_permission=False)
+    async def trade(interaction:ApplicationCommandInteraction) -> None:
+        """placeholder"""
+        pass
 
 # =========================================================================================================
 # START THE BOT |=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|

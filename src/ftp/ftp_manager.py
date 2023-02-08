@@ -33,8 +33,8 @@ class FTPConnect():
             self.ftp.retrbinary(f"RETR {File_name}", ftb_in.write, 1024)
 
 
-    def UpdateATM(self, serverID, SK64, map_name, amount):
-        path = f"_files/{serverID}/maps/{map_name}/atms/{SK64}.json"
+    def UpdateATM(self, SK64, map_name, amount):
+        path = f"_files/919677581824000070/maps/{map_name}/atms/{SK64}.json"
 
         with open(path, "r") as fin:
             player_ATM = json.load(fin)
@@ -61,11 +61,11 @@ class FTPConnect():
 
 
 
-    def getOnePlayerATM(self, serverID, playerID):
+    def getOnePlayerATM(self, SK64, serverID=919677581824000070):
         self.ftp.cwd("profiles/LBmaster/Data/LBBanking/Players")
         files = self.ftp.nlst()
-        if f"{playerID}.json" in files:
-            self.getFile(f"_files/{serverID}/maps/{self.map}/atms/", f"{playerID}.json")
+        if f"{SK64}.json" in files:
+            self.getFile(f"_files/{serverID}/maps/{self.map}/atms/", f"{SK64}.json")
         self.ftp.cwd("../../../../../")
 
     def getOmegaConfig(self):
