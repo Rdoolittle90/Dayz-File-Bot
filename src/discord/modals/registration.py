@@ -1,7 +1,7 @@
 import os
 from disnake import ModalInteraction
 from disnake.ui import Modal, TextInput
-from ftp.ftp_manager import FTPConnect
+from src.ftp.ftp_manager import FTPConnect
 
 from src.sql.sql_manager import DBConnect
 
