@@ -74,6 +74,7 @@ class DBConnect():
 """
         self.c.execute(sql, (duid, map_name, PlainID, UserName, OwnedCurrency, MaxOwnedCurrencyBonus, OwnedCurrency, MaxOwnedCurrencyBonus))
 
+
     
     def insert_into_server_mods(self, duid, map_name, mod_dict):
         sql = """
@@ -89,6 +90,29 @@ class DBConnect():
         self.c.execute(sql, (duid, map_name, mod_dict["directory"], mod_dict["disabled"], 
             mod_dict["file_id"], mod_dict["server_side"], mod_dict["disabled"]))
 
+
+    def select_SK64_from_registration(self, duid):
+        sql = """
+            SELECT 
+                SK64 
+            FROM 
+                registration 
+            WHERE 
+                DUID = %s
+"""
+        self.c.execute(sql, (duid, ))
+
+
+    def select_DUID_from_registration(self, SK64):
+        sql = """
+            SELECT 
+                DUID 
+            FROM 
+                registration 
+            WHERE 
+                SK64 = %s
+"""
+        self.c.execute(sql, (SK64, ))
 
     def select_all_from_typestable(self, duid, map_name):
         sql = """

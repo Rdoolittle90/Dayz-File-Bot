@@ -1,17 +1,22 @@
-import json
-from ftp.ftp_manager import FTPConnect
+from src.ftp.ftp_manager import FTPConnect
 from src.sql.sql_manager import DBConnect
 
 
-def update_mod_list(map_name):
-    ftp = FTPConnect("Namalsk", "135.148.136.106", 1338, "ryan", "Platinum1234") #FIXME
-    ftp.getOmegaConfig()
-    
-    with open(f"_files/support/{map_name}/omega.cfg", "r") as fin:
-        mod_list = json.load(fin)
+def update_player_atm(map_name:str, DUID:int, amount:int, serverID:int=919677581824000070):
+    ftp = FTPConnect("TestServer", "135.148.136.106", "ryan", "Platinum1234") #FIXME
+    ftp.connect()
 
-    for mod in mod_list["mods"]:
-        sql = DBConnect()
-        sql.insert_into_server_mods(map_name, mod)
-        sql.commit()
-    sql.close()
+    sql = DBConnect()
+    sql.select_SK64_from_registration(DUID)
+    SK64 = sql.c.fetchone()
+    if SK64:
+        SK64 = int(SK64[0])
+        ftp.getOnePlayerATM(serverID, SK64)
+        ftp.UpdateATM(serverID, SK64, map_name, amount)
+        ftp.quit()
+        return 1
+
+    # SK64 not found
+    print("ID not found")
+    ftp.quit()
+    return 0

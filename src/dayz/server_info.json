@@ -1,0 +1,14 @@
+{
+    "TestServer": {
+        "port": 21
+    },
+    "Namalsk": {
+        "port": 1338
+    },
+    "Chernarus": {
+        "port": 1234
+    },
+    "Takistan": {
+        "port": 2345
+    }
+}

@@ -3,6 +3,7 @@ from os import getenv
 from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
+from src.discord.modals.registration import Registration
 from src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
 
@@ -131,7 +132,10 @@ def main():
 # =========================================================================================================
 # @everyone COMMANDS --------------------------------------------------------------------------------------
 # =========================================================================================================
-
+    @bot.slash_command(dm_permission=False)
+    async def register(interaction:ApplicationCommandInteraction) -> None:
+        """placeholder"""
+        await interaction.response.send_modal(modal=Registration())
 
 
 # =========================================================================================================
