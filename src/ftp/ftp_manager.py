@@ -4,18 +4,20 @@ from os import getenv
 
 
 port_by_name = {
-    "TestServer": 21,
-    "Namalsk": 1338
+    "Chernarus": 21,
+    "Takistan": 22,
+    "Namalsk": 23,
+    "TestServer": 24
 }
 
 
 class FTPConnect():
-    def __init__(self, map_name, host, user, passwd):
+    def __init__(self, map_name):
         self.map = map_name
-        self.host = host
+        self.host = "135.148.136.106"
         self.port = port_by_name[map_name]
-        self.user = user
-        self.passwd = passwd
+        self.user = "drifter"
+        self.passwd = "waPreSPeHuF3"
 
         self.ftp = FTP()
         self.ftp.set_debuglevel(0)

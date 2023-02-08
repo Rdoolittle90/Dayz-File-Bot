@@ -9,6 +9,7 @@ def update_player_atm(map_name:str, DUID:int, amount:int, serverID:int=919677581
     sql = DBConnect()
     sql.select_SK64_from_registration(DUID)
     SK64 = sql.c.fetchone()
+
     if SK64:
         SK64 = int(SK64[0])
         ftp.getOnePlayerATM(serverID, SK64)

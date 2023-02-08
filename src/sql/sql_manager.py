@@ -91,6 +91,20 @@ class DBConnect():
             mod_dict["file_id"], mod_dict["server_side"], mod_dict["disabled"]))
 
 
+    def check_if_SK64_in_registration(self, SK64):
+        sql = """ 
+            SELECT
+                CASE WHEN EXISTS
+                (
+                    SELECT * FROM registration WHERE SK64 = %s
+                )
+                THEN True
+                ELSE False
+            END
+"""
+        self.c.execute(sql, (SK64, ))
+
+
     def select_SK64_from_registration(self, duid):
         sql = """
             SELECT 

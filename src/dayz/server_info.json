@@ -1,14 +1,14 @@
 {
-    "TestServer": {
+    "Chernarus": {
         "port": 21
     },
-    "Namalsk": {
-        "port": 1338
-    },
-    "Chernarus": {
-        "port": 1234
-    },
     "Takistan": {
-        "port": 2345
+        "port": 22
+    },
+    "Namalsk": {
+        "port": 23
+    },
+    "TestServer": {
+        "port": 24
     }
 }
