@@ -430,3 +430,5 @@ FodyWeavers.xsd
 /_files/919677581824000070/maps/Chernarus
 /extra_resources
 /pokemon_manager.py
+/_files
+/tester.py
