@@ -27,12 +27,12 @@ class Registration(Modal):
         sql = DBConnect()
         sql_cmmd = "INSERT IGNORE INTO registration (SK64) VALUES (%s)"
 
-        for folder_name in os.listdir("_files\919677581824000070\maps"):
+        for folder_name in os.listdir("home\container\_files\919677581824000070\maps"):
             print(folder_name)
             ftp = FTPConnect(folder_name) #FIXME
             ftp.getAllPlayerATM(919677581824000070)
             ftp.connect()
-            for file_name in os.listdir(f"_files\919677581824000070\maps\{folder_name}\\atms"):
+            for file_name in os.listdir(f"home\container\_files\919677581824000070\maps\{folder_name}\\atms"):
                 sql.c.execute(sql_cmmd, (file_name.strip(".json"), ))
             sql.commit()
             ftp.ftp.close()
