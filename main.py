@@ -137,19 +137,12 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
     async def get_all_atms(interaction:ApplicationCommandInteraction) -> None:
         await interaction.response.defer()
-        sql = DBConnect()
-        sql_cmmd = "INSERT IGNORE INTO registration (SK64) VALUES (%s)"
-
         for folder_name in os.listdir("_files\919677581824000070\maps"):
             print(folder_name)
             ftp = FTPConnect(folder_name)
             ftp.connect()
             ftp.getAllPlayerATM(919677581824000070)
-            for file_name in os.listdir(f"_files\919677581824000070\maps\{folder_name}\\atms"):
-                sql.c.execute(sql_cmmd, (file_name.strip(".json"), ))
-            sql.commit()
             ftp.ftp.close()
-        sql.close()
         await interaction.followup.send("Done!")
 
 
