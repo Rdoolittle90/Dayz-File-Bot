@@ -139,10 +139,10 @@ def main():
         await interaction.response.defer()
         for folder_name in os.listdir("_files/919677581824000070/maps"):
             print(folder_name)
-            # ftp = FTPConnect(folder_name)
-            # ftp.connect()
-            # ftp.getAllPlayerATM(919677581824000070)
-            # ftp.ftp.close()
+            ftp = FTPConnect(folder_name)
+            ftp.connect()
+            ftp.getAllPlayerATM(919677581824000070)
+            ftp.ftp.close()
         await interaction.followup.send("Done!")
 
 
