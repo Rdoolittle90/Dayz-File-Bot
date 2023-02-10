@@ -163,7 +163,7 @@ def main():
 
         sql = DBConnect()
         sql.select_DUID_from_registration(steamid64)
-        member_duid = sql.c.fetchone[0]
+        member_duid = sql.c.fetchone()[0]
         embed: Embed
         message: Message
         embed, message = await display_player_atm(interaction, member_duid)
