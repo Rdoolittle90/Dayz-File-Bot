@@ -137,12 +137,12 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
     async def get_all_atms(interaction:ApplicationCommandInteraction) -> None:
         await interaction.response.defer()
-        for folder_name in os.listdir("_files\919677581824000070\maps"):
+        for folder_name in os.listdir("_files/919677581824000070/maps"):
             print(folder_name)
-            ftp = FTPConnect(folder_name)
-            ftp.connect()
-            ftp.getAllPlayerATM(919677581824000070)
-            ftp.ftp.close()
+            # ftp = FTPConnect(folder_name)
+            # ftp.connect()
+            # ftp.getAllPlayerATM(919677581824000070)
+            # ftp.ftp.close()
         await interaction.followup.send("Done!")
 
 
