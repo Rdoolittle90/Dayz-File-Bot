@@ -135,6 +135,13 @@ def main():
 
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    async def debug_chat_input(interaction:ApplicationCommandInteraction) -> None:
+        """placeholder"""
+        await interaction.response.send("debug results in console")
+
+
+    # =====================================================================================================
+    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
     async def get_all_atms(interaction:ApplicationCommandInteraction) -> None:
         await interaction.response.defer()
         for folder_name in os.listdir("_files/919677581824000070/maps"):
@@ -172,7 +179,7 @@ def main():
             amount_str = "+" + f"{amount:,} ₽"
             embed.color = Color.green()
         else:
-            amount_str = f"{amount:,}₽"
+            amount_str = f"{amount:,} ₽"
             embed.color = Color.red()
 
         embed.add_field(
