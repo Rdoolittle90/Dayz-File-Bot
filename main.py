@@ -175,7 +175,10 @@ def main():
             amount_str = f"{amount:,}₽"
             embed.color = Color.red()
 
-        embed.add_field(name=f"Cash given by: {interaction.author.display_name}", value=amount_str)
+        embed.add_field(
+            name=f"Cash given by: {interaction.author.display_name} on {maps[map_num]}", 
+            value=amount_str, 
+            inline=False)
         await message.edit(embed=embed)
 
 # =========================================================================================================
