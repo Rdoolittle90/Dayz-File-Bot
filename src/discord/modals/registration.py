@@ -43,10 +43,14 @@ class Registration(Modal):
 
                 player_file = get_player_info_from_any_atm_file(int(user_input))[0]
                 print(player_file)
+
+
+                await interaction.author.edit(nick=player_file[0]['playername'])
+                await interaction.author.add_roles(1072971824620650556, reason="Registered via Drifter")
                 await interaction.followup.send(f"Done! Welcome to Platinum Servers {player_file[0]['playername']}")
 
             elif SK64_found and DUID_found:
-                print(f"{user_input} Already Taken")
+                print(f"{SK64_found} Already Taken {DUID_found}")
                 await interaction.followup.send(f"This Account is already taken.")
 
             else:
