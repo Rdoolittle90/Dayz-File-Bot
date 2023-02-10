@@ -41,20 +41,20 @@ class Registration(Modal):
                 sql.update_registration(int(user_input), interaction.author.id)
                 sql.commit()
 
-
+                player_file = get_player_info_from_any_atm_file(int(user_input))[0]
+                print(player_file)
+                await interaction.followup.send(f"Done! Welcome to Platinum Servers {player_file[0]['playername']}")
 
             elif SK64_found and DUID_found:
                 print(f"{user_input} Already Taken")
+                await interaction.followup.send(f"This Account is already taken.")
 
             else:
                 print(f"{user_input} Not Found")
                 get_atms()
+                await interaction.followup.send(f"This Account was not found try again in a few minutes.")
 
             sql.close()
-
-            player_file = get_player_info_from_any_atm_file(int(user_input))[0]
-            print(player_file)
-            await interaction.followup.send(f"Done! Welcome to Platinum Servers {player_file['playername']}")
 
         except ValueError as err:
             print(err)
