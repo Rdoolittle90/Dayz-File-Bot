@@ -62,6 +62,7 @@ def update_player_atm(map_name:str, DUID:int, amount:int, SK64=None):
     sql.close()
     ftp.getOnePlayerATM(SK64)
     ftp.UpdateATM(SK64, map_name, amount)
+
     ftp.quit()
     return 1
 

@@ -153,7 +153,12 @@ def main():
         """map_nums = Chernarus:0, Takistan:1, Namalsk:2, testServer:3"""
         maps = ["Chernarus", "Takistan", "Namalsk", "TestServer"]
         await interaction.response.defer()
-        update_player_atm(maps[map_num], interaction.author.id, amount, SK64=steamid64)
+        try:
+            update_player_atm(maps[map_num], interaction.author.id, amount, SK64=steamid64)
+        except FileNotFoundError:
+            print(f"{steamid64} does not have an ATM on {maps[map_num]}")
+            embed = Embed(title="Error", description=f"{steamid64} does not have an ATM on {maps[map_num]}")
+            return -1
         embed: Embed
         message: Message
         embed, message = await display_player_atm(interaction, interaction.author.id)
