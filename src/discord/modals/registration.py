@@ -40,6 +40,9 @@ class Registration(Modal):
                 print(f"{user_input} Available")
                 sql.update_registration(int(user_input), interaction.author.id)
                 sql.commit()
+
+
+
             elif SK64_found and DUID_found:
                 print(f"{user_input} Already Taken")
 
@@ -50,7 +53,7 @@ class Registration(Modal):
             sql.close()
 
             player_file = get_player_info_from_any_atm_file(int(user_input))[0]
-            
+            print(player_file)
             await interaction.followup.send(f"Done! Welcome to Platinum Servers {player_file['playername']}")
 
         except ValueError as err:

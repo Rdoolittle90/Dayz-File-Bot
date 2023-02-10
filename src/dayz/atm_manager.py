@@ -23,7 +23,6 @@ async def display_player_atm(interaction:ApplicationCommandInteraction, DUID):
 
     sql.select_SK64_from_registration(DUID)
     SK64 = sql.c.fetchone()
-    print(SK64[0])
 
     if result:
         update_atms(SK64[0])
