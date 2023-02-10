@@ -73,16 +73,16 @@ def update_player_atm(map_name:str, DUID:int, amount:int, SK64=None):
 
 def get_player_info_from_any_atm_file(SK64):
     found_atms = []
-    for folder_name in os.listdir("_files\919677581824000070\maps"):
-        if f"{SK64}.json" in os.listdir(f"_files\919677581824000070\maps\{folder_name}\\atms"):
-            with open(f"_files\919677581824000070\maps\{folder_name}\\atms\{SK64}.json", "r") as fin:
+    for folder_name in os.listdir("_files/919677581824000070/maps"):
+        if f"{SK64}.json" in os.listdir(f"_files/919677581824000070/maps/{folder_name}/atms"):
+            with open(f"_files/919677581824000070/maps/{folder_name}/atms/{SK64}.json", "r") as fin:
                 player_file = json.load(fin)
             found_atms.append((folder_name, player_file))
     return found_atms
 
 
 def open_player_atm(SK64, map_name):
-    if f"{SK64}.json" in os.listdir(f"_files\919677581824000070\maps\{map_name}\\atms"):
-        with open(f"_files\919677581824000070\maps\{map_name}\\atms\{SK64}.json", "r") as fin:
+    if f"{SK64}.json" in os.listdir(f"_files/919677581824000070/maps/{map_name}/atms"):
+        with open(f"_files/919677581824000070/maps/{map_name}/atms/{SK64}.json", "r") as fin:
             player_file = json.load(fin)
             return player_file
