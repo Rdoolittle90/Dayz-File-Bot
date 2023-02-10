@@ -161,9 +161,12 @@ def main():
             await interaction.followup.send(embed=embed)
             return -1
 
+        sql = DBConnect()
+        sql.select_DUID_from_registration(steamid64)
+        member_duid = sql.c.fetchone[0]
         embed: Embed
         message: Message
-        embed, message = await display_player_atm(interaction, interaction.author.id)
+        embed, message = await display_player_atm(interaction, member_duid)
 
         if amount >= 0:
             amount_str = "+" + f"{amount:,} ₽"
