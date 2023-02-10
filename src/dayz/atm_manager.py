@@ -66,11 +66,6 @@ def update_player_atm(map_name:str, DUID:int, amount:int, SK64=None):
     ftp.quit()
     return 1
 
-    # SK64 not found
-    print("ID not found")
-    ftp.quit()
-    return 0
-
 
 def get_player_info_from_any_atm_file(SK64):
     found_atms = []
