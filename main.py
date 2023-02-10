@@ -157,8 +157,10 @@ def main():
             update_player_atm(maps[map_num], interaction.author.id, amount, SK64=steamid64)
         except FileNotFoundError:
             print(f"{steamid64} does not have an ATM on {maps[map_num]}")
-            embed = Embed(title="Error", description=f"{steamid64} does not have an ATM on {maps[map_num]}")
+            embed = Embed(title="Error", description=f"{steamid64} does not have an ATM on {maps[map_num]}", color=Color.red())
+            await interaction.followup.send(embed=embed)
             return -1
+
         embed: Embed
         message: Message
         embed, message = await display_player_atm(interaction, interaction.author.id)
