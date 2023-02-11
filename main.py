@@ -200,7 +200,7 @@ def main():
 
 
     # =====================================================================================================
-    @bot.slash_command(dm_permission=False)
+    @bot.slash_command(default_member_permissions=576, dm_permission=False)
     async def atm(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         await interaction.response.defer()
@@ -208,14 +208,14 @@ def main():
 
 
     # =====================================================================================================
-    @bot.slash_command(dm_permission=False)
+    @bot.slash_command(default_member_permissions=576, dm_permission=False)
     async def inventory(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
 
 
     # =====================================================================================================
-    @bot.slash_command(dm_permission=False)
+    @bot.slash_command(default_member_permissions=576, dm_permission=False)
     async def trade(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
