@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from src.ftp.ftp_manager import FTPConnect
 from src.sql.sql_manager import DBConnect
 from src.dayz.atm_manager import display_player_atm, update_player_atm
-from src.discord.modals.registration import Registration
+from src.discord.modals.registration import Registration, get_reg_role
 from src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
 
@@ -138,6 +138,7 @@ def main():
     async def debug_chat_input(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         await interaction.response.defer("debug results in console")
+        print(get_reg_role(interaction))
         await interaction.followup.send("Done.")
 
 

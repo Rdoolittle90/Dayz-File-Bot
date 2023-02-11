@@ -1,6 +1,6 @@
 import json
 import os
-from disnake import ModalInteraction, Role
+from disnake import ModalInteraction, Permissions, Role
 from disnake.ui import Modal, TextInput
 from src.dayz.atm_manager import get_player_info_from_any_atm_file
 from src.ftp.ftp_manager import FTPConnect
@@ -34,13 +34,12 @@ class Registration(Modal):
 
             sql.check_if_DUID_in_registration(interaction.author.id)
             DUID_found = sql.c.fetchone()[0]
-
+            
             print(SK64_found, DUID_found)
             if SK64_found and not DUID_found:
                 print(f"{user_input} Available")
                 sql.update_registration(int(user_input), interaction.author.id)
                 sql.commit()
-
                 player_file = get_player_info_from_any_atm_file(int(user_input))[0]
                 print(player_file)
                 nick_name = player_file[1]['playername']
@@ -83,3 +82,7 @@ def get_atms():
 
 def get_reg_role(interaction: ModalInteraction) -> Role:
     return interaction.guild.get_role(1072971824620650556)
+
+
+def get_role_permissions(interaction: ModalInteraction) -> Permissions:
+    return interaction.guild.get_role(1072971824620650556).permissions
