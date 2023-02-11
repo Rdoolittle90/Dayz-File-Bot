@@ -43,11 +43,11 @@ class Registration(Modal):
 
                 player_file = get_player_info_from_any_atm_file(int(user_input))[0]
                 print(player_file)
-                nick_name = player_file[0]['playername']
+                nick_name = player_file[1]['playername']
                 print(nick_name)
                 await interaction.author.edit(nick=nick_name)
                 await interaction.author.add_roles(1072971824620650556, reason="Registered via Drifter")
-                await interaction.followup.send(f"Done! Welcome to Platinum Servers {player_file[0]['playername']}")
+                await interaction.followup.send(f"Done! Welcome to Platinum Servers {player_file[1]['playername']}")
 
             elif SK64_found and DUID_found:
                 print(f"{SK64_found} Already Taken {DUID_found}")
