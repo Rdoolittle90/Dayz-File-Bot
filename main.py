@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from src.ftp.ftp_manager import FTPConnect
 from src.sql.sql_manager import DBConnect
 from src.dayz.atm_manager import display_player_atm, update_player_atm
-from src.discord.modals.registration import Registration, get_reg_role
+from src.discord.modals.registration import Registration, get_reg_role, get_role_permissions
 from src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
 
