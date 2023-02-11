@@ -137,7 +137,7 @@ def main():
     @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
     async def debug_chat_input(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
-        await interaction.response.defer("debug results in console")
+        await interaction.response.defer()
         print(get_reg_role(interaction))
         await interaction.followup.send("Done.")
 
