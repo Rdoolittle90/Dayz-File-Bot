@@ -46,7 +46,7 @@ class Registration(Modal):
                 nick_name = player_file[1]['playername']
                 print(nick_name)
                 await interaction.author.edit(nick=nick_name)
-                await interaction.author.add_roles(1072971824620650556, reason="Registered via Drifter")
+                await interaction.author.add_roles(roles=1072971824620650556, reason="Registered via Drifter")
                 await interaction.followup.send(f"Done! Welcome to Platinum Servers {player_file[1]['playername']}")
 
             elif SK64_found and DUID_found:
