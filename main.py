@@ -138,7 +138,7 @@ def main():
     async def debug_chat_input(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         await interaction.response.defer()
-        print(get_reg_role(interaction))
+        print(get_role_permissions(interaction))
         await interaction.followup.send("Done.")
 
 
