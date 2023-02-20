@@ -1,5 +1,6 @@
 from os import getenv
 import os
+import openai
 
 from disnake import ApplicationCommandInteraction, Embed, Intents, Message, Color
 from disnake.ext.commands import when_mentioned
@@ -34,7 +35,7 @@ def main():
 
     # this is the discord bot object
     bot = MyClient(command_prefix=prefix, intents=intents)
-
+    bot.openai_api_key = "api_key_here"
 
     # below are all of the commands for the bot
     # default_member_permissions=8 is the same as saying only available to admins
@@ -53,6 +54,20 @@ def main():
         await interaction.response.defer(ephemeral=True)
         channel = await set_announce_channel(interaction.guild, int(channel_id))
         await interaction.followup.send(channel)
+
+    @bot.slash_command(name="ask", description="Ask the OpenAI GPT a question")
+    async def ask_command(ctx: ApplicationCommandInteraction, question: str):
+        async with openai.ApiClient(api_key=bot.openai_api_key) as api_client:
+            response = api_client.completions.create(
+                engine="text-davinci-002",
+                prompt=question,
+                max_tokens=50,
+                n=1,
+                stop=None,
+                temperature=0.5,
+            )
+            answer = response.choices[0].text.strip()
+            await ctx.respond(answer)
 
     @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def clean_bot_chatter(interaction: ApplicationCommandInteraction, channel_id: str):
