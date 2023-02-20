@@ -42,19 +42,19 @@ def main():
 # =========================================================================================================
 # ADMIN DISCORD COMMANDS ----------------------------------------------------------------------------------
 # =========================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def set_status(interaction: ApplicationCommandInteraction, status_code:int, map_name="ALL", message=None):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await announce_status(interaction, status_code, map_name, message)
 
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: str):
         """sets the bots announcement channel"""
         await interaction.response.defer(ephemeral=True)
         channel = await set_announce_channel(interaction.guild, int(channel_id))
         await interaction.followup.send(channel)
 
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def clean_bot_chatter(interaction: ApplicationCommandInteraction, channel_id: str):
         """deletes messages at given channel from the bot"""
         channel = bot.get_channel(int(channel_id))
@@ -64,14 +64,14 @@ def main():
 # =========================================================================================================
 # ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
 # =========================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """creates a new map directory"""
         create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def render_types(interaction:ApplicationCommandInteraction) -> None:
         """Render the types.xml for the selected map"""
         options = get_map_selections(interaction.guild.id)
@@ -81,7 +81,7 @@ def main():
             await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         options = get_map_selections(interaction.guild.id)
@@ -91,7 +91,7 @@ def main():
             await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def load_traderconfig(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         options = get_map_selections(interaction.guild.id)
@@ -101,7 +101,7 @@ def main():
             await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def load_types(interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         options = get_map_selections(interaction.guild.id)
@@ -111,7 +111,7 @@ def main():
             await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def kill(interaction:ApplicationCommandInteraction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.author}")
@@ -119,7 +119,7 @@ def main():
 
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def get_key(interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """Looks up the given maps passkey"""
         passkey = get_map_key(interaction.guild.id, mapname)["passkey"]
@@ -127,14 +127,14 @@ def main():
 
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def remove_map(interaction:ApplicationCommandInteraction) -> None:
         """Opens the map deletion Modal"""
         await interaction.response.send_modal(modal=RemoveMapModal())
 
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def debug_chat_input(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         await interaction.response.defer()
@@ -143,7 +143,7 @@ def main():
 
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def get_all_atms(interaction:ApplicationCommandInteraction) -> None:
         await interaction.response.defer()
         for folder_name in os.listdir("_files/919677581824000070/maps"):
@@ -157,7 +157,7 @@ def main():
 
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=1067403561537, dm_permission=False)
+    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def give_money(interaction:ApplicationCommandInteraction, steamid64, map_num:int, amount:int) -> None:
         """map_nums = Chernarus:0, Takistan:1, Namalsk:2, testServer:3"""
         maps = ["Chernarus", "Takistan", "Namalsk", "TestServer"]
