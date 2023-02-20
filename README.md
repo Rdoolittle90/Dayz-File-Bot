@@ -2,7 +2,7 @@
 Scope and Features still under heavy development
 
 ## Purpose
-This bot is intended to be used as a Dayz server manager in bot file management and discord managment capacity
+This bot is intended to be used as a Dayz server manager
 
 
 ### Current Features
