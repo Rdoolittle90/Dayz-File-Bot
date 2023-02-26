@@ -2,7 +2,7 @@ from os import getenv
 import aiohttp
 
 from disnake import ApplicationCommandInteraction, Intents
-from disnake.ext.commands import when_mentioned
+from disnake.ext.commands import when_mentioned, has_role
 from dotenv import load_dotenv
 from src.discord.registration import EnterSteamID, verify_user
 from src.discord.guild_manager import set_announce_channel
@@ -103,21 +103,24 @@ def main():
         await interaction.response.send_modal(modal=EnterSteamID())
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=576, dm_permission=False)
+    @bot.slash_command(dm_permission=False)
+    @has_role("Steam Linked")
     async def atm(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
 
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=576, dm_permission=False)
+    @bot.slash_command(dm_permission=False)
+    @has_role("Steam Linked")
     async def inventory(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
 
 
     # =====================================================================================================
-    @bot.slash_command(default_member_permissions=576, dm_permission=False)
+    @bot.slash_command(dm_permission=False)
+    @has_role("Steam Linked")
     async def trade(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
