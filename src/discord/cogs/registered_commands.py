@@ -12,7 +12,7 @@ class RegisteredCog(commands.Cog):
     @nextcord.slash_command(dm_permission=False, name="register", description="placeholder description 1")
     async def register(self, interaction: nextcord.Interaction) -> None:
         """placeholder"""
-        await interaction.response.send_modal(modal=EnterSteamID())
+        await interaction.response.send_modal(modal=EnterSteamID(self.bot))
 
 
     # =====================================================================================================
