@@ -1,7 +1,7 @@
 from os import getenv
 
-from disnake import ApplicationCommandInteraction, Intents
-from disnake.ext.commands import when_mentioned, has_role
+from nextcord import ApplicationCommandInteraction, Intents
+from nextcord.ext.commands import when_mentioned, has_role
 from dotenv import load_dotenv
 
 from src.discord.announcements import announce_status
