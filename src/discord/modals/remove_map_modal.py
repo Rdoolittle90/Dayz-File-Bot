@@ -43,9 +43,3 @@ class RemoveMapModal(ui.Modal):
                 color=Color.red()
             )
             await interaction.followup.send(embed=failed_deletion)
-
-class RemoveMapDropdownView(ui.View):
-    def __init__(self):
-        super().__init__()
-        # Adds the dropdown to view object.
-        self.add_item(RemoveMapModal())

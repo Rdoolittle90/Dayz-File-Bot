@@ -17,7 +17,6 @@ def main():
     bot.load_extension("src.discord.cogs.registered_commands")
     bot.load_extension("src.discord.cogs.everyone_commands")
 
-
     bot.run(getenv("DISCORD_TOKEN"))
 
 
