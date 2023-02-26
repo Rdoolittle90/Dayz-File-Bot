@@ -3,9 +3,8 @@ from os import getenv
 from typing import Optional
 
 import aiohttp
-from nextcord.interactions import ModalInteraction
 from nextcord.ui import Modal, TextInput
-
+from nextcord import Interaction
 from src.discord.bot import DiscordBot
 
 
@@ -29,7 +28,7 @@ class EnterSteamID(Modal):
         ]
         super().__init__(title="Registration Form", components=components)
 
-    async def callback(self, interaction: ModalInteraction) -> None:
+    async def callback(self, interaction: Interaction) -> None:
         """
         Validates the Steam 64 ID entered by the user and saves it to the database.
 
