@@ -91,16 +91,16 @@ async def set_announce_channel(guild: Guild, channel_id: int) -> bool:
 
     settings = get_server_settings(guild.id)
     settings["announcement_channel"] = channel_id
-    with open(f"_files/{guild.id}/support/settings.json", "w") as json_out:
+    with open(f"_files/support/settings.json", "w") as json_out:
         dump(settings, json_out, indent=4)
     return True
 
 
-def get_map_selections(guild_id, type_return="SelectOption"):
-    if not os.path.exists(f"_files/{guild_id}"):
+def get_map_selections(type_return="SelectOption"):
+    if not os.path.exists(f"_files"):
         return None
         
-    maps = os.listdir(f"_files/{guild_id}/maps")
+    maps = os.listdir(f"_files/maps")
     selections = []
     selections_list = []
     if len(maps) == 0:

@@ -4,7 +4,7 @@ import random
 import shutil
 from string import ascii_lowercase, ascii_uppercase
 
-from disnake import Color, Embed
+from nextcord import Colour, Embed
 
 # =========================================================================================================
 def generate_map_passkey() -> str:
@@ -91,13 +91,13 @@ def remove_map_dir(map_name:str) -> None:
 # =========================================================================================================
 def remove_embed(map_name):
     """return a removal confirmation Embed"""
-    embed = Embed(title=map_name, description="Map Removed!\nThis can NOT be undone.", color=Color.green())
+    embed = Embed(title=map_name, description="Map Removed!\nThis can NOT be undone.", color=Colour.green())
     return embed
 
 # =========================================================================================================
 def key_embed(map_name:str, passkey:str) -> Embed:
     """returns an Embed containing a map passkey"""
-    embed = Embed(title=map_name, description=passkey, color=Color.blurple())
+    embed = Embed(title=map_name, description=passkey, color=Colour.blurple())
     return embed
 
 

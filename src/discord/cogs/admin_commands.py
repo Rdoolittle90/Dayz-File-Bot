@@ -31,14 +31,14 @@ class AdminCog(commands.Cog):
     @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="add_map", description="placeholder description 3")
     async def add_map(self, interaction: nextcord.Interaction, mapname: str) -> None:
         """creates a new map directory"""
-        create_new_map_dir(interaction.guild_id, mapname)
+        create_new_map_dir(mapname)
         await interaction.send(f"New Directory created for {mapname}")
 
     # =====================================================================================================
     @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="load_traderconfig", description="placeholder description 4")
     async def load_traderconfig(self, interaction: nextcord.Interaction) -> None:
         """Render the TraderConfig.txt for the selected map"""
-        options = get_map_selections(interaction.guild_id)
+        options = get_map_selections()
         if options:
             await interaction.send(view=load_traderconfig_view(options=options), ephemeral=True)
         else:
