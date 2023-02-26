@@ -100,24 +100,24 @@ def main():
         await interaction.response.send_modal(modal=EnterSteamID())
 
     # =====================================================================================================
-    @bot.slash_command(dm_permission=False, hidden=True)
     @has_role("Steam Linked")
+    @bot.slash_command(dm_permission=False, hidden=True)
     async def atm(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
 
 
     # =====================================================================================================
-    @bot.slash_command(dm_permission=False, hidden=True)
     @has_role("Steam Linked")
+    @bot.slash_command(dm_permission=False, hidden=True)
     async def inventory(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
 
 
     # =====================================================================================================
-    @bot.slash_command(dm_permission=False, hidden=True)
     @has_role("Steam Linked")
+    @bot.slash_command(dm_permission=False, hidden=True)
     async def trade(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
         pass
