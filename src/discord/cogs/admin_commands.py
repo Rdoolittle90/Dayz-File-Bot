@@ -14,13 +14,13 @@ class AdminCog(commands.Cog):
         print("Admin Cog Connected")
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="set_status", description="placeholder description 1")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_status", description="placeholder description 1")
     async def set_status(self, interaction: nextcord.Interaction, status_code: int, map_name: str = "ALL", message: str = None):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await announce_status(interaction, status_code, map_name, message)
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="set_announcement_channel", description="placeholder description 2")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_announcement_channel", description="placeholder description 2")
     async def set_announcement_channel(self, interaction: nextcord.Interaction, channel_id: str):
         """sets the bots announcement channel"""
         await interaction.response.defer(ephemeral=True)
@@ -28,14 +28,14 @@ class AdminCog(commands.Cog):
         await interaction.followup.send(channel)   
         
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="add_map", description="placeholder description 3")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="add_map", description="placeholder description 3")
     async def add_map(self, interaction: nextcord.Interaction, mapname: str) -> None:
         """creates a new map directory"""
         create_new_map_dir(interaction.guild_id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="load_traderconfig", description="placeholder description 4")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="load_traderconfig", description="placeholder description 4")
     async def load_traderconfig(self, interaction: nextcord.Interaction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         options = get_map_selections(interaction.guild_id)
@@ -45,7 +45,7 @@ class AdminCog(commands.Cog):
             await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="kill", description="placeholder description 5")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="kill", description="placeholder description 5")
     async def kill(self, interaction: nextcord.Interaction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.user}")
@@ -53,7 +53,7 @@ class AdminCog(commands.Cog):
         await self.bot.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="get_key", description="placeholder description 6")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="get_key", description="placeholder description 6")
     async def get_key(self, interaction: nextcord.Interaction, mapname: str) -> None:
         """Looks up the given maps passkey"""
         passkey = get_map_key(interaction.guild_id, mapname)["passkey"]
