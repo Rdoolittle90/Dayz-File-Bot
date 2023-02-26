@@ -1,5 +1,5 @@
 from disnake import ApplicationCommandInteraction
-from disnake.ext.commands import Cog, command
+from disnake.ext.commands import cog, command
 
 from src.discord.announcements import announce_status
 from src.discord.guild_manager import get_map_selections
@@ -8,7 +8,7 @@ from src.discord.modals.remove_map_modal import RemoveMapModal
 from src.file_manager import create_new_map_dir, get_map_key, key_embed
 
 
-class AdminCog(Cog):
+class AdminCog(cog.SlashCommandCog):
     def __init__(self, bot):
         self.bot = bot
         print("Admin Cog Connected")
