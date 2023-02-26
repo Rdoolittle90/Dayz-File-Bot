@@ -92,7 +92,7 @@ class DiscordBot(Bot, DBConnect):
         logging.info(f'{member.name} has left the server')
 
     
-    async def on_command_error(ctx, error):
+    async def on_command_error(self, ctx, error):
         if isinstance(error, MissingRole):
             await ctx.send(f"Error: {error}")
             return
