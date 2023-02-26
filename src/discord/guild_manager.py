@@ -1,9 +1,9 @@
 ﻿import os
 
 import requests
-from disnake import Color, DMChannel, Embed, Guild, Message, NotFound, SelectOption, File
-from disnake.errors import Forbidden
-from disnake.utils import get
+from nextcord import Colour, DMChannel, Embed, Guild, Message, NotFound, SelectOption, File
+from nextcord.errors import Forbidden
+from nextcord.utils import get
 
 from json import load, dump
 
@@ -12,7 +12,7 @@ async def initial_server_setup(guild: Guild):
     try:
         bot_manager_role = get(guild.roles, name='Bot Manager')
         if bot_manager_role is None:
-            await guild.create_role(name="Bot Manager", color=Color.darker_grey())
+            await guild.create_role(name="Bot Manager", color=Colour.darker_grey())
     except Forbidden:
         print("Missing Permissions!")
 
@@ -23,7 +23,7 @@ async def initial_cha_setup(guild: Guild):
         if channel is None:
             category = await guild.create_category("BOT CONTROLS")
             channel = await category.create_text_channel('drifter-imports')
-            embed = Embed(title="How to upload a file", description="Files must be uploaded by the following commands", color=Color.blurple())
+            embed = Embed(title="How to upload a file", description="Files must be uploaded by the following commands", color=Colour.blurple())
             embed.add_field(name="Step 1", value="Attach files to a message", inline=False)
             embed.add_field(name="Step 2", value="send `@Drifter map_name` as the message with the files", inline=False)
             embed.add_field(name="Step 3", value="wait for confirmation of upload.", inline=False)

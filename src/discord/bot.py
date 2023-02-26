@@ -1,28 +1,37 @@
-from nextcord import Member
-from nextcord.ext.commands import Bot, MissingRole, CommandNotFound
-from nextcord.message import Message
 import logging
-from src.sql.sql_manager import DBConnect
+import os
+
+from nextcord import Member, Intents, Message
+from nextcord.ext import commands
+
 from src.discord.guild_manager import check_for_files, initial_cha_setup, initial_server_setup
 from src.file_manager import create_new_server_dir, initial_dir_setup
+from src.sql.sql_manager import DBConnect
 
-
-class DiscordBot(Bot, DBConnect):
+class DiscordBot(commands.Bot, DBConnect):
     """
-    Custom bot class inheriting from the `discord.ext.commands.Bot` class and the `DBConnect` mixin.
+    Custom bot class inheriting from the `nextcord.ext.commands.Bot` class and the `DBConnect` mixin.
 
     This class handles the bot's events and has methods for setting up the server directories and channels
     upon initialization, as well as handling messages and member join/leave events.
 
     Args:
-        Bot (discord.ext.commands.Bot): The bot object to handle Discord events.
+        Bot (nextcord.ext.commands.Bot): The bot object to handle Discord events.
         DBConnect (mixin): A mixin class that defines a `sql_connect` method for connecting to a database.
 
     Attributes:
         (None)
-
     """
-
+    
+    def __init__(self, *args, **kwargs):
+        intents = Intents.default()
+        intents.members = True
+        super().__init__(command_prefix='!', intents=intents, *args, **kwargs)
+        self.add_listener(self.on_ready)
+        self.add_listener(self.on_member_join)
+        self.add_listener(self.on_member_remove)
+        self.add_listener(self.on_message)
+        
     async def on_ready(self) -> None:
         """
         Event handler for the `on_ready` event.
@@ -52,7 +61,7 @@ class DiscordBot(Bot, DBConnect):
         message for any attachments and saves them to disk.
 
         Args:
-            message (discord.Message): The message object containing the message content and attachments.
+            message (nextcord.Message): The message object containing the message content and attachments.
 
         Returns:
             (None)
@@ -68,7 +77,7 @@ class DiscordBot(Bot, DBConnect):
         This method is called when a new member joins the server. It logs the event to the console.
 
         Args:
-            member (discord.Member): The member object representing the new member.
+            member (nextcord.Member): The member object representing the new member.
 
         Returns:
             (None)
@@ -83,7 +92,7 @@ class DiscordBot(Bot, DBConnect):
         This method is called when a member leaves the server. It logs the event to the console.
 
         Args:
-            member (discord.Member): The member object representing the departing member.
+            member (nextcord.Member): The member object representing the departing member.
 
         Returns:
             (None)
@@ -91,12 +100,10 @@ class DiscordBot(Bot, DBConnect):
         """
         logging.info(f'{member.name} has left the server')
 
-    
     async def on_command_error(self, ctx, error):
-        if isinstance(error, MissingRole):
+        if isinstance(error, commands.MissingRole):
             await ctx.send(f"Error: {error}")
-            return
-        elif isinstance(error, CommandNotFound):
+        elif isinstance(error, commands.CommandNotFound):
             # Handle CommandNotFound error
-            return
+            pass
         # Handle other types of errors
