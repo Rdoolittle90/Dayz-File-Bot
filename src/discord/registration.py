@@ -3,8 +3,8 @@ from os import getenv
 from typing import Optional
 
 import aiohttp
-from disnake import ModalInteraction
-from disnake.ui import Modal, TextInput
+from nextcord import ModalInteraction
+from nextcord.ui import Modal, TextInput
 
 from src.discord.bot import DiscordBot
 

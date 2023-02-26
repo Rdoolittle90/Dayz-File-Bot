@@ -1,6 +1,6 @@
-from disnake import Member
-from disnake.ext.commands import Bot, MissingRole, CommandNotFound
-from disnake.message import Message
+from nextcord import Member
+from nextcord.ext.commands import Bot, MissingRole, CommandNotFound
+from nextcord.message import Message
 import logging
 from src.sql.sql_manager import DBConnect
 from src.discord.guild_manager import check_for_files, initial_cha_setup, initial_server_setup
