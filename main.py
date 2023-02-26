@@ -12,7 +12,6 @@ def main():
 
     # this is the discord bot object
     bot = DiscordBot()
-    bot.openai_api_key = "api_key_here"
 
     bot.load_extension("src.discord.cogs.admin_commands")
     bot.load_extension("src.discord.cogs.registered_commands")
