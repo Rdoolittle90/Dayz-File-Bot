@@ -53,7 +53,7 @@ def main():
 # ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
 # =========================================================================================================
 
-    bot.load_extension("src/discord/cogs/admin_commands")
+    bot.load_extension("admin_commands")
     # bot.load_extension("src/discord/cogs/everyone_commands")
     # bot.load_extension("src/discord/cogs/registered_commands")
 
