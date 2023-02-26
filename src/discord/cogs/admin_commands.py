@@ -13,19 +13,19 @@ class AdminCog(Cog):
         self.bot = bot
         print("Admin Cog Connected")
 
-    @SlashCommand(name="Set Status", description="", default_member_permissions=8, dm_permission=False)
+    @SlashCommand(name="set_status", description="", default_member_permissions=8, dm_permission=False)
     async def set_status(self, ctx, status_code:int, map_name="ALL", message=None):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await announce_status(ctx, status_code, map_name, message)
 
-    @SlashCommand(name="Add Map", description="", dm_permission=False)
+    @SlashCommand(name="add_map", description="", dm_permission=False)
     async def add_map(self, interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """creates a new map directory"""
         create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
 
     # =====================================================================================================
-    @SlashCommand(name="Get key", description="", default_member_permissions=8, dm_permission=False)
+    @SlashCommand(name="load_traderconfig", description="", default_member_permissions=8, dm_permission=False)
     async def load_traderconfig(self, interaction: ApplicationCommandInteraction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         options = get_map_selections(interaction.guild.id)
@@ -35,7 +35,7 @@ class AdminCog(Cog):
             await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
-    @SlashCommand(name="Kill", description="", default_member_permissions=8, dm_permission=False)
+    @SlashCommand(name="kill", description="", default_member_permissions=8, dm_permission=False)
     async def kill(self, interaction:ApplicationCommandInteraction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.author}")
@@ -44,14 +44,14 @@ class AdminCog(Cog):
 
 
     # =====================================================================================================
-    @SlashCommand(name="Get key", description="", default_member_permissions=8, dm_permission=False)
+    @SlashCommand(name="get_key", description="", default_member_permissions=8, dm_permission=False)
     async def get_key(self, interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """Looks up the given maps passkey"""
         passkey = get_map_key(interaction.guild.id, mapname)["passkey"]
         await interaction.send(embed=key_embed(mapname, passkey))
         
     # =====================================================================================================
-    @SlashCommand(name="Remove Map", description="", default_member_permissions=8, dm_permission=False)
+    @SlashCommand(name="remove_map", description="", default_member_permissions=8, dm_permission=False)
     async def remove_map(interaction:ApplicationCommandInteraction) -> None:
         """Opens the map deletion Modal"""
         await interaction.response.send_modal(modal=RemoveMapModal())
