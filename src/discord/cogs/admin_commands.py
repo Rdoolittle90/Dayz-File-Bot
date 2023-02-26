@@ -1,5 +1,5 @@
 from nextcord import SlashContext
-from nextcord.ext.commands import Cog, command
+from nextcord.ext.commands import Cog
 from discord.bot import DiscordBot
 
 from src.discord.announcements import announce_status

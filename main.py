@@ -1,6 +1,6 @@
 from os import getenv
 
-from nextcord import ApplicationCommandInteraction, Intents
+from nextcord import Intents, SlashContext
 from nextcord.ext.commands import when_mentioned, has_role
 from dotenv import load_dotenv
 
@@ -35,12 +35,12 @@ def main():
 # ADMIN DISCORD COMMANDS ----------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def set_status(interaction: ApplicationCommandInteraction, status_code:int, map_name="ALL", message=None):
+    async def set_status(interaction: SlashContext, status_code:int, map_name="ALL", message=None):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await announce_status(interaction, status_code, map_name, message)
 
     @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: str):
+    async def set_announcement_channel(interaction: SlashContext, channel_id: str):
         """sets the bots announcement channel"""
         await interaction.response.defer(ephemeral=True)
         channel = await set_announce_channel(interaction.guild, int(channel_id))
@@ -59,14 +59,14 @@ def main():
 # @everyone COMMANDS --------------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(dm_permission=False)
-    async def register(interaction:ApplicationCommandInteraction) -> None:
+    async def register(interaction:SlashContext) -> None:
         """placeholder"""
         await interaction.response.send_modal(modal=EnterSteamID())
 
     # =====================================================================================================
     @has_role("Steam Linked")
     @bot.slash_command(dm_permission=False, hidden=True)
-    async def atm(interaction:ApplicationCommandInteraction) -> None:
+    async def atm(interaction:SlashContext) -> None:
         """placeholder"""
         pass
 
@@ -74,7 +74,7 @@ def main():
     # =====================================================================================================
     @has_role("Steam Linked")
     @bot.slash_command(dm_permission=False, hidden=True)
-    async def inventory(interaction:ApplicationCommandInteraction) -> None:
+    async def inventory(interaction:SlashContext) -> None:
         """placeholder"""
         pass
 
@@ -82,7 +82,7 @@ def main():
     # =====================================================================================================
     @has_role("Steam Linked")
     @bot.slash_command(dm_permission=False, hidden=True)
-    async def trade(interaction:ApplicationCommandInteraction) -> None:
+    async def trade(interaction:SlashContext) -> None:
         """placeholder"""
         pass
 
