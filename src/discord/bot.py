@@ -1,6 +1,4 @@
 import logging
-import os
-
 from nextcord import Member, Intents, Message
 from nextcord.ext import commands
 
@@ -24,9 +22,13 @@ class DiscordBot(commands.Bot, DBConnect):
     """
     
     def __init__(self, *args, **kwargs):
+        # setup intents for bot permissions
         intents = Intents.default()
+        intents.message_content = True
         intents.members = True
-        super().__init__(command_prefix='!', intents=intents, *args, **kwargs)
+        prefix = commands.when_mentioned
+
+        super().__init__(command_prefix=prefix, intents=intents, *args, **kwargs)
         self.add_listener(self.on_ready)
         self.add_listener(self.on_member_join)
         self.add_listener(self.on_member_remove)

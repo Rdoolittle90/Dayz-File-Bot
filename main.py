@@ -1,7 +1,5 @@
 from os import getenv
-
-from nextcord import Intents
-from nextcord.ext.commands import when_mentioned, has_role
+from nextcord.ext.commands import has_role
 from dotenv import load_dotenv
 
 from src.discord.announcements import announce_status
@@ -16,16 +14,8 @@ def main():
     load_dotenv()
     display_title()     
 
-    # setup intents for bot permissions
-    intents = Intents.default()
-    intents.message_content = True
-
-    # disable prefix in favor of just using slash commands
-    # still allows for the bot to be mentioned to invoke a command if its valid
-    prefix = when_mentioned
-
     # this is the discord bot object
-    bot = DiscordBot(command_prefix=prefix, intents=intents)
+    bot = DiscordBot()
     bot.openai_api_key = "api_key_here"
 
     # below are all of the commands for the bot
