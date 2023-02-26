@@ -4,7 +4,7 @@ import datetime
 from src.discord.guild_manager import get_server_settings
 
 
-async def announce_status(interaction: Interaction, status_code:int, map:str ="ALL", message:str=None) -> Embed:
+async def announce_status(interaction:Interaction, status_code:int, map:str ="ALL", message:str=None) -> Embed:
     """status_codes: 
     0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
     

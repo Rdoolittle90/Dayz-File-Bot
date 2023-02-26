@@ -56,7 +56,7 @@ class AdminCog(commands.Cog):
     @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="get_key", description="placeholder description 6")
     async def get_key(self, interaction: nextcord.Interaction, mapname: str) -> None:
         """Looks up the given maps passkey"""
-        passkey = get_map_key(interaction.guild_id, mapname)["passkey"]
+        passkey = get_map_key(mapname)["passkey"]
         await interaction.send(embed=key_embed(mapname, passkey))
 
     # =====================================================================================================
