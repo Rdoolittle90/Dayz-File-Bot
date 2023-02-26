@@ -1,7 +1,7 @@
 from os import getenv
 
 from disnake import ApplicationCommandInteraction, Intents
-from disnake.ext.commands import when_mentioned, has_role
+from disnake.ext.commands import when_mentioned, has_role, MissingRole, CommandNotFound
 from dotenv import load_dotenv
 
 from src.discord.announcements import announce_status
@@ -125,6 +125,20 @@ def main():
 # =========================================================================================================
 # START THE BOT |=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
 # =========================================================================================================
+
+
+
+    @bot.event
+    async def on_command_error(ctx, error):
+        if isinstance(error, MissingRole):
+            await ctx.send(f"Error: {error}")
+            return
+        elif isinstance(error, CommandNotFound):
+            # Handle CommandNotFound error
+            return
+        # Handle other types of errors
+    
+
     bot.run(getenv("DISCORD_TOKEN"))
 
 
