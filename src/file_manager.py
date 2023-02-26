@@ -30,20 +30,22 @@ def initial_dir_setup() -> None:
         pass
 
 # =========================================================================================================
-def create_new_server_dir(server_id) -> None:
+def create_new_server_dir() -> None:
     """called automatically on bot ready, creates required files for server"""
-
-    try:
-        os.makedirs(f"_files/{server_id}")
-        os.makedirs(f"_files/{server_id}/maps")
-        os.makedirs(f"_files/{server_id}/support")
-        shutil.copyfile("src/discord/template_files/settings.json", f"_files/{server_id}/support/settings.json")
-        print(f"\t\tDirectories Created.")
-    except FileExistsError:
-        print(f"\t\tReady.")
+    dirs_to_create = [
+        "_files/",
+        "_files/maps",
+        "_files/support"
+    ]
+    for directory in dirs_to_create:
+        os.makedirs(directory, exist_ok=True)
+    settings_file = "_files/support/settings.json"
+    if not os.path.exists(settings_file):
+        shutil.copyfile("src/discord/template_files/settings.json", settings_file)
+    print("\t\tDirectories Created.")
 
 # =========================================================================================================
-def create_new_map_dir(server_id, map_name) -> bool:
+def create_new_map_dir(map_name) -> bool:
     """Returns True if map directory does not exist"""
     
     passkey = {
@@ -51,13 +53,13 @@ def create_new_map_dir(server_id, map_name) -> bool:
         "passkey": generate_map_passkey()
         }
 
-    if map_name not in os.listdir(f"_files/{server_id}/maps"):
-        os.makedirs(f"_files/{server_id}/maps/{map_name}")
-        os.makedirs(f"_files/{server_id}/maps/{map_name}/inputs")
-        os.makedirs(f"_files/{server_id}/maps/{map_name}/outputs")
-        os.makedirs(f"_files/{server_id}/maps/{map_name}/atms")
-        os.makedirs(f"_files/{server_id}/maps/{map_name}/backups")
-        with open(f"_files/{server_id}/maps/{map_name}/passkey.json", "w") as json_out:
+    if map_name not in os.listdir(f"_files/maps"):
+        os.makedirs(f"_files/maps/{map_name}")
+        os.makedirs(f"_files/maps/{map_name}/inputs")
+        os.makedirs(f"_files/maps/{map_name}/outputs")
+        os.makedirs(f"_files/maps/{map_name}/atms")
+        os.makedirs(f"_files/maps/{map_name}/backups")
+        with open(f"_files/maps/{map_name}/passkey.json", "w") as json_out:
             json.dump(passkey, json_out, indent=4)
 
 
@@ -66,9 +68,9 @@ def create_new_map_dir(server_id, map_name) -> bool:
         return False
 
 # =========================================================================================================
-def get_map_key(server_id:int, map_name:str) -> str:
+def get_map_key(map_name:str) -> str:
     """if map passkey exists return it"""
-    path = f"_files/{server_id}/maps/{map_name}/passkey.json"
+    path = f"_files/maps/{map_name}/passkey.json"
     try:
         with open(path, "r") as json_in:
             passkey = json.load(json_in)
@@ -78,9 +80,9 @@ def get_map_key(server_id:int, map_name:str) -> str:
     return passkey
 
 # =========================================================================================================
-def remove_map_dir(server_id:int, map_name:str) -> None:
+def remove_map_dir(map_name:str) -> None:
     """Destory the directory given the server_id and map_name"""
-    path = f"_files/{server_id}/maps/{map_name}"
+    path = f"_files/maps/{map_name}"
     try:
         shutil.rmtree(path)
     except OSError as e:

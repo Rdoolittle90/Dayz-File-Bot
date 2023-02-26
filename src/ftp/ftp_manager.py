@@ -1,7 +1,8 @@
-from ftplib import FTP
 import json
+import asyncio
+import aioftp
+import aiofiles
 from os import getenv
-
 
 port_by_name = {
     "Chernarus": 21,
@@ -10,30 +11,32 @@ port_by_name = {
     "TestServer": 24
 }
 
-
-class FTPConnect():
-    def __init__(self, map_name):
-        self.map = map_name
+class FTPConnect:
+    def __init__(self):
         self.host = "135.148.136.106"
-        self.port = port_by_name[map_name]
+        self.port = ""
         self.user = "drifter"
         self.passwd = "waPreSPeHuF3"
+        self.pool = None
 
-        self.ftp = FTP()
-        self.ftp.set_debuglevel(0)
+    async def init_ftp(self, map_name):
+        self.pool = await aioftp.Pool().make_connection(
+            host= self.host,
+            port= port_by_name[map_name],
+            user= self.user,
+            password= self.passwd,
+            max_size= 4,
+        )
 
+    async def get_file(self, path, filename):
+        async with self.pool.acquire() as conn:
+            async with conn.client as client:
+                async with client.download_stream(filename) as stream:
+                    async with aiofiles.open(f"{path}/{filename}", "wb") as file:
+                        async for chunk in stream.iter_by_block():
+                            await file.write(chunk)
 
-    def connect(self):
-        self.ftp.connect(host=self.host, port=self.port)
-        self.ftp.login(user=self.user, passwd=self.passwd)
-
-
-    def getFile(self, path, File_name):
-        with open(f"{path}/{File_name}", "wb") as ftb_in:
-            self.ftp.retrbinary(f"RETR {File_name}", ftb_in.write, 1024)
-
-
-    def UpdateATM(self, SK64, map_name, amount):
+    async def update_atm(self, SK64, map_name, amount):
         path = f"_files/919677581824000070/maps/{map_name}/atms/{SK64}.json"
 
         with open(path, "r") as fin:
@@ -44,42 +47,33 @@ class FTPConnect():
         with open(path, "w") as fout:
             json.dump(player_ATM, fout, indent=4)
 
-        self.ftp.cwd("profiles/LBmaster/Data/LBBanking/Players")
-        with open(path, "rb") as ftb_out:
-            self.ftp.storbinary(f"STOR {SK64}.json", ftb_out)
-        self.ftp.cwd("../../../../../")
+        async with self.pool.acquire() as conn:
+            async with conn.client as client:
+                await client.upload(f"{SK64}.json", f"{path}/{SK64}.json")
 
+    async def get_all_player_atm(self, serverID):
+        async with self.pool.acquire() as conn:
+            async with conn.client as client:
+                await client.change_directory("profiles/LBmaster/Data/LBBanking/Players")
+                files = await client.list()
+                for file in files:
+                    if file.name.endswith(".json"):
+                        await self.get_file(f"_files/maps/{self.map}/atms/", file.name)
+                await client.change_directory("../../../../../")
 
+    async def get_one_player_atm(self, SK64, serverID=919677581824000070):
+        async with self.pool.acquire() as conn:
+            async with conn.client as client:
+                await client.change_directory("profiles/LBmaster/Data/LBBanking/Players")
+                files = await client.list()
+                if f"{SK64}.json" in [file.name for file in files]:
+                    await self.get_file(f"_files/maps/{self.map}/atms/", f"{SK64}.json")
+                await client.change_directory("../../../../../")
 
-    def getAllPlayerATM(self, serverID):
-        self.ftp.cwd("profiles/LBmaster/Data/LBBanking/Players")
-        files = self.ftp.nlst()
-        for file in files:
-            if file.endswith(".json"):
-                self.getFile(f"_files/{serverID}/maps/{self.map}/atms/", file)
-        self.ftp.cwd("../../../../../")
+    async def get_omega_config(self):
+        async with self.pool.acquire() as conn:
+            async with conn.client as client:
+                await self.get_file(f"_files/support/", "omega.cfg")
 
-
-
-    def getOnePlayerATM(self, SK64, serverID=919677581824000070):
-        self.ftp.cwd("profiles/LBmaster/Data/LBBanking/Players")
-        files = self.ftp.nlst()
-        if f"{SK64}.json" in files:
-            self.getFile(f"_files/{serverID}/maps/{self.map}/atms/", f"{SK64}.json")
-        self.ftp.cwd("../../../../../")
-
-    def getOmegaConfig(self):
-        self.getFile(f"_files/support/", "omega.cfg")
-
-    def quit(self):
-        self.ftp.quit()
-
-
-
-if __name__ == "__main__":
-    ftp = FTPConnect("Namalsk", 
-        getenv("FTP_IP"), int(getenv("FTP_PORT_1")), 
-        getenv("FTP_USER"), getenv("FTP_PASSWORD")
-    ) #FIXME
-
-    ftp.getOmegaConfig()
+    async def quit(self):
+        await self.pool.close()

@@ -1,25 +1,21 @@
 from os import getenv
-import os
-import openai
+import aiohttp
 
-from disnake import ApplicationCommandInteraction, Embed, Intents, Message, Color
+from disnake import ApplicationCommandInteraction, Intents
 from disnake.ext.commands import when_mentioned
 from dotenv import load_dotenv
-from src.ftp.ftp_manager import FTPConnect
-from src.sql.sql_manager import DBConnect
-from src.dayz.atm_manager import display_player_atm, update_player_atm
-from src.discord.modals.registration import Registration, get_reg_role, get_role_permissions
+from src.discord.registration import EnterSteamID, verify_user
 from src.discord.guild_manager import set_announce_channel
 from src.discord.announcements import announce_status
 
-from src.discord.bot import MyClient
+from src.discord.bot import DiscordBot
 from src.discord.guild_manager import get_map_selections
 from src.discord.load_traderconfig import load_traderconfig_view
-from src.discord.load_types import load_types_view
 from src.discord.modals.remove_map_modal import RemoveMapModal
-from src.discord.render_traderconfig import render_traderconfig_view
-from src.discord.render_types import render_types_view
 from src.file_manager import create_new_map_dir, get_map_key, key_embed
+import aiohttp
+import aiomysql
+from datetime import datetime
 
 
 def main():
@@ -34,7 +30,7 @@ def main():
     prefix = when_mentioned
 
     # this is the discord bot object
-    bot = MyClient(command_prefix=prefix, intents=intents)
+    bot = DiscordBot(command_prefix=prefix, intents=intents)
     bot.openai_api_key = "api_key_here"
 
     # below are all of the commands for the bot
@@ -53,57 +49,16 @@ def main():
         """sets the bots announcement channel"""
         await interaction.response.defer(ephemeral=True)
         channel = await set_announce_channel(interaction.guild, int(channel_id))
-        await interaction.followup.send(channel)
-
-    @bot.slash_command(name="ask", description="Ask the OpenAI GPT a question")
-    async def ask_command(ctx: ApplicationCommandInteraction, question: str):
-        async with openai.ApiClient(api_key=bot.openai_api_key) as api_client:
-            response = api_client.completions.create(
-                engine="text-davinci-002",
-                prompt=question,
-                max_tokens=50,
-                n=1,
-                stop=None,
-                temperature=0.5,
-            )
-            answer = response.choices[0].text.strip()
-            await ctx.respond(answer)
-
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def clean_bot_chatter(interaction: ApplicationCommandInteraction, channel_id: str):
-        """deletes messages at given channel from the bot"""
-        channel = bot.get_channel(int(channel_id))
-        await interaction.send(f"deleting the messages I have sent in #{channel.name}")
-        
+        await interaction.followup.send(channel)        
 
 # =========================================================================================================
 # ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
 # =========================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
+    @bot.slash_command(dm_permission=False)
     async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
         """creates a new map directory"""
         create_new_map_dir(interaction.guild.id, mapname)
         await interaction.send(f"New Directory created for {mapname}")
-
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def render_types(interaction:ApplicationCommandInteraction) -> None:
-        """Render the types.xml for the selected map"""
-        options = get_map_selections(interaction.guild.id)
-        if options:
-            await interaction.send(view=render_types_view(options=options), ephemeral=True)
-        else:
-            await interaction.send("Server has no registered maps", ephemeral=True)
-
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def render_traderconfig(interaction: ApplicationCommandInteraction) -> None:
-        """Render the TraderConfig.txt for the selected map"""
-        options = get_map_selections(interaction.guild.id)
-        if options:
-            await interaction.send(view=render_traderconfig_view(options=options), ephemeral=True)
-        else:
-            await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=8, dm_permission=False)
@@ -117,19 +72,10 @@ def main():
 
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def load_types(interaction: ApplicationCommandInteraction) -> None:
-        """Render the TraderConfig.txt for the selected map"""
-        options = get_map_selections(interaction.guild.id)
-        if options:
-            await interaction.send(view=load_types_view(options=options), ephemeral=True)
-        else:
-            await interaction.send("Server has no registered maps", ephemeral=True)
-
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
     async def kill(interaction:ApplicationCommandInteraction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.author}")
+        await bot.pool.close()
         await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
 
@@ -147,79 +93,19 @@ def main():
         """Opens the map deletion Modal"""
         await interaction.response.send_modal(modal=RemoveMapModal())
 
-
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def debug_chat_input(interaction:ApplicationCommandInteraction) -> None:
-        """placeholder"""
-        await interaction.response.defer()
-        print(get_role_permissions(interaction))
-        await interaction.followup.send("Done.")
-
-
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def get_all_atms(interaction:ApplicationCommandInteraction) -> None:
-        await interaction.response.defer()
-        for folder_name in os.listdir("_files/919677581824000070/maps"):
-            print(folder_name)
-            ftp = FTPConnect(folder_name)
-            ftp.connect()
-            ftp.getAllPlayerATM(919677581824000070)
-            ftp.ftp.close()
-        await interaction.send("Done!")
-
-
-
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def give_money(interaction:ApplicationCommandInteraction, steamid64, map_num:int, amount:int) -> None:
-        """map_nums = Chernarus:0, Takistan:1, Namalsk:2, testServer:3"""
-        maps = ["Chernarus", "Takistan", "Namalsk", "TestServer"]
-        await interaction.response.defer()
-        try:
-            update_player_atm(maps[map_num], interaction.author.id, amount, SK64=steamid64)
-        except FileNotFoundError:
-            print(f"{steamid64} does not have an ATM on {maps[map_num]}")
-            embed = Embed(title="Error", description=f"{steamid64} does not have an ATM on {maps[map_num]}", color=Color.red())
-            await interaction.followup.send(embed=embed)
-            return -1
-
-        sql = DBConnect()
-        sql.select_DUID_from_registration(steamid64)
-        member_duid = sql.c.fetchone()[0]
-        embed: Embed
-        message: Message
-        embed, message = await display_player_atm(interaction, member_duid)
-
-        if amount >= 0:
-            amount_str = "+" + f"{amount:,} ₽"
-            embed.color = Color.green()
-        else:
-            amount_str = f"{amount:,} ₽"
-            embed.color = Color.red()
-
-        embed.add_field(
-            name=f"Cash given by: {interaction.author.display_name} on {maps[map_num]}", 
-            value=amount_str, 
-            inline=False)
-        await message.edit(embed=embed)
-
 # =========================================================================================================
 # @everyone COMMANDS --------------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(dm_permission=False)
     async def register(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
-        await interaction.response.send_modal(modal=Registration())
-
+        await interaction.response.send_modal(modal=EnterSteamID())
 
     # =====================================================================================================
     @bot.slash_command(default_member_permissions=576, dm_permission=False)
     async def atm(interaction:ApplicationCommandInteraction) -> None:
         """placeholder"""
-        await interaction.response.defer()
-        await display_player_atm(interaction, interaction.author.id)
+        pass
 
 
     # =====================================================================================================
