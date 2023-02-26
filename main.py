@@ -1,6 +1,6 @@
 from os import getenv
 
-from nextcord import Intents, SlashContext
+from nextcord import Intents
 from nextcord.ext.commands import when_mentioned, has_role
 from dotenv import load_dotenv
 
@@ -35,16 +35,16 @@ def main():
 # ADMIN DISCORD COMMANDS ----------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def set_status(interaction: SlashContext, status_code:int, map_name="ALL", message=None):
+    async def set_status(ctx, status_code:int, map_name="ALL", message=None):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
-        await announce_status(interaction, status_code, map_name, message)
+        await announce_status(ctx, status_code, map_name, message)
 
     @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def set_announcement_channel(interaction: SlashContext, channel_id: str):
+    async def set_announcement_channel(ctx, channel_id: str):
         """sets the bots announcement channel"""
-        await interaction.response.defer(ephemeral=True)
-        channel = await set_announce_channel(interaction.guild, int(channel_id))
-        await interaction.followup.send(channel)        
+        await ctx.response.defer(ephemeral=True)
+        channel = await set_announce_channel(ctx.guild, int(channel_id))
+        await ctx.followup.send(channel)        
 
 # =========================================================================================================
 # ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
@@ -59,22 +59,14 @@ def main():
 # @everyone COMMANDS --------------------------------------------------------------------------------------
 # =========================================================================================================
     @bot.slash_command(dm_permission=False)
-    async def register(interaction:SlashContext) -> None:
+    async def register(ctx) -> None:
         """placeholder"""
-        await interaction.response.send_modal(modal=EnterSteamID())
+        await ctx.response.send_modal(modal=EnterSteamID())
 
     # =====================================================================================================
     @has_role("Steam Linked")
     @bot.slash_command(dm_permission=False, hidden=True)
-    async def atm(interaction:SlashContext) -> None:
-        """placeholder"""
-        pass
-
-
-    # =====================================================================================================
-    @has_role("Steam Linked")
-    @bot.slash_command(dm_permission=False, hidden=True)
-    async def inventory(interaction:SlashContext) -> None:
+    async def atm(ctx) -> None:
         """placeholder"""
         pass
 
@@ -82,7 +74,16 @@ def main():
     # =====================================================================================================
     @has_role("Steam Linked")
     @bot.slash_command(dm_permission=False, hidden=True)
-    async def trade(interaction:SlashContext) -> None:
+    async def inventory(ctx) -> None:
+        print(type(ctx))
+        """placeholder"""
+        pass
+
+
+    # =====================================================================================================
+    @has_role("Steam Linked")
+    @bot.slash_command(dm_permission=False, hidden=True)
+    async def trade(ctx) -> None:
         """placeholder"""
         pass
 
