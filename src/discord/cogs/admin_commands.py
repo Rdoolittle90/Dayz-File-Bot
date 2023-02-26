@@ -21,11 +21,11 @@ class AdminCog(commands.Cog):
 
     # =====================================================================================================
     @nextcord.slash_command(default_member_permissions=8, dm_permission=False)
-    async def set_announcement_channel(ctx, channel_id: str):
+    async def set_announcement_channel(self, interaction: nextcord.Interaction, channel_id: str):
         """sets the bots announcement channel"""
-        await ctx.response.defer(ephemeral=True)
-        channel = await set_announce_channel(ctx.guild, int(channel_id))
-        await ctx.followup.send(channel)   
+        await interaction.response.defer(ephemeral=True)
+        channel = await set_announce_channel(interaction.guild, int(channel_id))
+        await interaction.followup.send(channel)   
         
     # =====================================================================================================
     @nextcord.slash_command(name="add_map", description="")
