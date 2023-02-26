@@ -125,20 +125,6 @@ def main():
 # =========================================================================================================
 # START THE BOT |=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
 # =========================================================================================================
-
-
-
-    @bot.event
-    async def on_command_error(ctx, error):
-        if isinstance(error, MissingRole):
-            await ctx.send(f"Error: {error}")
-            return
-        elif isinstance(error, CommandNotFound):
-            # Handle CommandNotFound error
-            return
-        # Handle other types of errors
-    
-
     bot.run(getenv("DISCORD_TOKEN"))
 
 

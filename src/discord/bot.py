@@ -1,5 +1,5 @@
 from disnake import Member
-from disnake.ext.commands import Bot
+from disnake.ext.commands import Bot, MissingRole, CommandNotFound
 from disnake.message import Message
 import logging
 from src.sql.sql_manager import DBConnect
@@ -90,3 +90,13 @@ class DiscordBot(Bot, DBConnect):
 
         """
         logging.info(f'{member.name} has left the server')
+
+    
+    async def on_command_error(ctx, error):
+        if isinstance(error, MissingRole):
+            await ctx.send(f"Error: {error}")
+            return
+        elif isinstance(error, CommandNotFound):
+            # Handle CommandNotFound error
+            return
+        # Handle other types of errors
