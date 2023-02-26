@@ -69,7 +69,7 @@ class DiscordBot(commands.Bot, DBConnect):
             (None)
 
         """
-        if message.author != self.user:
+        if message.user != self.user:
             await check_for_files(message)
 
     async def on_member_join(self, member: Member) -> None:

@@ -48,7 +48,7 @@ class AdminCog(commands.Cog):
     @nextcord.slash_command(dm_permission=False, name="kill", description="placeholder description 5")
     async def kill(self, interaction: nextcord.Interaction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
-        await interaction.send(f"Shutdown Command sent from {interaction.author}")
+        await interaction.send(f"Shutdown Command sent from {interaction.user}")
         await self.bot.db.close()
         await self.bot.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 

@@ -41,7 +41,7 @@ class EnterSteamID(Modal):
         steam_id = self.steam_id.value
 
         # Verify the user with the given Steam 64 ID and Discord User ID.
-        new_commit = await verify_user(self.bot, steam_id, interaction.author.id)
+        new_commit = await verify_user(self.bot, steam_id, interaction.user.id)
 
         # If the verification is successful, respond with a success message.
         if new_commit == 1:
