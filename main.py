@@ -102,7 +102,7 @@ def main():
     # =====================================================================================================
     @bot.slash_command(dm_permission=False)
     @has_role("Steam Linked")
-    async def atm(interaction:ApplicationCommandInteraction) -> None:
+    async def atm(interaction:ApplicationCommandInteraction, hidden=True) -> None:
         """placeholder"""
         pass
 
@@ -110,7 +110,7 @@ def main():
     # =====================================================================================================
     @bot.slash_command(dm_permission=False)
     @has_role("Steam Linked")
-    async def inventory(interaction:ApplicationCommandInteraction) -> None:
+    async def inventory(interaction:ApplicationCommandInteraction, hidden=True) -> None:
         """placeholder"""
         pass
 
@@ -118,7 +118,7 @@ def main():
     # =====================================================================================================
     @bot.slash_command(dm_permission=False)
     @has_role("Steam Linked")
-    async def trade(interaction:ApplicationCommandInteraction) -> None:
+    async def trade(interaction:ApplicationCommandInteraction, hidden=True) -> None:
         """placeholder"""
         pass
 
