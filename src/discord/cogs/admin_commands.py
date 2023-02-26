@@ -63,7 +63,7 @@ class AdminCog(commands.Cog):
     @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="remove_map", description="placeholder description 7")
     async def remove_map(self, interaction: nextcord.Interaction) -> None:
         """Opens the map deletion Modal"""
-        await interaction.response.send_modal(modal=RemoveMapModal(self.bot))
+        await interaction.response.send_modal(modal=RemoveMapModal())
 
 
 def setup(bot: commands.Bot):
