@@ -15,8 +15,8 @@ def main():
     bot.openai_api_key = "api_key_here"
 
     bot.load_extension("src.discord.cogs.admin_commands")
-    bot.load_extension("src/discord/cogs/registered_commands")
-    # bot.load_extension("src/discord/cogs/everyone_commands")
+    bot.load_extension("src.discord.cogs.registered_commands")
+    bot.load_extension("src.discord.cogs.everyone_commands")
 
 
     bot.run(getenv("DISCORD_TOKEN"))
