@@ -10,9 +10,11 @@ from json import load, dump
 
 async def initial_server_setup(guild: Guild):
     try:
-        await guild.create_role(name="Bot Manager", color=Color.darker_grey())
-    except:
-        pass
+        bot_manager_role = get(guild.roles, name='Bot Manager')
+        if bot_manager_role is None:
+            await guild.create_role(name="Bot Manager", color=Color.darker_grey())
+    except Forbidden:
+        print("Missing Permissions!")
 
 
 async def initial_cha_setup(guild: Guild):
