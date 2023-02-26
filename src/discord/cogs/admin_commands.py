@@ -14,7 +14,7 @@ class AdminCog(commands.Cog):
         print("Admin Cog Connected")
 
     # =====================================================================================================
-    @nextcord.slash_command(name="set_status", description="", default_permission=False)
+    @nextcord.slash_command(name="set_status", description="")
     async def set_status(self, interaction: nextcord.Interaction, status_code: int, map_name: str = "ALL", message: str = None):
         """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
         await announce_status(interaction, status_code, map_name, message)
@@ -35,7 +35,7 @@ class AdminCog(commands.Cog):
         await interaction.send(f"New Directory created for {mapname}")
 
     # =====================================================================================================
-    @nextcord.slash_command(name="load_traderconfig", description="", default_permission=False)
+    @nextcord.slash_command(name="load_traderconfig", description="")
     async def load_traderconfig(self, interaction: nextcord.Interaction) -> None:
         """Render the TraderConfig.txt for the selected map"""
         options = get_map_selections(interaction.guild_id)
@@ -45,7 +45,7 @@ class AdminCog(commands.Cog):
             await interaction.send("Server has no registered maps", ephemeral=True)
 
     # =====================================================================================================
-    @nextcord.slash_command(name="kill", description="", default_permission=False)
+    @nextcord.slash_command(name="kill", description="")
     async def kill(self, interaction: nextcord.Interaction) -> None:
         """Kill the bot 🗡️🤖 requires manual reboot"""
         await interaction.send(f"Shutdown Command sent from {interaction.author}")
@@ -53,14 +53,14 @@ class AdminCog(commands.Cog):
         await self.bot.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
     # =====================================================================================================
-    @nextcord.slash_command(name="get_key", description="", default_permission=False)
+    @nextcord.slash_command(name="get_key", description="")
     async def get_key(self, interaction: nextcord.Interaction, mapname: str) -> None:
         """Looks up the given maps passkey"""
         passkey = get_map_key(interaction.guild_id, mapname)["passkey"]
         await interaction.send(embed=key_embed(mapname, passkey))
 
     # =====================================================================================================
-    @nextcord.slash_command(name="remove_map", description="", default_permission=False)
+    @nextcord.slash_command(name="remove_map", description="")
     async def remove_map(self, interaction: nextcord.Interaction) -> None:
         """Opens the map deletion Modal"""
         await interaction.channel.send("Select a map to remove:", view=RemoveMapModal())
