@@ -33,94 +33,97 @@ def main():
 
     # below are all of the commands for the bot
     # default_member_permissions=8 is the same as saying only available to admins
-
+    try:
 # =========================================================================================================
 # ADMIN DISCORD COMMANDS ----------------------------------------------------------------------------------
 # =========================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def set_status(interaction: ApplicationCommandInteraction, status_code:int, map_name="ALL", message=None):
-        """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
-        await announce_status(interaction, status_code, map_name, message)
+        @bot.slash_command(default_member_permissions=8, dm_permission=False)
+        async def set_status(interaction: ApplicationCommandInteraction, status_code:int, map_name="ALL", message=None):
+            """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
+            await announce_status(interaction, status_code, map_name, message)
 
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: str):
-        """sets the bots announcement channel"""
-        await interaction.response.defer(ephemeral=True)
-        channel = await set_announce_channel(interaction.guild, int(channel_id))
-        await interaction.followup.send(channel)        
+        @bot.slash_command(default_member_permissions=8, dm_permission=False)
+        async def set_announcement_channel(interaction: ApplicationCommandInteraction, channel_id: str):
+            """sets the bots announcement channel"""
+            await interaction.response.defer(ephemeral=True)
+            channel = await set_announce_channel(interaction.guild, int(channel_id))
+            await interaction.followup.send(channel)        
 
 # =========================================================================================================
 # ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
 # =========================================================================================================
-    @bot.slash_command(dm_permission=False)
-    async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
-        """creates a new map directory"""
-        create_new_map_dir(interaction.guild.id, mapname)
-        await interaction.send(f"New Directory created for {mapname}")
+        @bot.slash_command(dm_permission=False)
+        async def add_map(interaction:ApplicationCommandInteraction, mapname: str) -> None:
+            """creates a new map directory"""
+            create_new_map_dir(interaction.guild.id, mapname)
+            await interaction.send(f"New Directory created for {mapname}")
 
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def load_traderconfig(interaction: ApplicationCommandInteraction) -> None:
-        """Render the TraderConfig.txt for the selected map"""
-        options = get_map_selections(interaction.guild.id)
-        if options:
-            await interaction.send(view=load_traderconfig_view(options=options), ephemeral=True)
-        else:
-            await interaction.send("Server has no registered maps", ephemeral=True)
+        # =====================================================================================================
+        @bot.slash_command(default_member_permissions=8, dm_permission=False)
+        async def load_traderconfig(interaction: ApplicationCommandInteraction) -> None:
+            """Render the TraderConfig.txt for the selected map"""
+            options = get_map_selections(interaction.guild.id)
+            if options:
+                await interaction.send(view=load_traderconfig_view(options=options), ephemeral=True)
+            else:
+                await interaction.send("Server has no registered maps", ephemeral=True)
 
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def kill(interaction:ApplicationCommandInteraction) -> None:
-        """Kill the bot 🗡️🤖 requires manual reboot"""
-        await interaction.send(f"Shutdown Command sent from {interaction.author}")
-        await bot.pool.close()
-        await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
-
-
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def get_key(interaction:ApplicationCommandInteraction, mapname: str) -> None:
-        """Looks up the given maps passkey"""
-        passkey = get_map_key(interaction.guild.id, mapname)["passkey"]
-        await interaction.send(embed=key_embed(mapname, passkey))
+        # =====================================================================================================
+        @bot.slash_command(default_member_permissions=8, dm_permission=False)
+        async def kill(interaction:ApplicationCommandInteraction) -> None:
+            """Kill the bot 🗡️🤖 requires manual reboot"""
+            await interaction.send(f"Shutdown Command sent from {interaction.author}")
+            await bot.pool.close()
+            await interaction.client.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
 
-    # =====================================================================================================
-    @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    async def remove_map(interaction:ApplicationCommandInteraction) -> None:
-        """Opens the map deletion Modal"""
-        await interaction.response.send_modal(modal=RemoveMapModal())
+        # =====================================================================================================
+        @bot.slash_command(default_member_permissions=8, dm_permission=False)
+        async def get_key(interaction:ApplicationCommandInteraction, mapname: str) -> None:
+            """Looks up the given maps passkey"""
+            passkey = get_map_key(interaction.guild.id, mapname)["passkey"]
+            await interaction.send(embed=key_embed(mapname, passkey))
+
+
+        # =====================================================================================================
+        @bot.slash_command(default_member_permissions=8, dm_permission=False)
+        async def remove_map(interaction:ApplicationCommandInteraction) -> None:
+            """Opens the map deletion Modal"""
+            await interaction.response.send_modal(modal=RemoveMapModal())
 
 # =========================================================================================================
 # @everyone COMMANDS --------------------------------------------------------------------------------------
 # =========================================================================================================
-    @bot.slash_command(dm_permission=False)
-    async def register(interaction:ApplicationCommandInteraction) -> None:
-        """placeholder"""
-        await interaction.response.send_modal(modal=EnterSteamID())
+        @bot.slash_command(dm_permission=False)
+        async def register(interaction:ApplicationCommandInteraction) -> None:
+            """placeholder"""
+            await interaction.response.send_modal(modal=EnterSteamID())
 
-    # =====================================================================================================
-    @has_role("Steam Linked")
-    @bot.slash_command(dm_permission=False, hidden=True)
-    async def atm(interaction:ApplicationCommandInteraction) -> None:
-        """placeholder"""
-        pass
-
-
-    # =====================================================================================================
-    @has_role("Steam Linked")
-    @bot.slash_command(dm_permission=False, hidden=True)
-    async def inventory(interaction:ApplicationCommandInteraction) -> None:
-        """placeholder"""
-        pass
+        # =====================================================================================================
+        @has_role("Steam Linked")
+        @bot.slash_command(dm_permission=False, hidden=True)
+        async def atm(interaction:ApplicationCommandInteraction) -> None:
+            """placeholder"""
+            pass
 
 
-    # =====================================================================================================
-    @has_role("Steam Linked")
-    @bot.slash_command(dm_permission=False, hidden=True)
-    async def trade(interaction:ApplicationCommandInteraction) -> None:
-        """placeholder"""
-        pass
+        # =====================================================================================================
+        @has_role("Steam Linked")
+        @bot.slash_command(dm_permission=False, hidden=True)
+        async def inventory(interaction:ApplicationCommandInteraction) -> None:
+            """placeholder"""
+            pass
+
+
+        # =====================================================================================================
+        @has_role("Steam Linked")
+        @bot.slash_command(dm_permission=False, hidden=True)
+        async def trade(interaction:ApplicationCommandInteraction) -> None:
+            """placeholder"""
+            pass
+
+    except MissingRole as missing_roles_error:
+        print(missing_roles_error)
 
 # =========================================================================================================
 # START THE BOT |=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
