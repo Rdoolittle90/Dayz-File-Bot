@@ -11,6 +11,7 @@ from src.file_manager import create_new_map_dir, get_map_key, key_embed
 class AdminCog(Cog):
     def __init__(self, bot):
         self.bot = bot
+        print("Admin Cog Connected")
 
     @command(default_member_permissions=8, dm_permission=False)
     async def set_status(self, ctx, status_code:int, map_name="ALL", message=None):
