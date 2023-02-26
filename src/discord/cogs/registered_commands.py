@@ -1,6 +1,6 @@
 from nextcord.ext import commands
 import nextcord
-from discord.modals.registration import EnterSteamID
+from src.discord.modals.registration import EnterSteamID
 
 
 class RegisteredCog(commands.Cog):
