@@ -16,8 +16,8 @@ class EnterSteamID(Modal):
         """
         Initializes the EnterSteamID modal.
         """
-        components = [
-            TextInput(
+        super().__init__(title="Registration Form", timeout=(5 * 60))
+        self.steam_id = TextInput(
                 label="Steam 64 ID",
                 placeholder="00000000000000000",
                 custom_id="map",
@@ -25,8 +25,8 @@ class EnterSteamID(Modal):
                 max_length=17,
                 required=True
             )
-        ]
-        super().__init__(title="Registration Form", components=components)
+        self.add_item(self.steam_id)
+
 
     async def callback(self, interaction: Interaction) -> None:
         """
@@ -36,7 +36,7 @@ class EnterSteamID(Modal):
             interaction (ModalInteraction): The user's interaction with the modal.
         """
         await interaction.response.defer(ephemeral=False)
-        steam_id = interaction.data["components"][0]["components"][0]["value"]
+        steam_id = self.steam_id.value
 
         # Verify the user with the given Steam 64 ID and Discord User ID.
         new_commit = await verify_user(interaction.bot, steam_id, interaction.author.id)
