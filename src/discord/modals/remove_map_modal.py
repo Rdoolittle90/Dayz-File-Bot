@@ -1,14 +1,14 @@
-from nextcord import Color, Embed, Interaction
-from nextcord.ui import Modal, TextInput
+from nextcord import Color, Embed, Interaction, ui
+# Modal, TextInput, View
 
 from src.file_manager import get_map_key, remove_embed, remove_map_dir
 
 
 
-class RemoveMapModal(Modal):
+class RemoveMapModal(ui.Modal):
     def __init__(self) -> None:
         super().__init__(title="Select an Option Catagory")
-        self.map_name = TextInput(
+        self.map_name = ui.TextInput(
             label="Map Name",
             placeholder="Namalsk",
             custom_id=f"map",
@@ -18,7 +18,7 @@ class RemoveMapModal(Modal):
         )
         self.add_item(self.map_name)
 
-        self.map_key = TextInput(
+        self.map_key = ui.TextInput(
             label="Enter passkey",
             placeholder="use /get_key",
             custom_id=f"passkey",
@@ -43,3 +43,9 @@ class RemoveMapModal(Modal):
                 color=Color.red()
             )
             await interaction.followup.send(embed=failed_deletion)
+
+class RemoveMapDropdownView(ui.View):
+    def __init__(self):
+        super().__init__()
+        # Adds the dropdown to view object.
+        self.add_item(RemoveMapModal())
