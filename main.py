@@ -18,68 +18,11 @@ def main():
     bot = DiscordBot()
     bot.openai_api_key = "api_key_here"
 
-    # below are all of the commands for the bot
-    # default_member_permissions=8 is the same as saying only available to admins
-
-# =========================================================================================================
-# ADMIN DISCORD COMMANDS ----------------------------------------------------------------------------------
-# =========================================================================================================
-    # @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    # async def set_status(ctx, status_code:int, map_name="ALL", message=None):
-    #     """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
-    #     await announce_status(ctx, status_code, map_name, message)
-
-    # @bot.slash_command(default_member_permissions=8, dm_permission=False)
-    # async def set_announcement_channel(ctx, channel_id: str):
-    #     """sets the bots announcement channel"""
-    #     await ctx.response.defer(ephemeral=True)
-    #     channel = await set_announce_channel(ctx.guild, int(channel_id))
-    #     await ctx.followup.send(channel)        
-
-# =========================================================================================================
-# ADMIN FILE COMMANDS -------------------------------------------------------------------------------------
-# =========================================================================================================
-
     bot.load_extension("src.discord.cogs.admin_commands")
+    bot.load_extension("src/discord/cogs/registered_commands")
     # bot.load_extension("src/discord/cogs/everyone_commands")
-    # bot.load_extension("src/discord/cogs/registered_commands")
 
 
-# =========================================================================================================
-# @everyone COMMANDS --------------------------------------------------------------------------------------
-# =========================================================================================================
-    # @bot.slash_command(dm_permission=False)
-    # async def register(ctx) -> None:
-    #     """placeholder"""
-    #     await ctx.response.send_modal(modal=EnterSteamID())
-
-    # # =====================================================================================================
-    # @has_role("Steam Linked")
-    # @bot.slash_command(dm_permission=False, hidden=True)
-    # async def atm(ctx) -> None:
-    #     """placeholder"""
-    #     pass
-
-
-    # # =====================================================================================================
-    # @has_role("Steam Linked")
-    # @bot.slash_command(dm_permission=False, hidden=True)
-    # async def inventory(ctx) -> None:
-    #     print(type(ctx))
-    #     """placeholder"""
-    #     pass
-
-
-    # # =====================================================================================================
-    # @has_role("Steam Linked")
-    # @bot.slash_command(dm_permission=False, hidden=True)
-    # async def trade(ctx) -> None:
-    #     """placeholder"""
-    #     pass
-
-# =========================================================================================================
-# START THE BOT |=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
-# =========================================================================================================
     bot.run(getenv("DISCORD_TOKEN"))
 
 
