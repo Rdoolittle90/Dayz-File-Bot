@@ -12,11 +12,13 @@ class EnterSteamID(Modal):
     """
     A modal for entering a Steam 64 ID.
     """
-    def __init__(self) -> None:
+    def __init__(self, bot: DiscordBot) -> None:
         """
         Initializes the EnterSteamID modal.
         """
         super().__init__(title="Registration Form", timeout=(5 * 60))
+        self.bot = bot
+
         self.steam_id = TextInput(
                 label="Steam 64 ID",
                 placeholder="00000000000000000",
@@ -39,7 +41,7 @@ class EnterSteamID(Modal):
         steam_id = self.steam_id.value
 
         # Verify the user with the given Steam 64 ID and Discord User ID.
-        new_commit = await verify_user(interaction.bot, steam_id, interaction.author.id)
+        new_commit = await verify_user(self.bot, steam_id, interaction.author.id)
 
         # If the verification is successful, respond with a success message.
         if new_commit == 1:
