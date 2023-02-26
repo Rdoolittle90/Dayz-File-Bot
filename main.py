@@ -1,11 +1,7 @@
 from os import getenv
-from nextcord.ext.commands import has_role
 from dotenv import load_dotenv
 
-from src.discord.announcements import announce_status
 from src.discord.bot import DiscordBot
-from src.discord.guild_manager import set_announce_channel
-from src.discord.registration import EnterSteamID
 
 
 
@@ -37,10 +33,6 @@ def display_title():
 """
     print(app_display)
 
-
-
-# =========================================================================================================
-# =========================================================================================================
-# =========================================================================================================
+    
 if __name__ == "__main__":   
     main()
