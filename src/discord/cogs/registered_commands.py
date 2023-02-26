@@ -6,7 +6,7 @@ from src.discord.registration import EnterSteamID
 class RegisteredCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        print("Admin Cog Connected")
+        print("Registered Cog Connected")
 
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="register", description="placeholder description 1")
