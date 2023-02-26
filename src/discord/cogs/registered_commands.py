@@ -10,15 +10,15 @@ class RegisteredCog(commands.Cog):
 
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="register", description="placeholder description 1")
-    async def register(ctx) -> None:
+    async def register(self, interaction: nextcord.Interction) -> None:
         """placeholder"""
-        await ctx.response.send_modal(modal=EnterSteamID())
+        await interaction.response.send_modal(modal=EnterSteamID())
 
 
     # =====================================================================================================
     @commands.has_role("Steam Linked")
     @nextcord.slash_command(dm_permission=False, name="atm", description="placeholder description 1")
-    async def atm(ctx) -> None:
+    async def atm(interaction: nextcord.Interction) -> None:
         """placeholder"""
         pass
 
@@ -26,8 +26,7 @@ class RegisteredCog(commands.Cog):
     # =====================================================================================================
     @commands.has_role("Steam Linked")
     @nextcord.slash_command(dm_permission=False, name="inventory", description="placeholder description 1")
-    async def inventory(ctx) -> None:
-        print(type(ctx))
+    async def inventory(interaction: nextcord.Interction) -> None:
         """placeholder"""
         pass
 
@@ -35,7 +34,7 @@ class RegisteredCog(commands.Cog):
     # =====================================================================================================
     @commands.has_role("Steam Linked")
     @nextcord.slash_command(dm_permission=False, name="trade", description="placeholder description 1")
-    async def trade(ctx) -> None:
+    async def trade(interaction: nextcord.Interction) -> None:
         """placeholder"""
         pass
 
