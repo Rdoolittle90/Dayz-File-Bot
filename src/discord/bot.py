@@ -63,9 +63,6 @@ class DiscordBot(commands.Bot, DBConnect):
             await initial_server_setup(guild)
             create_new_server_dir()
         await self.sql_connect()
-        for map_name in ["Chernarus", "Takistan", "Namalsk", "TestServer"]:
-            if map_name in os.listdir("_files/maps"):
-                await self.ftp.init_ftp(map_name)
 
     async def on_message(self, message: Message) -> None:
         """
@@ -120,16 +117,8 @@ class DiscordBot(commands.Bot, DBConnect):
     async def my_background_task(self):
         await self.wait_until_ready()
         channel = self.get_channel(1045953730824130590)  # channel ID goes here
-        print("Warmup loop Begin")
-        while not self.ftp.is_ready:
-            if len(self.ftp.clients) < 4:
-                await asyncio.sleep(5)  # task runs every 5 seconds
-            else:
-                self.ftp.is_ready = True
-                print(self.ftp.clients)
-        print("Functoin Loop Begin")
+
+        print("Repeat Loop Begin")
         while not self.is_closed():
-            for map_name in ["Chernarus", "Takistan", "Namalsk", "TestServer"]:
-                print(map_name)
-                await self.ftp.get_all_player_atm(map_name)
+            await self.ftp.get_all_player_atm("Chernarus")
             await asyncio.sleep(60 * 5)  # task runs every 60 seconds

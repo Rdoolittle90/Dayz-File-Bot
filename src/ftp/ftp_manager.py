@@ -25,41 +25,20 @@ class FTPConnect:
     """
     def __init__(self):
         """Initializes an FTPConnect object with default values for its attributes."""
-        self.ports_listing = port_by_name
-        self.is_ready = False
         self.host: str = getenv("FTP_HOST")
         self.user: str = getenv("FTP_USER")
         self.passwd: str = getenv("FTP_PASSWORD")
-        self.clients: dict[aioftp.Client] = {}
-
-    async def init_ftp(self, map_name: str) -> aioftp.Client:
-        """Initializes the connection pool for the FTP server.
-
-        Args:
-            map_name (str): The name of the map to connect to on the FTP server.
-
-        Raises:
-            aioftp.errors.ClientError: If the connection pool could not be created.
-        """
-        client: aioftp.Client = aioftp.Client()
-        await client.connect(self.host, port_by_name[map_name])
-        await client.login(self.user, self.passwd)
-        self.clients[map_name] = client
-        print(f"FTP Connection made to {self.host}:{port_by_name[map_name]} for {map_name}")
-
-
-
+        
 
     async def get_all_player_atm(self, map_name):
-        current_client: aioftp.Client = self.clients[map_name]
-        print(await current_client.get_current_directory())
-        await current_client.change_directory("/profiles/LBmaster/Data/LBBanking/players")
-        stats = await current_client.list()
-        print(stats)
-
-        # async with current_client.download_stream("/profiles/LBmaster/Data/LBBanking/Players") as stream:
-        #     async for block in stream.iter_by_block():
-        #         pass
+        async with aioftp.Client.context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
+            print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
+            try:
+                async for path, info in client.list("/profiles/LBmaster/Data/LBBanking/players"):
+                    if info["type"] == "file" and path.suffix == ".json":
+                        print(path)
+            except aioftp.StatusCodeError as e:
+                print(f"Error: {e.message}")
 
     async def get_one_player_atm(self, map_name, SK64):
         pass
