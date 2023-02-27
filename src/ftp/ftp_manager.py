@@ -74,7 +74,7 @@ class FTPConnect:
 
 
     async def get_all_player_atm(self, map_name):
-        async with aioftp.Client(parsers=self.my_parse_list_line).context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
+        async with aioftp.Client(parse_list_line_custom=self.my_parse_list_line).context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
             print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
             try:
                 async for path, info in client.list("/"):
