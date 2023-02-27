@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import aioftp
@@ -29,9 +30,51 @@ class FTPConnect:
         self.user: str = getenv("FTP_USER")
         self.passwd: str = getenv("FTP_PASSWORD")
         
+    def my_parse_list_line(line):
+        """
+        A custom parsing function to handle the server response when the MLSD/MLST commands are not supported.
+
+        This function is intended to parse the server response of a 'LIST' command.
+        """
+
+        # Replace the month abbreviation with its number
+        months = {
+            "Jan": "01",
+            "Feb": "02",
+            "Mar": "03",
+            "Apr": "04",
+            "May": "05",
+            "Jun": "06",
+            "Jul": "07",
+            "Aug": "08",
+            "Sep": "09",
+            "Oct": "10",
+            "Nov": "11",
+            "Dec": "12",
+        }
+        line = line.split()
+        if len(line) < 6:
+            raise ValueError("Invalid format")
+        if line[0].startswith("d"):
+            line_type = "dir"
+        else:
+            line_type = "file"
+        year = datetime.now().strftime("%Y")
+        if ":" in line[7]:
+            year = datetime.now().strftime("%Y")
+            line[7] = f"{line[6]} {line[7]}"
+        try:
+            line[6] = months[line[6][:3]] + line[6][3:]
+            dt = datetime.strptime(f"{line[6]} {year} {line[7]}", "%m %Y %I:%M %p")
+        except ValueError:
+            raise ValueError("Invalid format")
+        size = int(line[4])
+        path = " ".join(line[8:])
+        return path, {"type": line_type, "size": size, "modify": dt}
+
 
     async def get_all_player_atm(self, map_name):
-        async with aioftp.Client.context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
+        async with aioftp.Client.context(self.host, port_by_name[map_name], self.user, self.passwd, parsers=self.my_parse_list_line) as client:
             print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
             try:
                 async for path, info in client.list("/"):
