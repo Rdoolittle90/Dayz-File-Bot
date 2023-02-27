@@ -33,13 +33,13 @@ class FTPConnect:
     async def get_all_player_atm(self, map_name):
         async with aioftp.Client.context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
             print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
-            async with aioftp.setlocale("C"):
-                try:
-                    async for path, info in client.list("/"):
-                        if info["type"] == "file" and path.suffix == ".json":
-                            print(path)
-                except aioftp.StatusCodeError as e:
-                    print(f"Error: {e.message}")
+            try:
+                async for path, info in client.list("/"):
+                    if info["type"] == "file" and path.suffix == ".json":
+                        print(path)
+            except aioftp.StatusCodeError as e:
+                print(f"Error: {e.message}")
+
 
     async def get_one_player_atm(self, map_name, SK64):
         pass
