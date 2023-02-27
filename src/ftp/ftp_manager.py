@@ -35,7 +35,7 @@ class FTPConnect:
             print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
             async with aioftp.setlocale("C"):
                 try:
-                    async for path, info in client.list("profiles/LBmaster/Data/LBBanking/players/"):
+                    async for path, info in client.list("/"):
                         if info["type"] == "file" and path.suffix == ".json":
                             print(path)
                 except aioftp.StatusCodeError as e:
