@@ -41,8 +41,7 @@ def create_new_server_dir() -> None:
         os.makedirs(directory, exist_ok=True)
     settings_file = "_files/support/settings.json"
     if not os.path.exists(settings_file):
-        shutil.copyfile("src/discord/template_files/settings.json", settings_file)
-    print("\t\tDirectories Created.")
+        shutil.copyfile("src/template_files/settings.json", settings_file)
 
 # =========================================================================================================
 def create_new_map_dir(map_name) -> bool:
@@ -54,14 +53,10 @@ def create_new_map_dir(map_name) -> bool:
         }
 
     if map_name not in os.listdir(f"_files/maps"):
-        os.makedirs(f"_files/maps/{map_name}")
-        os.makedirs(f"_files/maps/{map_name}/inputs")
-        os.makedirs(f"_files/maps/{map_name}/outputs")
-        os.makedirs(f"_files/maps/{map_name}/atms")
-        os.makedirs(f"_files/maps/{map_name}/backups")
+        for dir_name in ["", "inputs", "outputs", "atms", "backups"]:
+            os.makedirs(f"_files/maps/{map_name}/{dir_name}", exist_ok=True)
         with open(f"_files/maps/{map_name}/passkey.json", "w") as json_out:
             json.dump(passkey, json_out, indent=4)
-
 
         return True
     else:

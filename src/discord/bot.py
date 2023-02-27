@@ -1,10 +1,15 @@
+import asyncio
 import logging
-from nextcord import Member, Intents, Message
+import os
+
+from nextcord import Intents, Member, Message
 from nextcord.ext import commands
 
+from src.ftp.ftp_manager import FTPConnect
 from src.discord.guild_manager import check_for_files, initial_cha_setup, initial_server_setup
 from src.file_manager import create_new_server_dir, initial_dir_setup
 from src.sql.sql_manager import DBConnect
+
 
 class DiscordBot(commands.Bot, DBConnect):
     """
@@ -33,7 +38,11 @@ class DiscordBot(commands.Bot, DBConnect):
         self.add_listener(self.on_member_join)
         self.add_listener(self.on_member_remove)
         self.add_listener(self.on_message)
-        
+        self.ftp = FTPConnect()
+        # create the background task and run it in the background
+        self.bg_task = self.loop.create_task(self.my_background_task())
+
+
     async def on_ready(self) -> None:
         """
         Event handler for the `on_ready` event.
@@ -54,6 +63,9 @@ class DiscordBot(commands.Bot, DBConnect):
             await initial_server_setup(guild)
             create_new_server_dir()
         await self.sql_connect()
+        for map_name in ["Chernarus", "Takistan", "Namalsk", "TestServer"]:
+            if map_name in os.listdir("_files/maps"):
+                await self.ftp.init_ftp(map_name)
 
     async def on_message(self, message: Message) -> None:
         """
@@ -87,6 +99,7 @@ class DiscordBot(commands.Bot, DBConnect):
         """
         logging.info(f'{member.name} has joined the server')
 
+
     async def on_member_remove(self, member: Member) -> None:
         """
         Event handler for the `on_member_remove` event.
@@ -102,10 +115,21 @@ class DiscordBot(commands.Bot, DBConnect):
         """
         logging.info(f'{member.name} has left the server')
 
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.MissingRole):
-            await ctx.send(f"Error: {error}")
-        elif isinstance(error, commands.CommandNotFound):
-            # Handle CommandNotFound error
-            pass
-        # Handle other types of errors
+
+
+    async def my_background_task(self):
+        await self.wait_until_ready()
+        channel = self.get_channel(1045953730824130590)  # channel ID goes here
+        print("Warmup loop Begin")
+        while not self.ftp.is_ready:
+            if len(self.ftp.clients) < 4:
+                await asyncio.sleep(5)  # task runs every 5 seconds
+            else:
+                self.ftp.is_ready = True
+                print(self.ftp.clients)
+        print("Functoin Loop Begin")
+        while not self.is_closed():
+            for map_name in ["Chernarus", "Takistan", "Namalsk", "TestServer"]:
+                print(map_name)
+                await self.ftp.get_all_player_atm(map_name)
+            await asyncio.sleep(60 * 5)  # task runs every 60 seconds

@@ -1,7 +1,7 @@
 import datetime
 import os
 
-from disnake import Color, Embed, Message
+from nextcord import Colour, Embed, Message
 
 from src.sql.sql_manager import DBConnect
 from src.dayz.clean_trader_file import open_config, parse_config
@@ -17,7 +17,7 @@ class TraderConfigManager(DBConnect):
             if idx % 25 == 0:     
                 self.commit()
                 est_perc = f"{round((idx / len(items)) * 100, 2)}%"
-                embed = Embed(title="loading TraderConfig.txt to db", description="This will take some time.", color=Color.yellow())
+                embed = Embed(title="loading TraderConfig.txt to db", description="This will take some time.", color=Colour.yellow())
                 embed.add_field(name=map_name, value=est_perc)
                 await message.edit(embed=embed)
         self.commit()
@@ -64,7 +64,7 @@ class TraderConfigManager(DBConnect):
 
             est_perc = f"0.0%"  # embed
             for trader in trader_list:
-                embed = Embed(title="Rendering TraderConfig.txt", description="This will a little bit of time", color=Color.yellow(), timestamp=start_time)
+                embed = Embed(title="Rendering TraderConfig.txt", description="This will a little bit of time", color=Colour.yellow(), timestamp=start_time)
                 embed.add_field(name=map_name, value=est_perc, inline=False)  # embed
 
                 fout.write(f"<Trader> {trader}\n")
@@ -106,7 +106,7 @@ class TraderConfigManager(DBConnect):
             seconds_in_day = 24 * 60 * 60
             ex_time = divmod(deltatime.days * seconds_in_day + deltatime.seconds, 60)
 
-            embed = Embed(title="Rendering TraderConfig.txt", description=f"This took {ex_time[0]} minutes and {ex_time[1]} seconds", color=Color.green(), timestamp=start_time)
+            embed = Embed(title="Rendering TraderConfig.txt", description=f"This took {ex_time[0]} minutes and {ex_time[1]} seconds", color=Colour.green(), timestamp=start_time)
             embed.add_field(name=map_name, value="Complete!", inline=True)
             embed.add_field(name="Items in file", value=stats[1], inline=True)
 
