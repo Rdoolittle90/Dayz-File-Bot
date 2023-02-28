@@ -5,6 +5,8 @@ from twisted.internet import defer, reactor, protocol
 from twisted.python.filepath import FilePath
 from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
 
+from src.discord.bot import DiscordBot
+
 
 # Maps the name of a map to an FTP path
 ftp_port_by_name: Dict[str, int] = {
@@ -30,7 +32,7 @@ class FTPConnect:
         self.passwd: str = os.getenv("FTP_PASSWORD")
 
     @defer.inlineCallbacks
-    def download_all_atm_json_files(self, map_name: str):
+    def download_all_atm_json_files(self, bot: DiscordBot, map_name: str):
         """
         Downloads all JSON files in the /profiles/LBmaster/Data/LBBanking/Players directory on the FTP server
         to the local _files/maps/atms directory.
@@ -40,7 +42,7 @@ class FTPConnect:
         """
         print(f"Attempting to connect to {map_name}")
         # Connect to the FTP server
-        client = yield protocol.ClientCreator(reactor, FTPClient).connectTCP(self.host, ftp_port_by_name[map_name])
+        client = yield protocol.ClientCreator(bot.loop, FTPClient).connectTCP(self.host, ftp_port_by_name[map_name])
         yield client.login(self.user, self.passwd)
         print(f"Connected to {map_name}")
         # Change to the correct directory
