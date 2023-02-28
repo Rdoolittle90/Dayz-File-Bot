@@ -1,5 +1,6 @@
 from nextcord.ext import commands
 import nextcord
+from src.discord.bot import DiscordBot
 
 from src.discord.announcements import announce_status
 from src.discord.guild_manager import get_map_selections, set_announce_channel
@@ -9,61 +10,60 @@ from src.file_manager import create_new_map_dir, get_map_key, key_embed
 
 
 class AdminCog(commands.Cog):
+    # =====================================================================================================
     def __init__(self, bot):
-        self.bot = bot
+        self.bot: DiscordBot = bot
         print("Admin Cog Connected")
 
+
     # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_status", description="placeholder description 1")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_status", description="Set the status of the server")
     async def set_status(self, interaction: nextcord.Interaction, status_code: int, map_name: str = "ALL", message: str = None):
-        """status_codes: 0: "OFFLINE", 1: "ONLINE", 2: "RESTARTING" """
+        """Set the status of the server to either offline, online, or restarting."""
         await announce_status(interaction, status_code, map_name, message)
 
-    # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_announcement_channel", description="placeholder description 2")
-    async def set_announcement_channel(self, interaction: nextcord.Interaction, channel_id: str):
-        """sets the bots announcement channel"""
-        await interaction.response.defer(ephemeral=True)
-        channel = await set_announce_channel(interaction.guild, int(channel_id))
-        await interaction.followup.send(channel)   
-        
-    # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="add_map", description="placeholder description 3")
-    async def add_map(self, interaction: nextcord.Interaction, mapname: str) -> None:
-        """creates a new map directory"""
-        create_new_map_dir(mapname)
-        await interaction.send(f"New Directory created for {mapname}")
 
     # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="load_traderconfig", description="placeholder description 4")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_announcement_channel", description="Set the bot's announcement channel")
+    async def set_announcement_channel(self, interaction: nextcord.Interaction, channel_id: str):
+        """Sets the bot's announcement channel to the given channel ID."""
+        await interaction.response.defer(ephemeral=True)
+        channel = await set_announce_channel(interaction.guild, int(channel_id))
+        await interaction.followup.send(channel)
+
+
+    # =====================================================================================================
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="load_traderconfig", description="Render the TraderConfig.txt for the selected map")
     async def load_traderconfig(self, interaction: nextcord.Interaction) -> None:
-        """Render the TraderConfig.txt for the selected map"""
+        """Render the TraderConfig.txt file for the selected map."""
         options = get_map_selections()
         if options:
             await interaction.send(view=load_traderconfig_view(options=options), ephemeral=True)
         else:
             await interaction.send("Server has no registered maps", ephemeral=True)
 
-    # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="kill", description="placeholder description 5")
-    async def kill(self, interaction: nextcord.Interaction) -> None:
-        """Kill the bot 🗡️🤖 requires manual reboot"""
-        await interaction.send(f"Shutdown Command sent from {interaction.user}")
-        await self.bot.db.close()
-        await self.bot.close()  # Throws a RuntimeError noisey but seems to have no ill effect   #FIXME
 
     # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="get_key", description="placeholder description 6")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="add_map", description="Create a new map directory")
+    async def add_map(self, interaction: nextcord.Interaction, mapname: str) -> None:
+        """Create a new directory for the given map name."""
+        create_new_map_dir(mapname)
+        await interaction.send(f"New directory created for {mapname}")
+
+
+    # =====================================================================================================
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="remove_map", description="Open the map deletion modal")
+    async def remove_map(self, interaction: nextcord.Interaction) -> None:
+        """Open the map deletion modal."""
+        await interaction.response.send_modal(modal=RemoveMapModal())
+
+
+    # =====================================================================================================
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="get_key", description="Look up the given map's passkey")
     async def get_key(self, interaction: nextcord.Interaction, mapname: str) -> None:
-        """Looks up the given maps passkey"""
+        """Look up the passkey for the given map name."""
         passkey = get_map_key(mapname)["passkey"]
         await interaction.send(embed=key_embed(mapname, passkey))
-
-    # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="remove_map", description="placeholder description 7")
-    async def remove_map(self, interaction: nextcord.Interaction) -> None:
-        """Opens the map deletion Modal"""
-        await interaction.response.send_modal(modal=RemoveMapModal())
 
 
 def setup(bot: commands.Bot):
