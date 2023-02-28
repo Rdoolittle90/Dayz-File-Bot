@@ -43,7 +43,7 @@ async def callback(self, interaction: Interaction) -> None:
 
     # Verify the user with the given Steam 64 ID and Discord User ID.
     new_commit = await verify_user(self.bot, steam_id, interaction.user.id)
-
+    print(new_commit)
     # If the verification is successful, respond with a success message.
     if new_commit == 1:
         embed = Embed(title="Registration Successful", color=0x00ff00)
