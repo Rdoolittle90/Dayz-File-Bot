@@ -31,34 +31,15 @@ class FTPConnect:
         self.passwd: str = getenv("FTP_PASSWORD")
 
     async def get_all_player_atm(self, map_name):
-        async with aioftp.Client() as client:
-            await client.connect(host=self.host, port=port_by_name[map_name])
-            await client.login(user=self.user, password=self.passwd)
+        async with aioftp.connect(self.host, port_by_name[map_name], self.user, self.passwd) as client:
             print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
             try:
                 async for path, info in await client.list("/"):
                     if info["type"] == "file" and path.suffix == ".json":
-                        async with aiofiles.open(path.name, mode="r") as f:
-                            contents = await f.read()
-                            data = json.loads(contents)
-                            print(data)
+                        print(path)
             except aioftp.StatusCodeError as e:
                 print(f"Error: {e.message}")
-            finally:
-                await client.quit()
+
 
     async def get_one_player_atm(self, map_name, SK64):
-        async with aioftp.Client() as client:
-            await client.connect(host=self.host, port=port_by_name[map_name])
-            await client.login(user=self.user, password=self.passwd)
-            try:
-                path = f"{SK64}.json"
-                if await client.exists(path):
-                    async with aiofiles.open(path, mode="r") as f:
-                        contents = await f.read()
-                        data = json.loads(contents)
-                        print(data)
-            except aioftp.StatusCodeError as e:
-                print(f"Error: {e.message}")
-            finally:
-                await client.quit()
+        pass
