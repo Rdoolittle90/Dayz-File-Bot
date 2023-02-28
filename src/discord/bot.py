@@ -36,7 +36,7 @@ class DiscordBot(commands.Bot, DBConnect):
         self.add_listener(self.on_member_join)
         self.add_listener(self.on_member_remove)
         self.add_listener(self.on_message)
-        self.ftp = FTPConnect()
+        self.ftp: FTPConnect = FTPConnect()
         # create the background task and run it in the background
 
 

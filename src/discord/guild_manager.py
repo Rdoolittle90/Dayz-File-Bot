@@ -74,8 +74,8 @@ def store_attachment(file: File, guild_id, map_name):
             xml_out.write(response.content)
 
 
-def get_server_settings(guild_id) -> dict:
-    with open(f"_files/{guild_id}/support/settings.json", "r") as json_in:
+def get_server_settings() -> dict:
+    with open(f"_files/support/settings.json", "r") as json_in:
         settings = load(json_in)
     return settings
 
@@ -89,7 +89,7 @@ async def set_announce_channel(guild: Guild, channel_id: int) -> bool:
 
     print("Found")
 
-    settings = get_server_settings(guild.id)
+    settings = get_server_settings()
     settings["announcement_channel"] = channel_id
     with open(f"_files/support/settings.json", "w") as json_out:
         dump(settings, json_out, indent=4)
