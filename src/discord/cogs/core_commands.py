@@ -8,7 +8,7 @@ from src.discord.bot import DiscordBot
 class CoreCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
-        print("Everyone Cog Connected")
+        print("Core Cog Connected")
 
 
     # =====================================================================================================

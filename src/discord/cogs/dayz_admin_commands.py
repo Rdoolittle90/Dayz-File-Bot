@@ -12,7 +12,7 @@ from src.discord.bot import DiscordBot
 class DayzAdminCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
-        print("Dayz User Cog Connected")
+        print("Dayz Admin Cog Connected")
 
 
     # =====================================================================================================
