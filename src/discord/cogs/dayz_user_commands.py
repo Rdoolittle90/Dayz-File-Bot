@@ -16,6 +16,7 @@ class DayzUserCog(commands.Cog):
         """placeholder"""
         await interaction.response.send_modal(modal=EnterSteamID(self.bot))
 
+
     # =====================================================================================================
     @commands.has_role("Steam Linked")
     @nextcord.slash_command(dm_permission=False, name="atm", description="placeholder description 1")
