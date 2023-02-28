@@ -84,13 +84,11 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
     existing_steam_id = await bot.sql_execute(
         "SELECT steam_id FROM registration WHERE discord_id=%s", (discord_id,)
     )
-    print(f"Existing Steam ID for Discord ID {discord_id}: {existing_steam_id}")
 
     # Check if steam id is already associated with a discord id in the database
     existing_discord_id = await bot.sql_execute(
         "SELECT discord_id FROM registration WHERE steam_id=%s", (steam_id,)
     )
-    print(f"Existing Discord ID for Steam ID {steam_id}: {existing_discord_id}")
 
     if existing_discord_id is not None:
         # Steam id already associated with a discord id
@@ -109,7 +107,6 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
 
                 data = await response.json()
                 user_info = data['response']['players'][0]
-                print(f"User info for Steam ID {steam_id}: {user_info}")
 
                 # Insert new user data into database
                 current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
