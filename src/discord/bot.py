@@ -60,7 +60,7 @@ class DiscordBot(commands.Bot, DBConnect):
             await initial_server_setup(guild)
             create_new_server_dir()
         await self.sql_connect()
-        self.bg_task = self.loop.create_task(self.my_background_task())
+        # self.bg_task = self.loop.create_task(self.my_background_task())
 
     async def on_message(self, message: Message) -> None:
         """
