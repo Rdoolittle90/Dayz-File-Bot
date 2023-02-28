@@ -18,7 +18,7 @@ class EnterSteamID(Modal):
         Initializes the EnterSteamID modal.
         """
         super().__init__(title="Registration Form", timeout=(5 * 60))
-        self.bot = bot
+        self.bot: DiscordBot = bot
 
         self.steam_id = TextInput(
                 label="Steam 64 ID",
