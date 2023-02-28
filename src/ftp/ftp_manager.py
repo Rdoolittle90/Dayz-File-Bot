@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+import random
 import aioftp
 import aiofiles
 from os import getenv
@@ -75,7 +76,7 @@ class FTPConnect:
 
     async def get_all_player_atm(self, map_name):
         async with aioftp.Client.context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
-            print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
+            print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}  {random.randint(0, 99999)}")
             try:
                 for path, info in await client.list():
                     if info["type"] == "file" and path.suffix == ".json":
