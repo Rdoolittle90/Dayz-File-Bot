@@ -1,13 +1,13 @@
 from nextcord.ext import commands
 import nextcord
-
 from src.discord.bot import DiscordBot
 
 
-class RegisteredCog(commands.Cog):
+
+class DayzUserCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
-        print("Registered Cog Connected")
+        print("Dayz User Cog Connected")
 
     # =====================================================================================================
     @commands.has_role("Steam Linked")
@@ -34,4 +34,4 @@ class RegisteredCog(commands.Cog):
 
 
 def setup(bot: commands.Bot):
-    bot.add_cog(RegisteredCog(bot))
+    bot.add_cog(DayzUserCog(bot))
