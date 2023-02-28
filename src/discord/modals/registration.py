@@ -89,16 +89,21 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
         return -2
 
     # Get user location information from Steam API
-    async with aiohttp.ClientSession() as session:
-        async with session.get(f'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={getenv("STEAM_API_KEY")}&steamids={steam_id}') as response:
-            if response.status != 200:
-                # Handle error response
-                return -3
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={getenv("STEAM_API_KEY")}&steamids={steam_id}') as response:
+                if response.status != 200:
+                    # Handle error response
+                    return -3
 
-            data = await response.json()
-            user_info = data['response']['players'][0]
+                data = await response.json()
+                user_info = data['response']['players'][0]
 
-            # Insert new user data into database
-            current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            await bot.sql_execute("INSERT INTO registration (discord_id, steam_id, loccountrycode, profile_url, registration_date) VALUES (%s, %s, %s, %s, %s)", discord_id, steam_id, user_info.get('loccountrycode', None), user_info.get('profileurl', None), current_time)
-            return 1
+                # Insert new user data into database
+                current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                await bot.sql_execute("INSERT INTO registration (discord_id, steam_id, loccountrycode, profile_url, registration_date) VALUES (%s, %s, %s, %s, %s)", discord_id, steam_id, user_info.get('loccountrycode', None), user_info.get('profileurl', None), current_time)
+                return 1
+    except Exception as e:
+        # Handle other exceptions
+        print(f"An error occurred: {e}")
+        return -3
