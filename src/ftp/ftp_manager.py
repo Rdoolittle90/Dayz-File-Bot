@@ -41,7 +41,7 @@ class FTPConnect:
         # Connect to the FTP server
         client = yield protocol.ClientCreator(reactor, FTPClient).connectTCP(self.host, ftp_port_by_name[map_name])
         yield client.login(self.user, self.passwd)
-
+        print(f"Connected to {map_name}")
         # Change to the correct directory
         yield client.cwd("profiles/LBmaster/Data/LBBanking/Players")
 
@@ -49,7 +49,7 @@ class FTPConnect:
         file_list_protocol = FTPFileListProtocol()
         yield client.list(".", file_list_protocol)
         files = file_list_protocol.files
-
+        print(files)
         # Download each JSON file to the _files/maps/atms directory
         for filename, attrs in files:
             if not filename.endswith(".json"):
