@@ -10,7 +10,7 @@ class TestingCog(commands.Cog):
         print("!!! Testing Cog Connected !!!")
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="placeholder", description="placeholder description 1")
+    @nextcord.slash_command(dm_permission=False, name="debug_atm_get_all", description="placeholder description 1")
     async def debug_atm_get_all(self, interaction: nextcord.Interaction):
         """placeholder method"""
         tasks = [

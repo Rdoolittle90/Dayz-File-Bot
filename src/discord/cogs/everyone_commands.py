@@ -9,10 +9,10 @@ class EveryoneCog(commands.Cog):
         print("Everyone Cog Connected")
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="placeholder", description="placeholder description 1")
-    async def placeholder(self, interaction: nextcord.Interaction):
-        """placeholder method"""
-        pass
+    # @nextcord.slash_command(dm_permission=False, name="placeholder", description="placeholder description 1")
+    # async def placeholder(self, interaction: nextcord.Interaction):
+    #     """placeholder method"""
+    #     pass
 
 
 def setup(bot: commands.Bot):
