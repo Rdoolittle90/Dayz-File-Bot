@@ -5,7 +5,7 @@ from src.discord.bot import DiscordBot
 
 
 
-class EveryoneCog(commands.Cog):
+class CoreCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         print("Everyone Cog Connected")
@@ -29,4 +29,4 @@ class EveryoneCog(commands.Cog):
 
 
 def setup(bot: commands.Bot):
-    bot.add_cog(EveryoneCog(bot))
+    bot.add_cog(CoreCog(bot))
