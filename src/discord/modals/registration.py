@@ -56,7 +56,7 @@ class EnterSteamID(Modal):
             await interaction.followup.send(embed=embed)
         elif new_commit == -2:
             embed = Embed(title="Registration Failed", color=0xff0000)
-            embed.description = f"You are already registered with Steam ID: `{steam_id}`"
+            embed.description = f"You are already registered"
             await interaction.followup.send(embed=embed)
         else:
             embed = Embed(title="Registration Failed", color=0xff0000)
