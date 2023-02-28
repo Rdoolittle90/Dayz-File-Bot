@@ -23,7 +23,7 @@ async def announce_status(interaction:Interaction, status_code:int, map:str ="AL
         embed = Embed(title=f"**{map}** {server_str_format} now **RESTARTING**", description=message, timestamp=datetime.datetime.now(), color=Colour.yellow())
         embed.set_author(name=interaction.user, icon_url=interaction.user.avatar.url)
 
-    settings = get_server_settings(interaction.guild.id)
+    settings = get_server_settings()
     if settings["announcement_channel"] != None:
         channel = await interaction.guild.fetch_channel(settings["announcement_channel"])
         await channel.send(embed=embed)

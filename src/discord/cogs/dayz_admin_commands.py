@@ -16,7 +16,7 @@ class DayzAdminCog(commands.Cog):
 
 
     # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_status", description="Set the status of the server")
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="set_status", description='"0:"OFFLINE", 1:"ONLINE", 2:"RESTARTING"')
     async def set_status(self, interaction: nextcord.Interaction, status_code: int, map_name: str = "ALL", message: str = None):
         """Set the status of the server to either offline, online, or restarting."""
         await announce_status(interaction, status_code, map_name, message)
