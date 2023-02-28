@@ -13,6 +13,7 @@ def main():
     # this is the discord bot object
     bot = DiscordBot()
 
+    bot.load_extension("src.discord.cogs.test_commands")
     bot.load_extension("src.discord.cogs.admin_commands")
     bot.load_extension("src.discord.cogs.registered_commands")
     bot.load_extension("src.discord.cogs.everyone_commands")
