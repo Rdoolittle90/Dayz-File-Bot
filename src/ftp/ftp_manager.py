@@ -38,6 +38,7 @@ class FTPConnect:
         Args:
             map_name (str): The name of the map to download the JSON files for.
         """
+        print(f"Attempting to connect to {map_name}")
         # Connect to the FTP server
         client = yield protocol.ClientCreator(reactor, FTPClient).connectTCP(self.host, ftp_port_by_name[map_name])
         yield client.login(self.user, self.passwd)
