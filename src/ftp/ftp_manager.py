@@ -1,13 +1,13 @@
-import datetime
-import json
 import os
-import aioftp
-import aiofiles
-from os import getenv
 from typing import Dict
 
-# Maps the name of a map to a port number
-port_by_name: Dict[str, int] = {
+from twisted.internet import defer, reactor, protocol
+from twisted.python.filepath import FilePath
+from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
+
+
+# Maps the name of a map to an FTP path
+ftp_port_by_name: Dict[str, int] = {
     "Chernarus": 21,
     "Takistan": 22,
     "Namalsk": 23,
@@ -19,27 +19,44 @@ class FTPConnect:
 
     Attributes:
         host (str): The host address of the FTP server.
-        port (int): The port number to connect to on the FTP server.
         user (str): The username to use when authenticating with the FTP server.
         passwd (str): The password to use when authenticating with the FTP server.
-        pool (aioftp.ConnectionPool): A connection pool to manage connections to the FTP server.
     """
+
     def __init__(self):
         """Initializes an FTPConnect object with default values for its attributes."""
-        self.host: str = getenv("FTP_HOST")
-        self.user: str = getenv("FTP_USER")
-        self.passwd: str = getenv("FTP_PASSWORD")
+        self.host: str = os.getenv("FTP_HOST")
+        self.user: str = os.getenv("FTP_USER")
+        self.passwd: str = os.getenv("FTP_PASSWORD")
 
-    async def get_all_player_atm(self, map_name):
-        async with aioftp.connect(self.host, port_by_name[map_name], self.user, self.passwd) as client:
-            print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}")
-            try:
-                async for path, info in await client.list("/"):
-                    if info["type"] == "file" and path.suffix == ".json":
-                        print(path)
-            except aioftp.StatusCodeError as e:
-                print(f"Error: {e.message}")
+    @defer.inlineCallbacks
+    def download_all_atm_json_files(self, map_name: str):
+        """
+        Downloads all JSON files in the /profiles/LBmaster/Data/LBBanking/Players directory on the FTP server
+        to the local _files/maps/atms directory.
 
+        Args:
+            map_name (str): The name of the map to download the JSON files for.
+        """
+        # Connect to the FTP server
+        client = yield protocol.ClientCreator(reactor, FTPClient).connectTCP(self.host, ftp_port_by_name[map_name])
+        yield client.login(self.user, self.passwd)
 
-    async def get_one_player_atm(self, map_name, SK64):
-        pass
+        # Change to the correct directory
+        yield client.cwd("profiles/LBmaster/Data/LBBanking/Players")
+
+        # List all files in the directory
+        file_list_protocol = FTPFileListProtocol()
+        yield client.list(".", file_list_protocol)
+        files = file_list_protocol.files
+
+        # Download each JSON file to the _files/maps/atms directory
+        for filename, attrs in files:
+            if not filename.endswith(".json"):
+                continue
+
+            local_filepath = FilePath(f"_files/maps/atms/{filename}")
+            with open(local_filepath.path, "wb") as f:
+                yield client.retrieveFile(filename, f)
+
+        client.quit()

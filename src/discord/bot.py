@@ -1,7 +1,6 @@
 import asyncio
 import logging
-import os
-
+from twisted.internet import reactor
 from nextcord import Intents, Member, Message
 from nextcord.ext import commands
 
@@ -120,5 +119,6 @@ class DiscordBot(commands.Bot, DBConnect):
 
         print("Repeat Loop Begin")
         while not self.is_closed():
-            await self.ftp.get_all_player_atm("Chernarus")
+            reactor.callLater(0, ftp.download_all_atm_json_files, "Chernarus")
+            reactor.run()
             await asyncio.sleep(60 * 5)  # task runs every 60 seconds
