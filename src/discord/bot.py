@@ -119,6 +119,6 @@ class DiscordBot(commands.Bot, DBConnect):
 
         print("Repeat Loop Begin")
         while not self.is_closed():
-            reactor.callLater(0, ftp.download_all_atm_json_files, "Chernarus")
+            reactor.callLater(0, self.ftp.download_all_atm_json_files, "Chernarus")
             reactor.run()
             await asyncio.sleep(60 * 5)  # task runs every 60 seconds
