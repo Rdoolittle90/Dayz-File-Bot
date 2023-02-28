@@ -5,7 +5,6 @@ import nextcord
 from src.discord.bot import DiscordBot
 
 
-
 class TestingCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
