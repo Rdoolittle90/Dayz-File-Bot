@@ -14,9 +14,7 @@ class DayzUserCog(commands.Cog):
     @nextcord.slash_command(dm_permission=False, name="register", description="register your steam 64 ID")
     async def register(self, interaction: nextcord.Interaction) -> None:
         """placeholder"""
-        embed = nextcord.Embed(title="Unavailable", color=0xff0000)
-        embed.description = f"Command Coming Soon"
-        await interaction.channel.send(embed=embed)
+        await interaction.response.send_modal(modal=EnterSteamID(self.bot))
 
 
     # =====================================================================================================
