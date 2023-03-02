@@ -1,5 +1,7 @@
 import asyncio
 import logging
+import random
+import string
 from nextcord import Intents, Member, Message
 from nextcord.ext import commands
 
@@ -110,6 +112,10 @@ class DiscordBot(commands.Bot, DBConnect):
         """
         logging.info(f'{member.name} has left the server')
 
+
+    def generate_random_string(length):
+        characters = string.digits + string.ascii_letters
+        return ''.join(random.choice(characters) for i in range(length))
 
 
     async def my_background_task(self):

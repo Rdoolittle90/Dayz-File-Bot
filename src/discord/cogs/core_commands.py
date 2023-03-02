@@ -1,5 +1,6 @@
 from nextcord.ext import commands
 import nextcord
+from discord.modals.announcement_creator import AnnouncementCreator
 from src.discord.guild_manager import set_announce_channel
 from src.discord.bot import DiscordBot
 
@@ -18,6 +19,16 @@ class CoreCog(commands.Cog):
         await interaction.response.defer(ephemeral=True)
         channel = await set_announce_channel(interaction.guild, int(channel_id))
         await interaction.followup.send(channel)
+
+
+    # =====================================================================================================
+    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="make_announcement", description="send an announcement to the set channel or preview in this channel.")
+    async def make_announcement(self, interaction: nextcord.Interaction, num_fields=0, preview=False):
+        """make an announcement"""
+
+        # You can then send the announcement to a Discord channel using your bot's client
+        # For example, if you have a variable named "channel" that represents the channel you want to send the message to:
+        await interaction.response.send_modal(modal=AnnouncementCreator(self.bot, num_fields, preview))
 
 
     # =====================================================================================================
