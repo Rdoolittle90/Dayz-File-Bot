@@ -66,16 +66,17 @@ class AnnouncementCreator(Modal):
             self.color.value = 0xffffff
 
         # Create a new Embed object with the input values
-        embed = Embed(
-            title=self.title.value,
-            description=self.description.value,
-            color=self.color.value
-        )
+        # embed = Embed(
+        #     title=self.title.value,
+        #     description=self.description.value,
+        #     color=self.color.value
+        # )
 
-        if self.is_preview:
-            channel = interaction.channel
-        else:
-            settings = get_server_settings()
-            channel = self.bot.get_channel(settings["announcement_channel"])
+        # if self.is_preview:
+        #     channel = interaction.channel
+        # else:
+        #     settings = get_server_settings()
+        #     channel = self.bot.get_channel(settings["announcement_channel"])
 
-        await channel.send(embed=embed)
+        # await channel.send(embed=embed)
+        print("done.")
