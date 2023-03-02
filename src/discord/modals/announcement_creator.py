@@ -8,48 +8,25 @@ from src.discord.bot import DiscordBot
 
 class AnnouncementCreator(Modal):
     """
-    A modal for entering a Steam 64 ID.
+    A modal for creating embedded announcements
     """
     def __init__(self, bot: DiscordBot, preview=0) -> None:
         """
         Initializes the EnterSteamID modal.
         """
-        super().__init__(title="Registration Form", timeout=(5 * 60))
+        super().__init__(title="Announcement Form", timeout=(5 * 60))
         self.bot: DiscordBot = bot
         self.is_preview = preview
-
-        color_id = bot.generate_random_string(8)
-        title_id = bot.generate_random_string(8)
-        descr_id = bot.generate_random_string(8)
-
         
         self.color = TextInput(
             label="Color",
-            placeholder="enter color",
+            placeholder="0xffffff",
+            default_value="0xffffff",
             min_length=1,
             max_length=35,
             required=False
         )
         self.add_item(self.color)
-
-        self.title = TextInput(
-            label="Title",
-            placeholder="enter title",
-            min_length=1,
-            max_length=35,
-            required=True
-        )
-        self.add_item(self.title)
-
-        self.description = TextInput(
-            style=TextInputStyle.paragraph,
-            label="Description",
-            placeholder="enter description",
-            min_length=1,
-            max_length=1000,
-            required=True
-        )
-        self.add_item(self.description)
 
 
 
@@ -57,10 +34,6 @@ class AnnouncementCreator(Modal):
         """
         """
         await interaction.response.defer(ephemeral=False)
-
-
-        if not self.color.value:
-            self.color.value = 0xffffff
 
         # Create a new Embed object with the input values
         # embed = Embed(
