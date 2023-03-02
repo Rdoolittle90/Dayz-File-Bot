@@ -113,14 +113,13 @@ class DiscordBot(commands.Bot, DBConnect):
         logging.info(f'{member.name} has left the server')
 
 
-    def generate_random_string(length):
+    def generate_random_string(self, length):
         characters = string.digits + string.ascii_letters
         return ''.join(random.choice(characters) for i in range(length))
 
 
     async def my_background_task(self):
         await self.wait_until_ready()
-        channel = self.get_channel(1045953730824130590)  # channel ID goes here
 
         print("Repeat Loop Begin")
         while not self.is_closed():
