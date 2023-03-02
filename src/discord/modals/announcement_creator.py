@@ -9,7 +9,7 @@ class AnnouncementCreator(Modal):
     """
     A modal for entering a Steam 64 ID.
     """
-    def __init__(self, bot: DiscordBot, num_fields=0, preview=0) -> None:
+    def __init__(self, bot: DiscordBot, preview=0) -> None:
         """
         Initializes the EnterSteamID modal.
         """
@@ -44,21 +44,15 @@ class AnnouncementCreator(Modal):
         """
         await interaction.response.defer(ephemeral=False)
 
-        # Get the values of the inputs from the modal
-        title = self.title.value
-        description = self.description.value
-        field_names = [f.value for f in self.field_names]
-        field_values = [f.value for f in self.field_values]
-
         # Create a new Embed object with the input values
         embed = Embed(
-            title=title,
-            description=description,
+            title=self.title.value,
+            description=self.description.value,
             timestamp=datetime.datetime.utcnow()
         )
 
         if self.is_preview:
-            channel = self.bot.get_channel(1045953730824130590)
+            channel = interaction.channel
         else:
             settings = get_server_settings()
             channel = self.bot.get_channel(settings["announcement_channel"])
