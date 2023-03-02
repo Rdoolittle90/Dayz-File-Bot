@@ -26,7 +26,6 @@ class AnnouncementCreator(Modal):
         self.color = TextInput(
             label="Color",
             placeholder="enter color",
-            custom_id=f"title_{color_id}",
             min_length=1,
             max_length=35,
             required=False
@@ -36,7 +35,6 @@ class AnnouncementCreator(Modal):
         self.title = TextInput(
             label="Title",
             placeholder="enter title",
-            custom_id=f"title_{title_id}",
             min_length=1,
             max_length=35,
             required=True
@@ -47,7 +45,6 @@ class AnnouncementCreator(Modal):
             style=TextInputStyle.paragraph,
             label="Description",
             placeholder="enter description",
-            custom_id=f"description_{descr_id}",
             min_length=1,
             max_length=1000,
             required=True
