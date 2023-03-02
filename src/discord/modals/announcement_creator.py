@@ -9,7 +9,7 @@ class AnnouncementCreator(Modal):
     """
     A modal for entering a Steam 64 ID.
     """
-    def __init__(self, bot: DiscordBot, num_fields=0, preview=False) -> None:
+    def __init__(self, bot: DiscordBot, num_fields=0, preview=0) -> None:
         """
         Initializes the EnterSteamID modal.
         """

@@ -23,7 +23,7 @@ class CoreCog(commands.Cog):
 
     # =====================================================================================================
     @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="make_announcement", description="send an announcement to the set channel or preview in this channel.")
-    async def make_announcement(self, interaction: nextcord.Interaction, num_fields=0, preview=False):
+    async def make_announcement(self, interaction: nextcord.Interaction, num_fields=0, preview=0):
         """make an announcement"""
 
         # You can then send the announcement to a Discord channel using your bot's client
