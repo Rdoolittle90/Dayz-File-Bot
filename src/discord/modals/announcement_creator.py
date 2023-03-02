@@ -65,13 +65,11 @@ class AnnouncementCreator(Modal):
         if not self.color.value:
             self.color.value = 0xffffff
 
-
         # Create a new Embed object with the input values
         embed = Embed(
             title=self.title.value,
             description=self.description.value,
-            color=self.color.value,
-            timestamp=datetime.datetime.utcnow()
+            color=self.color.value
         )
 
         if self.is_preview:
