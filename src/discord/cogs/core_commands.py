@@ -1,6 +1,6 @@
 from nextcord.ext import commands
 import nextcord
-from discord.modals.announcement_creator import AnnouncementCreator
+from src.discord.modals.announcement_creator import AnnouncementCreator
 from src.discord.guild_manager import set_announce_channel
 from src.discord.bot import DiscordBot
 
