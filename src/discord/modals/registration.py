@@ -1,6 +1,7 @@
 import datetime
 from os import getenv
 from typing import Optional
+import re
 
 import aiohttp
 from discord import Embed
@@ -40,28 +41,24 @@ class EnterSteamID(Modal):
         """
         await interaction.response.defer(ephemeral=False)
         steam_id = self.steam_id.value
+        
+        if not self.is_valid_steam64_id(steam_id):
+            await interaction.followup.send(embed=embed_invalid_id(steam_id))
+            return -1
 
         # Verify the user with the given Steam 64 ID and Discord User ID.
         new_commit = await verify_user(self.bot, steam_id, interaction.user.id)
         print(new_commit)
         # If the verification is successful, respond with a success message.
         if new_commit == 1:
-            embed = Embed(title="Registration Successful", color=0x00ff00)
-            embed.description = "Thank you for registering."
-            await interaction.followup.send(embed=embed)
+            await interaction.followup.send(embed=embed_success())
         # If the verification fails, respond with a failure message.
         elif new_commit == -1:
-            embed = Embed(title="Registration Failed", color=0xff0000)
-            embed.description = f"That account is already registered with Steam ID: `{steam_id}`"
-            await interaction.followup.send(embed=embed)
+            await interaction.followup.send(embed=embed_already_taken())
         elif new_commit == -2:
-            embed = Embed(title="Registration Failed", color=0xff0000)
-            embed.description = f"You are already registered"
-            await interaction.followup.send(embed=embed)
+            await interaction.followup.send(embed=embed_already_registered())
         else:
-            embed = Embed(title="Registration Failed", color=0xff0000)
-            embed.description = f"Invalid Steam 64 ID: `{steam_id}`"
-            await interaction.followup.send(embed=embed)
+            await interaction.followup.send(embed=embed_invalid_id(steam_id))
 
 
 async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Optional[int]:
@@ -116,3 +113,34 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
         # Handle other exceptions
         print(f"An error occurred: {e}")
         return -3
+
+
+def is_valid_steam64_id(steam_id: str) -> bool:
+    """
+    Returns True if the given string matches the pattern for a valid Steam64 ID, False otherwise.
+    """
+    pattern = r'^\d{17}$'
+    return bool(re.match(pattern, steam_id))
+
+
+def embed_invalid_id(steam_id) -> Embed:
+    embed = Embed(title="Registration Failed", color=0xff0000)
+    embed.description = f"Invalid Steam 64 ID: `{steam_id}`"
+    return embed
+
+
+def embed_already_registered() -> Embed:
+    embed = Embed(title="Registration Failed", color=0xff0000)
+    embed.description = f"You are already registered"
+    return embed
+
+
+def embed_already_taken() -> Embed:
+    embed = Embed(title="Registration Failed", color=0xff0000)
+    embed.description = f"That account is already registered"
+    return embed
+
+def embed_success() -> Embed:
+    embed = Embed(title="Registration Successful", color=0x00ff00)
+    embed.description = "Thank you for registering."
+    return embed
