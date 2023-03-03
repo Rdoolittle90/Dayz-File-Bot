@@ -23,7 +23,7 @@ class DayzUserCog(commands.Cog):
     @nextcord.slash_command(dm_permission=False, name="profile", description="View your player card")
     async def profile(self, interaction: nextcord.Interaction) -> None:
         """placeholder"""
-        await interaction.channel.send(embed=create_profile_card_embed(interaction.id))
+        await interaction.channel.send(embed=await create_profile_card_embed(interaction.id))
 
 
     # =====================================================================================================
