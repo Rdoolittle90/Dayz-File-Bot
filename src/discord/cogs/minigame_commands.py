@@ -36,7 +36,7 @@ class Minigames(commands.Cog):
         return payout
 
     @nextcord.slash_command(dm_permission=False, name="slot", description="WIP")
-    async def slot(self, ctx, bet):
+    async def slot(self, ctx, bet:int):
         """Play the slot machine!"""
         balance = 500
         if balance < bet:
