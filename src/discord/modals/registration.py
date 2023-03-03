@@ -76,10 +76,10 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
         -3 if there is an error with the Steam API.
     """
 
-    if get_registered_steam_64(bot, discord_id) is None:
+    if await get_registered_steam_64(bot, discord_id) is None:
         # Steam id already associated with a discord id
         return -1
-    if get_registered_discord_id(bot, steam_id) is None:
+    if await get_registered_discord_id(bot, steam_id) is None:
         # Discord id already associated with a steam id
         return -2
 
