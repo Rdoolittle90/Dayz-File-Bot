@@ -37,10 +37,10 @@ class MiniGames(commands.Cog):
         
         payout_multiplier = 1
         if reels[0] == reels[1] == reels[2]:
-            payout_multiplier = 3
+            payout_multiplier = 1
         
         elif reels[0] == reels[1] or reels[1] == reels[2]:
-            payout_multiplier = 2
+            payout_multiplier = 0.7
         
         payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels)
         user_balance += bet * payout
