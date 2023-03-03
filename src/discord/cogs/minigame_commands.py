@@ -41,7 +41,7 @@ class MiniGames(commands.Cog):
             payout_multiplier = 0.9
             payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels)
         
-        elif reels[0] == reels[1] or reels[1] == reels[2]:
+        elif (reels[0] == reels[1] and reels[2] == "knife") or (reels[1] == reels[2] and reels[0] == "knife"):
             payout_multiplier = 0.4
             if reels[0] == reels[1]:
                 payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels[:1])
