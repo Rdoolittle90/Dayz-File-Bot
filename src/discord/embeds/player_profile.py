@@ -19,7 +19,7 @@ async def create_profile_card_embed(bot: DiscordBot, discord_id) -> nextcord.Emb
         return embed
 
     # Get Steam API data
-    steam_api_url = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={getenv('STEAM_API_KEY')}&steamids={existing_steam_id}"
+    steam_api_url = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={getenv('STEAM_API_KEY')}&steamids={steam_id[0][0]}"
     response = requests.get(steam_api_url)
     data = response.json()["response"]["players"][0]
 
