@@ -6,12 +6,16 @@ class MiniGames(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.symbols = {
-            "Cherry": {"weight": 3, "payout": 3},
-            "Orange": {"weight": 3, "payout": 3},
-            "Lemon": {"weight": 3, "payout": 3},
-            "Bar": {"weight": 2, "payout": 5},
-            "7": {"weight": 1, "payout": 10}
+            "🩹": {"weight": 10, "payout": 2},  # Bandage
+            "💉": {"weight": 10, "payout": 3},  # Morphine
+            "🍔": {"weight": 10, "payout": 5},  # Food
+            "🔪": {"weight": 8, "payout": 7},   # Knife
+            "🎒": {"weight": 5, "payout": 10},  # Backpack
+            "🔫": {"weight": 3, "payout": 15},  # Gun
+            "🚗": {"weight": 2, "payout": 25},  # Vehicle
+            "🚁": {"weight": 1, "payout": 50},  # Helicopter
         }
+        print("Minigame Cog Connected")
     
     @nextcord.slash_command(dm_permission=False, name="slots", description="Slots test")
     async def slots(self, ctx, bet: int):
