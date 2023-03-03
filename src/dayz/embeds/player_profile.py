@@ -6,7 +6,7 @@ from src.discord.modals.registration import get_registered_steam_64
 
 
 async def create_profile_card_embed(bot: DiscordBot, discord_id) -> nextcord.Embed:
-    existing_steam_id = get_registered_steam_64(bot, discord_id)
+    existing_steam_id = await get_registered_steam_64(bot, discord_id)
 
     if existing_steam_id != None:
         # Get Steam API data
