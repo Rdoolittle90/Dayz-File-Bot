@@ -42,7 +42,7 @@ class EnterSteamID(Modal):
         await interaction.response.defer(ephemeral=False)
         steam_id = self.steam_id.value
         
-        if not self.is_valid_steam64_id(steam_id):
+        if not is_valid_steam64_id(steam_id):
             await interaction.followup.send(embed=embed_invalid_id(steam_id))
             return -1
 
