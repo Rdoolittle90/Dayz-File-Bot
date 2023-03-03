@@ -1,8 +1,10 @@
 import random
-import nextcord
+from typing import List
+import discord
 from nextcord.ext import commands
+import nextcord
 
-class MiniGames(commands.Cog):
+class Minigames(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.symbols = {
@@ -15,47 +17,43 @@ class MiniGames(commands.Cog):
             "🚗": {"weight": 2, "payout": 25},  # Vehicle
             "🚁": {"weight": 1, "payout": 50},  # Helicopter
         }
-        print("Minigame Cog Connected")
-    
-    @nextcord.slash_command(dm_permission=False, name="slots", description="Slots test")
-    async def slots(self, interaction, bet: int):
-        if bet <= 0:
-            await interaction.channel.send("Please enter a valid bet amount.")
-            return
-        
-        user_balance = 500 # replace with actual user balance
-        
-        if bet > user_balance:
-            await interaction.channel.send(f"You do not have enough currency to place this bet. Your current balance is {user_balance}.")
-            return
-        
-        user_balance -= bet
-        
-        reels = []
-        for _ in range(3):
-            reels.append(random.choices(list(self.symbols.keys()), weights=list(x["weight"] for x in self.symbols.values()), k=1)[0])
-        
+
+    def _get_spin_result(self) -> List[str]:
+        spin_result = []
+        for i in range(3):
+            symbol = random.choices(
+                list(self.symbols.keys()),
+                weights=[symbol["weight"] for symbol in self.symbols.values()],
+                k=1
+            )[0]
+            spin_result.append(symbol)
+        return spin_result
+
+    def _calculate_payout(self, spin_result: List[str]) -> int:
         payout = 0
-        if reels[0] == reels[1] == reels[2]:
-            payout_multiplier = 3
-            payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels)
-        
-        elif (reels[0] == reels[1] and reels[2] == "knife") or (reels[1] == reels[2] and reels[0] == "knife"):
-            payout_multiplier = 1
-            if reels[0] == reels[1]:
-                payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels[:1])
-            else:
-                payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels[1:])
-        
-        
-        user_balance += bet * payout
-        
-        embed = nextcord.Embed(title="DayZ Slot Machine", color=0xff0000)
-        embed.add_field(name="Reels", value=f"{reels[0]} | {reels[1]} | {reels[2]}", inline=False)
-        embed.add_field(name="Payout", value=f"{bet * payout} currency")
-        embed.add_field(name="Balance", value=f"{user_balance} currency", inline=False)
-        
-        await interaction.channel.send(embed=embed)
+        for symbol in spin_result:
+            payout += self.symbols[symbol]["payout"]
+        return payout
+
+    @nextcord.slash_command(dm_permission=False, name="slot", description="WIP")
+    async def slot(self, ctx, bet):
+        """Play the slot machine!"""
+        balance = 500
+        if balance < bet:
+            await ctx.send("You don't have enough money to place that bet!")
+            return
+
+        spin_result = self._get_spin_result()
+        payout = self._calculate_payout(spin_result)
+
+        balance += payout - bet
+
+        embed = discord.Embed(title="Slot Machine", description=f"{' '.join(spin_result)}", color=discord.Color.blue())
+        embed.add_field(name="Payout", value=f"{payout} credits")
+        embed.add_field(name="Balance", value=f"{balance} credits")
+
+        await ctx.send(embed=embed)
+
 
 def setup(bot: commands.Bot):
-    bot.add_cog(MiniGames(bot))
+    bot.add_cog(Minigames(bot))
