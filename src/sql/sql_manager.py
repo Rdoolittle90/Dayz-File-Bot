@@ -2,6 +2,8 @@ import aiomysql
 from os import getenv
 from typing import List, Tuple
 
+from pymysql import err
+
 class DBConnect:
     """
     Class for handling connection to MySQL database
@@ -15,14 +17,17 @@ class DBConnect:
         """
         Connects to the MySQL database using environment variables
         """
-        self.pool = await aiomysql.create_pool(
-            host=getenv("SQL_HOST"),
-            port=int(getenv("SQL_PORT")),
-            user=getenv("SQL_USER"),
-            password=getenv("SQL_PASSWORD"),
-            db=getenv("SQL_DB"),
-            autocommit=True
-        )
+        try:
+            self.pool = await aiomysql.create_pool(
+                host=getenv("SQL_HOST"),
+                port=int(getenv("SQL_PORT")),
+                user=getenv("SQL_USER"),
+                password=getenv("SQL_PASSWORD"),
+                db=getenv("SQL_DB"),
+                autocommit=True
+            )
+        except err.OperationalError:
+            print(f"Failed to connect to SQL server")
 
 
     async def sql_disconnect(self) -> None:
