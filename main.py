@@ -17,6 +17,7 @@ def main():
     bot.load_extension("src.discord.cogs.core_commands")
     bot.load_extension("src.discord.cogs.dayz_admin_commands")
     bot.load_extension("src.discord.cogs.dayz_user_commands")
+    bot.load_extension("src.discord.cogs.minigame_commands")
     # bot.load_extension("src.discord.cogs.everyone_commands")
     # bot.load_extension("src.discord.cogs.test_commands")
 
