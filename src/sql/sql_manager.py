@@ -49,8 +49,6 @@ class DBConnect:
         Returns:
             List of tuples containing the result of the query, or None if the query returns no result
         """
-        print(query)
-        print(args)
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 await cur.execute(query, args)
