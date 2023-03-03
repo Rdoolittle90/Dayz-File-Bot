@@ -26,7 +26,7 @@ class DiscordBot(commands.Bot, DBConnect):
         (None)
     """
     
-    async def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         # setup intents for bot permissions
         intents = Intents.default()
         intents.message_content = True
@@ -39,7 +39,6 @@ class DiscordBot(commands.Bot, DBConnect):
         self.add_listener(self.on_member_remove)
         self.add_listener(self.on_message)
         self.ftp: FTPConnect = FTPConnect()
-        await self.sql_connect()
         # create the background task and run it in the background
 
 
@@ -57,11 +56,13 @@ class DiscordBot(commands.Bot, DBConnect):
             (None)
 
         """
+        await self.wait_until_ready()
         initial_dir_setup()
         for guild in self.guilds:
             await initial_cha_setup(guild)
             await initial_server_setup(guild)
             create_new_server_dir()
+        await self.sql_connect()
         # self.bg_task = self.loop.create_task(self.my_background_task())
 
     async def on_message(self, message: Message) -> None:
