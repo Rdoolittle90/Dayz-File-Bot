@@ -23,7 +23,7 @@ class MiniGames(commands.Cog):
             await ctx.send("Please enter a valid bet amount.")
             return
         
-        user = ctx.author
+        user = ctx.user
         user_balance = 500 # replace with actual user balance
         
         if bet > user_balance:
