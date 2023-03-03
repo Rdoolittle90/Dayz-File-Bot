@@ -40,7 +40,7 @@ class Minigames(commands.Cog):
         """Play the slot machine!"""
         balance = 500
         if balance < bet:
-            await ctx.send("You don't have enough money to place that bet!")
+            await ctx.channel.send("You don't have enough money to place that bet!")
             return
 
         spin_result = self._get_spin_result()
@@ -52,7 +52,7 @@ class Minigames(commands.Cog):
         embed.add_field(name="Payout", value=f"{payout} credits")
         embed.add_field(name="Balance", value=f"{balance} credits")
 
-        await ctx.send(embed=embed)
+        await ctx.channel.send(embed=embed)
 
 
 def setup(bot: commands.Bot):
