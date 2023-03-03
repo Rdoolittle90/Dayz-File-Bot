@@ -35,14 +35,13 @@ class MiniGames(commands.Cog):
         for _ in range(3):
             reels.append(random.choices(list(self.symbols.keys()), weights=list(x["weight"] for x in self.symbols.values()), k=1)[0])
         
-        payout_multiplier = 1
         payout = 0
         if reels[0] == reels[1] == reels[2]:
-            payout_multiplier = 0.9
+            payout_multiplier = 3
             payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels)
         
         elif (reels[0] == reels[1] and reels[2] == "knife") or (reels[1] == reels[2] and reels[0] == "knife"):
-            payout_multiplier = 0.4
+            payout_multiplier = 1
             if reels[0] == reels[1]:
                 payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels[:1])
             else:
