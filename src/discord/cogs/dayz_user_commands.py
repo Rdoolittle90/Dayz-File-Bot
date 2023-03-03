@@ -1,5 +1,6 @@
 from nextcord.ext import commands
 import nextcord
+from src.dayz.embeds.player_profile import create_profile_card_embed
 from src.discord.modals.registration import EnterSteamID
 from src.discord.bot import DiscordBot
 
@@ -15,6 +16,15 @@ class DayzUserCog(commands.Cog):
     async def register(self, interaction: nextcord.Interaction) -> None:
         """placeholder"""
         await interaction.response.send_modal(modal=EnterSteamID(self.bot))
+
+
+    # =====================================================================================================
+    @commands.has_role("Steam Linked")
+    @nextcord.slash_command(dm_permission=False, name="me", description="View your player card")
+    async def show_profile(self, interaction: nextcord.Interaction) -> None:
+        """placeholder"""
+        steam_64 = self.bot.sql_execute()
+        await interaction.channel.send(embed=create_profile_card_embed(interaction.id))
 
 
     # =====================================================================================================

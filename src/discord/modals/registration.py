@@ -42,22 +42,20 @@ class EnterSteamID(Modal):
         await interaction.response.defer(ephemeral=False)
         steam_id = self.steam_id.value
         
-        if not is_valid_steam64_id(steam_id):
+        if not is_valid_steam64_id(steam_id): # 
             await interaction.followup.send(embed=embed_invalid_id(steam_id))
             return -1
 
         # Verify the user with the given Steam 64 ID and Discord User ID.
         new_commit = await verify_user(self.bot, steam_id, interaction.user.id)
-        print(new_commit)
-        # If the verification is successful, respond with a success message.
-        if new_commit == 1:
+
+        if new_commit == 1: # Success
             await interaction.followup.send(embed=embed_success())
-        # If the verification fails, respond with a failure message.
-        elif new_commit == -1:
+        elif new_commit == -1: # Steam 64 ID already claimed
             await interaction.followup.send(embed=embed_already_taken())
-        elif new_commit == -2:
+        elif new_commit == -2: # Already registered
             await interaction.followup.send(embed=embed_already_registered())
-        else:
+        else: # Account not found: steam 64 was valid but not found
             await interaction.followup.send(embed=embed_invalid_id(steam_id))
 
 
@@ -78,19 +76,15 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
         -3 if there is an error with the Steam API.
     """
     # Check if discord id is already associated with a steam id in the database
-    existing_steam_id = await bot.sql_execute(
-        "SELECT steam_id FROM registration WHERE discord_id=%s", (discord_id,)
-    )
+
 
     # Check if steam id is already associated with a discord id in the database
-    existing_discord_id = await bot.sql_execute(
-        "SELECT discord_id FROM registration WHERE steam_id=%s", (steam_id,)
-    )
 
-    if existing_discord_id is not None:
+
+    if get_registered_steam_64(discord_id) is not None:
         # Steam id already associated with a discord id
         return -1
-    if existing_steam_id is not None:
+    if get_registered_discord_id(steam_id) is not None:
         # Discord id already associated with a steam id
         return -2
 
@@ -113,6 +107,21 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
         # Handle other exceptions
         print(f"An error occurred: {e}")
         return -3
+
+
+
+async def get_registered_steam_64(bot, discord_id):
+    existing_steam_id = await bot.sql_execute(
+        "SELECT steam_id FROM registration WHERE discord_id=%s", (discord_id,)
+    )
+    return existing_steam_id
+
+
+async def get_registered_discord_id(bot, steam_id):
+    existing_discord_id = await bot.sql_execute(
+        "SELECT discord_id FROM registration WHERE steam_id=%s", (steam_id,)
+    )
+    return existing_discord_id
 
 
 def is_valid_steam64_id(steam_id: str) -> bool:
