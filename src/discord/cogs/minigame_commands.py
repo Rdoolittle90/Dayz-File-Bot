@@ -36,13 +36,19 @@ class MiniGames(commands.Cog):
             reels.append(random.choices(list(self.symbols.keys()), weights=list(x["weight"] for x in self.symbols.values()), k=1)[0])
         
         payout_multiplier = 1
+        payout = 0
         if reels[0] == reels[1] == reels[2]:
-            payout_multiplier = 1
+            payout_multiplier = 0.9
+            payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels)
         
         elif reels[0] == reels[1] or reels[1] == reels[2]:
-            payout_multiplier = 0.7
+            payout_multiplier = 0.4
+            if reels[0] == reels[1]:
+                payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels[:1])
+            else:
+                payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels[1:])
         
-        payout = sum(self.symbols[symbol]["payout"] * payout_multiplier for symbol in reels)
+        
         user_balance += bet * payout
         
         embed = nextcord.Embed(title="DayZ Slot Machine", color=0xff0000)
