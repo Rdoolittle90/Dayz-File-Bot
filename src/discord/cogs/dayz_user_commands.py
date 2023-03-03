@@ -1,6 +1,6 @@
 from nextcord.ext import commands
 import nextcord
-from src.dayz.embeds.player_profile import create_profile_card_embed
+from src.discord.embeds.player_profile import create_profile_card_embed
 from src.discord.modals.registration import EnterSteamID
 from src.discord.bot import DiscordBot
 

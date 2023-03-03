@@ -75,11 +75,6 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
         -2 if Discord ID is already associated with a Steam ID,\n
         -3 if there is an error with the Steam API.
     """
-    # Check if discord id is already associated with a steam id in the database
-
-
-    # Check if steam id is already associated with a discord id in the database
-
 
     if get_registered_steam_64(bot, discord_id) is not None:
         # Steam id already associated with a discord id
