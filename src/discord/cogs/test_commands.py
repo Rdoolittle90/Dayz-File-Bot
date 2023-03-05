@@ -9,43 +9,6 @@ import requests
 from src.discord.bot import DiscordBot
 
 
-def generate_server_id(game_identifier: int, ipv4: str, game_port: int) -> str:
-    # Build the string using the given parameters
-    server_string = f"{game_identifier}{ipv4}{game_port}"
-    
-    # Hash the string using SHA-1
-    hash_object = hashlib.sha1(server_string.encode())
-    
-    # Get the hex digest of the hash
-    hex_digest = hash_object.hexdigest()
-    
-    # Return the hex digest as the server ID
-    return hex_digest
-
-
-def make_authenticated_request(method, url, token=None, json=None):
-    headers = {}
-    if token:
-        headers["Authorization"] = f"Bearer {token}"
-
-    response = requests.request(method, url, headers=headers, json=json)
-    if response.status_code == 401 and response.json().get("error") == "expired-token":
-        # Token has expired, reauthenticate
-        token = authenticate()
-        headers["Authorization"] = f"Bearer {token}"
-        response = requests.request(method, url, headers=headers, json=json)
-        response.raise_for_status()
-
-    return response
-
-
-def authenticate():
-    auth_url = "https://data.cftools.cloud/v1/auth/register"
-    payload = {"application_id": getenv("CFTools_App_ID"), "secret": getenv("CFTools_secret")}
-    response = requests.post(auth_url, json=payload)
-    response.raise_for_status()
-    return response.json()["token"]
-
 class TestingCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
@@ -76,7 +39,7 @@ class TestingCog(commands.Cog):
         """placeholder method"""
         await interaction.response.defer(ephemeral=False)
         for idx, server_map in enumerate(self.maps):
-            response = make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/{server_map}", token=self.bot.cftools_token)
+            response = self.bot.make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/{server_map}", token=self.bot.cftools_token)
             data = response.json()
             name = data[server_map]['name'].split(" ")[1].title()
             self.server_info[idx]["name"] = name

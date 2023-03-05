@@ -1,15 +1,17 @@
 import asyncio
+import hashlib
 import logging
+from os import getenv
 import random
 import string
 from nextcord import Intents, Member, Message
 from nextcord.ext import commands
+import requests
 
 from src.ftp.ftp_manager import FTPConnect
 from src.discord.guild_manager import check_for_files, initial_cha_setup, initial_server_setup
 from src.file_manager import create_new_server_dir, initial_dir_setup
 from src.sql.sql_manager import DBConnect
-from tester import authenticate
 
 
 class DiscordBot(commands.Bot, DBConnect):
@@ -42,7 +44,7 @@ class DiscordBot(commands.Bot, DBConnect):
         self.ftp: FTPConnect = FTPConnect()
         
 
-        self.cftools_token = authenticate()
+        self.cftools_token = self.authenticate()
 
 
     async def on_ready(self) -> None:
@@ -135,3 +137,39 @@ class DiscordBot(commands.Bot, DBConnect):
             ]
             await asyncio.wait(tasks)
             await asyncio.sleep(60 * 5)  # task runs every 60 seconds
+
+
+    def generate_server_id(self, game_identifier: int, ipv4: str, game_port: int) -> str:
+        # Build the string using the given parameters
+        # Hash the string using SHA-1
+        # Get the hex digest of the hash
+        # Return the hex digest as the server ID
+
+        server_string = f"{game_identifier}{ipv4}{game_port}"
+        hash_object = hashlib.sha1(server_string.encode())
+        hex_digest = hash_object.hexdigest()
+        return hex_digest
+
+
+    def make_authenticated_request(self, method, url, token=None, json=None):
+        headers = {}
+        if token:
+            headers["Authorization"] = f"Bearer {token}"
+
+        response = requests.request(method, url, headers=headers, json=json)
+        if response.status_code == 401 and response.json().get("error") == "expired-token":
+            # Token has expired, reauthenticate
+            token = self.authenticate()
+            headers["Authorization"] = f"Bearer {token}"
+            response = requests.request(method, url, headers=headers, json=json)
+            response.raise_for_status()
+
+        return response
+
+
+    def authenticate(self):
+        auth_url = "https://data.cftools.cloud/v1/auth/register"
+        payload = {"application_id": getenv("CFTools_App_ID"), "secret": getenv("CFTools_secret")}
+        response = requests.post(auth_url, json=payload)
+        response.raise_for_status()
+        return response.json()["token"]
