@@ -6,7 +6,6 @@ import nextcord
 import requests
 
 from src.discord.bot import DiscordBot
-from tester import make_authenticated_request
 
 
 def generate_server_id(game_identifier: int, ipv4: str, game_port: int) -> str:
