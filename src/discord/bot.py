@@ -9,6 +9,7 @@ from src.ftp.ftp_manager import FTPConnect
 from src.discord.guild_manager import check_for_files, initial_cha_setup, initial_server_setup
 from src.file_manager import create_new_server_dir, initial_dir_setup
 from src.sql.sql_manager import DBConnect
+from tester import authenticate
 
 
 class DiscordBot(commands.Bot, DBConnect):
@@ -39,7 +40,9 @@ class DiscordBot(commands.Bot, DBConnect):
         self.add_listener(self.on_member_remove)
         self.add_listener(self.on_message)
         self.ftp: FTPConnect = FTPConnect()
-        # create the background task and run it in the background
+        
+
+        self.cftools_token = authenticate()
 
 
     async def on_ready(self) -> None:

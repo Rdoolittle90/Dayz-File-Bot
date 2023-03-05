@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import hashlib
 from os import getenv
 from nextcord.ext import commands
@@ -50,6 +51,12 @@ class TestingCog(commands.Cog):
         self.bot: DiscordBot = bot
         print("!!! Testing Cog Connected !!!")
 
+        self.server_info = {0:{}, 1:{}, 2:{}}
+        self.chernarus = getenv("CFTtools_Map_1")
+        self.takistan = getenv("CFTtools_Map_2")
+        self.namalsk = getenv("CFTtools_Map_3")
+        self.maps = [self.chernarus, self.takistan, self.namalsk]
+
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="debug_atm_get_all", description="placeholder description 1")
     async def debug_atm_get_all(self, interaction: nextcord.Interaction):
@@ -62,30 +69,42 @@ class TestingCog(commands.Cog):
         ]
         await asyncio.wait(tasks)
 
+
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="get_server_status", description="placeholder description 1")
     async def get_server_status(self, interaction: nextcord.Interaction):
-        """placeholder method"""# Access the specific data you want to include in the embed
+        """placeholder method"""
+        await interaction.response.defer(ephemeral=False)
+        for idx, server_map in enumerate(self.maps):
+            response = make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/{server_map}", token=self.bot.cftools_token)
+            data = response.json()
+            name = data[server_map]['name'].split(" ")[1].title()
+            self.server_info[idx]["name"] = name
+            self.server_info[idx]["status"] = data[server_map]['online']
+            self.server_info[idx]["players"] = data[server_map]['status']['players']
+            self.server_info[idx]["slots"] = data[server_map]['status']['slots']
 
-        token = authenticate()
-        response = make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a", token=token)
-        data = response.json()
-        server_name = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['name']
-        server_status = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['online']
-        server_players = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['status']['players']
-        server_slots = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['status']['slots']
-        server_mods = "\n".join([f"- {mod['name']} (file ID: {mod['file_id']})" for mod in data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['mods']])
 
+        server_status = [self.server_info[0]["status"], self.server_info[1]["status"]], self.server_info[2]["status"]
+        if False not in server_status:
+            color = nextcord.Color.green()
+            status_emoji = "🟢"
+        elif False in server_status and True in server_status:
+            color = nextcord.Color.orange()
+            status_emoji = "🟠"
+        else:
+            color = nextcord.Color.red()
+            status_emoji = "🔴"
         # Create a new embed
-        embed = nextcord.Embed(title=server_name, color=0x00ff00)
+        embed = nextcord.Embed(title="Platinum Server Status", color=color, timestamp=datetime.datetime.utcnow())
 
         # Add fields to the embed
-        embed.add_field(name="Status", value="Online" if server_status else "Offline", inline=True)
-        embed.add_field(name="Players", value=f"{server_players}/{server_slots}", inline=True)
-        embed.add_field(name="Mods", value=server_mods, inline=False)
+        for i in range(0, 3):
+            status = "Online" if self.server_info[i]["status"] else "Offline"
+            embed.add_field(name=f'[#{i}] {self.server_info[i]["name"]}', value=f'{status_emoji}: `{status}`\nPlayers: `{self.server_info[i]["players"]}/{self.server_info[i]["slots"]}`', inline=True)
 
         # Send the embed to a channel
-        await interaction.channel.send(embed=embed)
+        await interaction.followup.send(embed=embed)
 
     
 
