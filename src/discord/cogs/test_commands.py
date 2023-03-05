@@ -63,7 +63,7 @@ class TestingCog(commands.Cog):
         await asyncio.wait(tasks)
 
     # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="debug_atm_get_all", description="placeholder description 1")
+    @nextcord.slash_command(dm_permission=False, name="get_server_status", description="placeholder description 1")
     async def get_server_status(self, interaction: nextcord.Interaction):
         """placeholder method"""# Access the specific data you want to include in the embed
 
