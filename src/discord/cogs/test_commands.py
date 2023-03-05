@@ -71,7 +71,7 @@ class TestingCog(commands.Cog):
         response = make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a", token=token)
         data = response.json()
         server_name = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['name']
-        server_status = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['status']['online']
+        server_status = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['online']
         server_players = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['status']['players']
         server_slots = data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['status']['slots']
         server_mods = "\n".join([f"- {mod['name']} (file ID: {mod['file_id']})" for mod in data['4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a']['mods']])
