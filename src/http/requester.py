@@ -23,6 +23,8 @@ from os import getenv
 
 import requests
 
+from src.helpers.colored_logging import colorize_log
+
 
 class CFTools:
     """A Class for connecting to rhe CFTools API"""
@@ -47,6 +49,7 @@ class CFTools:
         }
         self.token = self.authenticate()
         self.utc_then = datetime.datetime.utcnow()
+        colorize_log("DEBUG", "CFTools has been initialized")
 
 
     def generate_server_id(self, game_identifier: int, ipv4: str, game_port: int) -> str:

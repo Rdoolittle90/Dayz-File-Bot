@@ -29,6 +29,7 @@ class FTPConnect:
         self.host: str = os.getenv("FTP_HOST")
         self.user: str = os.getenv("FTP_USER")
         self.passwd: str = os.getenv("FTP_PASSWORD")
+        colorize_log("DEBUG", "FTPConnect has been initialized")
 
     def my_parser(filename):
         dt_str = filename.split("_")[1]
