@@ -4,6 +4,7 @@ from logging import Logger
 
 from dotenv import load_dotenv
 from nextcord.ext import tasks
+from src.http.requester import CFTools
 
 from src.discord.bot import DiscordBot
 from src.discord.guild_manager import initial_cha_setup, initial_server_setup
@@ -44,6 +45,8 @@ async def wait_until_ready(bot: DiscordBot):
     await bot.sql.sql_connect()
 
     bot.ftp = FTPConnect()
+
+    bot.cftools = CFTools()
 
     
 if __name__ == "__main__":   
