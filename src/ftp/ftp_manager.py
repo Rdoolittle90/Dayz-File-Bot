@@ -1,12 +1,11 @@
 import datetime
-import json
 import logging
 import os
 import random
 import aioftp
-import aiofiles
-from os import getenv
 from typing import Dict
+
+from src.helpers.colored_logging import colorize_log
 
 # Maps the name of a map to a port number
 port_by_name: Dict[str, int] = {
@@ -30,10 +29,12 @@ class FTPConnect:
         self.host: str = os.getenv("FTP_HOST")
         self.user: str = os.getenv("FTP_USER")
         self.passwd: str = os.getenv("FTP_PASSWORD")
-        self.logger = logging.getLogger('ftpconnect')
-        self.logger.setLevel(logging.DEBUG)
-        self.logger.addHandler(logging.StreamHandler())
 
+    def my_parser(filename):
+        dt_str = filename.split("_")[1]
+        dt = datetime.datetime.strptime(dt_str, "%Y%m%d_%H%M%S")
+        return dt
+    
     async def get_all_player_atm(self, map_name):
         """
         Connects to an FTP server and downloads all JSON files in the /profiles/LBmaster/Data/LBBanking/Players directory.
@@ -48,13 +49,14 @@ class FTPConnect:
             None
         """
         async with aioftp.Client.context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
-            print(f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}  {random.randint(0, 99999)}")
+            client.parser = self.my_parser
+            colorize_log("INFO", f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}  {random.randint(0, 99999)}")
             try:
                 for path, info in await client.list():
                     if info["type"] == "file" and path.suffix == ".json":
-                        print(f"Downloading file {path.name}")
-            except aioftp.StatusCodeError as e:
-                print(f"Error: {e.message}")
+                        colorize_log("INFO", f"Downloading file {path.name}")
+            except ValueError as err:
+                colorize_log("ERROR", f"Error: {err.message}")
 
 
     async def get_one_player_atm(self, map_name, SK64):

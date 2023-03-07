@@ -1,36 +1,45 @@
 ﻿import os
+from json import dump, load
 
 import requests
-from nextcord import Colour, DMChannel, Embed, Guild, Message, NotFound, SelectOption, File
+from nextcord import (CategoryChannel, Colour, DMChannel, Embed, File, Guild,
+                      Message, NotFound, SelectOption, TextChannel, Role)
 from nextcord.errors import Forbidden
 from nextcord.utils import get
 
-from json import load, dump
+from src.helpers.colored_logging import colorize_log
 
 
 async def initial_server_setup(guild: Guild):
     try:
         bot_manager_role = get(guild.roles, name='Bot Manager')
         if bot_manager_role is None:
-            await guild.create_role(name="Bot Manager", color=Colour.darker_grey())
+            new_role: Role = await guild.create_role(name="Bot Manager", color=Colour.darker_grey())
+            colorize_log("DEBUG", f"Created new role {new_role.name} in guild {guild.name}")
+        else:
+            colorize_log("DEBUG", f"Found Role {bot_manager_role.name} in guild {guild.name}")
+
     except Forbidden:
-        print("Missing Permissions!")
+        colorize_log("ERROR", "Missing Permissions!")
 
 
 async def initial_cha_setup(guild: Guild):
     try:
-        channel = get(guild.categories, name='BOT CONTROLS')
-        if channel is None:
+        category: CategoryChannel = get(guild.categories, name='BOT CONTROLS')
+        channel: TextChannel = get(guild.channels, name='drifter-imports')
+        if category is None:
             category = await guild.create_category("BOT CONTROLS")
             channel = await category.create_text_channel('drifter-imports')
             embed = Embed(title="How to upload a file", description="Files must be uploaded by the following commands", color=Colour.blurple())
             embed.add_field(name="Step 1", value="Attach files to a message", inline=False)
             embed.add_field(name="Step 2", value="send `@Drifter map_name` as the message with the files", inline=False)
             embed.add_field(name="Step 3", value="wait for confirmation of upload.", inline=False)
-
             await channel.send(embed=embed)
+            colorize_log("DEBUG", f"Created new text channel in category {category.name}")
+        else:
+            colorize_log("DEBUG", f"Found text channel {channel.name} in category {channel.category.name} in guild {guild.name}")
     except Forbidden:
-        print("Missing Permissions!")
+        colorize_log("ERROR", "Missing Permissions!")
 
 
 async def check_for_files(message: Message):

@@ -1,8 +1,5 @@
-import datetime
-from discord import TextInputStyle
 from nextcord.ui import Modal, TextInput
-from nextcord import Interaction, Embed
-from src.discord.guild_manager import get_server_settings
+from nextcord import Interaction
 from src.discord.bot import DiscordBot
 
 
@@ -34,17 +31,6 @@ class AnnouncementCreator(Modal):
         """
         """
         await interaction.response.defer(ephemeral=False)
-        embed = Embed(
-            title=self.title.value,
-            description=self.description.value,
-            color=self.color.value
-        )
 
-        if self.is_preview:
-            channel = interaction.channel
-        else:
-            settings = get_server_settings()
-            channel = self.bot.get_channel(settings["announcement_channel"])
-
-        await channel.send(embed=embed)
+        await interaction.channel.send("🐈")
         print("done.")

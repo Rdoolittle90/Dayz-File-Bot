@@ -1,316 +1,137 @@
 {
-    "4a1c3f05ef5f6f7004286b8c8f73ef1061e54e1a": {
-        "_object": {
-            "created_at": "2022-09-23T18:20:23.514000",
-            "error": "GameServerQueryError.NONE",
-            "updated_at": "2023-03-05T06:53:20.138000"
-        },
-        "attributes": {
-            "dlc": false,
-            "dlcs": {
-                "livonia": false
+    "sessions": [
+        {
+            "cftools_id": "631ce883432621199f807615",
+            "connection": {
+                "country_code": "US",
+                "country_names": {
+                    "de": "Vereinigte Staaten",
+                    "en": "United States",
+                    "es": "Estados Unidos",
+                    "fr": "\u00c9tats Unis",
+                    "ja": "\u30a2\u30e1\u30ea\u30ab",
+                    "pt-BR": "EUA",
+                    "ru": "\u0421\u0428\u0410",
+                    "zh-CN": "\u7f8e\u56fd"
+                },
+                "ipv4": "98.255.5.102",
+                "malicious": false,
+                "provider": "Comcast Cable Communications, LLC"
             },
-            "experimental": false,
-            "hive": "private",
-            "modded": true,
-            "official": false,
-            "shard": "","whitelist": false},
-        "environment": {
-            "perspectives": {
-                "1rd": true,
-                "3rd": false
+            "created_at": "2023-03-06T19:21:14.180000",
+            "gamedata": {
+                "player_name": "BFrosty",
+                "steam64": "76561198119798427"
             },
-            "time": "17:06",
-            "time_acceleration": {
-                "general": 6.0,
-                "night": 3.0
-            }},
-        "game": 1,
-        "geolocation": {
-            "available": false,
-            "city": {
-                "name": "Watson",
-                "region": "Virginia"
+            "id": "64063d2a35eb1e5202abd8af",
+            "info": {
+                "ban_count": 0,
+                "labels": []
             },
-            "continent": "NA",
-            "country": {
-                "code": "US",
-                "name": "United States"
+            "live": {
+                "load_time": 34.49,
+                "loaded": true,
+                "ping": {
+                    "actual": 140,
+                    "trend": -1
+                },
+                "position": {
+                    "join": [
+                        15345.98046875,
+                        15346.4501953125,
+                        211.48745727539062
+                    ],
+                    "latest": [
+                        15345.98046875,
+                        15346.4501953125,
+                        211.48745727539062
+                    ],
+                    "leave": null
+                }
             },
-            "timezone": "America/New_York"
-        },
-        "host": {
-            "address": "135.148.136.106",
-            "game_port": 2502,
-            "os": "w",
-            "query_port": 2506
-        },
-        "map": "chernarusplus",
-        "mods": [
-            {
-                "file_id": 1932611410,
-                "name": "CannabisPlus"
+            "persona": {
+                "bans": {
+                    "community": false,
+                    "economy": "none",
+                    "game": 0,
+                    "last_ban": 0,
+                    "vac": 0
+                },
+                "profile": {
+                    "avatar": "https://avatars.akamai.steamstatic.com/3ca0cd38a9429b4d7fe0a5f2e566f4aab606eb48_full.jpg",
+                    "name": "BFrosty (spyFFy)",
+                    "private": false
+                }
             },
-            {
-                "file_id": 2442719054,
-                "name": "Dex Storage Stuff"
-            },
-            {
-                "file_id": 2775001965,
-                "name": "Hummer_H2_v2"
-            },
-            {
-                "file_id": 2155726353,
-                "name": "Mortys Weapons"
-            },
-            {
-                "file_id": 1850623448,
-                "name": "ZeRoY FishingZ"
-            },
-            {
-                "file_id": 1572541337,
-                "name": "InventoryPlus"
-            },
-            {
-                "file_id": 2122332595,
-                "name": "Vehicle3PP"
-            },
-            {
-                "file_id": 1819921337,
-                "name": "Cheytac M200 from ArmA 2 Port"
-            },
-            {
-                "file_id": 2842791521,
-                "name": "KOTH"
-            },
-            {
-                "file_id": 2049002856,
-                "name": "MuchCarKey"
-            },
-            {
-                "file_id": 2251677907,
-                "name": "LayoutTrader"
-            },
-            {
-                "file_id": 1680019590,
-                "name": "Server Information Panel"
-            },
-            {
-                "file_id": 2716714958,
-                "name": "WZG Creature"
-            },
-            {
-                "file_id": 2067834152,
-                "name": "SchanaModCompass"
-            },
-            {
-                "file_id": 2197959098,
-                "name": "TraderFixesAndFeatures"
-            },
-            {
-                "file_id": 1870524790,
-                "name": "Airdrop-Upgraded"
-            },
-            {
-                "file_id": 1623711988,
-                "name": "VanillaPlusPlusMap"
-            },
-            {
-                "file_id": 2115602332,
-                "name": "SchanaModGlobalChat"
-            },
-            {
-                "file_id": 2757080411,
-                "name": "Crocos Quadbike"
-            },
-            {
-                "file_id": 2832395845,
-                "name": "dbo_surfaces"
-            },
-            {
-                "file_id": 2428677475,
-                "name": "PsychoGaming Vehicles"
-            },
-            {
-                "file_id": 2852363605,
-                "name": "TommysClothingPack"
-            },
-            {
-                "file_id": 2454879181,
-                "name": "Enhanced Banking"
-            },
-            {
-                "file_id": 2839126911,
-                "name": "Techs 4x4 Hilux"
-            },
-            {
-                "file_id": 1619208263,
-                "name": "Modern's Drink Pack"
-            },
-            {
-                "file_id": 1560819773,
-                "name": "Unlimited Stamina"
-            },
-            {
-                "file_id": 2237106012,
-                "name": "Pog Raid Tools"
-            },
-            {
-                "file_id": 1617874376,
-                "name": "OP_BaseItems"
-            },
-            {
-                "file_id": 1818957231,
-                "name": "[CrSk] VAZ-2107"
-            },
-            {
-                "file_id": 1912237302,
-                "name": "IRP Land Rover Defender 110"
-            },
-            {
-                "file_id": 2159027181,
-                "name": "TrailBruiser"
-            },
-            {
-                "file_id": 2141350489,
-                "name": "Nehr_Pickup_Lada"
-            },
-            {
-                "file_id": 2248016797,
-                "name": "Blackouts Corvette"
-            },
-            {
-                "file_id": 2357982659,
-                "name": "Blackouts Baja"
-            },
-            {
-                "file_id": 2860643107,
-                "name": "BoomLay's Things"
-            },
-            {
-                "file_id": 2797171732,
-                "name": "AFixForScopes"
-            },
-            {
-                "file_id": 1646187754,
-                "name": "CodeLock"
-            },
-            {
-                "file_id": 2024889593,
-                "name": "COCAs_NoVehicleDamageMOD"
-            },
-            {
-                "file_id": 2629595854,
-                "name": "Modular Vest System - Reworked"
-            },
-            {
-                "file_id": 2906371600,
-                "name": "RedFalcon Watercraft"
-            },
-            {
-                "file_id": 2534883520,
-                "name": "SchanaParty"
-            },
-            {
-                "file_id": 1819514788,
-                "name": "Ear Plugs"
-            },
-            {
-                "file_id": 2313173630,
-                "name": "Autorun Mod"
-            },
-            {
-                "file_id": 2714183642,
-                "name": "DNA Keycards"
-            },
-            {
-                "file_id": 2845226518,
-                "name": "PokemonAlbum"
-            },
-            {
-                "file_id": 2575183443,
-                "name": "Collectable Items"
-            },
-            {
-                "file_id": 1775478803,
-                "name": "CJ187_Drinks_Food"
-            },
-            {
-                "file_id": 1832448183,
-                "name": "FlipTransport"
-            },
-            {
-                "file_id": 2398911445,
-                "name": "Basic Territories"
-            },
-            {
-                "file_id": 2303554682,
-                "name": "Dogtags"
-            },
-            {
-                "file_id": 2345073965,
-                "name": "CJ187-LootChest"
-            },
-            {
-                "file_id": 2794690371,
-                "name": "BBPItemPack"
-            },
-            {
-                "file_id": 1710977250,
-                "name": "BaseBuildingPlus"
-            },
-            {
-                "file_id": 2858839719,
-                "name": "Platinum DayZ Chernarus Mod"
-            },
-            {
-                "file_id": 1582756848,
-                "name": "ZomBerry Admin Tools"
-            },
-            {
-                "file_id": 1828439124,
-                "name": "VPPAdminTools"
-            },
-            {
-                "file_id": 1590841260,
-                "name": "Trader Mod"
-            },
-            {
-                "file_id": 2545327648,
-                "name": "Dabs Framework"
-            },
-            {
-                "file_id": 2276010135,
-                "name": "DayZ Editor Loader"
-            },
-            {
-                "file_id": 1565871491,
-                "name": "BuilderItems"
+            "stats": {
+                "falldamage_deaths": 1
             }
-        ],
-        "name": "PLATINUM CHERNARUS [#1]",
-        "offline": false,
-        "online": true,
-        "publisher": {
-            "monetization": false
         },
-        "rank": 2194,
-        "rating": "9860",
-        "security": {
-            "battleye": true,
-            "password": false,
-            "vac": true
-        },
-        "status": {
-            "bots": false,
-            "players": 2,
-            "queue": {
-                "active": false,
-                "size": 0
+        {
+            "cftools_id": "6350d411c869e9a047010d23",
+            "connection": {
+                "country_code": "US",
+                "country_names": {
+                    "de": "Vereinigte Staaten",
+                    "en": "United States",
+                    "es": "Estados Unidos",
+                    "fr": "\u00c9tats Unis",
+                    "ja": "\u30a2\u30e1\u30ea\u30ab",
+                    "pt-BR": "EUA",
+                    "ru": "\u0421\u0428\u0410",
+                    "zh-CN": "\u7f8e\u56fd"
+                },
+                "ipv4": "73.185.202.190",
+                "malicious": false,
+                "provider": "Comcast Cable Communications, LLC"
             },
-            "slots": 100
-        },
-        "version": "1.20.155844"
-    },
+            "created_at": "2023-03-06T20:29:32.456000",
+            "gamedata": {
+                "player_name": "Hacker",
+                "steam64": "76561198069302644"
+            },
+            "id": "64064d2c35eb1e5202ac18c3",
+            "info": {
+                "ban_count": 0,
+                "labels": []
+            },
+            "live": {
+                "load_time": 31.49,
+                "loaded": true,
+                "ping": {
+                    "actual": 47,
+                    "trend": 0
+                },
+                "position": {
+                    "join": [
+                        3883.349853515625,
+                        11565.0009765625,
+                        380.2105712890625
+                    ],
+                    "latest": [
+                        3883.349853515625,
+                        11565.0009765625,
+                        380.2105712890625
+                    ],
+                    "leave": null
+                }
+            },
+            "persona": {
+                "bans": {
+                    "community": false,
+                    "economy": "none",
+                    "game": 0,
+                    "last_ban": 0,
+                    "vac": 0
+                },
+                "profile": {
+                    "avatar": "https://avatars.akamai.steamstatic.com/ee3657839a2a4636b1b0b769763fc541461a4457_full.jpg",
+                    "name": "Krackasourus",
+                    "private": false
+                }
+            },
+            "stats": {}
+        }
+    ],
     "status": true
 }

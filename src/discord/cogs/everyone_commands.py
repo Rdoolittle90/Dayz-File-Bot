@@ -1,5 +1,6 @@
 from nextcord.ext import commands
 import nextcord
+from src.helpers.colored_logging import colorize_log
 from src.discord.bot import DiscordBot
 
 
@@ -7,7 +8,8 @@ from src.discord.bot import DiscordBot
 class EveryoneCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
-        print("Everyone Cog Connected")
+        self.name = "Everyone Cog"
+        colorize_log("INFO", f"{self.name} Connected")
 
 
     # =====================================================================================================

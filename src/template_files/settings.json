@@ -1,4 +1,5 @@
 {
     "bot_admin_role": null,
-    "announcement_channel": null
+    "announcement_channel": null,
+    "active_cogs": []
 }

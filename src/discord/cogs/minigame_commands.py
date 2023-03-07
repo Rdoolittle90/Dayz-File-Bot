@@ -1,8 +1,12 @@
+import datetime
 import random
 from typing import List
 import discord
 from nextcord.ext import commands
 import nextcord
+
+from src.helpers.colored_logging import colorize_log
+
 
 class Minigames(commands.Cog):
     def __init__(self, bot):
@@ -17,6 +21,33 @@ class Minigames(commands.Cog):
             "🚗": {"weight": 2, "payout": 25},  # Vehicle
             "🚁": {"weight": 1, "payout": 50},  # Helicopter
         }
+        self.name = "Minigames Cog"
+        colorize_log("INFO", f"{self.name} Connected")
+
+
+    @nextcord.slash_command(dm_permission=False, name="slot", description="WIP")
+    async def slot(self, interaction: nextcord.Interaction, bet:int):
+        colorize_log("INFO", f"{interaction.user.name} used Minigames.slot at {datetime.datetime.now()}")
+        """Play the slot machine!"""
+        balance = 500
+        if balance < bet:
+            await interaction.channel.send("You don't have enough money to place that bet!")
+            return
+
+        spin_result = self._get_spin_result()
+        colorize_log("DEBUG", f"{interaction.user.name} spin result {spin_result}")
+        payout = self._calculate_payout(spin_result)
+        colorize_log("DEBUG", f"{interaction.user.name} received {payout}")
+
+        balance += payout - bet
+
+        embed = discord.Embed(title="Slot Machine", description=f"{' '.join(spin_result)}", color=discord.Color.blue())
+        embed.add_field(name="Payout", value=f"{payout} credits")
+        embed.add_field(name="Balance", value=f"{balance} credits")
+
+        await interaction.channel.send(embed=embed)
+
+
 
     def _get_spin_result(self) -> List[str]:
         spin_result = []
@@ -27,6 +58,7 @@ class Minigames(commands.Cog):
                 k=1
             )[0]
             spin_result.append(symbol)
+        colorize_log("DEBUG", f"{self.name} Connected")
         return spin_result
 
     def _calculate_payout(self, spin_result: List[str]) -> int:
@@ -34,25 +66,6 @@ class Minigames(commands.Cog):
         for symbol in spin_result:
             payout += self.symbols[symbol]["payout"]
         return payout
-
-    @nextcord.slash_command(dm_permission=False, name="slot", description="WIP")
-    async def slot(self, ctx, bet:int):
-        """Play the slot machine!"""
-        balance = 500
-        if balance < bet:
-            await ctx.channel.send("You don't have enough money to place that bet!")
-            return
-
-        spin_result = self._get_spin_result()
-        payout = self._calculate_payout(spin_result)
-
-        balance += payout - bet
-
-        embed = discord.Embed(title="Slot Machine", description=f"{' '.join(spin_result)}", color=discord.Color.blue())
-        embed.add_field(name="Payout", value=f"{payout} credits")
-        embed.add_field(name="Balance", value=f"{balance} credits")
-
-        await ctx.channel.send(embed=embed)
 
 
 def setup(bot: commands.Bot):
