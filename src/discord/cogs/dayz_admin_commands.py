@@ -5,7 +5,7 @@ from src.helpers.colored_printing import colorized_print
 from src.discord.announcements import announce_status
 from src.discord.modals.remove_map_modal import RemoveMapModal
 from src.file_manager import create_new_map_dir, get_map_key, key_embed
-from src.discord.load_traderconfig import load_traderconfig_view
+from src.dayz.load_traderconfig import load_traderconfig_view
 from src.discord.guild_manager import get_map_selections
 from src.discord.bot import DiscordBot
 
