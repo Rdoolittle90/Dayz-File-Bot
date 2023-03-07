@@ -32,6 +32,7 @@ import string
 
 from nextcord import Intents, Member, Message
 from nextcord.ext import commands
+from src.helpers.divider_title import divider_title
 
 from src.discord.guild_manager import check_for_files
 from src.ftp.ftp_manager import FTPConnect
@@ -64,8 +65,9 @@ class DiscordBot(commands.Bot):
         self.name = os.getenv("APP_NAME")
         self.version = os.getenv("APP_VERSION")
         self.app_title = f"{self.name} Discord Bot v.{self.version}"
-        self.app_display_primary = "=" * (len(self.app_title) + 8)
-        self.app_display_secondary = "-" * (len(self.app_title) + 8)
+        self.width = len(self.app_title) + 8
+        self.primary_symbol = "="
+        self.secondary_symbol = "-"
 
         self.display_title()
 
@@ -76,16 +78,19 @@ class DiscordBot(commands.Bot):
 
         super().__init__(command_prefix=prefix, intents=intents, *args, **kwargs)
 
+        divider_title("Cogs", self.width, self.secondary_symbol)
 
-        # self.load_extension("src.discord.cogs.admin_commands")
+        self.load_extension("src.discord.cogs.admin_commands")
         self.load_extension("src.discord.cogs.core_commands")
         self.load_extension("src.discord.cogs.dayz_admin_commands")
         self.load_extension("src.discord.cogs.dayz_user_commands")
         self.load_extension("src.discord.cogs.minigame_commands")
-        # self.load_extension("src.discord.cogs.everyone_commands")
+        self.load_extension("src.discord.cogs.everyone_commands")
         self.load_extension("src.discord.cogs.test_commands")
-         
-        print(self.app_display_secondary)  # ---
+
+        
+
+        divider_title("Guilds", self.width, self.secondary_symbol)
 
         self.add_listener(self.on_ready)
         self.add_listener(self.on_member_join)
@@ -174,9 +179,9 @@ class DiscordBot(commands.Bot):
 
     def display_title(self):
         print()
-        print(self.app_display_primary)
-        print(f"    {self.app_title}")
-        print(self.app_display_primary)
+        divider_title("", self.width, self.primary_symbol)
+        divider_title(self.app_title, self.width, " ")
+        divider_title("", self.width, self.primary_symbol)
 
 
 

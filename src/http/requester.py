@@ -19,11 +19,12 @@ Methods:
 
 import datetime
 import hashlib
+import json
 from os import getenv
 
 import requests
 
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 
 
 class CFTools:
@@ -47,9 +48,21 @@ class CFTools:
                 "server_id": getenv("CFTools_Map_3_Server_ID")
             }
         }
-        self.token = self.authenticate()
+        with open("_files/support/settings.json", "r") as json_in:
+            data = json.load(json_in)
+
+
+        if data["CFTools_AUTH"] == None:
+            self.token = self.authenticate()
+            with open("_files/support/settings.json", "w") as json_out:
+                data["CFTools_AUTH"] = self.token
+                json.dump(data, json_out, indent=4)
+                colorized_print("DEBUG", "New token saved to file.")
+        else:
+            self.token = data["CFTools_AUTH"]
+            colorized_print("DEBUG", "Token found in file.")
         self.utc_then = datetime.datetime.utcnow()
-        colorize_log("DEBUG", "CFTools has been initialized")
+        colorized_print("DEBUG", "CFTools has been initialized")
 
 
     def generate_server_id(self, game_identifier: int, ipv4: str, game_port: int) -> str:
@@ -108,6 +121,8 @@ class CFTools:
         """
         auth_url = "https://data.cftools.cloud/v1/auth/register"
         payload = {"application_id": getenv("CFTools_App_ID"), "secret": getenv("CFTools_secret")}
+        colorized_print("DEBUG", "Requesting new Auth token")
         response = requests.post(auth_url, json=payload, timeout=10)
         response.raise_for_status()
+        colorized_print("DEBUG", "Success new token received")
         return response.json()["token"]

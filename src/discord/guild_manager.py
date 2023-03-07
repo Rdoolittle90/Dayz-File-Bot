@@ -7,7 +7,7 @@ from nextcord import (CategoryChannel, Colour, DMChannel, Embed, File, Guild,
 from nextcord.errors import Forbidden
 from nextcord.utils import get
 
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 
 
 async def initial_server_setup(guild: Guild):
@@ -15,12 +15,12 @@ async def initial_server_setup(guild: Guild):
         bot_manager_role = get(guild.roles, name='Bot Manager')
         if bot_manager_role is None:
             new_role: Role = await guild.create_role(name="Bot Manager", color=Colour.darker_grey())
-            colorize_log("DEBUG", f"Created new role {new_role.name} in guild {guild.name}")
+            colorized_print("DEBUG", f"Created new role {new_role.name} in guild {guild.name}")
         else:
-            colorize_log("DEBUG", f"Found Role {bot_manager_role.name} in guild {guild.name}")
+            colorized_print("DEBUG", f"Found Role {bot_manager_role.name} in guild {guild.name}")
 
     except Forbidden:
-        colorize_log("ERROR", "Missing Permissions!")
+        colorized_print("ERROR", "Missing Permissions!")
 
 
 async def initial_cha_setup(guild: Guild):
@@ -35,11 +35,11 @@ async def initial_cha_setup(guild: Guild):
             embed.add_field(name="Step 2", value="send `@Drifter map_name` as the message with the files", inline=False)
             embed.add_field(name="Step 3", value="wait for confirmation of upload.", inline=False)
             await channel.send(embed=embed)
-            colorize_log("DEBUG", f"Created new text channel in category {category.name}")
+            colorized_print("DEBUG", f"Created new text channel in category {category.name}")
         else:
-            colorize_log("DEBUG", f"Found text channel {channel.name} in category {channel.category.name} in guild {guild.name}")
+            colorized_print("DEBUG", f"Found text channel {channel.name} in category {channel.category.name} in guild {guild.name}")
     except Forbidden:
-        colorize_log("ERROR", "Missing Permissions!")
+        colorized_print("ERROR", "Missing Permissions!")
 
 
 async def check_for_files(message: Message):

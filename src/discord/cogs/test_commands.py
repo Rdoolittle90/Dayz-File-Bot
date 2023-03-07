@@ -2,7 +2,7 @@ import asyncio
 import datetime
 from nextcord.ext import commands
 import nextcord
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 
 from src.discord.bot import DiscordBot
 
@@ -10,13 +10,13 @@ from src.discord.bot import DiscordBot
 class TestingCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
-        self.name = "Testing Cog"
-        colorize_log("INFO", "{:<16} Connected".format(self.name))
+        self.name = "Testing"
+        colorized_print("COG", self.name)
 
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="debug_atm_get_all", description="placeholder description 1")
     async def debug_atm_get_all(self, interaction: nextcord.Interaction):
-        colorize_log("WARNING", f"{interaction.user.name} used TestingCog.debug_atm_get_all at {datetime.datetime.now()}")
+        colorized_print("WARNING", f"{interaction.user.name} used TestingCog.debug_atm_get_all at {datetime.datetime.now()}")
         """placeholder method"""
         tasks = [
             asyncio.create_task(self.bot.ftp.get_all_player_atm("Chernarus")),
@@ -30,13 +30,10 @@ class TestingCog(commands.Cog):
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="get_server_status", description="placeholder description 1")
     async def get_server_status(self, interaction: nextcord.Interaction):
-        colorize_log("WARNING", f"{interaction.user.name} used TestingCog.get_server_status at {datetime.datetime.now()}")
+        colorized_print("WARNING", f"{interaction.user.name} used TestingCog.get_server_status at {datetime.datetime.now()}")
         """placeholder method"""
-        await interaction.response.defer(ephemeral=False)
-        # Wait for 1 second
-        await asyncio.sleep(1)
-
         utc_now = datetime.datetime.utcnow()
+        now = datetime.datetime.now()
 
         time_diff = utc_now - self.bot.cftools.utc_then
 
@@ -61,7 +58,7 @@ class TestingCog(commands.Cog):
         
         color, status_emoji = format_status(server_status_list)
         # Create a new embed
-        embed = nextcord.Embed(title="Platinum Server Status", color=color, timestamp=utc_now)
+        embed = nextcord.Embed(title="Platinum Server Status", color=color, timestamp=now)
 
         # Add fields to the embed
         for idx in range(0, 3):
@@ -77,7 +74,7 @@ class TestingCog(commands.Cog):
                 )
 
         # Send the embed to a channel
-        await interaction.followup.send(embed=embed)
+        await interaction.channel.send(embed=embed)
 
     
 

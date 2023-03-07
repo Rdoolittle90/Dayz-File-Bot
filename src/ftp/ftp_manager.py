@@ -5,7 +5,7 @@ import random
 import aioftp
 from typing import Dict
 
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 
 # Maps the name of a map to a port number
 port_by_name: Dict[str, int] = {
@@ -29,7 +29,7 @@ class FTPConnect:
         self.host: str = os.getenv("FTP_HOST")
         self.user: str = os.getenv("FTP_USER")
         self.passwd: str = os.getenv("FTP_PASSWORD")
-        colorize_log("DEBUG", "FTPConnect has been initialized")
+        colorized_print("DEBUG", "FTPConnect has been initialized")
 
     def my_parser(filename):
         dt_str = filename.split("_")[1]
@@ -51,13 +51,13 @@ class FTPConnect:
         """
         async with aioftp.Client.context(self.host, port_by_name[map_name], self.user, self.passwd) as client:
             client.parser = self.my_parser
-            colorize_log("INFO", f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}  {random.randint(0, 99999)}")
+            colorized_print("INFO", f"Connecting to {self.host}:{port_by_name[map_name]} {map_name}  {random.randint(0, 99999)}")
             try:
                 for path, info in await client.list():
                     if info["type"] == "file" and path.suffix == ".json":
-                        colorize_log("INFO", f"Downloading file {path.name}")
+                        colorized_print("INFO", f"Downloading file {path.name}")
             except ValueError as err:
-                colorize_log("ERROR", f"Error: {err.message}")
+                colorized_print("ERROR", f"Error: {err.message}")
 
 
     async def get_one_player_atm(self, map_name, SK64):

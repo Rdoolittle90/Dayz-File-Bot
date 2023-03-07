@@ -7,7 +7,7 @@ import aiohttp
 from discord import Embed
 from nextcord.ui import Modal, TextInput
 from nextcord import Interaction
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 from src.discord.bot import DiscordBot
 
 
@@ -79,11 +79,11 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
 
     if await get_registered_steam_64(bot, discord_id) is not None:
         # Steam id already associated with a discord id
-        colorize_log("WARNING", f"Discord ID {discord_id} is already associated with a Steam ID.")
+        colorized_print("WARNING", f"Discord ID {discord_id} is already associated with a Steam ID.")
         return -1
     if await get_registered_discord_id(bot, steam_id) is not None:
         # Discord id already associated with a steam id
-        colorize_log("WARNING", f"Steam ID {steam_id} is already associated with a Discord ID.")
+        colorized_print("WARNING", f"Steam ID {steam_id} is already associated with a Discord ID.")
         return -2
 
     # Get user location information from Steam API
@@ -92,7 +92,7 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
             async with session.get(f'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={getenv("STEAM_API_KEY")}&steamids={steam_id}') as response:
                 if response.status != 200:
                     # Handle error response
-                    colorize_log("ERROR", f"Error getting user info from Steam API: {response.status}")
+                    colorized_print("ERROR", f"Error getting user info from Steam API: {response.status}")
                     return -3
 
                 data = await response.json()
@@ -101,11 +101,11 @@ async def verify_user(bot: DiscordBot, steam_id: str, discord_id: str) -> Option
                 # Insert new user data into database
                 current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 await bot.sql.sql_execute("INSERT INTO registration (discord_id, steam_id, loccountrycode, profile_url, registration_date) VALUES (%s, %s, %s, %s, %s)", discord_id, steam_id, user_info.get('loccountrycode', None), user_info.get('profileurl', None), current_time)
-                colorize_log("INFO", f"User with Discord ID {discord_id} and Steam ID {steam_id} has been verified and registered.")
+                colorized_print("INFO", f"User with Discord ID {discord_id} and Steam ID {steam_id} has been verified and registered.")
                 return 1
     except Exception as e:
         # Handle other exceptions
-        colorize_log("ERROR", f"Error verifying user with Discord ID {discord_id} and Steam ID {steam_id}: {e}")
+        colorized_print("ERROR", f"Error verifying user with Discord ID {discord_id} and Steam ID {steam_id}: {e}")
         return -3
 
 
@@ -133,28 +133,28 @@ def is_valid_steam64_id(steam_id: str) -> bool:
 
 
 def embed_invalid_id(user_name, steam_id: str) -> Embed:
-    colorize_log("WARNING", f"{user_name} Invalid Steam 64 ID: {steam_id}")
+    colorized_print("WARNING", f"{user_name} Invalid Steam 64 ID: {steam_id}")
     embed = Embed(title="Registration Failed", color=0xff0000)
     embed.description = f"Invalid Steam 64 ID: `{steam_id}`"
     return embed
 
 
 def embed_already_registered(user_name) -> Embed:
-    colorize_log("WARNING", f"{user_name} is already registered")
+    colorized_print("WARNING", f"{user_name} is already registered")
     embed = Embed(title="Registration Failed", color=0xff0000)
     embed.description = f"You are already registered"
     return embed
 
 
 def embed_already_taken(user_name) -> Embed:
-    colorize_log("CRITICAL", f"{user_name} attempted to activate a Steam account that is already registered")
+    colorized_print("CRITICAL", f"{user_name} attempted to activate a Steam account that is already registered")
     embed = Embed(title="Registration Failed", color=0xff0000)
     embed.description = f"That account is already registered"
     return embed
 
 
 def embed_success(user_name) -> Embed:
-    colorize_log("INFO", f"{user_name} Registration Successful")
+    colorized_print("INFO", f"{user_name} Registration Successful")
     embed = Embed(title="Registration Successful", color=0x00ff00)
     embed.description = "Thank you for registering."
     return embed

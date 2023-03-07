@@ -29,7 +29,7 @@ from string import ascii_lowercase, ascii_uppercase
 from nextcord import Embed
 import nextcord
 
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 
 # ==================================================================================================
 
@@ -71,7 +71,7 @@ def create_new_server_dir() -> None:
         if os.path.exists(template_file):
             shutil.copyfile(template_file, settings_file)
         else:
-            colorize_log("ERROR", f"Template file {template_file} not found.")
+            colorized_print("ERROR", f"Template file {template_file} not found.")
 
 # ==================================================================================================
 

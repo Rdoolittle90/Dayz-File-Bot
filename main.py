@@ -1,22 +1,18 @@
-import logging
 import os
-from logging import Logger
 
 from dotenv import load_dotenv
 from nextcord.ext import tasks
-from src.http.requester import CFTools
+from src.helpers.divider_title import divider_title
 
 from src.discord.bot import DiscordBot
 from src.discord.guild_manager import initial_cha_setup, initial_server_setup
-from src.ftp.ftp_manager import FTPConnect
 from src.file_manager import create_new_server_dir, initial_dir_setup
-from src.helpers.colored_logging import colorize_log
+from src.ftp.ftp_manager import FTPConnect
+from src.helpers.colored_printing import colorized_print
+from src.http.requester import CFTools
 from src.sql.sql_manager import DBConnect
 
-
-
-logger = Logger(__name__)
-logger.setLevel(logging.INFO)
+DEBUG_LEVEL = "DEBUG"
 
 def main():
     load_dotenv()
@@ -30,17 +26,16 @@ def main():
 
 @tasks.loop(count=1)
 async def wait_until_ready(bot: DiscordBot):
-    colorize_log("DEBUG", "Waiting until ready.")
+    colorized_print("DEBUG", "Waiting until ready.")
     await bot.wait_until_ready()
-    colorize_log("DEBUG", "Ready.")
+    colorized_print("DEBUG", "Ready.")
     initial_dir_setup()
     for guild in bot.guilds:
-        colorize_log("INFO", f"Connected to: {guild.name}")
+        colorized_print("GUILD", f"{guild.name}")
         await initial_cha_setup(guild)
         await initial_server_setup(guild)
         create_new_server_dir()
-
-    print(bot.app_display_secondary)
+    divider_title("Begin Log", bot.width, bot.secondary_symbol)
     bot.sql = DBConnect()
     await bot.sql.sql_connect()
 

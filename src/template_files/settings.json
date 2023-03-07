@@ -1,5 +1,6 @@
 {
     "bot_admin_role": null,
     "announcement_channel": null,
-    "active_cogs": []
+    "active_cogs": [],
+    "CFTools_AUTH": null
 }

@@ -5,7 +5,7 @@ import discord
 from nextcord.ext import commands
 import nextcord
 
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 
 
 class Minigames(commands.Cog):
@@ -21,13 +21,13 @@ class Minigames(commands.Cog):
             "🚗": {"weight": 2, "payout": 25},  # Vehicle
             "🚁": {"weight": 1, "payout": 50},  # Helicopter
         }
-        self.name = "Minigames Cog"
-        colorize_log("INFO", "{:<16} Connected".format(self.name))
+        self.name = "Minigames"
+        colorized_print("COG", self.name)
 
 
     @nextcord.slash_command(dm_permission=False, name="slot", description="WIP")
     async def slot(self, interaction: nextcord.Interaction, bet:int):
-        colorize_log("INFO", f"{interaction.user.name} used Minigames.slot at {datetime.datetime.now()}")
+        colorized_print("INFO", f"{interaction.user.name} used Minigames.slot at {datetime.datetime.now()}")
         """Play the slot machine!"""
         balance = 500
         if balance < bet:
@@ -35,9 +35,9 @@ class Minigames(commands.Cog):
             return
 
         spin_result = self._get_spin_result()
-        colorize_log("DEBUG", f"{interaction.user.name} spin result {spin_result}")
+        colorized_print("DEBUG", f"{interaction.user.name} spin result {spin_result}")
         payout = self._calculate_payout(spin_result)
-        colorize_log("DEBUG", f"{interaction.user.name} received {payout}")
+        colorized_print("DEBUG", f"{interaction.user.name} received {payout}")
 
         balance += payout - bet
 
@@ -58,7 +58,7 @@ class Minigames(commands.Cog):
                 k=1
             )[0]
             spin_result.append(symbol)
-        colorize_log("DEBUG", f"{self.name} Connected")
+        colorized_print("DEBUG", f"{self.name} Connected")
         return spin_result
 
     def _calculate_payout(self, spin_result: List[str]) -> int:

@@ -20,7 +20,7 @@ from typing import List, Tuple
 import aiomysql
 from pymysql import err
 
-from src.helpers.colored_logging import colorize_log
+from src.helpers.colored_printing import colorized_print
 
 
 class DBConnect:
@@ -31,7 +31,7 @@ class DBConnect:
     def __init__(self) -> None:
         self.pool: aiomysql.Pool = None
         self.is_connected = False
-        colorize_log("DEBUG", "DBConnect has been initialized")
+        colorized_print("DEBUG", "DBConnect has been initialized")
 
 
     async def sql_connect(self) -> None:
@@ -48,9 +48,9 @@ class DBConnect:
                 autocommit=True
             )
             self.is_connected = True
-            colorize_log("INFO", "Successfully Connected to SQL server")
+            colorized_print("INFO", "Successfully Connected to SQL server")
         except err.OperationalError:
-            colorize_log("ERROR", "Failed to connect to SQL server")
+            colorized_print("ERROR", "Failed to connect to SQL server")
 
 
     async def sql_disconnect(self) -> None:
@@ -59,7 +59,7 @@ class DBConnect:
         """
         self.pool.close()
         await self.pool.wait_closed()
-        colorize_log("DEBUG", "Connection to SQL server closed")
+        colorized_print("DEBUG", "Connection to SQL server closed")
 
 
     async def sql_execute(self, query: str, *args) -> List[Tuple]:
@@ -74,14 +74,14 @@ class DBConnect:
             List of tuples containing the result of the query,
             or None if the query returns no result
         """
-        colorize_log("DEBUG", "Execute SQL query")
+        colorized_print("DEBUG", "Execute SQL query")
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 await cur.execute(query, args)
                 result: List[Tuple] = await cur.fetchall()
                 if result:
-                    colorize_log("DEBUG", f"   SQL query result {result}")
+                    colorized_print("DEBUG", f"   SQL query result {result}")
                     return result
                 else:
-                    colorize_log("DEBUG", f"   SQL query result None")
+                    colorized_print("DEBUG", f"   SQL query result None")
                     return None
