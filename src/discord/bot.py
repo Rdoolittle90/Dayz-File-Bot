@@ -25,6 +25,7 @@ Attributes:
 
 
 import asyncio
+import json
 import logging
 import os
 import random
@@ -80,14 +81,12 @@ class DiscordBot(commands.Bot):
 
         divider_title("Cogs", self.width, self.secondary_symbol)
 
-        self.load_extension("src.discord.cogs.admin_commands")
-        self.load_extension("src.discord.cogs.core_commands")
-        self.load_extension("src.discord.cogs.dayz_admin_commands")
-        self.load_extension("src.discord.cogs.dayz_user_commands")
-        self.load_extension("src.discord.cogs.minigame_commands")
-        self.load_extension("src.discord.cogs.everyone_commands")
-        self.load_extension("src.discord.cogs.test_commands")
 
+        with open("_files/support/settings.json", "r") as json_in:
+            data = json.load(json_in)
+
+        for extension in data["active_cogs"]:
+            self.load_extension(extension)
         
 
         divider_title("Guilds", self.width, self.secondary_symbol)
