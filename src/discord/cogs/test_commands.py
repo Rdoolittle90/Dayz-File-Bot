@@ -1,19 +1,17 @@
 import asyncio
 import datetime
-import logging
 from nextcord.ext import commands
 import nextcord
 from src.helpers.colored_logging import colorize_log
 
 from src.discord.bot import DiscordBot
-from colorama import Fore, Style
 
 
 class TestingCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "Testing Cog"
-        colorize_log("WARNING", f"{self.name} Connected")
+        colorize_log("INFO", "{:<16} Connected".format(self.name))
 
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="debug_atm_get_all", description="placeholder description 1")

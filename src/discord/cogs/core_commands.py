@@ -12,7 +12,7 @@ class CoreCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "Core Cog"
-        colorize_log("INFO", f"{self.name} Connected")
+        colorize_log("INFO", "{:<16} Connected".format(self.name))
 
 
     # =====================================================================================================

@@ -13,7 +13,7 @@ class DayzUserCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "DayZ User Cog"
-        colorize_log("INFO", f"{self.name} Connected")
+        colorize_log("INFO", "{:<16} Connected".format(self.name))
 
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="register", description="register your steam 64 ID")

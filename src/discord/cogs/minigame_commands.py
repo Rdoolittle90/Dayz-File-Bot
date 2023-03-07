@@ -22,7 +22,7 @@ class Minigames(commands.Cog):
             "🚁": {"weight": 1, "payout": 50},  # Helicopter
         }
         self.name = "Minigames Cog"
-        colorize_log("INFO", f"{self.name} Connected")
+        colorize_log("INFO", "{:<16} Connected".format(self.name))
 
 
     @nextcord.slash_command(dm_permission=False, name="slot", description="WIP")
