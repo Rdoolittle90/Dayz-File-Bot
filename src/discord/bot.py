@@ -88,7 +88,8 @@ class DiscordBot(commands.Bot):
 
         for extension in data["active_cogs"]:
             extension_name = extension.split(".")[-1]
-            extension_name = extension_name.strip("_commands").title()
+            extension_name = extension_name.strip("_")
+            extension_name = " ".join(extension_name[:-1])
             self.load_extension(extension)
             colorized_print("COG", extension_name)
         
