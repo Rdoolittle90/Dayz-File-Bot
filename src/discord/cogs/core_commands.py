@@ -12,7 +12,6 @@ class CoreCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "Core"
-        colorized_print("COG", self.name)
 
 
     # =====================================================================================================

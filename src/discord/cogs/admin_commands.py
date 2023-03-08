@@ -9,7 +9,6 @@ class AdminCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "Admin"
-        colorized_print("COG", self.name)
 
 
 def setup(bot: commands.Bot):

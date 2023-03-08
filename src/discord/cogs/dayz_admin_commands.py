@@ -15,7 +15,6 @@ class DayzAdminCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "DayZ Admin"
-        colorized_print("COG", self.name)
 
 
     # =====================================================================================================

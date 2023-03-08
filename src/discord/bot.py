@@ -33,6 +33,7 @@ import string
 
 from nextcord import Intents, Member, Message
 from nextcord.ext import commands
+from src.helpers.colored_printing import colorized_print
 from src.helpers.divider_title import divider_title
 
 from src.discord.guild_manager import check_for_files
@@ -86,7 +87,10 @@ class DiscordBot(commands.Bot):
             data = json.load(json_in)
 
         for extension in data["active_cogs"]:
+            extension_name = extension.split(".")[-1]
+            extension_name = extension_name.strip("_commands").title()
             self.load_extension(extension)
+            colorized_print("COG", extension_name)
         
 
         divider_title("Guilds", self.width, self.secondary_symbol)

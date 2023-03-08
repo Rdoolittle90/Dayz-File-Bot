@@ -9,7 +9,6 @@ class EveryoneCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "Everyone"
-        colorized_print("COG", self.name)
 
 
     # =====================================================================================================

@@ -22,7 +22,6 @@ class Minigames(commands.Cog):
             "🚁": {"weight": 1, "payout": 50},  # Helicopter
         }
         self.name = "Minigames"
-        colorized_print("COG", self.name)
 
 
     @nextcord.slash_command(dm_permission=False, name="slot", description="WIP")

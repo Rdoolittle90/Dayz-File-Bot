@@ -11,7 +11,6 @@ class TestingCog(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.name = "Testing"
-        colorized_print("COG", self.name)
 
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="debug_atm_get_all", description="placeholder description 1")
@@ -43,6 +42,7 @@ class TestingCog(commands.Cog):
                 server_id = self.bot.cftools.map_info[server_map]["map_id"]
                 response = self.bot.cftools.make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/{server_id}", token=self.bot.cftools.token)
                 data = response.json()
+                colorized_print("DEBUG", f"TestingCog.get_server_status")
                 name = data[server_id]['name'].split(" ")[1].title()
                 self.bot.cftools.server_info[idx]["name"] = name
                 self.bot.cftools.server_info[idx]["status"] = "Online" if data[server_id]['online'] else "Offline"
