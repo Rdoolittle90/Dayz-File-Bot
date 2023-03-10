@@ -1,0 +1,91 @@
+{
+    "leaderboard": [
+        {
+            "cftools_id": "6357918efa11ccb22ffc5c44",
+            "deaths": 3,
+            "environment_deaths": 14,
+            "explosion_deaths": 1,
+            "falldamage_deaths": 2,
+            "hits": 8,
+            "infected_deaths": 3,
+            "kdratio": 0.33,
+            "kills": 1,
+            "latest_name": "Lacer",
+            "longest_kill": 3.92,
+            "longest_shot": 25.48,
+            "playtime": 320381,
+            "rank": 1,
+            "suicides": 1
+        },
+        {
+            "cftools_id": "5f1af58c81582527e160c3a6",
+            "environment_deaths": 1,
+            "hits": 1,
+            "kdratio": 1.0,
+            "kills": 1,
+            "latest_name": "Anxiety",
+            "longest_kill": 61.87,
+            "longest_shot": 61.87,
+            "playtime": 24188,
+            "rank": 2,
+            "suicides": 1
+        },
+        {
+            "cftools_id": "63839ae79142c3610b97c423",
+            "hits": 2,
+            "infected_deaths": 1,
+            "kdratio": 1.0,
+            "kills": 1,
+            "latest_name": "ZigZag",
+            "longest_kill": 1.88,
+            "longest_shot": 2.51,
+            "playtime": 40454,
+            "rank": 3,
+            "suicides": 2
+        },
+        {
+            "cftools_id": "5ce9f6f7a1db3a6c60ad9a90",
+            "environment_deaths": 1,
+            "hits": 3,
+            "kdratio": 1.0,
+            "kills": 1,
+            "latest_name": "Mr. Stark",
+            "longest_kill": 22.29,
+            "longest_shot": 22.29,
+            "playtime": 2233,
+            "rank": 4
+        },
+        {
+            "cftools_id": "6351e8c3334f462e44fafc41",
+            "deaths": 7,
+            "environment_deaths": 7,
+            "falldamage_deaths": 1,
+            "hits": 13,
+            "kdratio": 0.57,
+            "kills": 4,
+            "latest_name": "baillie_boys",
+            "longest_kill": 17.59,
+            "longest_shot": 106.92,
+            "playtime": 233017,
+            "rank": 5,
+            "suicides": 5
+        },
+        {
+            "cftools_id": "6350d411c869e9a047010d23",
+            "deaths": 3,
+            "environment_deaths": 5,
+            "falldamage_deaths": 17,
+            "hits": 31,
+            "infected_deaths": 1,
+            "kdratio": 2.67,
+            "kills": 8,
+            "latest_name": "Survivor",
+            "longest_kill": 111.83,
+            "longest_shot": 111.83,
+            "playtime": 543174,
+            "rank": 6,
+            "suicides": 3
+        }
+    ],
+    "status": true
+}

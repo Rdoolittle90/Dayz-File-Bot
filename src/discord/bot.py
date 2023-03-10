@@ -25,25 +25,22 @@ Attributes:
 
 
 import asyncio
+import datetime
 import json
 import logging
 import os
-import random
-import string
+from typing import Dict
 
+from colorama import Fore, Style
 from nextcord import Intents, Member, Message
 from nextcord.ext import commands
-from src.helpers.colored_printing import colorized_print
-from src.helpers.divider_title import divider_title
 
 from src.discord.guild_manager import check_for_files
 from src.ftp.ftp_manager import FTPConnect
-from src.http.requester import CFTools
+from src.helpers.colored_printing import colorized_print
+from src.helpers.divider_title import divider_title
+from src.http.cftools import CFTools
 from src.sql.sql_manager import DBConnect
-from colorama import Fore, Style
-
-
-logger = logging.getLogger(__name__)
 
 
 class DiscordBot(commands.Bot):
@@ -62,7 +59,13 @@ class DiscordBot(commands.Bot):
         (None)
     """
 
+    intents = Intents.default()
+    intents.message_content = True
+    intents.members = True
+    prefix = commands.when_mentioned
+
     def __init__(self, *args, **kwargs):
+        super().__init__(command_prefix=DiscordBot.prefix, intents=DiscordBot.intents, *args, **kwargs)
         # setup intents for bot permissions
         self.name = os.getenv("APP_NAME")
         self.version = os.getenv("APP_VERSION")
@@ -71,39 +74,35 @@ class DiscordBot(commands.Bot):
         self.primary_symbol = "="
         self.secondary_symbol = "-"
 
-        self.display_title()
-
-        intents = Intents.default()
-        intents.message_content = True
-        intents.members = True
-        prefix = commands.when_mentioned
-
-        super().__init__(command_prefix=prefix, intents=intents, *args, **kwargs)
-
-        divider_title("Cogs", self.width, self.secondary_symbol)
-
-
-        with open("_files/support/settings.json", "r") as json_in:
-            data = json.load(json_in)
-
-        for extension in data["active_cogs"]:
-            extension_name = extension.split(".")[-1]
-            extension_name = extension_name.split("_")
-            extension_name = " ".join(extension_name[:-1]).title()
-            self.load_extension(extension)
-            colorized_print("COG", extension_name)
-        
-
-        divider_title("Guilds", self.width, self.secondary_symbol)
-
         self.add_listener(self.on_ready)
         self.add_listener(self.on_member_join)
         self.add_listener(self.on_member_remove)
         self.add_listener(self.on_message)
 
-        self.cftools: CFTools = None
-        self.ftp: FTPConnect = None
-        self.sql: DBConnect = None
+
+    async def setup(self):
+        start_time = datetime.datetime.now()
+
+        divider_title("Cogs", self.width, self.secondary_symbol)
+        self.load_cogs()
+
+        divider_title("Connections", self.width, self.secondary_symbol)
+        self.cftools: CFTools = CFTools()
+
+        self.ftp_connections: Dict[str, FTPConnect] = {
+            "Chernarus": FTPConnect("Chernarus"),
+            "Takistan": FTPConnect("Takistan"),
+            "Namalsk": FTPConnect("Namalsk"),
+            "TestServer": FTPConnect("TestServer"),
+        }
+
+        self.sql: DBConnect = DBConnect()
+        await self.sql.sql_connect()
+        
+        end_time = datetime.datetime.now()
+        time_taken = (end_time - start_time).total_seconds() * 1000
+        colorized_print("DEBUG", f"Time taken to setup: {time_taken:.2f}ms")
+
 
 
     async def on_ready(self) -> None:
@@ -174,13 +173,6 @@ class DiscordBot(commands.Bot):
         """
 
 
-    def generate_random_string(self, length):
-        """placeholder"""
-        characters = string.digits + string.ascii_letters
-        return ''.join(random.choice(characters) for i in range(length))
-
-
-
     def display_title(self):
         print()
         divider_title("", self.width, self.primary_symbol)
@@ -188,18 +180,30 @@ class DiscordBot(commands.Bot):
         divider_title("", self.width, self.primary_symbol)
 
 
+    def load_cogs(self):
+        with open("_files/support/settings.json", "r") as json_in:
+            data = json.load(json_in)
+
+        all_extensions = [i.removesuffix(".py") for i in os.listdir("src/discord/cogs") if i.endswith(".py")]
+        for extension in all_extensions:
+            if extension in data["active_cogs"]:
+                try:
+                    self.load_extension(f"src.discord.cogs.{extension}")
+                    colorized_print("COG", f"🟢 {extension.removesuffix('_commands').title()}")
+                except commands.errors.ExtensionFailed:
+                    colorized_print("COG", f"🔴 {extension.removesuffix('_commands').title()}  [ExtensionFailed]")
+                except commands.errors.NoEntryPointError:
+                    colorized_print("COG", f"🔴 {extension.removesuffix('_commands').title()}  [NoEntryPointError]")
+            else:
+                colorized_print("COG", f"⚫ {extension.removesuffix('_commands').title()}  [Disabled]")
+
 
     async def my_background_task(self):
         """placeholder"""
-        await self.wait_until_ready()
-
-        print("Repeat Loop Begin")
+        colorized_print("INFO", f"Starting ...")
         while not self.is_closed():
             tasks = [
-                asyncio.create_task(self.ftp.get_all_player_atm("Chernarus")),
-                asyncio.create_task(self.ftp.get_all_player_atm("Takistan")),
-                asyncio.create_task(self.ftp.get_all_player_atm("Namalsk")),
-                asyncio.create_task(self.ftp.get_all_player_atm("TestServer"))
+                asyncio.create_task(self.ftp_connections["Chernarus"].download_all_map_atm_files_async())
             ]
             await asyncio.wait(tasks)
-            await asyncio.sleep(60 * 5)  # task runs every 60 seconds
+            await asyncio.sleep(60 * 60)  # task runs every 60 * 5 seconds

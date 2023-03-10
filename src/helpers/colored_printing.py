@@ -10,6 +10,14 @@ color_map = {
         "color": Fore.GREEN,
         "int": 3
         },
+    "COG":  {
+        "color": Fore.CYAN,
+        "int": 3
+        },
+    "GUILD":  {
+        "color": Fore.CYAN,
+        "int": 3
+        },
     "WARNING": {
         "color": Fore.YELLOW,
         "int": 2
@@ -20,14 +28,6 @@ color_map = {
         },
     "CRITICAL":  {
         "color": Fore.RED + Style.BRIGHT,
-        "int": 0
-        },
-    "COG":  {
-        "color": Fore.CYAN,
-        "int": 0
-        },
-    "GUILD":  {
-        "color": Fore.CYAN,
         "int": 0
         },
     }
