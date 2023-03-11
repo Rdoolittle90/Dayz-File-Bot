@@ -72,7 +72,7 @@ class CFTools:
         return hex_digest
 
 
-    def make_authenticated_request(self, method: str, url: str, token=None, params=None):
+    def make_authenticated_request(self, method: str, url: str, params=None):
         """
         Makes an authenticated request to the CFTools API.
 
@@ -89,8 +89,10 @@ class CFTools:
         - requests.exceptions.HTTPError: If the request fails.
         """
         headers = {}
-        if token:
-            headers["Authorization"] = f"Bearer {token}"
+        if not self.token:
+            headers["Authorization"] = f"Bearer {self.token}"
+            colorized_print("ERROR", f"No token found")
+            return None
 
         colorized_print("DEBUG", f"Making {method} request to {url}")
         response = requests.request(method, url, headers=headers, params=params, timeout=10)
