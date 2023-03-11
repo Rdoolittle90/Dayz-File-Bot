@@ -87,9 +87,9 @@ class Minigames(commands.Cog):
 
         for k, v in counts.items():
             if v == 3:
-                multiplier = self.symbols[k]["multiplier"]
+                multiplier = self.symbols[k]["multiplier"] * 1.5
             elif v == 2:
-                multiplier = self.symbols[k]["multiplier"] * 0.65
+                multiplier = self.symbols[k]["multiplier"] * 1
             else:
                 continue
         payout = bet * multiplier
