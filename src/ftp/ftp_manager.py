@@ -23,7 +23,10 @@ class FTPConnect:
         user (str): The username to use when authenticating with the FTP server.
         passwd (str): The password to use when authenticating with the FTP server.
     """
-
+    paths = {
+        "killboard": '/profiles/GAREA_Leaderboard/PlayerDB',
+        "atm": '/profiles/LBmaster/Data/LBBanking/Players'
+    }
     def __init__(self, map_name):
         """Initializes an FTPConnect object with default values for its attributes."""
         self.ftp = FTP()
@@ -51,17 +54,18 @@ class FTPConnect:
         colorized_print("WARNING", f"FTP server {self.map_name}:{self.port} has been logged out")
         
 
-    async def upload_file(self, local_path, remote_path, file_name):
+    async def upload_file(self, local_path, path_name, file_name):
         """Uploads a file to the FTP server.
 
         Args:
             local_path (str): The local path to the file to upload.
             remote_filename (str): The filename to use on the FTP server.
         """
+        remote_path = FTPConnect.paths[path_name]
         try:
             if not self.is_connected:
                 self.login()
-            self.ftp.cwd(remote_path)
+            self.ftp.cwd(FTPConnect.paths[path_name])
             with open(local_path, 'rb') as f:
                 self.ftp.storbinary(f'STOR {remote_path}/{file_name}', f)
             colorized_print("DEBUG", f"File {remote_path}/{file_name} uploaded successfully to {remote_path}")
@@ -73,15 +77,11 @@ class FTPConnect:
 
 
     async def download_one_map_file_async(self, path_name, steam_64):
-        paths = {
-            "killboard": '/profiles/GAREA_Leaderboard/PlayerDB',
-            "atm": '/profiles/LBmaster/Data/LBBanking/Players'
-        }
         try:
             if not self.is_connected:
                 colorized_print("WARNING", f"Not logged in")
                 self.login()
-            remote_path = paths[path_name]
+            remote_path = FTPConnect.paths[path_name]
             self.ftp.cwd(remote_path)
 
             local_path = f"_files/maps/{self.map_name}/killboards/{steam_64}.json"

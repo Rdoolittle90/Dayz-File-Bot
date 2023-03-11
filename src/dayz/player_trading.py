@@ -12,7 +12,6 @@ from src.helpers.update_player_atm import update_money
 
 async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_2:User, player_2_map:str, trade_amount:int):
     trade_id = generate_random_string(7)
-    remote_path = '/profiles/LBmaster/Data/LBBanking/Players'
     proceed_with_trade = True
 
     player_1_steam_64_id = await get_registered_steam_64(bot, player_1.id)
@@ -40,14 +39,14 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
             player_1_path = f"_files/maps/{player_1_map}/atms/{player_1_steam_64_id}.json"
             player_1_atm = await bot.ftp_connections[player_1_map].download_one_map_file_async("atm", player_1_steam_64_id)
             reason = update_money(player_1_atm, player_1_path, -trade_amount)
-            await bot.ftp_connections[player_1_map].upload_file(player_1_path, remote_path, f"{player_1_steam_64_id}.json")
+            await bot.ftp_connections[player_1_map].upload_file(player_1_path, "atm", f"{player_1_steam_64_id}.json")
             player_1_success = True
 
             # Player 2
             player_2_path = f"_files/maps/{player_2_map}/atms/{player_2}.json"
             player_2_atm = await bot.ftp_connections[player_2_map].download_one_map_file_async("atm", player_2_steam_64_id)
             update_money(player_2_atm, player_2_path, trade_amount)
-            await bot.ftp_connections[player_2_map].upload_file(player_2_path, remote_path, f"{player_2_steam_64_id}.json")
+            await bot.ftp_connections[player_2_map].upload_file(player_2_path, "atm", f"{player_2_steam_64_id}.json")
             colorized_print("INFO", f"trade_id: {trade_id} 🟢 Trade Complete {player_1.mention} -> {player_2.mention}: {trade_amount}")
             player_2_success = True
 
@@ -55,7 +54,7 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
             colorized_print("ERROR", f"trade_id: {trade_id} 🔴 Trade Failed {player_1.mention} -> {player_2.mention}: {trade_amount}")
             if player_1_success == True and player_2_success == False:
                 update_money(player_1_atm, player_1_path, trade_amount)
-                await bot.ftp_connections[player_1_map].upload_file(player_1_path, remote_path, f"{player_1_steam_64_id}.json")
+                await bot.ftp_connections[player_1_map].upload_file(player_1_path, "atm", f"{player_1_steam_64_id}.json")
                 colorized_print("INFO", f"trade_id: {trade_id} 🟡 Trade Value returned to sender {player_1_steam_64_id}: {trade_amount}")
 
     embed = nextcord.Embed(title="Trade Information")
