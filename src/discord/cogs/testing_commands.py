@@ -25,8 +25,8 @@ class TestingCog(commands.Cog):
 
 
    # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="get_leaderboard", description="placeholder description 1")
-    async def get_leaderboard(self, interaction: nextcord.Interaction, map_name:str=None):
+    @nextcord.slash_command(dm_permission=False, name="get_killboard", description="placeholder description 1")
+    async def get_killboard(self, interaction: nextcord.Interaction, map_name:str=None):
         colorized_print("INFO", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
         await interaction.response.defer(ephemeral=False)
         self.bot.ftp_connections[map_name].download_one_map_killboard_file_async(get_registered_steam_64(self.bot, interaction.user))
