@@ -3,6 +3,7 @@ import ftplib
 import inspect
 
 import nextcord
+from nextcord import User
 from nextcord.ext import commands
 
 from src.discord.bot import DiscordBot
@@ -18,21 +19,21 @@ class TestingCog(commands.Cog):
 
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="test_trade", description="placeholder description 1")
-    async def test_trade(self, interaction: nextcord.Interaction, player_1_map:str, player_2:str, player_2_map:str, trade_amount:int):
+    async def test_trade(self, interaction: nextcord.Interaction, player_1_map:str, player_2:User, player_2_map:str, trade_amount:int):
         colorized_print("WARNING", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
         await interaction.response.defer(ephemeral=False)
         await interaction.followup.send(embed=await player_trade(self.bot, interaction.user.id, player_1_map, player_2, player_2_map, trade_amount))
 
 
 
-async def player_trade(bot: DiscordBot, player_1:str, player_1_map:str, player_2:str, player_2_map:str, trade_amount:int):
+async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_2:User, player_2_map:str, trade_amount:int):
     trade_id = generate_random_string(7)
     remote_path = '/profiles/LBmaster/Data/LBBanking/Players'
     proceed_with_trade = True
-    if trade_amount > 10000:
+    if trade_amount >= 10000:
         reason = "Trade must be less than 500 rubles"
         proceed_with_trade = False
-    if trade_amount < 500:
+    if trade_amount <= 500:
         reason = "Trade must be greater than 500 rubles"
         proceed_with_trade = False
 
