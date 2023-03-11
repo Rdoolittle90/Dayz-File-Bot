@@ -17,7 +17,7 @@ def server_status_embed(bot: DiscordBot):
         bot.cftools.utc_then = utc_now
         for idx, server_map in enumerate(bot.cftools.map_info.keys()):
             server_id = bot.cftools.map_info[server_map]["map_id"]
-            response = bot.cftools.make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/{server_id}", token=bot.cftools.token)
+            response = bot.cftools.make_authenticated_request("GET", f"https://data.cftools.cloud/v1/gameserver/{server_id}")
             data = response.json()
             name = data[server_id]['name'].split(" ")[1].title()
             bot.cftools.server_info[idx]["name"] = name
