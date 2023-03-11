@@ -82,6 +82,7 @@ class DiscordBot(commands.Bot):
         divider_title("Cogs", self.width, self.secondary_symbol)
         self.load_cogs()
 
+
     async def setup(self):
         start_time = datetime.datetime.now()
 
