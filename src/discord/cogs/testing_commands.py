@@ -75,10 +75,10 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
                 colorized_print("INFO", f"trade_id: {trade_id} 🟡 Trade Value returned to sender {player_1_steam_64_id}: {trade_amount}")
 
     embed = nextcord.Embed(title="Trade Information")
-    embed.add_field(name="Player 1", value=player_1, inline=True)
-    embed.add_field(name="Player 2", value=player_2, inline=True)
+    embed.add_field(name=f"{player_1}  ➡️", value=player_1_map, inline=True)
+    embed.add_field(name=f"{player_2}", value=player_2_map, inline=True)
+    embed.add_field(name="Amount:", value=f"{trade_amount}₽")
     embed.set_footer(text=f"TRADE ID: {trade_id}")
-    embed.add_field(name="Trade Amount", value=trade_amount)
 
     if player_1_success and player_2_success:
         embed.description = f"Trade Successful 🟢"
