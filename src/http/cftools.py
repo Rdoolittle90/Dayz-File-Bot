@@ -29,26 +29,26 @@ from src.helpers.colored_printing import colorized_print
 
 class CFTools:
     """A Class for connecting to rhe CFTools API"""
-    map_info = {
-        "Chernarus": {
-            "map_id":getenv("CFTools_Map_1_ID"),
-            "server_id": getenv("CFTools_Map_1_Server_ID")
-        },
-        "Takistan": {
-            "map_id":getenv("CFTools_Map_2_ID"),
-            "server_id": getenv("CFTools_Map_2_Server_ID")
-        },
-        "Namalsk": {
-            "map_id":getenv("CFTools_Map_3_ID"),
-            "server_id": getenv("CFTools_Map_3_Server_ID")
-        }
-    }
     server_info = {0:{}, 1:{}, 2:{}}
 
     def __init__(self):
         """
         Initializes a new instance of the CFTools class.
         """
+        self.map_info = {
+            "Chernarus": {
+                "map_id":getenv("CFTools_Map_1_ID"),
+                "server_id": getenv("CFTools_Map_1_Server_ID")
+            },
+            "Takistan": {
+                "map_id":getenv("CFTools_Map_2_ID"),
+                "server_id": getenv("CFTools_Map_2_Server_ID")
+            },
+            "Namalsk": {
+                "map_id":getenv("CFTools_Map_3_ID"),
+                "server_id": getenv("CFTools_Map_3_Server_ID")
+            }
+        }
         self.token = None
         self.utc_then = datetime.datetime.utcnow()
         colorized_print("DEBUG", "CFTools has been initialized")
@@ -142,7 +142,7 @@ class CFTools:
         if map is not None:
             map_names = [map]
         else:
-            map_names = CFTools.map_info.keys()
+            map_names = self.map_info.keys()
 
         for map_name in map_names:
             map_data[map_name] = []
@@ -195,7 +195,7 @@ class CFTools:
             map_names = CFTools.map_info.keys()
 
         for map_name in map_names:
-            info = CFTools.map_info[map_name]
+            info = self.map_info[map_name]
             print(info)
             response = self.make_authenticated_request("GET", f'https://data.cftools.cloud/v1/server/{info["server_id"]}/leaderboard', params=leaderboard_payload)
             data = response.json()
