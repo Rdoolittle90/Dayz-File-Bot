@@ -49,7 +49,7 @@ class CFTools:
         """
         Initializes a new instance of the CFTools class.
         """
-        self.token = self.authenticate()
+        self.token = None
         self.utc_then = datetime.datetime.utcnow()
         colorized_print("DEBUG", "CFTools has been initialized")
 
@@ -108,7 +108,7 @@ class CFTools:
             colorized_print("DEBUG", f"Response status code: {response.status_code}")
         return response
 
-    def authenticate(self) -> str:
+    def authenticate(self):
         """
         Authenticates with the CFTools API and returns an access token.
 
