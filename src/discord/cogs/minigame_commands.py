@@ -54,7 +54,7 @@ class Minigames(commands.Cog):
         payout = self._calculate_payout(bet, spin_result)
         colorized_print("DEBUG", f"{interaction.user.name} received {payout}")
 
-        update_money(player_atm, player_path, payout - bet)
+        balance = update_money(player_atm, player_path, payout - bet)
         await self.bot.ftp_connections[map_name].upload_file(player_path, "atm", f"{player_steam_64_id}.json")
 
         embed = discord.Embed(title="Slot Machine", description=f"{' '.join(spin_result)}", color=discord.Color.blue())
