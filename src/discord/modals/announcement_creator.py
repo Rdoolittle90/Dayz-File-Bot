@@ -24,6 +24,26 @@ class AnnouncementCreator(Modal):
             required=False
         )
         self.add_item(self.color)
+        
+        self.title = TextInput(
+            label="Title",
+            placeholder="announcement title here",
+            default_value="Platinum Server Announcement",
+            min_length=1,
+            max_length=100,
+            required=False
+        )
+        self.add_item(self.title)
+        
+        self.title = TextInput(
+            label="Summary description",
+            placeholder="short and sweet",
+            default_value="Details Below",
+            min_length=1,
+            max_length=35,
+            required=False
+        )
+        self.add_item(self.title)
 
 
 
@@ -33,4 +53,3 @@ class AnnouncementCreator(Modal):
         await interaction.response.defer(ephemeral=False)
 
         await interaction.channel.send("🐈")
-        print("done.")

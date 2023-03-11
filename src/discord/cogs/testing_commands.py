@@ -24,7 +24,7 @@ class TestingCog(commands.Cog):
         colorized_print("WARNING", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
         await interaction.response.defer(ephemeral=False)
         
-        await interaction.followup.send(embed=await player_trade(self.bot, interaction.user, player_1_map, player_2, player_2_map, trade_amount))
+        await interaction.followup.send(embed=await player_trade(self.bot, interaction.user, player_1_map.title(), player_2, player_2_map.title(), trade_amount))
 
 
 
@@ -35,10 +35,12 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
 
     player_1_steam_64_id = await get_registered_steam_64(bot, player_1.id)
     if player_1_steam_64_id is None:
+        reason = "You are not registered!"
         proceed_with_trade = False
 
     player_2_steam_64_id = await get_registered_steam_64(bot, player_2.id)
     if player_2_steam_64_id is None:
+        reason = "The person you are attempting to send rubles to is not registered"
         proceed_with_trade = False
 
     if trade_amount >= 10000:
