@@ -200,7 +200,7 @@ class CFTools:
 
         for map_name in map_names:
             info = CFTools.map_info[map_name]
-            response = self.make_authenticated_request("GET", f'https://data.cftools.cloud/v1/server/{info["server_id"]}/leaderboard', token=self.token, params=leaderboard_payload)
+            response = self.make_authenticated_request("GET", f'https://data.cftools.cloud/v1/server/{info["server_id"]}/leaderboard', params=leaderboard_payload)
             data = response.json()
             data["collected_at"] = str(datetime.datetime.now())
             with open(f"_files/maps/{map_name}/data/{leaderboard_payload['stat']}_{leaderboard_payload['limit']}.json", "w", encoding="utf-8") as json_out:
