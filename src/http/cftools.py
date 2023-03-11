@@ -89,10 +89,10 @@ class CFTools:
         - requests.exceptions.HTTPError: If the request fails.
         """
         headers = {}
-        if not self.token:
+        if self.token == None:
+            colorized_print("ERROR", f"No token found")
             self.authenticate()
             headers["Authorization"] = f"Bearer {self.token}"
-            colorized_print("ERROR", f"No token found")
             return None
 
         colorized_print("DEBUG", f"Making {method} request to {url}")
