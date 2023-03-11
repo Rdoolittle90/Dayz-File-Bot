@@ -164,3 +164,9 @@ def embed_success(user_name) -> Embed:
     embed = Embed(title="Registration Successful", color=0x00ff00)
     embed.description = "Thank you for registering."
     return embed
+
+def embed_not_registered(user_name, command_name) -> Embed:
+    colorized_print("INFO", f"{user_name} is Not Registered and cant use {command_name}")
+    embed = Embed(title="Not Registered", color=0x00ff00)
+    embed.description = "user /register to be able to use this command"
+    return embed

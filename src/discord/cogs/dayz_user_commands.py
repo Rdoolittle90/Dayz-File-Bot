@@ -46,7 +46,7 @@ class DayzUserCog(commands.Cog):
    # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="get_leaderboard", description="placeholder description 1")
     async def get_leaderboard(self, interaction: nextcord.Interaction, map_name:str=None):
-        colorized_print("INFO", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
+        colorized_print("INFO", f"{interaction.user.name} used {self.__cog_name__}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
         await interaction.response.defer(ephemeral=False)
         self.bot.cftools.get_leaderboard_info(map_name)
         if map_name:
