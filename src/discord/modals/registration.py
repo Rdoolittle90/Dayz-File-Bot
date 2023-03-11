@@ -114,14 +114,20 @@ async def get_registered_steam_64(bot: DiscordBot, discord_id: str):
     steam_id = await bot.sql.sql_execute(
         "SELECT steam_id FROM registration WHERE discord_id=%s", (discord_id,)
     )
-    return steam_id
+    if steam_id:
+        return steam_id[0][0]
+    else:
+        return None
 
 
 async def get_registered_discord_id(bot: DiscordBot, steam_id: str):
     discord_id = await bot.sql.sql_execute(
         "SELECT discord_id FROM registration WHERE steam_id=%s", (steam_id,)
     )
-    return discord_id
+    if discord_id:
+        return discord_id[0][0]
+    else:
+        return None
 
 
 def is_valid_steam64_id(steam_id: str) -> bool:
