@@ -36,10 +36,11 @@ async def player_trade(bot: DiscordBot, player_1:str, player_1_map:str, player_2
         reason = "Trade must be greater than 500 rubles"
         proceed_with_trade = False
 
+    player_1_success = False
+    player_2_success = False
     if proceed_with_trade:
         try:
             # Player 1
-            player_1_success = False
             player_1_steam_64_id = 76561198020302385  # get steam_64 from DB using interaction.user.id 
             player_1_path = f"_files/maps/{player_1_map}/atms/{player_1_steam_64_id}.json"
             player_1_atm = await bot.ftp_connections[player_1_map].download_one_map_atm_file_async(player_1_steam_64_id)
@@ -48,7 +49,6 @@ async def player_trade(bot: DiscordBot, player_1:str, player_1_map:str, player_2
             player_1_success = True
 
             # Player 2
-            player_2_success = False
             player_2_path = f"_files/maps/{player_2_map}/atms/{player_2}.json"
             player_2_atm = await bot.ftp_connections[player_2_map].download_one_map_atm_file_async(player_2)
             update_money(player_2_atm, player_2_path, trade_amount)
