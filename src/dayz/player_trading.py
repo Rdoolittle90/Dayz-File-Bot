@@ -38,14 +38,14 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
         try:
             # Player 1
             player_1_path = f"_files/maps/{player_1_map}/atms/{player_1_steam_64_id}.json"
-            player_1_atm = await bot.ftp_connections[player_1_map].download_one_map_atm_file_async(player_1_steam_64_id)
+            player_1_atm = await bot.ftp_connections[player_1_map].download_one_map_file_async("atm", player_1_steam_64_id)
             reason = update_money(player_1_atm, player_1_path, -trade_amount)
             await bot.ftp_connections[player_1_map].upload_file(player_1_path, remote_path, f"{player_1_steam_64_id}.json")
             player_1_success = True
 
             # Player 2
             player_2_path = f"_files/maps/{player_2_map}/atms/{player_2}.json"
-            player_2_atm = await bot.ftp_connections[player_2_map].download_one_map_atm_file_async(player_2_steam_64_id)
+            player_2_atm = await bot.ftp_connections[player_2_map].download_one_map_file_async("atm", player_2_steam_64_id)
             update_money(player_2_atm, player_2_path, trade_amount)
             await bot.ftp_connections[player_2_map].upload_file(player_2_path, remote_path, f"{player_2_steam_64_id}.json")
             colorized_print("INFO", f"trade_id: {trade_id} 🟢 Trade Complete {player_1.mention} -> {player_2.mention}: {trade_amount}")

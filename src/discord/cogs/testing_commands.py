@@ -24,14 +24,6 @@ class TestingCog(commands.Cog):
         await interaction.followup.send(embed=await player_trade(self.bot, interaction.user, player_1_map.title(), player_2, player_2_map.title(), trade_amount))
 
 
-   # =====================================================================================================
-    @nextcord.slash_command(dm_permission=False, name="get_killboard", description="placeholder description 1")
-    async def get_killboard(self, interaction: nextcord.Interaction, map_name:str=None):
-        colorized_print("INFO", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
-        await interaction.response.defer(ephemeral=False)
-        await self.bot.ftp_connections[map_name].download_one_map_killboard_file_async(await get_registered_steam_64(self.bot, interaction.user.id))
-
-
 
 
 

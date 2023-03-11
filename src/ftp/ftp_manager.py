@@ -72,23 +72,27 @@ class FTPConnect:
             raise e
 
 
-    async def download_one_map_killboard_file_async(self, steam_64):
+    async def download_one_map_file_async(self, path_name, steam_64):
+        paths = {
+            "killboard": '/profiles/GAREA_Leaderboard/PlayerDB',
+            "atm": '/profiles/LBmaster/Data/LBBanking/Players'
+        }
         try:
             if not self.is_connected:
                 colorized_print("WARNING", f"Not logged in")
                 self.login()
-            remote_path = '/profiles/GAREA_Leaderboard/PlayerDB'
+            remote_path = paths[path_name]
             self.ftp.cwd(remote_path)
 
-            local_path = f"_files/maps/{self.map_name}/atms/{steam_64}.json"
+            local_path = f"_files/maps/{self.map_name}/killboards/{steam_64}.json"
             with open(local_path, 'wb') as fout:
                 def callback(data):
                     fout.write(data)
                 self.ftp.retrbinary('RETR ' + f"{remote_path}/{steam_64}.json", callback)
-                colorized_print("DEBUG", f"File {steam_64}.json downloaded successfully")
-            with open(f"_files/maps/{self.map_name}/kill_boards/{steam_64}.json", "r") as fin:
-                player_killboard = json.load(fin)
-                return player_killboard
+                colorized_print("DEBUG", f"File {path_name}: {steam_64}.json downloaded successfully")
+            with open(local_path, "r") as fin:
+                json_data = json.load(fin)
+                return json_data
 
         except ftplib.error_perm as e:
             colorized_print("ERROR", f"Could not download files from {remote_path}")
@@ -112,7 +116,7 @@ class FTPConnect:
                     fout.write(data)
                 self.ftp.retrbinary('RETR ' + f"{remote_path}/{steam_64}.json", callback)
                 colorized_print("DEBUG", f"File {steam_64}.json downloaded successfully")
-            with open(f"_files/maps/{self.map_name}/atms/{steam_64}.json", "r") as fin:
+            with open(local_path, "r") as fin:
                 player_atm = json.load(fin)
                 colorized_print("DEBUG", f'       Steam ID: {player_atm["steamid"]}')
                 colorized_print("DEBUG", f'    Player Name: {player_atm["playername"]}')
