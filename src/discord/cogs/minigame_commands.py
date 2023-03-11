@@ -59,7 +59,7 @@ class Minigames(commands.Cog):
 
         color = discord.Color.green() if payout > balance else discord.Color.red()
         embed = discord.Embed(title="Slot Machine", description=f"{' '.join(spin_result)}", color=color)
-        embed.add_field(name="Payout", value=f"{payout} credits", inline=False)
+        embed.add_field(name="Payout", value=f"{payout}₽", inline=False)
         embed.add_field(name="Balance", value=f"Was: {starting_balance}₽\nNow: {balance}₽", inline=False)
 
         await interaction.followup.send(embed=embed)
@@ -95,7 +95,7 @@ class Minigames(commands.Cog):
         payout = bet * multiplier
         if payout <= bet:
             self.bot.get_settings_json()
-            self.bot.settings["minigame_jackpot"] += bet - payout
+            self.bot.settings["minigame_jackpot"] += int(bet - payout)
             self.bot.update_settings_file()
         return int(bet * multiplier)
 
