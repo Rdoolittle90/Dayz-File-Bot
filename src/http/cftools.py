@@ -192,7 +192,7 @@ class CFTools:
         if map is not None:
             map_names = [map]
         else:
-            map_names = CFTools.map_info.keys()
+            map_names = self.map_info.keys()
 
         for map_name in map_names:
             info = self.map_info[map_name]
