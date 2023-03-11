@@ -196,7 +196,6 @@ class CFTools:
 
         for map_name in map_names:
             info = self.map_info[map_name]
-            print(info)
             response = self.make_authenticated_request("GET", f'https://data.cftools.cloud/v1/server/{info["server_id"]}/leaderboard', params=leaderboard_payload)
             data = response.json()
             data["collected_at"] = str(datetime.datetime.now())
