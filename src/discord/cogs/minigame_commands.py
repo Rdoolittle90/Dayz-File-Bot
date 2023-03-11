@@ -91,7 +91,11 @@ class Minigames(commands.Cog):
                 multiplier = self.symbols[k]["multiplier"] * 0.65
             else:
                 continue
-
+        payout = bet * multiplier
+        if payout <= bet:
+            self.bot.get_settings_json()
+            self.bot.settings["minigame_jackpot"] += bet - payout
+            self.bot.update_settings_file()
         return bet * multiplier
 
 

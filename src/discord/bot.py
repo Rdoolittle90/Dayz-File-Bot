@@ -73,7 +73,8 @@ class DiscordBot(commands.Bot):
         self.width = len(self.app_title) + 8
         self.primary_symbol = "="
         self.secondary_symbol = "-"
-
+        self.settings = None
+        
         self.add_listener(self.on_ready)
         self.add_listener(self.on_member_join)
         self.add_listener(self.on_member_remove)
@@ -196,6 +197,17 @@ class DiscordBot(commands.Bot):
                     colorized_print("COG", f"🔴 {extension.removesuffix('_commands').title()}  [NoEntryPointError]")
             else:
                 colorized_print("COG", f"⚫ {extension.removesuffix('_commands').title()}  [Disabled]")
+
+
+    def get_settings_json(self):
+        with open("_files/support/settings.json", "r") as json_in:
+            self.settings = json.load(json_in)
+        return self.settings
+
+
+    def update_settings_file(self):
+        with open("_files/support/settings.json", "w") as json_out:
+            json.dump(self.settings, json_out, indent=4)
 
 
     async def my_background_task(self):
