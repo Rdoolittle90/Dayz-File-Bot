@@ -85,7 +85,7 @@ def create_new_map_dir(map_name) -> bool:
     }
 
     if map_name not in os.listdir("_files/maps"):
-        for dir_name in ["", "inputs", "atms", "backups"]:
+        for dir_name in ["", "inputs", "atms", "backups", "data", "killboards"]:
             os.makedirs(f"_files/maps/{map_name}/{dir_name}", exist_ok=True)
         with open(f"_files/maps/{map_name}/passkey.json", "w", encoding='utf-8') as json_out:
             json.dump(passkey, json_out, indent=4)

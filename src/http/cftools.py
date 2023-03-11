@@ -109,6 +109,7 @@ class CFTools:
 
         return response
 
+
     def authenticate(self):
         """
         Authenticates with the CFTools API and returns an access token.
@@ -122,14 +123,16 @@ class CFTools:
         response = requests.post(auth_url, json=payload, timeout=10)
         colorized_print("DEBUG", f"Response status code: {response.status_code}")
         response.raise_for_status()
-        colorized_print("DEBUG", "Authentication successful!")
+        colorized_print("INFO", "Authentication successful!")
         self.token = response.json()["token"]
+
 
     def get_settings(self):
         with open("_files/support/settings.json", "r") as json_in:
             settings = json.load(json_in)
         return settings
-    
+
+ 
     def set_token(self, token):
         settings = self.get_settings()
         settings["CFTools_AUTH"] = token
@@ -185,6 +188,7 @@ class CFTools:
 
             map_data[map_name] = sorted(leaderboard_ordering_list, key=lambda x: x[3], reverse=True)
         return map_data
+
 
     def get_leaderboard_info(self, map=None, stat="kdratio", order=-1, limit=100):
         leaderboard_payload = {"stat": stat, "order": order, "limit": limit}
