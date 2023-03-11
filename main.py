@@ -1,16 +1,12 @@
 import os
 import asyncio
-from datetime import datetime
 from dotenv import load_dotenv
 from nextcord.ext import tasks
 from src.helpers.divider_title import divider_title
 from src.discord.bot import DiscordBot
 from src.discord.guild_manager import initial_cha_setup, initial_server_setup
 from src.file_manager import create_new_server_dir, initial_dir_setup
-from src.ftp.ftp_manager import FTPConnect
 from src.helpers.colored_printing import colorized_print
-from src.http.cftools import CFTools
-from src.sql.sql_manager import DBConnect
 
 
 async def setup_guild(bot: DiscordBot, guild):
