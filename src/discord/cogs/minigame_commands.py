@@ -16,14 +16,14 @@ class Minigames(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.symbols = {
-            "🩹": {"weight": 10, "payout": 2},  # Bandage
-            "💉": {"weight": 10, "payout": 3},  # Morphine
-            "🍔": {"weight": 10, "payout": 5},  # Food
-            "🔪": {"weight": 8, "payout": 7},   # Knife
-            "🎒": {"weight": 5, "payout": 10},  # Backpack
-            "🔫": {"weight": 3, "payout": 15},  # Gun
-            "🚗": {"weight": 2, "payout": 25},  # Vehicle
-            "🚁": {"weight": 1, "payout": 50},  # Helicopter
+            "🩹": {"weight": 10, "payout": 0.0},  # Bandage 0
+            "💉": {"weight": 10, "payout": 0.3},  # Morphine 0.3
+            "🍔": {"weight": 10, "payout": 0.5},  # Food 0.5
+            "🔪": {"weight": 8, "payout": 0.7},   # Knife 0.7
+            "🎒": {"weight": 5, "payout": 1.0},  # Backpack 1.0
+            "🔫": {"weight": 3, "payout": 1.5},  # Gun 1.5
+            "🚗": {"weight": 2, "payout": 2.5},  # Vehicle 2.5
+            "🚁": {"weight": 1, "payout": 5.0},  # Helicopter 5.0
         }
         self.name = "Minigames"
 
@@ -50,7 +50,7 @@ class Minigames(commands.Cog):
 
         spin_result = self._get_spin_result()
         colorized_print("DEBUG", f"{interaction.user.name} spin result {spin_result}")
-        payout = self._calculate_payout(spin_result)
+        payout = self._calculate_payout(bet, spin_result)
         colorized_print("DEBUG", f"{interaction.user.name} received {payout}")
 
         update_money(player_atm, player_path, payout - bet)
@@ -74,10 +74,10 @@ class Minigames(commands.Cog):
             spin_result.append(symbol)
         return spin_result
 
-    def _calculate_payout(self, spin_result: List[str]) -> int:
+    def _calculate_payout(self, bet, spin_result: List[str]) -> int:
         payout = 0
         for symbol in spin_result:
-            payout += self.symbols[symbol]["payout"]
+            payout += bet * self.symbols[symbol]["payout"]
         return payout
 
 
