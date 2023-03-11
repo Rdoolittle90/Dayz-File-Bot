@@ -25,8 +25,8 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
         reason = "The person you are attempting to send rubles to is not registered"
         proceed_with_trade = False
 
-    if trade_amount >= 10000:
-        reason = "Trade must be less than 500 rubles"
+    if trade_amount >= 100000:
+        reason = "Trade must be less than 100000 rubles"
         proceed_with_trade = False
     if trade_amount <= 500:
         reason = "Trade must be greater than 500 rubles"
