@@ -92,9 +92,8 @@ class CFTools:
         if self.token == None:
             colorized_print("ERROR", f"No token found")
             self.authenticate()
-            headers["Authorization"] = f"Bearer {self.token}"
-            return None
 
+        headers["Authorization"] = f"Bearer {self.token}"
         colorized_print("DEBUG", f"Making {method} request to {url}")
         response = requests.request(method, url, headers=headers, params=params, timeout=10)
         if response.status_code == 403 and response.json().get("error") in ["expired-token", "bad-token"]:
@@ -107,6 +106,7 @@ class CFTools:
             response.raise_for_status()
         else:
             colorized_print("DEBUG", f"Response status code: {response.status_code}")
+
         return response
 
     def authenticate(self):
@@ -125,20 +125,17 @@ class CFTools:
         colorized_print("DEBUG", "Authentication successful!")
         self.token = response.json()["token"]
 
-
     def get_settings(self):
         with open("_files/support/settings.json", "r") as json_in:
             settings = json.load(json_in)
         return settings
     
-
     def set_token(self, token):
         settings = self.get_settings()
         settings["CFTools_AUTH"] = token
         with open("_files/support/settings.json", "w") as json_out:
             settings = json.dump(settings, json_out, indent=4)
     
-
     def read_leaderboard_info(self, map=None, stat="kdratio", limit=15):
         map_data = {}
 
@@ -188,7 +185,6 @@ class CFTools:
 
             map_data[map_name] = sorted(leaderboard_ordering_list, key=lambda x: x[3], reverse=True)
         return map_data
-
 
     def get_leaderboard_info(self, map=None, stat="kdratio", order=-1, limit=100):
         leaderboard_payload = {"stat": stat, "order": order, "limit": limit}
