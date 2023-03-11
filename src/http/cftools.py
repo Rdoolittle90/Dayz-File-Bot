@@ -102,7 +102,7 @@ class CFTools:
 
         colorized_print("DEBUG", f"Making {method} request to {url}")
         response = requests.request(method, url, headers=headers, params=params, timeout=10)
-        if response.status_code == 403 and response.json().get("error") == "expired-token":
+        if response.status_code == 403 and response.json().get("error") in ["expired-token", "bad-token"]:
             colorized_print("WARNING", "Token expired, authenticating again...")
             self.token = self.authenticate()
             headers["Authorization"] = f"Bearer {self.token}"
