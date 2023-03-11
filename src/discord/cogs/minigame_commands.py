@@ -42,6 +42,7 @@ class Minigames(commands.Cog):
             player_path = f"_files/maps/{map_name}/atms/{player_steam_64_id}.json"
             player_atm = await self.bot.ftp_connections[map_name].download_one_map_file_async("atm", player_steam_64_id)
             balance = update_money(player_atm, player_path, 0)
+            starting_balance = balance
 
 
         if balance < bet:
@@ -58,7 +59,7 @@ class Minigames(commands.Cog):
 
         embed = discord.Embed(title="Slot Machine", description=f"{' '.join(spin_result)}", color=discord.Color.blue())
         embed.add_field(name="Payout", value=f"{payout} credits")
-        embed.add_field(name="Balance", value=f"{balance} credits")
+        embed.add_field(name="Balance", value=f"{starting_balance}₽ -> {balance}₽")
 
         await interaction.followup.send(embed=embed)
 
