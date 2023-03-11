@@ -81,16 +81,5 @@ class DayzUserCog(commands.Cog):
         await interaction.channel.send(embed=embed)
 
 
-    # =====================================================================================================
-    @commands.has_role("Steam Linked")
-    @nextcord.slash_command(dm_permission=False, name="trade", description="Trade Discord Stashed items")
-    async def trade(self, interaction: nextcord.Interaction) -> None:
-        colorized_print("INFO", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
-        """placeholder"""
-        embed = nextcord.Embed(title="Unavailable", color=0xff0000)
-        embed.description = f"Command Coming Soon"
-        await interaction.channel.send(embed=embed)
-
-
 def setup(bot: commands.Bot):
     bot.add_cog(DayzUserCog(bot))
