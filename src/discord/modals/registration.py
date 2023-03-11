@@ -40,7 +40,7 @@ class EnterSteamID(Modal):
         Args:
             interaction (ModalInteraction): The user's interaction with the modal.
         """
-        await interaction.response.defer(ephemeral=False)
+        await interaction.response.defer(ephemeral=True)
         steam_id = self.steam_id.value
         
         if not is_valid_steam64_id(steam_id): # 
