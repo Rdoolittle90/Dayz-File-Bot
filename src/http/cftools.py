@@ -51,7 +51,7 @@ class CFTools:
         """
         with open("_files/support/settings.json", "r") as json_in:
             data = json.load(json_in)
-        self.authenticate()
+        self.token = self.authenticate()
         with open("_files/support/settings.json", "w") as json_out:
             json.dump(data, json_out, indent=4)
         self.utc_then = datetime.datetime.utcnow()
