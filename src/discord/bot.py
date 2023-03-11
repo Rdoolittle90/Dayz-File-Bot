@@ -79,12 +79,11 @@ class DiscordBot(commands.Bot):
         self.add_listener(self.on_member_remove)
         self.add_listener(self.on_message)
 
+        divider_title("Cogs", self.width, self.secondary_symbol)
+        self.load_cogs()
 
     async def setup(self):
         start_time = datetime.datetime.now()
-
-        divider_title("Cogs", self.width, self.secondary_symbol)
-        self.load_cogs()
 
         divider_title("Connections", self.width, self.secondary_symbol)
         self.cftools: CFTools = CFTools()
