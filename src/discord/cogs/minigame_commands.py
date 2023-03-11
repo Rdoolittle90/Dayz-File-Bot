@@ -16,14 +16,14 @@ class Minigames(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.symbols = {
-            "🩹": {"weight": 10, "payout": 0.0},  # Bandage 0
-            "💉": {"weight": 10, "payout": 0.3},  # Morphine 0.3
-            "🍔": {"weight": 10, "payout": 0.5},  # Food 0.5
-            "🔪": {"weight": 8, "payout": 0.7},   # Knife 0.7
-            "🎒": {"weight": 5, "payout": 1.0},  # Backpack 1.0
-            "🔫": {"weight": 3, "payout": 1.5},  # Gun 1.5
-            "🚗": {"weight": 2, "payout": 2.5},  # Vehicle 2.5
-            "🚁": {"weight": 1, "payout": 5.0},  # Helicopter 5.0
+            "🩹": {"weight": 10, "multiplier": 0.0},  # Bandage 0
+            "💉": {"weight": 10, "multiplier": 0.3},  # Morphine 0.3
+            "🍔": {"weight": 10, "multiplier": 0.5},  # Food 0.5
+            "🔪": {"weight": 8, "multiplier": 0.7},   # Knife 0.7
+            "🎒": {"weight": 5, "multiplier": 1.0},  # Backpack 1.0
+            "🔫": {"weight": 3, "multiplier": 1.5},  # Gun 1.5
+            "🚗": {"weight": 2, "multiplier": 2.5},  # Vehicle 2.5
+            "🚁": {"weight": 1, "multiplier": 5.0},  # Helicopter 5.0
         }
         self.name = "Minigames"
 
@@ -76,10 +76,23 @@ class Minigames(commands.Cog):
         return spin_result
 
     def _calculate_payout(self, bet, spin_result: List[str]) -> int:
-        payout = 0
+        multiplier = 0
+        counts = {}
         for symbol in spin_result:
-            payout += bet * self.symbols[symbol]["payout"]
-        return payout
+            if symbol in counts.keys():
+                counts[symbol] += 1
+            else:
+                counts[symbol] = 1
+
+        for k, v in counts.items():
+            if v == 3:
+                multiplier = self.symbols[k]["multiplier"]
+            elif v == 2:
+                multiplier = self.symbols[k]["multiplier"] * 0.65
+            else:
+                continue
+
+        return bet * multiplier
 
 
 def setup(bot: commands.Bot):
