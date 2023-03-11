@@ -51,13 +51,9 @@ class CFTools:
         """
         with open("_files/support/settings.json", "r") as json_in:
             data = json.load(json_in)
-
-
-        if data["CFTools_AUTH"] == None:
-            self.authenticate()
-        else:
-            self.token = data["CFTools_AUTH"]
-            colorized_print("DEBUG", "Token found in file.")
+        self.authenticate()
+        with open("_files/support/settings.json", "w") as json_out:
+            json.dump(data, json_out, indent=4)
         self.utc_then = datetime.datetime.utcnow()
         colorized_print("DEBUG", "CFTools has been initialized")
 
