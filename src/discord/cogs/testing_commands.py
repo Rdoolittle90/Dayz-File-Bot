@@ -61,7 +61,7 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
 
             # Player 2
             player_2_path = f"_files/maps/{player_2_map}/atms/{player_2}.json"
-            player_2_atm = await bot.ftp_connections[player_2_map].download_one_map_atm_file_async(player_2)
+            player_2_atm = await bot.ftp_connections[player_2_map].download_one_map_atm_file_async(player_2_steam_64_id)
             update_money(player_2_atm, player_2_path, trade_amount)
             await bot.ftp_connections[player_2_map].upload_file(player_2_path, remote_path, f"{player_2_steam_64_id}.json")
             colorized_print("INFO", f"trade_id: {trade_id} 🟢 Trade Complete {player_1.mention} -> {player_2.mention}: {trade_amount}")
@@ -72,7 +72,7 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
             if player_1_success == True and player_2_success == False:
                 update_money(player_1_atm, player_1_path, trade_amount)
                 await bot.ftp_connections[player_1_map].upload_file(player_1_path, remote_path, f"{player_1_steam_64_id}.json")
-                colorized_print("DEBUG", f"trade_id: {trade_id} 🟡 Trade Value returned to sender {player_1_steam_64_id}: {trade_amount}")
+                colorized_print("INFO", f"trade_id: {trade_id} 🟡 Trade Value returned to sender {player_1_steam_64_id}: {trade_amount}")
 
     embed = nextcord.Embed(title="Trade Information")
     embed.add_field(name="Player 1", value=player_1, inline=True)
