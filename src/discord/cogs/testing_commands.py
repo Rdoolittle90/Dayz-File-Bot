@@ -24,7 +24,7 @@ class TestingCog(commands.Cog):
         colorized_print("WARNING", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
         await interaction.response.defer(ephemeral=False)
         
-        await interaction.followup.send(embed=await player_trade(self.bot, interaction.user.id, player_1_map, player_2, player_2_map, trade_amount))
+        await interaction.followup.send(embed=await player_trade(self.bot, interaction.user, player_1_map, player_2, player_2_map, trade_amount))
 
 
 
