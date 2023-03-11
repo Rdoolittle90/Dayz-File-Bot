@@ -1,4 +1,3 @@
-import asyncio
 import datetime
 import ftplib
 import inspect
@@ -22,38 +21,8 @@ class TestingCog(commands.Cog):
     # =====================================================================================================
     @nextcord.slash_command(dm_permission=False, name="test_trade", description="placeholder description 1")
     async def test_trade(self, interaction: nextcord.Interaction, player_1_map:str, player_2:User, player_2_map:str, trade_amount:int):
-        maps = ["Chernarus", "Takistan", "Namalsk"]
-        map_options = [nextcord.SelectOption(label=map_name, value=map_name) for map_name in maps]
-
-        select = nextcord.ui.Select(
-            placeholder="Select a map",
-            options=map_options,
-            max_values=1,
-        )
-
-        # Prompt the user for player 1's map selection
-        await interaction.response.send_message("Please select the map for Player 1:", ephemeral=True, components=[select])
-
-        try:
-            player_1_map_selection = await self.bot.wait_for(
-                "select_option", check=lambda i: i.component == select and i.user.id == interaction.user.id, timeout=30.0
-            )
-            player_1_map = player_1_map_selection.values[0]
-        except asyncio.TimeoutError:
-            await interaction.followup.send("You didn't select a map for Player 1 in time.", ephemeral=True)
-            return
-
-        # Prompt the user for player 2's map selection
-        await interaction.response.send_message("Please select the map for Player 2:", ephemeral=True, components=[select])
-
-        try:
-            player_2_map_selection = await self.bot.wait_for(
-                "select_option", check=lambda i: i.component == select and i.user.id == interaction.user.id, timeout=30.0
-            )
-            player_2_map = player_2_map_selection.values[0]
-        except asyncio.TimeoutError:
-            await interaction.followup.send("You didn't select a map for Player 2 in time.", ephemeral=True)
-            return
+        colorized_print("WARNING", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
+        await interaction.response.defer(ephemeral=False)
         
         await interaction.followup.send(embed=await player_trade(self.bot, interaction.user.id, player_1_map, player_2, player_2_map, trade_amount))
 
