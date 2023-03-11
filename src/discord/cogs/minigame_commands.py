@@ -57,9 +57,14 @@ class Minigames(commands.Cog):
         balance = update_money(player_atm, player_path, payout - bet)
         await self.bot.ftp_connections[map_name].upload_file(player_path, "atm", f"{player_steam_64_id}.json")
 
+        payout_sign = "+"
+        return_amount = bet - payout
+        if return_amount < 0:
+            payout_sign = "-"
+
         color = discord.Color.green() if payout > balance else discord.Color.red()
         embed = discord.Embed(title="Slot Machine", description=f"{' '.join(spin_result)}", color=color)
-        embed.add_field(name="Payout", value=f"{bet - payout}₽", inline=False)
+        embed.add_field(name="Payout", value=f"{payout_sign}{return_amount}₽", inline=False)
         embed.add_field(name="Balance", value=f"Was: {starting_balance}₽\nNow: {balance}₽", inline=False)
 
         await interaction.followup.send(embed=embed)
