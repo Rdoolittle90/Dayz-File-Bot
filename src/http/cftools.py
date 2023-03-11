@@ -90,6 +90,7 @@ class CFTools:
         """
         headers = {}
         if not self.token:
+            self.authenticate()
             headers["Authorization"] = f"Bearer {self.token}"
             colorized_print("ERROR", f"No token found")
             return None
@@ -98,7 +99,7 @@ class CFTools:
         response = requests.request(method, url, headers=headers, params=params, timeout=10)
         if response.status_code == 403 and response.json().get("error") in ["expired-token", "bad-token"]:
             colorized_print("WARNING", "Token expired, authenticating again...")
-            self.token = self.authenticate()
+            self.authenticate()
             headers["Authorization"] = f"Bearer {self.token}"
             colorized_print("DEBUG", f"Making {method} request to {url}")
             response = requests.request(method, url, headers=headers, params=params, timeout=10)
@@ -123,7 +124,6 @@ class CFTools:
         response.raise_for_status()
         colorized_print("DEBUG", "Authentication successful!")
         self.token = response.json()["token"]
-        self.set_token(self.token)
 
 
     def get_settings(self):

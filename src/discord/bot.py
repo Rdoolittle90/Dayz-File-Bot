@@ -88,7 +88,6 @@ class DiscordBot(commands.Bot):
 
         divider_title("Connections", self.width, self.secondary_symbol)
         self.cftools: CFTools = CFTools()
-        self.cftools.authenticate()
 
         self.ftp_connections: Dict[str, FTPConnect] = {
             "Chernarus": FTPConnect("Chernarus"),
