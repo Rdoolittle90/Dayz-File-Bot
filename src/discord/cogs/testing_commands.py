@@ -31,7 +31,6 @@ class TestingCog(commands.Cog):
         
         message_id = None
         if interaction.user.id in self.bot.settings["persistent_messages"].keys():
-            self.bot.settings["persistent_messages"][interaction.user.id] = {}
             message_id = self.bot.settings["persistent_messages"][interaction.user.id]["message_id"]
             number = self.bot.settings["persistent_messages"][interaction.user.id]["number"]
             self.bot.update_settings_file()
@@ -39,18 +38,19 @@ class TestingCog(commands.Cog):
         embed = Embed(title="Persistent Embed", description="This embed is persistent.")
         if message_id is None:
             # Send new message
+            self.bot.settings["persistent_messages"][interaction.user.id] = {}
             self.bot.settings["persistent_messages"][interaction.user.id]["number"] = 0
             embed.add_field(name="Number", value=self.bot.settings["persistent_messages"][interaction.user.id]["number"])
             message = await interaction.channel.send(embed=embed)
             self.bot.settings["persistent_messages"][interaction.user.id]["message_id"] = message.id
             with open('message_id.json', 'w') as f:
                 json.dump({'message_id': message.id}, f)
-                self.bot.update_settings_file()
+            self.bot.update_settings_file()
             
         else:
             # Edit existing message
-            embed.add_field(name="Number", value=self.bot.settings["persistent_messages"][interaction.user.id]["number"])
-            message = await interaction.channel.fetch_message(self.bot.settings["persistent_messages"][interaction.user.id]["message_id"])
+            embed.add_field(name="Number", value=number)
+            message = await interaction.channel.fetch_message(message_id)
             await message.edit(embed=embed)
 
         # Add buttons
