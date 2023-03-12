@@ -36,17 +36,20 @@ class TestingCog(commands.Cog):
             self.bot.update_settings_file()
 
         embed = Embed(title="Persistent Embed", description="This embed is persistent.")
-        embed.add_field(name="Number", value=number)
         if message_id is None:
             # Send new message
+            self.bot.settings["persistent_messages"][interaction.user.id]["number"] = 0
+            embed.add_field(name="Number", value=self.bot.settings["persistent_messages"][interaction.user.id]["number"])
             message = await interaction.channel.send(embed=embed)
             self.bot.settings["persistent_messages"][interaction.user.id]["message_id"] = message.id
             with open('message_id.json', 'w') as f:
                 json.dump({'message_id': message.id}, f)
                 self.bot.update_settings_file()
+            
         else:
             # Edit existing message
-            message = await interaction.channel.fetch_message(message_id)
+            embed.add_field(name="Number", value=self.bot.settings["persistent_messages"][interaction.user.id]["number"])
+            message = await interaction.channel.fetch_message(self.bot.settings["persistent_messages"][interaction.user.id]["message_id"])
             await message.edit(embed=embed)
 
         # Add buttons
