@@ -58,9 +58,11 @@ class TestingCog(commands.Cog):
     @commands.Cog.listener()
     async def on_button_click(self, interaction: nextcord.Interaction):
         if interaction.custom_id == "increment":
+            self.bot.settings["persistent_messages"][interaction.user.id]["number"] += 1
             number = self.bot.settings["persistent_messages"][interaction.user.id]["number"]
             embed = Embed(title="Persistent Embed", description="This embed is persistent.")
-            embed.add_field(name="Number", value=f"{number} -> {number + 1}")
+            embed.add_field(name="Number", value=f"{number - 1} -> {number}")
+            self.bot.update_settings_file()
             await interaction.message.edit(embed=embed)
             await interaction.response.defer()
 
