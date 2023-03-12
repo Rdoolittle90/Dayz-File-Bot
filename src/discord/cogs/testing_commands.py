@@ -1,10 +1,11 @@
 import datetime
 import inspect
+import json
 
-from nextcord import Interaction, User, slash_command
 import nextcord
+from nextcord import (Button, ButtonStyle, Embed, Interaction, User,
+                      slash_command)
 from nextcord.ext import commands
-from src.discord.modals.registration import get_registered_steam_64
 
 from src.dayz.player_trading import player_trade
 from src.discord.bot import DiscordBot
@@ -24,7 +25,43 @@ class TestingCog(commands.Cog):
         await interaction.followup.send(embed=await player_trade(self.bot, interaction.user, player_1_map.title(), player_2, player_2_map.title(), trade_amount))
 
 
+    @slash_command(dm_permission=False, name="test_embed", description="placeholder description 1")
+    async def test_embed(self, interaction):
+        number = 0
+        settings = self.bot.get_settings_json()
+        
+        message_id = None
+        if interaction.user.id in settings["persistent_messages"].keys():
+            message_id = settings["persistent_messages"][interaction.user.id]
 
+
+        embed = Embed(title="Persistent Embed", description="This embed is persistent.")
+        embed.add_field(name="Number", value=number)
+        if message_id is None:
+            # Send new message
+            message = await interaction.send(embed=embed)
+            message_id = message.id
+            with open('message_id.json', 'w') as f:
+                json.dump({'message_id': message.id}, f)
+        else:
+            # Edit existing message
+            message = await interaction.channel.fetch_message(self.message_id)
+            await message.edit(embed=embed)
+
+        # Add buttons
+        button = Button(style=ButtonStyle.blue, label="Increment", custom_id="increment")
+        view = nextcord.ui.View()
+        view.add_item(button)
+        await message.edit(view=view)
+
+    @commands.Cog.listener()
+    async def on_button_click(self, interaction):
+        if interaction.custom_id == "increment":
+            self.number += 1
+            embed = Embed(title="Persistent Embed", description="This embed is persistent.")
+            embed.add_field(name="Number", value=self.number)
+            await interaction.message.edit(embed=embed)
+            await interaction.response.defer()
 
 
 def setup(bot: commands.Bot):
