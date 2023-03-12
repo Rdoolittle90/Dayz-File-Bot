@@ -31,6 +31,7 @@ class TestingCog(commands.Cog):
         
         message_id = None
         if interaction.user.id in self.bot.settings["persistent_messages"].keys():
+            self.bot.settings["persistent_messages"][interaction.user.id] = {}
             message_id = self.bot.settings["persistent_messages"][interaction.user.id]["message_id"]
             number = self.bot.settings["persistent_messages"][interaction.user.id]["number"]
             self.bot.update_settings_file()
