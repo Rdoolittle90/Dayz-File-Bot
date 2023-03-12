@@ -54,7 +54,7 @@ class TestingCog(commands.Cog):
             await message.edit(embed=embed)
 
         # Add buttons
-        button = Button(style=ButtonStyle.blurple, label="Increment", custom_id="increment")
+        button = Button(style=ButtonStyle.primary, label="Increment", custom_id="increment")
         view = nextcord.ui.View()
         view.add_item(button)
         await message.edit(view=view)
