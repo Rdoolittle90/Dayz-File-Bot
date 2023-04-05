@@ -16,9 +16,9 @@ class Minigames(commands.Cog):
     def __init__(self, bot):
         self.bot: DiscordBot = bot
         self.symbols = {
-            "🩹": {"weight": 10, "multiplier": 0.0},  # Bandage 0
+            "🩹": {"weight": 9, "multiplier": 0.0},  # Bandage 0
             "💉": {"weight": 10, "multiplier": 0.3},  # Morphine 0.3
-            "🍔": {"weight": 10, "multiplier": 0.5},  # Food 0.5
+            "🍔": {"weight": 11, "multiplier": 0.5},  # Food 0.5
             "🔪": {"weight": 8, "multiplier": 0.7},   # Knife 0.7
             "🎒": {"weight": 5, "multiplier": 1.0},  # Backpack 1.0
             "🔫": {"weight": 3, "multiplier": 1.5},  # Gun 1.5
@@ -35,15 +35,14 @@ class Minigames(commands.Cog):
         await interaction.response.defer(ephemeral=False)
         player_steam_64_id = await get_registered_steam_64(self.bot, interaction.user.id)
         if player_steam_64_id is None:
-            reason = "You are not registered!"
+            3
             balance:int = 0
-            await interaction.followup.send(embed=embed_not_registered(interaction.user.name, self.__cog_name__))
+            await interaction.followup.send(embed=embed_not_registered(interaction.user.name, inspect.currentframe().f_code.co_name))
         else:
             player_path = f"_files/maps/{map_name}/atms/{player_steam_64_id}.json"
             player_atm = await self.bot.ftp_connections[map_name].download_one_map_file_async("atm", player_steam_64_id)
             balance = int(update_money(player_atm, player_path, 0))
             starting_balance = balance
-
 
         if balance < bet:
             await interaction.followup.send("You don't have enough money to place that bet!")

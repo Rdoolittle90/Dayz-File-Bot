@@ -22,13 +22,13 @@ class TestingCog(commands.Cog):
     async def trade(self, interaction: Interaction, player_1_map:str, player_2:User, player_2_map:str, trade_amount:int):
         colorized_print("WARNING", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
         await interaction.response.defer(ephemeral=False)
-        await interaction.followup.send(embed=await player_trade(self.bot, interaction.user, player_1_map.title(), player_2, player_2_map.title(), trade_amount))
+        try:
+            embed = await player_trade(self.bot, interaction.user, player_1_map.title(), player_2, player_2_map.title(), trade_amount)
+        except:
+            raise commands.CommandError('Something went wrong.')
+        await interaction.followup.send(embed=embed)
 
 
 
 def setup(bot: commands.Bot):
     bot.add_cog(TestingCog(bot))
-    
-
-
-

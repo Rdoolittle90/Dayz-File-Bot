@@ -41,7 +41,7 @@ class FTPConnect:
 
     def login(self):
         try:
-            self.ftp.connect(self.host, self.port)
+            self.ftp.connect(self.host, self.port, timeout=None)
             self.ftp.login(self.user, self.passwd)
             self.is_connected = True
             colorized_print("INFO", f"Successfully Connected to FTP server {self.map_name}:{self.port}")
@@ -70,7 +70,7 @@ class FTPConnect:
                 self.ftp.storbinary(f'STOR {remote_path}/{file_name}', f)
             colorized_print("DEBUG", f"File {remote_path}/{file_name} uploaded successfully to {remote_path}")
         except Exception as e:
-            colorized_print("ERROR", f"Could not upload file {local_path} to {remote_path}")
+            colorized_print("ERROR", f"Could not upload file {local_path} to {self.map_name}:{remote_path}")
             self.ftp.quit()
             self.is_connected = False
             raise e
@@ -95,7 +95,7 @@ class FTPConnect:
                 return json_data
 
         except ftplib.error_perm as e:
-            colorized_print("ERROR", f"Could not download files from {remote_path}")
+            colorized_print("ERROR", f"Could not download files from {self.map_name}:{remote_path}")
             os.remove(local_path)
             self.ftp.quit()
             self.is_connected = False
@@ -126,7 +126,7 @@ class FTPConnect:
                 return player_atm
 
         except ftplib.error_perm as e:
-            colorized_print("ERROR", f"Could not download files from {remote_path}")
+            colorized_print("ERROR", f"Could not download files from {self.map_name}:{remote_path}")
             os.remove(local_path)
             self.ftp.quit()
             self.is_connected = False

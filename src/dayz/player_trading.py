@@ -13,6 +13,14 @@ from src.helpers.update_player_atm import update_money
 async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_2:User, player_2_map:str, trade_amount:int):
     trade_id = generate_random_string(7)
     proceed_with_trade = True
+    valid_maps = ["Chernarus", "Takistan", "Namalsk"]
+    if player_1_map not in valid_maps:
+        reason = f"Map Not Found: {player_1_map}\n options: {', '.join(valid_maps)}"
+        proceed_with_trade = False
+    if player_2_map not in valid_maps:
+        reason = f"Map Not Found: {player_2_map}\n options: {', '.join(valid_maps)}"
+        proceed_with_trade = False
+
 
     player_1_steam_64_id = await get_registered_steam_64(bot, player_1.id)
     if player_1_steam_64_id is None:
@@ -24,10 +32,10 @@ async def player_trade(bot: DiscordBot, player_1:User, player_1_map:str, player_
         reason = "The person you are attempting to send rubles to is not registered"
         proceed_with_trade = False
 
-    if trade_amount >= 100000:
-        reason = "Trade must be less than 100000 rubles"
+    if trade_amount >= 10000:
+        reason = "Trade must be less than 10000 rubles"
         proceed_with_trade = False
-    if trade_amount <= 500:
+    if trade_amount <= 1:
         reason = "Trade must be greater than 500 rubles"
         proceed_with_trade = False
 

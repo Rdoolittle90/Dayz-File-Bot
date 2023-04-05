@@ -79,6 +79,7 @@ class DiscordBot(commands.Bot):
         self.add_listener(self.on_member_join)
         self.add_listener(self.on_member_remove)
         self.add_listener(self.on_message)
+        self.add_listener(self.on_command_error)
 
         divider_title("Cogs", self.width, self.secondary_symbol)
         self.load_cogs()
@@ -90,11 +91,13 @@ class DiscordBot(commands.Bot):
         divider_title("Connections", self.width, self.secondary_symbol)
         self.cftools: CFTools = CFTools()
 
+        
+
+
         self.ftp_connections: Dict[str, FTPConnect] = {
             "Chernarus": FTPConnect("Chernarus"),
             "Takistan": FTPConnect("Takistan"),
-            "Namalsk": FTPConnect("Namalsk"),
-            "TestServer": FTPConnect("TestServer"),
+            "Namalsk": FTPConnect("Namalsk")
         }
 
         self.sql: DBConnect = DBConnect()
@@ -219,3 +222,7 @@ class DiscordBot(commands.Bot):
             ]
             await asyncio.wait(tasks)
             await asyncio.sleep(60 * 60)  # task runs every 60 * 5 seconds
+
+    async def on_command_error(ctx, error):
+        if isinstance(error, commands.CommandError):
+            await ctx.send(f'Error: {error}')
