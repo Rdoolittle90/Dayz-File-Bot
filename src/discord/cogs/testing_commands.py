@@ -29,7 +29,7 @@ class TestingCog(commands.Cog):
         await interaction.followup.send(embed=embed)
 
     # =====================================================================================================
-    @slash_command(dm_permission=False, name="trade", description="placeholder description 1")
+    @slash_command(dm_permission=False, name="give", description="placeholder description 1")
     async def give(self, interaction: Interaction, player_2:User, player_2_map:str, trade_amount:int):
         colorized_print("WARNING", f"{interaction.user.name} used {self}.{inspect.currentframe().f_code.co_name} at {datetime.datetime.now()}")
         await interaction.response.defer(ephemeral=False)
