@@ -17,6 +17,11 @@ class EnterSteamID(Modal):
     """
     A modal for entering a Steam 64 ID.
     """
+    map_str = {
+        "0": "Chernarus",
+        "1": "Takistan",
+        "2": "Namalsk"
+    }
     def __init__(self, bot: DiscordBot) -> None:
         """
         Initializes the EnterSteamID modal.
@@ -64,8 +69,8 @@ class EnterSteamID(Modal):
 
         if new_commit == 1: # Success
             await interaction.followup.send(embed=embed_success(interaction.user.name))
-            player_path = f"_files/maps/{self.map_id.value}/atms/{interaction.user}.json"
-            player_atm = await self.bot.ftp_connections[self.map_id.value].download_one_map_file_async("atm", steam_id)
+            player_path = f"_files/maps/{EnterSteamID.map_str[self.map_id.value]}/atms/{interaction.user}.json"
+            player_atm = await self.bot.ftp_connections[EnterSteamID.map_str[self.map_id.value]].download_one_map_file_async("atm", steam_id)
             update_money(player_atm, player_path, 50000)
             await self.bot.ftp_connections[self.map_id.value].upload_file(player_path, "atm", f"{steam_id}.json")
             colorized_print("INFO", f"🟢 Registration Gift Complete ADMIN -> {interaction.user.mention}: 50000")
