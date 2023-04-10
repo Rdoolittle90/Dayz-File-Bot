@@ -61,6 +61,7 @@ class FTPConnect:
             local_path (str): The local path to the file to upload.
             remote_filename (str): The filename to use on the FTP server.
         """
+        self.login()
         remote_path = FTPConnect.paths[path_name]
         try:
             if not self.is_connected:
@@ -73,10 +74,11 @@ class FTPConnect:
             colorized_print("ERROR", f"Could not upload file {local_path} to {self.map_name}:{remote_path}")
             self.ftp.quit()
             self.is_connected = False
-            raise e
+        self.logout()
 
 
     async def download_one_map_file_async(self, path_name, steam_64):
+        self.login()
         try:
             if not self.is_connected:
                 colorized_print("WARNING", f"Not logged in")
@@ -99,10 +101,11 @@ class FTPConnect:
             os.remove(local_path)
             self.ftp.quit()
             self.is_connected = False
-            raise e
+        self.logout()
 
 
     async def download_one_map_atm_file_async(self, steam_64):
+        self.login()
         try:
             if not self.is_connected:
                 colorized_print("WARNING", f"Not logged in")
@@ -130,10 +133,11 @@ class FTPConnect:
             os.remove(local_path)
             self.ftp.quit()
             self.is_connected = False
-            raise e
+        self.logout()
 
             
     async def download_all_map_atm_files_async(self):
+        self.login()
         if not self.is_connected:
             self.login()
         remote_path = '/profiles/LBmaster/Data/LBBanking/Players'
@@ -153,4 +157,4 @@ class FTPConnect:
             colorized_print("ERROR", f"Could not download files from {remote_path}")
             self.ftp.quit()
             self.is_connected = False
-            raise e
+        self.logout()
