@@ -1,5 +1,6 @@
 import datetime
 from os import getenv
+import random
 from typing import Optional
 import re
 
@@ -7,6 +8,7 @@ import aiohttp
 from discord import Embed
 from nextcord.ui import Modal, TextInput
 from nextcord import Interaction
+from src.helpers.update_player_atm import update_money
 from src.helpers.colored_printing import colorized_print
 from src.discord.bot import DiscordBot
 
@@ -25,12 +27,22 @@ class EnterSteamID(Modal):
         self.steam_id = TextInput(
                 label="Steam 64 ID",
                 placeholder="00000000000000000",
-                custom_id="map",
+                custom_id=f"steam_id_{random.randint(1, 99999)}",
                 min_length=17,
                 max_length=17,
                 required=True
             )
         self.add_item(self.steam_id)
+
+        self.map_id = TextInput(
+                label="Steam 64 ID",
+                placeholder="Chernarus = 0, Takistan = 1, Namalask = 3",
+                custom_id=f"map_{random.randint(1, 99999)}",
+                min_length=1,
+                max_length=1,
+                required=True
+            )
+        self.add_item(self.map_id)
 
 
     async def callback(self, interaction: Interaction) -> None:
@@ -52,6 +64,11 @@ class EnterSteamID(Modal):
 
         if new_commit == 1: # Success
             await interaction.followup.send(embed=embed_success(interaction.user.name))
+            player_path = f"_files/maps/{self.map_id.value}/atms/{interaction.user}.json"
+            player_atm = await self.bot.ftp_connections[self.map_id.value].download_one_map_file_async("atm", steam_id)
+            update_money(player_atm, player_path, 50000)
+            await self.bot.ftp_connections[self.map_id.value].upload_file(player_path, "atm", f"{steam_id}.json")
+            colorized_print("INFO", f"🟢 Registration Gift Complete ADMIN -> {interaction.user.mention}: 50000")
         elif new_commit == -1: # Steam 64 ID already claimed
             await interaction.followup.send(embed=embed_already_taken(interaction.user.name))
         elif new_commit == -2: # Already registered
