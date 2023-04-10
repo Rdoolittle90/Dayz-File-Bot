@@ -109,15 +109,15 @@ async def player_give(bot: DiscordBot, player_2:User, player_2_map:str, trade_am
         colorized_print("INFO", f"trade_id: {trade_id} 🟢 Trade Complete ADMIN -> {player_2.mention}: {trade_amount}")
         player_2_success = True
 
-    embed = nextcord.Embed(title="Trade Information")
+    embed = nextcord.Embed(title="Gift Information")
     embed.add_field(name=f"{player_2}", value=player_2_map, inline=True)
     embed.add_field(name="Amount:", value=f"{trade_amount}₽")
     embed.set_footer(text=f"TRADE ID: {trade_id}")
 
     if player_2_success:
-        embed.description = f"Trade Successful 🟢"
+        embed.description = f"Gift Successful 🟢"
         embed.color = nextcord.Color.green()
     else:
-        embed.description = f"Trade Failed 🔴"
+        embed.description = f"Gift Failed 🔴"
         embed.color = nextcord.Color.red()
     return embed
