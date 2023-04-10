@@ -67,13 +67,20 @@ class EnterSteamID(Modal):
         # Verify the user with the given Steam 64 ID and Discord User ID.
         new_commit = await verify_user(self.bot, steam_id, interaction.user.id)
 
+        gift_map_name = EnterSteamID.map_str[self.map_id.value]
+        print(gift_map_name)
+
         if new_commit == 1: # Success
             await interaction.followup.send(embed=embed_success(interaction.user.name))
-            player_path = f"_files/maps/{EnterSteamID.map_str[self.map_id.value]}/atms/{interaction.user}.json"
-            player_atm = await self.bot.ftp_connections[EnterSteamID.map_str[self.map_id.value]].download_one_map_file_async("atm", steam_id)
-            update_money(player_atm, player_path, 50000)
-            await self.bot.ftp_connections[self.map_id.value].upload_file(player_path, "atm", f"{steam_id}.json")
-            colorized_print("INFO", f"🟢 Registration Gift Complete ADMIN -> {interaction.user.mention}: 50000")
+            player_path = f"_files/maps/{gift_map_name}/atms/{interaction.user}.json"
+            player_atm = await self.bot.ftp_connections[gift_map_name].download_one_map_file_async("atm", steam_id)
+            try:
+                update_money(player_atm, player_path, 50000)
+                await self.bot.ftp_connections[gift_map_name].upload_file(player_path, "atm", f"{steam_id}.json")
+                colorized_print("INFO", f"🟢 Registration Gift Complete ADMIN -> {interaction.user.mention}: 50000")
+            except TypeError:
+                colorized_print("ERROR", f"🔴 Registration Gift Failed {interaction.user.mention}")
+
         elif new_commit == -1: # Steam 64 ID already claimed
             await interaction.followup.send(embed=embed_already_taken(interaction.user.name))
         elif new_commit == -2: # Already registered
