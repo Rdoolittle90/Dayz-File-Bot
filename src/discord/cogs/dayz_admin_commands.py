@@ -37,30 +37,30 @@ class DayzAdminCog(commands.Cog):
             await interaction.send("Server has no registered maps", ephemeral=True)
 
 
-    # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="add_map", description="Create a new map directory")
-    async def add_map(self, interaction: nextcord.Interaction, mapname: str) -> None:
-        colorized_print("INFO", f"{interaction.user.name} used DayzAdminCog.load_traderconfig at {datetime.datetime.now()}")
-        """Create a new directory for the given map name."""
-        create_new_map_dir(mapname)
-        await interaction.send(f"New directory created for {mapname}")
+    # # =====================================================================================================
+    # @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="add_map", description="Create a new map directory")
+    # async def add_map(self, interaction: nextcord.Interaction, mapname: str) -> None:
+    #     colorized_print("INFO", f"{interaction.user.name} used DayzAdminCog.load_traderconfig at {datetime.datetime.now()}")
+    #     """Create a new directory for the given map name."""
+    #     create_new_map_dir(mapname)
+    #     await interaction.send(f"New directory created for {mapname}")
 
 
-    # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="remove_map", description="Open the map deletion modal")
-    async def remove_map(self, interaction: nextcord.Interaction) -> None:
-        colorized_print("WARNING", f"{interaction.user.name} used DayzAdminCog.remove_map at {datetime.datetime.now()}")
-        """Open the map deletion modal."""
-        await interaction.response.send_modal(modal=RemoveMapModal())
+    # # =====================================================================================================
+    # @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="remove_map", description="Open the map deletion modal")
+    # async def remove_map(self, interaction: nextcord.Interaction) -> None:
+    #     colorized_print("WARNING", f"{interaction.user.name} used DayzAdminCog.remove_map at {datetime.datetime.now()}")
+    #     """Open the map deletion modal."""
+    #     await interaction.response.send_modal(modal=RemoveMapModal())
 
 
-    # =====================================================================================================
-    @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="get_key", description="Look up the given map's passkey")
-    async def get_key(self, interaction: nextcord.Interaction, mapname: str) -> None:
-        colorized_print("INFO", f"{interaction.user.name} used DayzAdminCog.get_key at {datetime.datetime.now()}")
-        """Look up the passkey for the given map name."""
-        passkey = get_map_key(mapname)["passkey"]
-        await interaction.send(embed=key_embed(mapname, passkey))
+    # # =====================================================================================================
+    # @nextcord.slash_command(default_member_permissions=8, dm_permission=False, name="get_key", description="Look up the given map's passkey")
+    # async def get_key(self, interaction: nextcord.Interaction, mapname: str) -> None:
+    #     colorized_print("INFO", f"{interaction.user.name} used DayzAdminCog.get_key at {datetime.datetime.now()}")
+    #     """Look up the passkey for the given map name."""
+    #     passkey = get_map_key(mapname)["passkey"]
+    #     await interaction.send(embed=key_embed(mapname, passkey))
 
 
 def setup(bot: commands.Bot):
