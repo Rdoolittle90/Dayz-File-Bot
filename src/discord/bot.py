@@ -91,13 +91,9 @@ class DiscordBot(commands.Bot):
         divider_title("Connections", self.width, self.secondary_symbol)
         self.cftools: CFTools = CFTools()
 
-        
-
 
         self.ftp_connections: Dict[str, FTPConnect] = {
-            "Chernarus": FTPConnect("Chernarus"),
-            "Takistan": FTPConnect("Takistan"),
-            "Namalsk": FTPConnect("Namalsk")
+            "Chernarus": FTPConnect("Chernarus")
         }
 
         self.sql: DBConnect = DBConnect()

@@ -9,10 +9,7 @@ from src.helpers.colored_printing import colorized_print
 
 # Maps the name of a map to a port number
 port_by_name: Dict[str, int] = {
-    "Chernarus": 21,
-    "Takistan": 22,
-    "Namalsk": 23,
-    "TestServer": 24
+    "Chernarus": 21
 }
 
 class FTPConnect:
