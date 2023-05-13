@@ -45,9 +45,7 @@ class DBConnect:
                 user=getenv("SQL_USER"),
                 password=getenv("SQL_PASSWORD"),
                 db=getenv("SQL_DB"),
-                autocommit=True,
-                max_idle_time=3600,  # Close idle connections after 1 hour (3600 seconds)
-                max_lifetime=86400  # Close connections after 24 hours (86400 seconds)
+                autocommit=True
             )
             self.is_connected = True
             colorized_print("INFO", "Successfully Connected to SQL server")
