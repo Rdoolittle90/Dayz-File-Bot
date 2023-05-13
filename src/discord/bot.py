@@ -92,12 +92,12 @@ class DiscordBot(commands.Bot):
         self.cftools: CFTools = CFTools()
 
 
-        self.ftp_connections: Dict[str, FTPConnect] = {
-            "Chernarus": FTPConnect("Chernarus")
-        }
+        # self.ftp_connections: Dict[str, FTPConnect] = {
+        #     "Chernarus": FTPConnect("Chernarus")
+        # }
 
-        self.sql: DBConnect = DBConnect()
-        await self.sql.sql_connect()
+        # self.sql: DBConnect = DBConnect()
+        # await self.sql.sql_connect()
         
         end_time = datetime.datetime.now()
         time_taken = (end_time - start_time).total_seconds() * 1000
